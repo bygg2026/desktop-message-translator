@@ -38,11 +38,9 @@ export type MinimalSignalContextType = {
   executeMenuRole: (role: MenuItemConstructorOptions['role']) => Promise<void>;
   getAppInstance: () => string | undefined;
   getEnvironment: () => string;
-  getI18nAvailableLocales: () => ReadonlyArray<string>;
   getI18nLocale: LocalizerType['getLocale'];
   getI18nLocaleMessages: LocalizerType['getLocaleMessages'];
   i18n: LocalizerType;
-  getLocaleDisplayNames: () => Record<string, Record<string, string>>;
   getCountryDisplayNames: () => Record<string, Record<string, string>>;
   getResolvedMessagesLocaleDirection: () => LocaleDirection;
   getHourCyclePreference: () => HourCyclePreference;
@@ -69,48 +67,38 @@ export type MinimalSignalContextType = {
   Emojify: typeof Emojify | undefined;
 };
 
-export type TranslationConfigType = {
-  enabled: boolean;
-  provider: 'google' | 'deepl' | 'custom';
-  receiveLanguage: string;
-  sendLanguage: string;
-  apiUrl: string;
-  apiKey: string;
-  model: string;
-  outgoingStyleEnabled: boolean;
-  outgoingStylePrompt: string;
-};
-export type TranslationValidationResultType = {
-  ok: boolean;
-  message: string;
-};
-export type TranslationModelsResultType = {
-  models: Array<string>;
-  endpoint: string;
-};
+import type {
+  TranslationConfigForRenderer,
+  TranslationConfigInput,
+  TranslationValidationResult,
+  TranslationModelsResult,
+  TranslationDirection,
+} from '../types/Translation.std.ts';
+
 export type SignalContextType = {
+  getTranslationConfig: () => Promise<TranslationConfigForRenderer>;
+  setTranslationConfig: (
+    config: TranslationConfigInput
+  ) => Promise<TranslationConfigForRenderer>;
+  validateTranslationConfig: (
+    config: TranslationConfigInput
+  ) => Promise<TranslationValidationResult>;
+  getTranslationModels: (
+    config: TranslationConfigInput
+  ) => Promise<TranslationModelsResult>;
+  translateText: (
+    text: string,
+    direction: TranslationDirection,
+    configRevision?: string
+  ) => Promise<string | null>;
+  onTranslationConfigChanged: (
+    callback: (config: TranslationConfigForRenderer) => void
+  ) => () => void;
   bytes: Bytes;
   crypto: Crypto;
   setIsCallActive: (isCallActive: boolean) => unknown;
   timers: Timers;
   Emojify: typeof Emojify;
-  translateText: (
-    text: string,
-    direction?: 'receive' | 'send'
-  ) => Promise<string | null>;
-
-  getTranslationConfig: () => Promise<TranslationConfigType>;
-
-  validateTranslationConfig: (
-    config: TranslationConfigType
-  ) => Promise<TranslationValidationResultType>;
-
-  getTranslationModels: (
-    config: TranslationConfigType
-  ) => Promise<TranslationModelsResultType>;
-  setTranslationConfig: (
-    config: TranslationConfigType
-  ) => Promise<TranslationConfigType>;
   getLocalizedEmojiList: (locale: string) => Promise<LocaleEmojiListType>;
 } & MinimalSignalContextType;
 
@@ -118,6 +106,25 @@ const emojiListCache = new Map<string, LocaleEmojiListType>();
 
 export const SignalContext: SignalContextType = {
   ...MinimalSignalContext,
+  getTranslationConfig: () => ipcRenderer.invoke('translation-config-get'),
+  setTranslationConfig: config =>
+    ipcRenderer.invoke('translation-config-set', config),
+  validateTranslationConfig: config =>
+    ipcRenderer.invoke('translation-config-validate', config),
+  getTranslationModels: config =>
+    ipcRenderer.invoke('translation-models-list', config),
+  translateText: (text, direction, configRevision) =>
+    ipcRenderer.invoke('translate-text', { text, direction, configRevision }),
+  onTranslationConfigChanged(callback) {
+    const listener = (
+      _event: Electron.IpcRendererEvent,
+      config: TranslationConfigForRenderer
+    ) => callback(config);
+    ipcRenderer.on('translation-config-changed', listener);
+    return () => {
+      ipcRenderer.removeListener('translation-config-changed', listener);
+    };
+  },
   bytes: new Bytes(),
   crypto: new Crypto(),
   i18n,
@@ -126,36 +133,6 @@ export const SignalContext: SignalContextType = {
   },
   timers: new Timers(),
   Emojify,
-  translateText(
-    text: string,
-    direction: 'receive' | 'send' = 'receive'
-  ): Promise<string | null> {
-    return ipcRenderer.invoke('translate-text', {
-      text,
-      direction,
-    });
-  },
-
-  getTranslationConfig(): Promise<TranslationConfigType> {
-    return ipcRenderer.invoke('translation-config-get');
-  },
-
-  validateTranslationConfig(
-    config: TranslationConfigType
-  ): Promise<TranslationValidationResultType> {
-    return ipcRenderer.invoke('translation-config-validate', config);
-  },
-
-  getTranslationModels(
-    config: TranslationConfigType
-  ): Promise<TranslationModelsResultType> {
-    return ipcRenderer.invoke('translation-models-list', config);
-  },
-  setTranslationConfig(
-    config: TranslationConfigType
-  ): Promise<TranslationConfigType> {
-    return ipcRenderer.invoke('translation-config-set', config);
-  },
   async getLocalizedEmojiList(locale: string) {
     const cached = emojiListCache.get(locale);
     if (cached) {

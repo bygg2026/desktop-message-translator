@@ -2,8 +2,20 @@
   "icu:AxoAlertDialog.Cancel": {
     "messageformat": "Atcelt"
   },
+  "icu:AxoAlertDialog.Ok": {
+    "messageformat": "Ok"
+  },
   "icu:AxoButton.Pending": {
     "messageformat": "Gaidīšanas statusā"
+  },
+  "icu:AxoColorSlider.Hue": {
+    "messageformat": "Hue"
+  },
+  "icu:AxoColorSlider.Saturation": {
+    "messageformat": "Saturation"
+  },
+  "icu:AxoColorSlider.Lightness": {
+    "messageformat": "Lightness"
   },
   "icu:AxoDialog.Back": {
     "messageformat": "Atpakaļ"
@@ -73,12 +85,6 @@
   },
   "icu:LinkedDevicesOnboardingDialog__bullet--2": {
     "messageformat": "Jūs varat pārvaldīt piesaistītās ierīces savā galvenajā ierīcē. Piesaistīt var līdz 5 ierīcēm."
-  },
-  "icu:LinkedDevicesOnboardingDialog__bullet--3": {
-    "messageformat": "Konta iestatījumus var pārvaldīt tikai galvenajā ierīcē, tostarp konta iestatījumus un rezerves kopijas."
-  },
-  "icu:LinkedDevicesOnboardingDialog__bullet--3--1": {
-    "messageformat": "Konta iestatījumus un rezerves kopijas varat pārvaldīt tikai savā galvenajā ierīcē."
   },
   "icu:LinkedDevicesOnboardingDialog__bullet--3--2": {
     "messageformat": "Konta iestatījumus un Signal drošās rezerves kopijas varat pārvaldīt tikai savā galvenajā ierīcē."
@@ -281,6 +287,9 @@
   "icu:archivedConversations": {
     "messageformat": "Arhivētās sarunas"
   },
+  "icu:LeftPane__MoreActionsLabel": {
+    "messageformat": "More actions"
+  },
   "icu:LeftPane__MoreActionsMenu__AddChatFolder": {
     "messageformat": "Pievienot sarunu mapi"
   },
@@ -382,9 +391,6 @@
   },
   "icu:NavTabs__ItemIconLabel--UnreadCount": {
     "messageformat": "{count,number} nelasītas"
-  },
-  "icu:NavTabs__ItemIconLabel--MarkedUnread": {
-    "messageformat": "Atzīmēta kā nelasīta"
   },
   "icu:NavTabs__ItemLabel--Chats": {
     "messageformat": "Sarunas"
@@ -653,20 +659,11 @@
   "icu:SafetyNumberNotReady__learn-more": {
     "messageformat": "Lasīt vairāk"
   },
-  "icu:KeyTransparencyErrorDialog__Title": {
-    "messageformat": "Automātiskā atslēgu verifikācija jūsu ierīcei pašlaik nav pieejama. Vai iesniegt atkļūdošanas žurnālu?"
-  },
   "icu:KeyTransparencyErrorDialog__Title-v2": {
     "messageformat": "Automātiskā atslēgu verifikācija jūsu ierīcei pašlaik nav pieejama. Iesniegt ziņojumu, lai palīdzētu mums veikt uzlabojumus?"
   },
-  "icu:KeyTransparencyErrorDialog__Description": {
-    "messageformat": "Atkļūdošanas žurnāli palīdz mums diagnosticēt un novērst problēmu, un tie nesatur identificējošu informāciju."
-  },
   "icu:KeyTransparencyErrorDialog__Description-v2": {
     "messageformat": "Atkļūdošanas žurnālu pievienošana palīdz mums diagnosticēt un novērst problēmu, tie nesatur identificējošu informāciju. Kopīgošana nav obligāta."
-  },
-  "icu:KeyTransparencyErrorDialog__ShareDebugLog__Label": {
-    "messageformat": "Kopīgot atkļūdošanas žurnālu"
   },
   "icu:KeyTransparencyErrorDialog__ShareDebugLog__Label-v2": {
     "messageformat": "Pievienojiet atkļūdošanas žurnālu"
@@ -685,6 +682,9 @@
   },
   "icu:KeyTransparencyOnboardingDialog__Description": {
     "messageformat": "Signal automātiski pārbaudīs savienojuma drošību kontaktpersonām, kas pievienotas ar tālruņa numuru, izmantojot procesu, ko sauc par atslēgu caurskatāmību. Papildu drošībai savienojumus joprojām varat verificēt manuāli, izmantojot QR kodu vai salīdzinot drošības numurus."
+  },
+  "icu:KeyTransparencyOnboardingDialog__Description-v2": {
+    "messageformat": "<paragraph>Signal automātiski pārbaudīs savienojuma drošību kontaktpersonām, kas pievienotas ar tālruņa numuru, izmantojot procesu, ko sauc par atslēgu caurskatāmību.</paragraph><paragraph>Papildu drošībai savienojumus joprojām varat verificēt manuāli, izmantojot QR kodu vai salīdzinot drošības numurus.</paragraph>"
   },
   "icu:KeyTransparencyOnboardingDialog__Continue": {
     "messageformat": "Turpināt"
@@ -1493,6 +1493,9 @@
   "icu:ConversationMerge--learn-more": {
     "messageformat": "Uzzināt vairāk"
   },
+  "icu:ConversationMerge--explainer-dialog--label": {
+    "messageformat": "Ziņu vēsture ir apvienota"
+  },
   "icu:ConversationMerge--explainer-dialog--line-1": {
     "messageformat": "Pēc sarakstes ar {obsoleteConversationTitle} jūs uzzinājāt, ka šis numurs pieder kontaktam {conversationTitle}. Attiecīgais tālruņa numurs ir privāts."
   },
@@ -1753,6 +1756,9 @@
   },
   "icu:Preferences__EditChatFolderPage__SelectChatsDialog__Search__Placeholder": {
     "messageformat": "Meklēt"
+  },
+  "icu:Preferences__EditChatFolderPage__SelectChatsDialog__NoChats": {
+    "messageformat": "Nav sarunu"
   },
   "icu:Preferences__EditChatFolderPage__SelectChatsDialog__ChatTypesSection__Title": {
     "messageformat": "Sarunu veidi"
@@ -2246,6 +2252,24 @@
   "icu:deleteAccountDialogBody": {
     "messageformat": "Tiks dzēsta jūsu konta informācija, profils un visas ziņas. Tāpat tiksiet noņemts no visām Signal grupām. Pēc šī procesa pabeigšanas lietotne tiks aizvērta."
   },
+  "icu:DeleteAccountConfirmDialog--Title": {
+    "messageformat": "Delete account"
+  },
+  "icu:DeleteAccountConfirmDialog--Description": {
+    "messageformat": "This will delete your account info, profile, and all of your messages. You will also be removed from all Signal groups."
+  },
+  "icu:DeleteAccountConfirmDialog--ConfirmNumber": {
+    "messageformat": "Confirm your phone number"
+  },
+  "icu:DeleteAccountConfirmDialog--CountryCodePlaceholder": {
+    "messageformat": "Country code"
+  },
+  "icu:DeleteAccountConfirmDialog--NumberPlaceholder": {
+    "messageformat": "Phone number"
+  },
+  "icu:DeleteAccountConfirmDialog--DeleteButton": {
+    "messageformat": "Delete"
+  },
   "icu:deleteOldIndexedDBData": {
     "messageformat": "Jums ir novecojuši dati no iepriekšējas Signal Desktop versijas instalācijas. Izvēloties turpināt, šie dati tiks dzēsti un jūs sāksiet no nulles."
   },
@@ -2398,9 +2422,6 @@
   },
   "icu:callRingtoneNotificationDescription": {
     "messageformat": "Atskaņot zvana skaņas"
-  },
-  "icu:callSystemNotificationDescription": {
-    "messageformat": "Rādīt paziņojumus par zvaniem"
   },
   "icu:incomingCallNotificationDescription": {
     "messageformat": "Iespējot ienākošos zvanus"
@@ -2999,6 +3020,9 @@
   "icu:FunPanelSticker__SubNavLabel": {
     "messageformat": "Uzlīmju komplekti"
   },
+  "icu:FunPanelStickers__SubNavCategoryLabel--Favorites": {
+    "messageformat": "Favorites"
+  },
   "icu:FunPanelStickers__SubNavCategoryLabel--Recents": {
     "messageformat": "Nesen lietotie"
   },
@@ -3010,6 +3034,9 @@
   },
   "icu:FunPanelStickers__SectionTitle--Recents": {
     "messageformat": "Nesen lietotie"
+  },
+  "icu:FunPanelStickers__SectionTitle--Favorites": {
+    "messageformat": "Favorites"
   },
   "icu:FunPanelStickers__SectionTitle--Featured": {
     "messageformat": "Piedāvātās"
@@ -3524,6 +3551,9 @@
   "icu:MessageRequests--unblock-group-confirm-body": {
     "messageformat": "Grupas dalībnieki varēs atkal jūs pievienot šai grupai."
   },
+  "icu:MessageRequests--unblock-signal-confirm-body": {
+    "messageformat": "Jūs saņemsiet Signal atjauninājumus un ziņas par jaunumiem."
+  },
   "icu:MessageRequests--block-and-report-spam-success-toast": {
     "messageformat": "Lietotājs atzīmēts kā surogātpasta izplatītājs un bloķēts."
   },
@@ -3538,6 +3568,9 @@
   },
   "icu:MessageRequests--block-group-confirm-body": {
     "messageformat": "Jūs turpmāk nesaņemsiet ziņas vai atjauninājumus no šīs grupas, un dalībnieki nevarēs jūs pievienot šai grupai atkal."
+  },
+  "icu:MessageRequests--block-signal-confirm-body": {
+    "messageformat": "Jūs vairs nesaņemsiet Signal atjauninājumus un ziņas par jaunumiem."
   },
   "icu:MessageRequests--reportAndMaybeBlock": {
     "messageformat": "Ziņot…"
@@ -3866,6 +3899,9 @@
   "icu:callingDeviceSelection__settings": {
     "messageformat": "Iestatījumi"
   },
+  "icu:callingDeviceSelection__settings-v2": {
+    "messageformat": "Call Settings"
+  },
   "icu:calling__participants--pluralized": {
     "messageformat": "{people, plural, zero {Zvanā piedalās {people,number}} one {Zvanā piedalās {people,number}} other {Zvanā piedalās {people,number}}}"
   },
@@ -3970,6 +4006,15 @@
   },
   "icu:callingDeviceSelection__select--default": {
     "messageformat": "Noklusējuma"
+  },
+  "icu:callingDeviceSelection__select--default-nonwin": {
+    "messageformat": "Default: {deviceName}"
+  },
+  "icu:callingDeviceSelection__select--default_console": {
+    "messageformat": "Default: {deviceName}"
+  },
+  "icu:callingDeviceSelection__select--default_communications": {
+    "messageformat": "Default Communications: {deviceName}"
   },
   "icu:muteNotificationsTitle": {
     "messageformat": "Izslēgt paziņojumus"
@@ -4823,6 +4868,69 @@
   "icu:CompositionArea__AttachMenu__Poll": {
     "messageformat": "Aptauja"
   },
+  "icu:CompositionArea__AttachMenu__Contact": {
+    "messageformat": "Contact"
+  },
+  "icu:ShareContactDialog__SelectContact__Title": {
+    "messageformat": "Select contact"
+  },
+  "icu:ShareContactDialog__SelectContact__SearchPlaceholder": {
+    "messageformat": "Search"
+  },
+  "icu:ShareContactDialog__SelectContact__EmptyState": {
+    "messageformat": "No contacts"
+  },
+  "icu:ShareContactDialog__SelectContact__NoResults": {
+    "messageformat": "No results for “{searchQuery}”"
+  },
+  "icu:ShareContactDialog__ShareContact__Title": {
+    "messageformat": "Share contact"
+  },
+  "icu:ShareContactDialog__ShareContact__Description": {
+    "messageformat": "Anyone you share this profile with will be able to message {name}."
+  },
+  "icu:ShareContactDialog__ShareContact__Send": {
+    "messageformat": "Send contact"
+  },
+  "icu:ShareContactDialog__ShareContact__EditName": {
+    "messageformat": "Edit name"
+  },
+  "icu:ShareContactDialog__EditName__Title": {
+    "messageformat": "Edit name"
+  },
+  "icu:ShareContactDialog__EditName__Prefix": {
+    "messageformat": "Prefix"
+  },
+  "icu:ShareContactDialog__EditName__GivenName": {
+    "messageformat": "First name"
+  },
+  "icu:ShareContactDialog__EditName__MiddleName": {
+    "messageformat": "Middle name"
+  },
+  "icu:ShareContactDialog__EditName__FamilyName": {
+    "messageformat": "Last name"
+  },
+  "icu:ShareContactDialog__EditName__Suffix": {
+    "messageformat": "Suffix"
+  },
+  "icu:ShareContactDialog__EditName__Organization": {
+    "messageformat": "Organization"
+  },
+  "icu:ShareContactDialog__ShareContact__EditPhoto": {
+    "messageformat": "Edit photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__Title": {
+    "messageformat": "Select a photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__ContactPhoto": {
+    "messageformat": "Contact photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__ProfilePhoto": {
+    "messageformat": "Profile photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__DefaultAvatar": {
+    "messageformat": "Default avatar"
+  },
   "icu:CompositionArea--attach-plus": {
     "messageformat": "Pievienot pielikumu vai aptauju"
   },
@@ -4861,9 +4969,6 @@
   },
   "icu:CompositionInput__editing-message": {
     "messageformat": "Rediģēt ziņu"
-  },
-  "icu:countMutedConversationsDescription": {
-    "messageformat": "Iekļaut apklusinātas sarunas nozīmītes skaitītājā"
   },
   "icu:ContactModal--nickname": {
     "messageformat": "Segvārds"
@@ -5263,18 +5368,6 @@
   },
   "icu:UnreadReminders__notification__replySummary--many": {
     "messageformat": "{replyCount, plural, zero {{replyCount,number} atbilžu no {person1} un citiem} one {{replyCount,number} atbilde no {person1} un citiem} other {{replyCount,number} atbildes no {person1} un citiem}}"
-  },
-  "icu:ConversationNotificationsSettings__mentions__label": {
-    "messageformat": "Pieminējumi"
-  },
-  "icu:ConversationNotificationsSettings__mentions__info": {
-    "messageformat": "Saņemt paziņojumus, kad jūs piemin apklusinātās sarunās"
-  },
-  "icu:ConversationNotificationsSettings__mentions__select__always-notify": {
-    "messageformat": "Vienmēr paziņot"
-  },
-  "icu:ConversationNotificationsSettings__mentions__select__dont-notify-for-mentions-if-muted": {
-    "messageformat": "Nepaziņot, ja apklusināta"
   },
   "icu:GroupLinkManagement--clipboard": {
     "messageformat": "Grupas saite nokopēta"
@@ -6193,9 +6286,6 @@
   "icu:Preferences__SignalAccountKeys__Description": {
     "messageformat": "Glabājiet šo informāciju drošā vietā — pieteikšanās dati būs nepieciešami konta un datu atgūšanai. Nekad nevienam to neizpaudiet."
   },
-  "icu:Preferences__SignalAccountKeys__AccountKey": {
-    "messageformat": "Konta atslēga"
-  },
   "icu:Preferences__SignalAccountKeys__AccountID": {
     "messageformat": "Konta ID"
   },
@@ -6257,7 +6347,7 @@
     "messageformat": "Signal PIN"
   },
   "icu:Preferences--signal-pin__footer": {
-    "messageformat": "PINs keep information stored with Signal encrypted so only you can access it. Your PIN cannot be recovered. Your profile, settings, and contacts will restore when you reinstall Signal. <learnMoreLink>Learn more</learnMoreLink>"
+    "messageformat": "PIN glabā Signal informāciju šifrētā veidā, lai tai varētu piekļūt tikai jūs. Jūsu PIN nevar atjaunot. Pēc atkārtotas Signal instalēšanas jūsu profils, iestatījumi un kontaktpersonas tiks atjaunoti. <learnMoreLink>Uzzināt vairāk</learnMoreLink>"
   },
   "icu:Preferences--signal-pin-advanced-settings": {
     "messageformat": "Advancētie PIN iestatījumi"
@@ -6272,19 +6362,19 @@
     "messageformat": "Ja atspējosiet PIN, jūs zaudēsiet visus datus, atkārtoti reģistrējoties lietotnē Signal, ja vien manuāli tos nedublēsiet un neatjaunosiet. Reģistrācijas bloķēšanu nevar ieslēgt, kamēr PIN ir atspējots."
   },
   "icu:DisableSignalPinErrorDialog--reg-lock--title": {
-    "messageformat": "Disable PIN failed due to registration lock"
+    "messageformat": "PIN neizdevās atspējot reģistrācijas bloķēšanas dēļ"
   },
   "icu:DisableSignalPinErrorDialog--reg-lock--body": {
-    "messageformat": "You must disable Registration Lock before disabling your PIN."
+    "messageformat": "Pirms PIN atspējošanas ir jāatspējo reģistrācijas bloķēšana."
   },
   "icu:DisableSignalPinErrorDialog--reg-lock--ok": {
     "messageformat": "Ok"
   },
   "icu:DisableSignalPinErrorDialog--backups--title": {
-    "messageformat": "Disable PIN failed due to backups"
+    "messageformat": "PIN neizdevās atspējot rezerves kopiju dēļ"
   },
   "icu:DisableSignalPinErrorDialog--backups--body": {
-    "messageformat": "You must disable backups before disabling your PIN."
+    "messageformat": "Pirms PIN atspējošanas ir jāatspējo rezerves kopijas."
   },
   "icu:Preferences--enable-signal-pin": {
     "messageformat": "Iespējot PIN"
@@ -6302,10 +6392,7 @@
     "messageformat": "Reģistrācijas bloķēšana"
   },
   "icu:Preferences--registration-lock__footer": {
-    "messageformat": "Require your Signal PIN to register your phone number again with Signal."
-  },
-  "icu:Preferences--notification-content": {
-    "messageformat": "Paziņojuma saturs"
+    "messageformat": "Pieprasīt savu Signal PIN, lai vēlreiz reģistrētu savu tālruņa numuru lietotnē Signal."
   },
   "icu:Preferences__Chats__TextInputSection__Title": {
     "messageformat": "Teksta ievade"
@@ -6318,9 +6405,6 @@
   },
   "icu:Preferences__Notifications__SoundsSection__Title": {
     "messageformat": "Skaņas"
-  },
-  "icu:Preferences__Notifications__AppBadgeSection__Title": {
-    "messageformat": "Lietotnes nozīmīte"
   },
   "icu:Preferences__Notifications__AppBadgeSection__Title-v2": {
     "messageformat": "Neizlasītas nozīmītes"
@@ -6700,6 +6784,9 @@
   "icu:Preferences--blocked-users--description": {
     "messageformat": "Bloķētie lietotāji nevarēs jums piezvanīt vai sūtīt ziņas"
   },
+  "icu:Preferences--add-blocked": {
+    "messageformat": "Pievienot bloķētu lietotāju vai grupu"
+  },
   "icu:Preferences--blocked-users": {
     "messageformat": "Bloķētie lietotāji"
   },
@@ -6708,6 +6795,12 @@
   },
   "icu:Preferences--blocked--blocked-on": {
     "messageformat": "Bloķēts plkst. {blockedAt}"
+  },
+  "icu:Preferences--BlockChooser--Done": {
+    "messageformat": "Darīts"
+  },
+  "icu:Preferences--BlockChooser--Search--Placeholder": {
+    "messageformat": "Meklēt"
   },
   "icu:Preferences--signal-backups": {
     "messageformat": "Signal drošās rezerves kopijas"
@@ -7105,6 +7198,36 @@
   "icu:InstallScreenUpdateDialog--cannot-update__body": {
     "messageformat": "Signal Desktop neizdevās atjaunināt, taču ir pieejama jauna versija. Dodieties uz vietni {downloadUrl} un manuāli instalējiet jauno versiju, pēc tam sazinieties ar atbalsta dienestu vai ziņojiet par kļūdu saistībā šo problēmu."
   },
+  "icu:EntryPoint--signal-logo": {
+    "messageformat": "Signal Logo"
+  },
+  "icu:EntryPoint--Title--Line1": {
+    "messageformat": "Take privacy with you."
+  },
+  "icu:EntryPoint--Title--Line2": {
+    "messageformat": "Be yourself in every message."
+  },
+  "icu:EntryPoint--link-button": {
+    "messageformat": "Link your account"
+  },
+  "icu:EntryPoint--more-options-button": {
+    "messageformat": "More options"
+  },
+  "icu:EntryPoint--nonprofit": {
+    "messageformat": "Signal is a 501c3 nonprofit"
+  },
+  "icu:EntryPoint--terms": {
+    "messageformat": "Terms & privacy policy"
+  },
+  "icu:EntryPoint--MoreOptions--Title": {
+    "messageformat": "More options"
+  },
+  "icu:EntryPoint--MoreOptions--RegistrationButton--Title": {
+    "messageformat": "Create a new account"
+  },
+  "icu:EntryPoint--MoreOptions--RegistrationButton--Description": {
+    "messageformat": "Create a new Signal account using your phone number."
+  },
   "icu:StandaloneRegistration--signal-logo": {
     "messageformat": "Signal logotips"
   },
@@ -7124,7 +7247,7 @@
     "messageformat": "Mēģiniet vēlreiz pēc {duration}"
   },
   "icu:StandaloneRegistration--PhoneNumber--RegionCodeSelector--Label": {
-    "messageformat": "Select region code"
+    "messageformat": "Atlasīt valsts kodu"
   },
   "icu:StandaloneRegistration--PhoneNumber--placeholder": {
     "messageformat": "Tālruņa numurs"
@@ -7299,6 +7422,21 @@
   },
   "icu:StandaloneRegistration--VerificationCode--CannotSendCodeTemporary--ok-button": {
     "messageformat": "Ok"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Title": {
+    "messageformat": "Having trouble registering?"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet1": {
+    "messageformat": "Make sure your phone has a cellular signal to receive your SMS or call"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet2": {
+    "messageformat": "Confirm you can receive a phone call to the number"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet3": {
+    "messageformat": "Check that you have entered your phone number correctly"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Footer": {
+    "messageformat": "If you still can’t register, follow these <troubleshootingLink>troubleshooting steps</troubleshootingLink> or <contactSupportLink>Contact Support</contactSupportLink>."
   },
   "icu:StandaloneRegistration--ProfileEntry--header": {
     "messageformat": "Iestatiet savu profilu"
@@ -7649,10 +7787,10 @@
     "messageformat": "Ieslēdziet \"Signal\""
   },
   "icu:MediaPermissionsModal__step-2--windows--microphone": {
-    "messageformat": "Enable microphone access for Signal"
+    "messageformat": "Iespējot mikrofona piekļuvi lietotnei Signal"
   },
   "icu:MediaPermissionsModal__step-2--windows--camera": {
-    "messageformat": "Enable camera access for Signal"
+    "messageformat": "Iespējot kameras piekļuvi lietotnei Signal"
   },
   "icu:MediaPermissionsModal__open": {
     "messageformat": "Atvērt iestatījumus"
@@ -8204,7 +8342,7 @@
     "messageformat": "Lietotājvārdiem vienmēr ir piesaistīta ciparu kombinācija."
   },
   "icu:EditUsernameModalBody__discriminator-label": {
-    "messageformat": "Username digits"
+    "messageformat": "Lietotājvārda cipari"
   },
   "icu:EditUsernameModalBody__learn-more": {
     "messageformat": "Uzzināt vairāk"
@@ -8340,13 +8478,13 @@
     "messageformat": "Mainīt Signal PIN"
   },
   "icu:PinChangeModal__title--create--without-pin": {
-    "messageformat": "Create your Signal PIN"
+    "messageformat": "Izveidot Signal PIN"
   },
   "icu:PinChangeModal__body--create": {
     "messageformat": "Varat labot PIN kamēr ierīce ir reģistrēta. <learnMoreLink>Uzzināt vairāk</learnMoreLink>"
   },
   "icu:PinChangeModal__body--create--without-pin": {
-    "messageformat": "PINs keep information stored with Signal encrypted so only you can access it. Your profile, settings, and contacts will restore when you reinstall. You won't need your PIN to open the app. <learnMoreLink>Learn more</learnMoreLink>"
+    "messageformat": "PIN glabā Signal informāciju šifrētā veidā, lai tai varētu piekļūt tikai jūs. Jūsu profils, iestatījumi un kontaktpersonas pēc atkārtotas instalēšanas tiks atjaunotas. Lai atvērtu lietotni, PIN nebūs nepieciešams. <learnMoreLink>Uzzināt vairāk</learnMoreLink>"
   },
   "icu:PinChangeModal__title--confirm": {
     "messageformat": "Apstipriniet Signal PIN"
@@ -8588,12 +8726,6 @@
   "icu:CallLinkPendingParticipantModal__DenyButtonLabel": {
     "messageformat": "Noraidīt pieeju"
   },
-  "icu:CallLinkRestrictionsSelect__Option--Off": {
-    "messageformat": "Izslēgts"
-  },
-  "icu:CallLinkRestrictionsSelect__Option--On": {
-    "messageformat": "Ieslēgts"
-  },
   "icu:CallLinkAddNameModal__Title": {
     "messageformat": "Pievienot audiozvana nosaukumu"
   },
@@ -8641,6 +8773,39 @@
   },
   "icu:SaveMultiDialog__title": {
     "messageformat": "Saglabāt pielikumus"
+  },
+  "icu:EmbeddedContact__message": {
+    "messageformat": "Ziņa"
+  },
+  "icu:ContactDetail__message": {
+    "messageformat": "Ziņa"
+  },
+  "icu:ContactDetail__add-to-group": {
+    "messageformat": "Pievienot grupai"
+  },
+  "icu:ContactDetail__nickname": {
+    "messageformat": "Segvārds"
+  },
+  "icu:ContactDetail__note": {
+    "messageformat": "Piezīmes"
+  },
+  "icu:email-v2": {
+    "messageformat": "E-pasta adrese"
+  },
+  "icu:home-v2": {
+    "messageformat": "Sākums"
+  },
+  "icu:mobile-v2": {
+    "messageformat": "Mobilais"
+  },
+  "icu:work-v2": {
+    "messageformat": "Darba"
+  },
+  "icu:phone-v2": {
+    "messageformat": "tālrunis"
+  },
+  "icu:address-v2": {
+    "messageformat": "Adrese"
   },
   "icu:WhatsNew__modal-title": {
     "messageformat": "Jaunumi"
@@ -8806,6 +8971,9 @@
   },
   "icu:DonationReceipt__footer-text-v2": {
     "messageformat": "Pateicamies, ka atbalstāt Signal. Jūsu atbalsts palīdz īstenot mūsu misiju: aizsargāt vārda brīvību un nodrošināt drošu saziņu miljoniem cilvēku visā pasaulē. Mēs to darām, izmantojot atvērtā pirmkoda privātuma tehnoloģijas. Ja esat Amerikas Savienoto valstu iedzīvotājs, lūdzu, saglabājiet šo kvīti nodokļu uzskaitei. Signal Technology Foundation ir no nodokļu maksāšanas atbrīvota bezpeļnas organizācija Amerikas Savienotajās valstīs saskaņā ar Iekšējo ieņēmumu likuma 501. punkta c) daļas 3. apakšpunktu. Mūsu federālais nodokļu ID ir 82-4506840. Signal apmaiņā pret šo ziedojumu nav sniedzis nekādas preces vai pakalpojumus."
+  },
+  "icu:MessageCta__Donate": {
+    "messageformat": "Ziedot"
   },
   "icu:Donations__OfflineTooltip": {
     "messageformat": "Jūs esat bezsaistē. Lai pabeigtu ziedojumu, lūdzu, izveidojiet savienojumu ar internetu."
@@ -9005,6 +9173,9 @@
   "icu:CallQualitySurvey__WhatIssuesDidYouHave__SomethingElse__TextArea__AccessibilityLabel": {
     "messageformat": "Problēmas apraksts"
   },
+  "icu:CallQualitySurvey__WhatIssuesDidYouHave__SomethingElse__TextArea__Placeholder": {
+    "messageformat": "Aprakstiet problēmu"
+  },
   "icu:CallQualitySurvey__WhatIssuesDidYouHave__SomethingElse__TextArea__HelpText": {
     "messageformat": "Lūdzu, norādiet jebkādu informāciju, kas attiecas uz problēmu. Visa šeit sniegtā informācija tiks uzskatīta par privātu un izmantota tikai zvanu uzlabošanai programmā Signal."
   },
@@ -9114,16 +9285,25 @@
     "messageformat": "Nelielas izmaiņas, kļūdu labojumi un darbības uzlabojumi. Paldies, ka lietojat Signal!",
     "ignoreUnused": true
   },
-  "icu:WhatsNew__8.26--0": {
-    "messageformat": "Tagad jūs grupas biedru meklēšanā citu lietotāju vidū tiksiet rādīts kā “jūs”."
-  },
-  "icu:WhatsNew__8.27--0": {
-    "messageformat": "Šajā atjauninājumā ir ieviesti detalizētāki iestatījumi, kas sniedz plašākas iespējas kontrolēt Signal paziņojumus. Tagad varat izvēlēties, kas tiek rādīts lietotnes nozīmītē, pielāgot paziņojumu iestatījumus sarunās ar izslēgtu skaņu un daudz ko citu! Tāpat esam pievienojuši ērtu pogu, kas ļauj atjaunot paziņojumu noklusējuma iestatījumus, ja gadās apjukt visās veiktajās izmaiņās."
-  },
   "icu:WhatsNew__8.30--0": {
-    "messageformat": "Thanks to a few performance improvements, your CPU will be slightly happier during video calls (even if you're not smiling)."
+    "messageformat": "Pateicoties vairākiem veiktspējas uzlabojumiem, jūsu procesoram video zvanu laikā būs mazāka slodze."
   },
   "icu:WhatsNew__8.30--1": {
-    "messageformat": "We also added a convenient shortcut to open your system settings on Windows if you try to join a video call and Signal doesn't have permission to access the camera. Now it's easier to see what you need to do so that people can see you."
+    "messageformat": "Turklāt esam pievienojuši ērtu saīsni Windows sistēmas iestatījumu atvēršanai, ja mēģināt pievienoties video zvanam, bet Signal nav atļaujas piekļūt kamerai. Tagad ir vieglāk saprast, kas jādara, lai citi lietotāji varētu jūs redzēt."
+  },
+  "icu:WhatsNew__8.32--0": {
+    "messageformat": "Nelasīto ziņojumu filtrs tagad ir pieejams arī ziņojumu mapēs un meklēšanas saskarnē, lai jūs varētu ērti atrast nepamanītās ziņas."
+  },
+  "icu:WhatsNew__8.32--1": {
+    "messageformat": "Uzlabota augšupielādes stabilitāte vāja tīkla savienojuma apstākļos. Paldies, <GH3mmmbulus></GH3mmmbulus>!"
+  },
+  "icu:WhatsNew__8.32--2": {
+    "messageformat": "Saīsne “(N)” tagad pareizi atbilst emocijzīmei ar lejupvērstu īkšķi. Paldies <lnicola></lnicola> par kļūdas novēršanu!"
+  },
+  "icu:WhatsNew__8.34--0": {
+    "messageformat": "Signal Desktop now supports contact sharing too, so you can maintain eye contact with your computer screen without having to make physical contact with your smartphone."
+  },
+  "icu:WhatsNew__8.34--1": {
+    "messageformat": "Improved handling and performance for connected audio devices."
   }
 }

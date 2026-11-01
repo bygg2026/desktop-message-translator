@@ -2,8 +2,20 @@
   "icu:AxoAlertDialog.Cancel": {
     "messageformat": "Anulează"
   },
+  "icu:AxoAlertDialog.Ok": {
+    "messageformat": "OK"
+  },
   "icu:AxoButton.Pending": {
     "messageformat": "În curs"
+  },
+  "icu:AxoColorSlider.Hue": {
+    "messageformat": "Hue"
+  },
+  "icu:AxoColorSlider.Saturation": {
+    "messageformat": "Saturation"
+  },
+  "icu:AxoColorSlider.Lightness": {
+    "messageformat": "Lightness"
   },
   "icu:AxoDialog.Back": {
     "messageformat": "Înapoi"
@@ -73,12 +85,6 @@
   },
   "icu:LinkedDevicesOnboardingDialog__bullet--2": {
     "messageformat": "Dispozitivul principal gestionează dispozitivele conectate; poți asocia până la 5 dispozitive."
-  },
-  "icu:LinkedDevicesOnboardingDialog__bullet--3": {
-    "messageformat": "Anumite setări ale contului sunt gestionate exclusiv pe dispozitivul principal, inclusiv setările contului și copiile de rezervă."
-  },
-  "icu:LinkedDevicesOnboardingDialog__bullet--3--1": {
-    "messageformat": "Setările contului și backup-urile pot fi gestionate doar pe dispozitivul primar."
   },
   "icu:LinkedDevicesOnboardingDialog__bullet--3--2": {
     "messageformat": "Setările contului și Backup-urile securizate Signal pot fi gestionare doar pe dispozitivul tău principal."
@@ -281,6 +287,9 @@
   "icu:archivedConversations": {
     "messageformat": "Conversații arhivate"
   },
+  "icu:LeftPane__MoreActionsLabel": {
+    "messageformat": "More actions"
+  },
   "icu:LeftPane__MoreActionsMenu__AddChatFolder": {
     "messageformat": "Adaugă dosar de conversații"
   },
@@ -382,9 +391,6 @@
   },
   "icu:NavTabs__ItemIconLabel--UnreadCount": {
     "messageformat": "{count,number} necitite"
-  },
-  "icu:NavTabs__ItemIconLabel--MarkedUnread": {
-    "messageformat": "Marchează necitit"
   },
   "icu:NavTabs__ItemLabel--Chats": {
     "messageformat": "Conversații"
@@ -653,20 +659,11 @@
   "icu:SafetyNumberNotReady__learn-more": {
     "messageformat": "Află mai multe"
   },
-  "icu:KeyTransparencyErrorDialog__Title": {
-    "messageformat": "Verificarea automată a codului nu este disponibilă în prezent pentru dispozitivul tău. Trimiți jurnalul de depanare?"
-  },
   "icu:KeyTransparencyErrorDialog__Title-v2": {
     "messageformat": "Verificarea automată a codului nu este disponibilă în prezent pentru dispozitivul tău. Trimiți un raport ca să ne ajuți să ne îmbunătățim?"
   },
-  "icu:KeyTransparencyErrorDialog__Description": {
-    "messageformat": "Jurnalele de depanare ne ajută să diagnosticăm și să remediem problema și nu conțin informații de identificare."
-  },
   "icu:KeyTransparencyErrorDialog__Description-v2": {
     "messageformat": "Dacă incluzi jurnalele de depanare ne ajută să diagnosticăm și să remediem problema și nu conțin informații de identificare. Împărtășirea este opțională."
-  },
-  "icu:KeyTransparencyErrorDialog__ShareDebugLog__Label": {
-    "messageformat": "Trimite jurnalul de depanare"
   },
   "icu:KeyTransparencyErrorDialog__ShareDebugLog__Label-v2": {
     "messageformat": "Includere jurnale depanare"
@@ -685,6 +682,9 @@
   },
   "icu:KeyTransparencyOnboardingDialog__Description": {
     "messageformat": "Pentru contactele la care ești conectat prin numărul de telefon, Signal poate confirma automat dacă conexiunea este sigură folosind un proces numit transparență privind codurile. Pentru o securitate sporită, poți verifica în continuare conexiunile manual folosind un cod QR sau comparând numerele de siguranță."
+  },
+  "icu:KeyTransparencyOnboardingDialog__Description-v2": {
+    "messageformat": "<paragraph>Pentru contactele la care ești conectat prin numărul de telefon, Signal poate confirma automat dacă conexiunea este sigură folosind un proces numit transparență privind codurile.</paragraph><paragraph>Pentru o securitate sporită, poți verifica în continuare conexiunile manual, folosind un cod QR sau comparând numerele de siguranță.</paragraph>"
   },
   "icu:KeyTransparencyOnboardingDialog__Continue": {
     "messageformat": "Continuă"
@@ -1493,6 +1493,9 @@
   "icu:ConversationMerge--learn-more": {
     "messageformat": "Află mai multe"
   },
+  "icu:ConversationMerge--explainer-dialog--label": {
+    "messageformat": "Istoricul mesajelor cumulat"
+  },
   "icu:ConversationMerge--explainer-dialog--line-1": {
     "messageformat": "După ce ai schimbat mesaje cu {obsoleteConversationTitle} ai aflat că acest număr aparține lui {conversationTitle}. Numărul de telefon este privat."
   },
@@ -1753,6 +1756,9 @@
   },
   "icu:Preferences__EditChatFolderPage__SelectChatsDialog__Search__Placeholder": {
     "messageformat": "Caută"
+  },
+  "icu:Preferences__EditChatFolderPage__SelectChatsDialog__NoChats": {
+    "messageformat": "Fără conversații"
   },
   "icu:Preferences__EditChatFolderPage__SelectChatsDialog__ChatTypesSection__Title": {
     "messageformat": "Tipuri de conversații"
@@ -2246,6 +2252,24 @@
   "icu:deleteAccountDialogBody": {
     "messageformat": "Această acțiune va elimina informațiile contului, profilul și toate mesajele tale. Vei fi eliminat/ă și din toate grupurile Signal. Aplicația se va închide după ce se încheie procesul."
   },
+  "icu:DeleteAccountConfirmDialog--Title": {
+    "messageformat": "Delete account"
+  },
+  "icu:DeleteAccountConfirmDialog--Description": {
+    "messageformat": "This will delete your account info, profile, and all of your messages. You will also be removed from all Signal groups."
+  },
+  "icu:DeleteAccountConfirmDialog--ConfirmNumber": {
+    "messageformat": "Confirm your phone number"
+  },
+  "icu:DeleteAccountConfirmDialog--CountryCodePlaceholder": {
+    "messageformat": "Country code"
+  },
+  "icu:DeleteAccountConfirmDialog--NumberPlaceholder": {
+    "messageformat": "Phone number"
+  },
+  "icu:DeleteAccountConfirmDialog--DeleteButton": {
+    "messageformat": "Delete"
+  },
   "icu:deleteOldIndexedDBData": {
     "messageformat": "Ai date învechite de la o instalare anterioara a Signal Desktop. Dacă alegi să continui, acestea vor fi șterse și vei începe de la zero."
   },
@@ -2398,9 +2422,6 @@
   },
   "icu:callRingtoneNotificationDescription": {
     "messageformat": "Redare sunete de apel"
-  },
-  "icu:callSystemNotificationDescription": {
-    "messageformat": "Afișare notificări pentru apeluri"
   },
   "icu:incomingCallNotificationDescription": {
     "messageformat": "Activare apeluri de intrare"
@@ -2999,6 +3020,9 @@
   "icu:FunPanelSticker__SubNavLabel": {
     "messageformat": "Pachete de autocolante"
   },
+  "icu:FunPanelStickers__SubNavCategoryLabel--Favorites": {
+    "messageformat": "Favorites"
+  },
   "icu:FunPanelStickers__SubNavCategoryLabel--Recents": {
     "messageformat": "Utilizate Recent"
   },
@@ -3010,6 +3034,9 @@
   },
   "icu:FunPanelStickers__SectionTitle--Recents": {
     "messageformat": "Utilizate Recent"
+  },
+  "icu:FunPanelStickers__SectionTitle--Favorites": {
+    "messageformat": "Favorites"
   },
   "icu:FunPanelStickers__SectionTitle--Featured": {
     "messageformat": "Promovate"
@@ -3524,6 +3551,9 @@
   "icu:MessageRequests--unblock-group-confirm-body": {
     "messageformat": "Membrii grupului te vor putea adăuga din nou la acest grup."
   },
+  "icu:MessageRequests--unblock-signal-confirm-body": {
+    "messageformat": "Vei primi vești și actualizări Signal."
+  },
   "icu:MessageRequests--block-and-report-spam-success-toast": {
     "messageformat": "Raportat ca spam și blocat."
   },
@@ -3538,6 +3568,9 @@
   },
   "icu:MessageRequests--block-group-confirm-body": {
     "messageformat": "Nu vei mai primi mesaje sau actualizări de la acest grup, iar membrii nu te vor mai putea adăuga la acest grup."
+  },
+  "icu:MessageRequests--block-signal-confirm-body": {
+    "messageformat": "Nu vei mai primi vești și actualizări Signal."
   },
   "icu:MessageRequests--reportAndMaybeBlock": {
     "messageformat": "Raportează…"
@@ -3866,6 +3899,9 @@
   "icu:callingDeviceSelection__settings": {
     "messageformat": "Setări"
   },
+  "icu:callingDeviceSelection__settings-v2": {
+    "messageformat": "Call Settings"
+  },
   "icu:calling__participants--pluralized": {
     "messageformat": "{people, plural, one {{people,number} în apel} few {{people,number} în apel} other {{people,number} în apel}}"
   },
@@ -3970,6 +4006,15 @@
   },
   "icu:callingDeviceSelection__select--default": {
     "messageformat": "Implicit"
+  },
+  "icu:callingDeviceSelection__select--default-nonwin": {
+    "messageformat": "Default: {deviceName}"
+  },
+  "icu:callingDeviceSelection__select--default_console": {
+    "messageformat": "Default: {deviceName}"
+  },
+  "icu:callingDeviceSelection__select--default_communications": {
+    "messageformat": "Default Communications: {deviceName}"
   },
   "icu:muteNotificationsTitle": {
     "messageformat": "Notificări fără sunet"
@@ -4823,6 +4868,69 @@
   "icu:CompositionArea__AttachMenu__Poll": {
     "messageformat": "Sondaj"
   },
+  "icu:CompositionArea__AttachMenu__Contact": {
+    "messageformat": "Contact"
+  },
+  "icu:ShareContactDialog__SelectContact__Title": {
+    "messageformat": "Select contact"
+  },
+  "icu:ShareContactDialog__SelectContact__SearchPlaceholder": {
+    "messageformat": "Search"
+  },
+  "icu:ShareContactDialog__SelectContact__EmptyState": {
+    "messageformat": "No contacts"
+  },
+  "icu:ShareContactDialog__SelectContact__NoResults": {
+    "messageformat": "No results for “{searchQuery}”"
+  },
+  "icu:ShareContactDialog__ShareContact__Title": {
+    "messageformat": "Share contact"
+  },
+  "icu:ShareContactDialog__ShareContact__Description": {
+    "messageformat": "Anyone you share this profile with will be able to message {name}."
+  },
+  "icu:ShareContactDialog__ShareContact__Send": {
+    "messageformat": "Send contact"
+  },
+  "icu:ShareContactDialog__ShareContact__EditName": {
+    "messageformat": "Edit name"
+  },
+  "icu:ShareContactDialog__EditName__Title": {
+    "messageformat": "Edit name"
+  },
+  "icu:ShareContactDialog__EditName__Prefix": {
+    "messageformat": "Prefix"
+  },
+  "icu:ShareContactDialog__EditName__GivenName": {
+    "messageformat": "First name"
+  },
+  "icu:ShareContactDialog__EditName__MiddleName": {
+    "messageformat": "Middle name"
+  },
+  "icu:ShareContactDialog__EditName__FamilyName": {
+    "messageformat": "Last name"
+  },
+  "icu:ShareContactDialog__EditName__Suffix": {
+    "messageformat": "Suffix"
+  },
+  "icu:ShareContactDialog__EditName__Organization": {
+    "messageformat": "Organization"
+  },
+  "icu:ShareContactDialog__ShareContact__EditPhoto": {
+    "messageformat": "Edit photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__Title": {
+    "messageformat": "Select a photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__ContactPhoto": {
+    "messageformat": "Contact photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__ProfilePhoto": {
+    "messageformat": "Profile photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__DefaultAvatar": {
+    "messageformat": "Default avatar"
+  },
   "icu:CompositionArea--attach-plus": {
     "messageformat": "Adaugă un atașament sau un sondaj"
   },
@@ -4861,9 +4969,6 @@
   },
   "icu:CompositionInput__editing-message": {
     "messageformat": "Editează mesajul"
-  },
-  "icu:countMutedConversationsDescription": {
-    "messageformat": "Include conversații fără sunet în numărătoarea pentru insignă"
   },
   "icu:ContactModal--nickname": {
     "messageformat": "Pseudonim"
@@ -5263,18 +5368,6 @@
   },
   "icu:UnreadReminders__notification__replySummary--many": {
     "messageformat": "{replyCount, plural, one {{replyCount,number} răspuns de la {person1} și alte persoane} few {{replyCount,number} răspunsuri de la {person1} și alte persoane} other {{replyCount,number} de răspunsuri de la {person1} și alte persoane}}"
-  },
-  "icu:ConversationNotificationsSettings__mentions__label": {
-    "messageformat": "Mențiuni"
-  },
-  "icu:ConversationNotificationsSettings__mentions__info": {
-    "messageformat": "Primiți notificări atunci când sunteți menționați în conversații pe mod silențios"
-  },
-  "icu:ConversationNotificationsSettings__mentions__select__always-notify": {
-    "messageformat": "Notifică întotdeauna"
-  },
-  "icu:ConversationNotificationsSettings__mentions__select__dont-notify-for-mentions-if-muted": {
-    "messageformat": "Nu notifica pe silențios"
   },
   "icu:GroupLinkManagement--clipboard": {
     "messageformat": "Linkul grupului a fost copiat."
@@ -6193,9 +6286,6 @@
   "icu:Preferences__SignalAccountKeys__Description": {
     "messageformat": "Păstrează aceste informații într-un loc sigur; datele de autentificare îți sunt necesare pentru a-ți recupera contul și datele. Nu-l trimite nimănui."
   },
-  "icu:Preferences__SignalAccountKeys__AccountKey": {
-    "messageformat": "Cod pentru cont"
-  },
   "icu:Preferences__SignalAccountKeys__AccountID": {
     "messageformat": "ID cont"
   },
@@ -6257,7 +6347,7 @@
     "messageformat": "PIN Signal"
   },
   "icu:Preferences--signal-pin__footer": {
-    "messageformat": "PINs keep information stored with Signal encrypted so only you can access it. Your PIN cannot be recovered. Your profile, settings, and contacts will restore when you reinstall Signal. <learnMoreLink>Learn more</learnMoreLink>"
+    "messageformat": "PIN-urile îți păstrează informațiile stocate în Signal criptate ca doar tu să le poți accesa. PIN-ul tău nu poate fi recuperat. Profilul, setările și contactele vor fi restaurate când reinstalezi Signal. <learnMoreLink>Află mai multe</learnMoreLink>"
   },
   "icu:Preferences--signal-pin-advanced-settings": {
     "messageformat": "Setări PIN avansate"
@@ -6272,7 +6362,7 @@
     "messageformat": "Dacă dezactivezi codul PIN, vei pierde toate datele când te înregistrezi din nou la Signal, cu excepția cazului când faci backup și restaurezi manual. Nu poți activa Blocarea înregistrării în timp ce codul PIN este dezactivat."
   },
   "icu:DisableSignalPinErrorDialog--reg-lock--title": {
-    "messageformat": "Disable PIN failed due to registration lock"
+    "messageformat": "Dezactivarea PIN-ului a eșuat din cauza blocării înregistrării"
   },
   "icu:DisableSignalPinErrorDialog--reg-lock--body": {
     "messageformat": "Trebuie să dezactivezi blocarea înregistrării înainte de a dezactiva codul PIN."
@@ -6281,7 +6371,7 @@
     "messageformat": "OK"
   },
   "icu:DisableSignalPinErrorDialog--backups--title": {
-    "messageformat": "Disable PIN failed due to backups"
+    "messageformat": "Dezactivarea PIN-ului a eșuat din cauza backup-urilor"
   },
   "icu:DisableSignalPinErrorDialog--backups--body": {
     "messageformat": "Trebuie să dezactivezi Backup-urile înainte de a dezactiva codul PIN."
@@ -6304,9 +6394,6 @@
   "icu:Preferences--registration-lock__footer": {
     "messageformat": "Solicitați PIN-ul Signal pentru a vă înregistra din nou numărul de telefon cu Signal."
   },
-  "icu:Preferences--notification-content": {
-    "messageformat": "Conținut notificare"
-  },
   "icu:Preferences__Chats__TextInputSection__Title": {
     "messageformat": "Introducerea textului"
   },
@@ -6318,9 +6405,6 @@
   },
   "icu:Preferences__Notifications__SoundsSection__Title": {
     "messageformat": "Sunete"
-  },
-  "icu:Preferences__Notifications__AppBadgeSection__Title": {
-    "messageformat": "Insigna aplicației"
   },
   "icu:Preferences__Notifications__AppBadgeSection__Title-v2": {
     "messageformat": "Insigne necitite"
@@ -6700,6 +6784,9 @@
   "icu:Preferences--blocked-users--description": {
     "messageformat": "Utilizatorii blocați nu vor putea să te sune sau să îți trimită mesaje"
   },
+  "icu:Preferences--add-blocked": {
+    "messageformat": "Adaugă grup sau utilizator blocat"
+  },
   "icu:Preferences--blocked-users": {
     "messageformat": "Utilizatori blocați"
   },
@@ -6708,6 +6795,12 @@
   },
   "icu:Preferences--blocked--blocked-on": {
     "messageformat": "Blocat pe {blockedAt}"
+  },
+  "icu:Preferences--BlockChooser--Done": {
+    "messageformat": "Gata"
+  },
+  "icu:Preferences--BlockChooser--Search--Placeholder": {
+    "messageformat": "Caută"
   },
   "icu:Preferences--signal-backups": {
     "messageformat": "Backup-uri securizate Signal"
@@ -7105,6 +7198,36 @@
   "icu:InstallScreenUpdateDialog--cannot-update__body": {
     "messageformat": "Signal Desktop nu a reușit să se actualizeze, dar există o nouă versiune disponibilă. Mergi la {downloadUrl} și instalează noua versiune manual, apoi fie contactezi serviciul de asistență sau raportezi un bug despre această problemă."
   },
+  "icu:EntryPoint--signal-logo": {
+    "messageformat": "Signal Logo"
+  },
+  "icu:EntryPoint--Title--Line1": {
+    "messageformat": "Take privacy with you."
+  },
+  "icu:EntryPoint--Title--Line2": {
+    "messageformat": "Be yourself in every message."
+  },
+  "icu:EntryPoint--link-button": {
+    "messageformat": "Link your account"
+  },
+  "icu:EntryPoint--more-options-button": {
+    "messageformat": "More options"
+  },
+  "icu:EntryPoint--nonprofit": {
+    "messageformat": "Signal is a 501c3 nonprofit"
+  },
+  "icu:EntryPoint--terms": {
+    "messageformat": "Terms & privacy policy"
+  },
+  "icu:EntryPoint--MoreOptions--Title": {
+    "messageformat": "More options"
+  },
+  "icu:EntryPoint--MoreOptions--RegistrationButton--Title": {
+    "messageformat": "Create a new account"
+  },
+  "icu:EntryPoint--MoreOptions--RegistrationButton--Description": {
+    "messageformat": "Create a new Signal account using your phone number."
+  },
   "icu:StandaloneRegistration--signal-logo": {
     "messageformat": "Logo Signal"
   },
@@ -7124,7 +7247,7 @@
     "messageformat": "Încearcă din nou în {duration}"
   },
   "icu:StandaloneRegistration--PhoneNumber--RegionCodeSelector--Label": {
-    "messageformat": "Select region code"
+    "messageformat": "Alege codul țării"
   },
   "icu:StandaloneRegistration--PhoneNumber--placeholder": {
     "messageformat": "Număr de telefon"
@@ -7299,6 +7422,21 @@
   },
   "icu:StandaloneRegistration--VerificationCode--CannotSendCodeTemporary--ok-button": {
     "messageformat": "OK"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Title": {
+    "messageformat": "Having trouble registering?"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet1": {
+    "messageformat": "Make sure your phone has a cellular signal to receive your SMS or call"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet2": {
+    "messageformat": "Confirm you can receive a phone call to the number"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet3": {
+    "messageformat": "Check that you have entered your phone number correctly"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Footer": {
+    "messageformat": "If you still can’t register, follow these <troubleshootingLink>troubleshooting steps</troubleshootingLink> or <contactSupportLink>Contact Support</contactSupportLink>."
   },
   "icu:StandaloneRegistration--ProfileEntry--header": {
     "messageformat": "Configurează-ți profilul"
@@ -7649,10 +7787,10 @@
     "messageformat": "Activează „Signal”"
   },
   "icu:MediaPermissionsModal__step-2--windows--microphone": {
-    "messageformat": "Enable microphone access for Signal"
+    "messageformat": "Activează-ți accesul la microfon pentru Signal"
   },
   "icu:MediaPermissionsModal__step-2--windows--camera": {
-    "messageformat": "Enable camera access for Signal"
+    "messageformat": "Activează accesul la cameră pentru Signal"
   },
   "icu:MediaPermissionsModal__open": {
     "messageformat": "Mergi la setări"
@@ -8204,7 +8342,7 @@
     "messageformat": "Numele de utilizator sunt întotdeauna asociate cu un set de numere."
   },
   "icu:EditUsernameModalBody__discriminator-label": {
-    "messageformat": "Username digits"
+    "messageformat": "Cifrele numelui de utilizator"
   },
   "icu:EditUsernameModalBody__learn-more": {
     "messageformat": "Află mai multe"
@@ -8340,13 +8478,13 @@
     "messageformat": "Schimbă-ți PIN-ul Signal"
   },
   "icu:PinChangeModal__title--create--without-pin": {
-    "messageformat": "Create your Signal PIN"
+    "messageformat": "Creează PIN-ul Signal"
   },
   "icu:PinChangeModal__body--create": {
     "messageformat": "Poți schimba codul PIN atât timp cât acest dispozitiv este înregistrat. <learnMoreLink>Află mai multe</learnMoreLink>"
   },
   "icu:PinChangeModal__body--create--without-pin": {
-    "messageformat": "PINs keep information stored with Signal encrypted so only you can access it. Your profile, settings, and contacts will restore when you reinstall. You won't need your PIN to open the app. <learnMoreLink>Learn more</learnMoreLink>"
+    "messageformat": "PIN-urile îți păstrează informațiile stocate în Signal criptate ca doar tu să le poți accesa. Profilul, setările și contactele se vor restabili atunci când reinstalezi Signal. Nu o să ai nevoie de PIN ca să deschizi aplicația. <learnMoreLink>Află mai multe</learnMoreLink>"
   },
   "icu:PinChangeModal__title--confirm": {
     "messageformat": "Confirmă PIN-ul tău Signal"
@@ -8588,12 +8726,6 @@
   "icu:CallLinkPendingParticipantModal__DenyButtonLabel": {
     "messageformat": "Respinge intrarea"
   },
-  "icu:CallLinkRestrictionsSelect__Option--Off": {
-    "messageformat": "Dezactivat"
-  },
-  "icu:CallLinkRestrictionsSelect__Option--On": {
-    "messageformat": "Activat"
-  },
   "icu:CallLinkAddNameModal__Title": {
     "messageformat": "Adaugă numele apelului"
   },
@@ -8641,6 +8773,39 @@
   },
   "icu:SaveMultiDialog__title": {
     "messageformat": "Salvează atașamentele"
+  },
+  "icu:EmbeddedContact__message": {
+    "messageformat": "Mesaj"
+  },
+  "icu:ContactDetail__message": {
+    "messageformat": "Mesaj"
+  },
+  "icu:ContactDetail__add-to-group": {
+    "messageformat": "Adaugă la un grup"
+  },
+  "icu:ContactDetail__nickname": {
+    "messageformat": "Pseudonim"
+  },
+  "icu:ContactDetail__note": {
+    "messageformat": "Notițe"
+  },
+  "icu:email-v2": {
+    "messageformat": "E-mail"
+  },
+  "icu:home-v2": {
+    "messageformat": "Acasă"
+  },
+  "icu:mobile-v2": {
+    "messageformat": "Mobil"
+  },
+  "icu:work-v2": {
+    "messageformat": "Serviciu"
+  },
+  "icu:phone-v2": {
+    "messageformat": "Telefon"
+  },
+  "icu:address-v2": {
+    "messageformat": "Adresă"
   },
   "icu:WhatsNew__modal-title": {
     "messageformat": "Ce este nou"
@@ -8806,6 +8971,9 @@
   },
   "icu:DonationReceipt__footer-text-v2": {
     "messageformat": "Mulțumesc pentru susținerea acordată Signal. Contribuția ta ajută la îndeplinirea misiunii de a proteja libertatea de exprimare și de a permite o comunicare globală sigură pentru milioane de oameni din întreaga lume, prin intermediul tehnologiei open source pentru confidențialitate. Dacă ești rezident al Statelor Unite, păstrează această chitanță pentru evidența fiscală. Signal Technology Foundation este o organizație non-profit scutită de impozite din Statele Unite, în conformitate cu secțiunea 501c3 din Codul Veniturilor Interne. Codul nostru fiscal federal este 82-4506840. Signal nu a oferit bunuri sau servicii referitoare la această contribuție."
+  },
+  "icu:MessageCta__Donate": {
+    "messageformat": "Donează Acum"
   },
   "icu:Donations__OfflineTooltip": {
     "messageformat": "Ești offline. Conectează-te la internet pentru a finaliza o donație."
@@ -9005,6 +9173,9 @@
   "icu:CallQualitySurvey__WhatIssuesDidYouHave__SomethingElse__TextArea__AccessibilityLabel": {
     "messageformat": "Descrierea problemelor"
   },
+  "icu:CallQualitySurvey__WhatIssuesDidYouHave__SomethingElse__TextArea__Placeholder": {
+    "messageformat": "Descrie problema ta"
+  },
   "icu:CallQualitySurvey__WhatIssuesDidYouHave__SomethingElse__TextArea__HelpText": {
     "messageformat": "Include orice detalii relevante pentru problemă. Orice informații trimiți aici vor rămâne private și vor fi folosite doar pentru a îmbunătăți apelurile în Signal."
   },
@@ -9114,16 +9285,25 @@
     "messageformat": "Mici ajustări, soluționări de bug-uri și îmbunătățiri ale performanței. Mersi că folosești Signal!",
     "ignoreUnused": true
   },
-  "icu:WhatsNew__8.26--0": {
-    "messageformat": "Descoperirea de sine poate fi un proces care durează toată viața, dar de acum înainte vei apărea ca „Tu” în căutarea membrilor grupului, pentru a-ți ușura puțin sarcina."
-  },
-  "icu:WhatsNew__8.27--0": {
-    "messageformat": "Această actualizare introduce setări mai detaliate, pentru a-ți oferi un control mult mai mare asupra notificărilor din Signal. Acum poți alege ce apare pe pictograma aplicației, poți seta preferințele de notificare pentru discuțiile cu notificări dezactivate și multe altele! Am adăugat și un buton util pentru a restabili setările implicite ale notificărilor, în cazul în care faci atâtea modificări încât nu mai știi cum să te descurci."
-  },
   "icu:WhatsNew__8.30--0": {
-    "messageformat": "Thanks to a few performance improvements, your CPU will be slightly happier during video calls (even if you're not smiling)."
+    "messageformat": "Mulțumită unor îmbunătățiri de performanță, procesorul tău va fi un pic mai rapid în timpul apelurilor video (chiar dacă tu stai pe loc)."
   },
   "icu:WhatsNew__8.30--1": {
-    "messageformat": "We also added a convenient shortcut to open your system settings on Windows if you try to join a video call and Signal doesn't have permission to access the camera. Now it's easier to see what you need to do so that people can see you."
+    "messageformat": "Am adăugat și o scurtătură utilă ca să-ți deschizi setările de sistem pe Windows dacă încerci să te alături unui apel video și Signal nu are permisiunea să-ți acceseze camera. Acum este mai ușor să vezi ce e nevoie să faci ca oamenii să te vadă."
+  },
+  "icu:WhatsNew__8.32--0": {
+    "messageformat": "Filtrul Mesaje necitite e acum acceptat și în dosarele de mesaje și în interfața de căutare, ca să vezi ușor ce ai ratat."
+  },
+  "icu:WhatsNew__8.32--1": {
+    "messageformat": "Fiabilitate de încărcare îmbunătățită, în cazul condițiilor de rețea slabă. Mulțumesc, <GH3mmmbulus></GH3mmmbulus>!"
+  },
+  "icu:WhatsNew__8.32--2": {
+    "messageformat": "Scurtătura „(N)“ indică în mod corect către emoji-ul cu degetul mare în jos. Bravo <lnicola></lnicola> pentru remediere."
+  },
+  "icu:WhatsNew__8.34--0": {
+    "messageformat": "Signal Desktop now supports contact sharing too, so you can maintain eye contact with your computer screen without having to make physical contact with your smartphone."
+  },
+  "icu:WhatsNew__8.34--1": {
+    "messageformat": "Improved handling and performance for connected audio devices."
   }
 }

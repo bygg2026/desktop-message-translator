@@ -1,11 +1,20 @@
 // Copyright 2025 Signal Messenger, LLC
 // SPDX-License-Identifier: AGPL-3.0-only
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import {
+  memo,
+  useCallback,
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { DropdownMenu } from 'radix-ui';
 import type { FC, ReactNode } from 'react';
 import { computeAccessibleName } from 'dom-accessibility-api';
 import { AxoSymbol } from './AxoSymbol.dom.tsx';
 import { AxoBaseMenu } from './_internal/AxoBaseMenu.dom.tsx';
+import { AxoBaseLayer } from './_internal/AxoBaseLayer.dom.tsx';
 import { tw } from './tw.dom.tsx';
 import { assert } from './_internal/assert.std.tsx';
 import {
@@ -18,7 +27,6 @@ import {
 } from './_internal/StrictContext.dom.tsx';
 import { isTestOrMockEnvironment } from '../environment.std.ts';
 import { AxoDragRegion } from './AxoDragRegion.dom.tsx';
-import { AxoTheme } from './AxoTheme.dom.tsx';
 import { AriaLabelled } from './aria/AriaLabelled.dom.tsx';
 
 const { useDisableDragRegions } = AxoDragRegion;
@@ -209,21 +217,27 @@ export namespace AxoDropdownMenu {
     const { open } = useStrictContext(RootContext);
     return (
       <DropdownMenu.Portal>
-        <AxoTheme.Inherit>
-          <AriaLabelled.Root asChild>
-            <DropdownMenu.Content
-              sideOffset={4}
-              align={props.align}
-              side={props.side}
-              collisionPadding={6}
-              className={AxoBaseMenu.menuContentStyles}
-              onCloseAutoFocus={props.onCloseAutoFocus}
-              inert={!open}
-            >
-              {props.children}
-            </DropdownMenu.Content>
+        <AxoBaseLayer>
+          <AriaLabelled.Root>
+            <AriaLabelled.Target asChild>
+              <DropdownMenu.Content
+                sideOffset={4}
+                align={props.align}
+                side={props.side}
+                collisionPadding={6}
+                className={AxoBaseMenu.menuContentClassName}
+                onCloseAutoFocus={props.onCloseAutoFocus}
+                onEscapeKeyDown={AxoBaseMenu.menuContentEventStopPropagation}
+                onClick={AxoBaseMenu.menuContentEventStopPropagation}
+                onContextMenu={AxoBaseMenu.menuContentEventStopPropagation}
+                onKeyDown={AxoBaseMenu.menuContentEventStopPropagation}
+                inert={!open}
+              >
+                {props.children}
+              </DropdownMenu.Content>
+            </AriaLabelled.Target>
           </AriaLabelled.Root>
-        </AxoTheme.Inherit>
+        </AxoBaseLayer>
       </DropdownMenu.Portal>
     );
   });
@@ -267,7 +281,7 @@ export namespace AxoDropdownMenu {
         disabled={props.disabled}
         textValue={props.textValue}
         onSelect={props.onSelect}
-        className={AxoBaseMenu.menuItemStyles}
+        className={AxoBaseMenu.menuItemClassName}
       >
         {props.leading && (
           <AxoBaseMenu.ItemLeadingSlot>
@@ -295,12 +309,17 @@ export namespace AxoDropdownMenu {
    * A single selectable row in the dropdown menu.
    */
   export const Item: FC<ItemProps> = memo(props => {
+    const textId = useId();
+    const descriptionId = useId();
+    const hasDescription = props.description != null;
     return (
       <DropdownMenu.Item
         disabled={props.disabled}
         textValue={props.textValue}
         onSelect={props.onSelect}
-        className={AxoBaseMenu.menuItemStyles}
+        className={AxoBaseMenu.menuItemClassName}
+        aria-labelledby={hasDescription ? textId : undefined}
+        aria-describedby={hasDescription ? descriptionId : undefined}
       >
         {props.symbol && (
           <AxoBaseMenu.ItemLeadingSlot>
@@ -308,7 +327,17 @@ export namespace AxoDropdownMenu {
           </AxoBaseMenu.ItemLeadingSlot>
         )}
         <AxoBaseMenu.ItemContentSlot>
-          <AxoBaseMenu.ItemText>{props.children}</AxoBaseMenu.ItemText>
+          {hasDescription ? (
+            <AxoBaseMenu.ItemTextWithDescription
+              textId={textId}
+              descriptionId={descriptionId}
+              description={props.description}
+            >
+              {props.children}
+            </AxoBaseMenu.ItemTextWithDescription>
+          ) : (
+            <AxoBaseMenu.ItemText>{props.children}</AxoBaseMenu.ItemText>
+          )}
           {props.keyboardShortcut && (
             <AxoBaseMenu.ItemKeyboardShortcut
               keyboardShortcut={props.keyboardShortcut}
@@ -333,7 +362,7 @@ export namespace AxoDropdownMenu {
    */
   export const Group: FC<GroupProps> = memo(props => {
     return (
-      <DropdownMenu.Group className={AxoBaseMenu.menuGroupStyles}>
+      <DropdownMenu.Group className={AxoBaseMenu.menuGroupClassName}>
         {props.children}
       </DropdownMenu.Group>
     );
@@ -353,7 +382,7 @@ export namespace AxoDropdownMenu {
    */
   export const Label: FC<LabelProps> = memo(props => {
     return (
-      <DropdownMenu.Label className={AxoBaseMenu.menuLabelStyles}>
+      <DropdownMenu.Label className={AxoBaseMenu.menuLabelClassName}>
         <AxoBaseMenu.ItemContentSlot>
           <AxoBaseMenu.ItemText>{props.children}</AxoBaseMenu.ItemText>
         </AxoBaseMenu.ItemContentSlot>
@@ -382,15 +411,15 @@ export namespace AxoDropdownMenu {
    */
   export const Header: FC<HeaderProps> = memo(props => {
     return (
-      <span aria-hidden="true" className={AxoBaseMenu.menuHeaderStyles}>
+      <span aria-hidden="true" className={AxoBaseMenu.menuHeaderClassName}>
         <AriaLabelled.Label asChild>
-          <span className={AxoBaseMenu.menuHeaderLabelStyles}>
+          <span className={AxoBaseMenu.menuHeaderLabelClassName}>
             {props.label}
           </span>
         </AriaLabelled.Label>
         {props.description && (
           <AriaLabelled.Description asChild>
-            <span className={AxoBaseMenu.menuHeaderDescriptionStyles}>
+            <span className={AxoBaseMenu.menuHeaderDescriptionClassName}>
               {props.description}
             </span>
           </AriaLabelled.Description>
@@ -419,7 +448,7 @@ export namespace AxoDropdownMenu {
         checked={props.checked}
         onCheckedChange={props.onCheckedChange}
         onSelect={props.onSelect}
-        className={AxoBaseMenu.menuCheckboxItemStyles}
+        className={AxoBaseMenu.menuCheckboxItemClassName}
       >
         <AxoBaseMenu.ItemLeadingSlot>
           <AxoBaseMenu.ItemCheckPlaceholder>
@@ -464,7 +493,7 @@ export namespace AxoDropdownMenu {
       <DropdownMenu.RadioGroup
         value={props.value ?? undefined}
         onValueChange={props.onValueChange}
-        className={AxoBaseMenu.menuRadioGroupStyles}
+        className={AxoBaseMenu.menuRadioGroupClassName}
       >
         {props.children}
       </DropdownMenu.RadioGroup>
@@ -487,7 +516,7 @@ export namespace AxoDropdownMenu {
     return (
       <DropdownMenu.RadioItem
         value={props.value}
-        className={AxoBaseMenu.menuRadioItemStyles}
+        className={AxoBaseMenu.menuRadioItemClassName}
         disabled={props.disabled}
         textValue={props.textValue}
         onSelect={props.onSelect}
@@ -530,7 +559,7 @@ export namespace AxoDropdownMenu {
    */
   export const Separator: FC = memo(() => {
     return (
-      <DropdownMenu.Separator className={AxoBaseMenu.menuSeparatorStyles} />
+      <DropdownMenu.Separator className={AxoBaseMenu.menuSeparatorClassName} />
     );
   });
 
@@ -548,7 +577,7 @@ export namespace AxoDropdownMenu {
   export const ContentSeparator: FC = memo(() => {
     return (
       <DropdownMenu.Separator
-        className={AxoBaseMenu.menuContentSeparatorStyles}
+        className={AxoBaseMenu.menuContentSeparatorClassName}
       />
     );
   });
@@ -586,7 +615,7 @@ export namespace AxoDropdownMenu {
       <DropdownMenu.SubTrigger
         disabled={props.disabled}
         textValue={props.textValue}
-        className={AxoBaseMenu.menuSubTriggerStyles}
+        className={AxoBaseMenu.menuSubTriggerClassName}
       >
         {props.symbol && (
           <AxoBaseMenu.ItemLeadingSlot>
@@ -619,15 +648,20 @@ export namespace AxoDropdownMenu {
   export const SubContent: FC<SubContentProps> = memo(props => {
     return (
       <DropdownMenu.Portal>
-        <AriaLabelled.Root asChild>
-          <DropdownMenu.SubContent
-            alignOffset={-6}
-            collisionPadding={6}
-            className={AxoBaseMenu.menuSubContentStyles}
-          >
-            {props.children}
-          </DropdownMenu.SubContent>
-        </AriaLabelled.Root>
+        <AxoBaseLayer>
+          <AriaLabelled.Root>
+            <AriaLabelled.Target asChild>
+              <DropdownMenu.SubContent
+                alignOffset={-6}
+                collisionPadding={6}
+                className={AxoBaseMenu.menuSubContentClassName}
+                onEscapeKeyDown={AxoBaseMenu.menuContentEventStopPropagation}
+              >
+                {props.children}
+              </DropdownMenu.SubContent>
+            </AriaLabelled.Target>
+          </AriaLabelled.Root>
+        </AxoBaseLayer>
       </DropdownMenu.Portal>
     );
   });

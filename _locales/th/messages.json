@@ -2,8 +2,20 @@
   "icu:AxoAlertDialog.Cancel": {
     "messageformat": "ยกเลิก"
   },
+  "icu:AxoAlertDialog.Ok": {
+    "messageformat": "ตกลง"
+  },
   "icu:AxoButton.Pending": {
     "messageformat": "รอดำเนินการ"
+  },
+  "icu:AxoColorSlider.Hue": {
+    "messageformat": "Hue"
+  },
+  "icu:AxoColorSlider.Saturation": {
+    "messageformat": "Saturation"
+  },
+  "icu:AxoColorSlider.Lightness": {
+    "messageformat": "Lightness"
   },
   "icu:AxoDialog.Back": {
     "messageformat": "กลับ"
@@ -73,12 +85,6 @@
   },
   "icu:LinkedDevicesOnboardingDialog__bullet--2": {
     "messageformat": "ใช้อุปกรณ์หลักจัดการอุปกรณ์ที่เชื่อมโยงอยู่ทั้งหมด โดยสามารถเชื่อมโยงอุปกรณ์ได้สูงสุด 5 เครื่อง"
-  },
-  "icu:LinkedDevicesOnboardingDialog__bullet--3": {
-    "messageformat": "การตั้งค่าเกี่ยวกับบัญชี (ซึ่งรวมถึงการตั้งค่าบัญชีและการสำรองข้อมูล) จะต้องใช้อุปกรณ์หลักในการจัดการเท่านั้น"
-  },
-  "icu:LinkedDevicesOnboardingDialog__bullet--3--1": {
-    "messageformat": "สามารถจัดการการตั้งค่าบัญชีและการสำรองข้อมูลได้บนอุปกรณ์หลักเท่านั้น"
   },
   "icu:LinkedDevicesOnboardingDialog__bullet--3--2": {
     "messageformat": "สามารถจัดการการตั้งค่าบัญชีและการสำรองข้อมูลที่ปลอดภัยของ Signal ได้บนอุปกรณ์หลักเท่านั้น"
@@ -281,6 +287,9 @@
   "icu:archivedConversations": {
     "messageformat": "แชทที่ถูกเก็บในที่เก็บถาวร"
   },
+  "icu:LeftPane__MoreActionsLabel": {
+    "messageformat": "More actions"
+  },
   "icu:LeftPane__MoreActionsMenu__AddChatFolder": {
     "messageformat": "เพิ่มโฟลเดอร์แชท"
   },
@@ -382,9 +391,6 @@
   },
   "icu:NavTabs__ItemIconLabel--UnreadCount": {
     "messageformat": "ยังไม่ได้อ่าน {count,number} รายการ"
-  },
-  "icu:NavTabs__ItemIconLabel--MarkedUnread": {
-    "messageformat": "ถูกทำเครื่องหมายว่ายังไม่ได้อ่าน"
   },
   "icu:NavTabs__ItemLabel--Chats": {
     "messageformat": "แชท"
@@ -653,20 +659,11 @@
   "icu:SafetyNumberNotReady__learn-more": {
     "messageformat": "เรียนรู้เพิ่มเติม"
   },
-  "icu:KeyTransparencyErrorDialog__Title": {
-    "messageformat": "ไม่สามารถใช้การตรวจยืนยันโดยอัตโนมัติได้บนอุปกรณ์ของคุณ คุณต้องการส่งบันทึกดีบักหรือไม่"
-  },
   "icu:KeyTransparencyErrorDialog__Title-v2": {
     "messageformat": "ไม่สามารถใช้การตรวจยืนยันโดยอัตโนมัติได้บนอุปกรณ์ของคุณ คุณต้องการส่งรายงานเพื่อช่วยเราปรับปรุงการใช้งานหรือไม่"
   },
-  "icu:KeyTransparencyErrorDialog__Description": {
-    "messageformat": "บันทึกดีบักจะช่วยให้เราสามารถตรวจสอบและแก้ไขปัญหาได้ โดยที่ในบันทึกจะไม่มีข้อมูลที่ใช้ระบุตัวตน"
-  },
   "icu:KeyTransparencyErrorDialog__Description-v2": {
     "messageformat": "การแนบบันทึกดีบักจะช่วยให้เราสามารถตรวจสอบและแก้ไขปัญหาได้ โดยที่ในบันทึกจะไม่มีข้อมูลที่ใช้ระบุตัวตน คุณสามารถเลือกได้ว่าจะแนบบันทึกหรือไม่"
-  },
-  "icu:KeyTransparencyErrorDialog__ShareDebugLog__Label": {
-    "messageformat": "แชร์บันทึกดีบัก"
   },
   "icu:KeyTransparencyErrorDialog__ShareDebugLog__Label-v2": {
     "messageformat": "รวมบันทึกดีบัก"
@@ -685,6 +682,9 @@
   },
   "icu:KeyTransparencyOnboardingDialog__Description": {
     "messageformat": "หากคุณและผู้ติดต่อเชื่อมโยงกันผ่านทางหมายเลขโทรศัพท์ Signal จะสามารถใช้ขั้นตอนที่เรียกว่า Key Transparency ในการยืนยันความปลอดภัยของเครือข่ายโดยอัตโนมัติ เพื่อความปลอดภัยยิ่งขึ้น คุณยังคงสามารถตรวจยืนยันเครือข่ายด้วยตนเองผ่านทางคิวอาร์โค้ดหรือโดยการเทียบหมายเลขความปลอดภัย"
+  },
+  "icu:KeyTransparencyOnboardingDialog__Description-v2": {
+    "messageformat": "<paragraph>หากคุณและผู้ติดต่อเชื่อมโยงกันผ่านทางหมายเลขโทรศัพท์ Signal จะสามารถใช้ขั้นตอนที่เรียกว่า Key Transparency ในการยืนยันความปลอดภัยของเครือข่ายโดยอัตโนมัติ</paragraph><paragraph>เพื่อความปลอดภัยยิ่งขึ้น คุณยังคงสามารถตรวจยืนยันเครือข่ายด้วยตนเองผ่านทางคิวอาร์โค้ดหรือโดยการเทียบหมายเลขความปลอดภัย</paragraph>"
   },
   "icu:KeyTransparencyOnboardingDialog__Continue": {
     "messageformat": "ดำเนินการต่อ"
@@ -1493,6 +1493,9 @@
   "icu:ConversationMerge--learn-more": {
     "messageformat": "เรียนรู้เพิ่มเติม"
   },
+  "icu:ConversationMerge--explainer-dialog--label": {
+    "messageformat": "รวมประวัติการส่งข้อความเข้าด้วยกันแล้ว"
+  },
   "icu:ConversationMerge--explainer-dialog--line-1": {
     "messageformat": "หลังจากที่ส่งข้อความกับ {obsoleteConversationTitle} คุณได้ทราบว่าหมายเลขนี้เป็นของ {conversationTitle} หมายเลขโทรศัพท์นี้เป็นข้อมูลส่วนตัว"
   },
@@ -1753,6 +1756,9 @@
   },
   "icu:Preferences__EditChatFolderPage__SelectChatsDialog__Search__Placeholder": {
     "messageformat": "ค้นหา"
+  },
+  "icu:Preferences__EditChatFolderPage__SelectChatsDialog__NoChats": {
+    "messageformat": "ไม่มีแชท"
   },
   "icu:Preferences__EditChatFolderPage__SelectChatsDialog__ChatTypesSection__Title": {
     "messageformat": "ประเภทของแชท"
@@ -2246,6 +2252,24 @@
   "icu:deleteAccountDialogBody": {
     "messageformat": "ข้อมูลบัญชี โปรไฟล์ และข้อความทั้งหมดของคุณจะถูกลบ โดยคุณจะถูกลบออกจากกลุ่ม Signal ทั้งหมดด้วยเช่นกัน แอปจะปิดหลังขั้นตอนนี้เสร็จสิ้น"
   },
+  "icu:DeleteAccountConfirmDialog--Title": {
+    "messageformat": "Delete account"
+  },
+  "icu:DeleteAccountConfirmDialog--Description": {
+    "messageformat": "This will delete your account info, profile, and all of your messages. You will also be removed from all Signal groups."
+  },
+  "icu:DeleteAccountConfirmDialog--ConfirmNumber": {
+    "messageformat": "Confirm your phone number"
+  },
+  "icu:DeleteAccountConfirmDialog--CountryCodePlaceholder": {
+    "messageformat": "Country code"
+  },
+  "icu:DeleteAccountConfirmDialog--NumberPlaceholder": {
+    "messageformat": "Phone number"
+  },
+  "icu:DeleteAccountConfirmDialog--DeleteButton": {
+    "messageformat": "Delete"
+  },
   "icu:deleteOldIndexedDBData": {
     "messageformat": "คุณมีข้อมูลที่ล้าสมัยจากการติดตั้ง Signal เดสก์ท็อปครั้งก่อนหน้า หากเลือกที่จะดำเนินการต่อ ข้อมูลดังกล่าวจะถูกลบและทุกอย่างจะเริ่มต้นใหม่ทั้งหมด"
   },
@@ -2398,9 +2422,6 @@
   },
   "icu:callRingtoneNotificationDescription": {
     "messageformat": "เล่นเสียงเรียกเข้า"
-  },
-  "icu:callSystemNotificationDescription": {
-    "messageformat": "แสดงการแจ้งเตือนสำหรับการโทร"
   },
   "icu:incomingCallNotificationDescription": {
     "messageformat": "เปิดใช้งานสายเรียกเข้า"
@@ -2999,6 +3020,9 @@
   "icu:FunPanelSticker__SubNavLabel": {
     "messageformat": "ชุดสติกเกอร์"
   },
+  "icu:FunPanelStickers__SubNavCategoryLabel--Favorites": {
+    "messageformat": "Favorites"
+  },
   "icu:FunPanelStickers__SubNavCategoryLabel--Recents": {
     "messageformat": "เพิ่งใช้"
   },
@@ -3010,6 +3034,9 @@
   },
   "icu:FunPanelStickers__SectionTitle--Recents": {
     "messageformat": "เพิ่งใช้"
+  },
+  "icu:FunPanelStickers__SectionTitle--Favorites": {
+    "messageformat": "Favorites"
   },
   "icu:FunPanelStickers__SectionTitle--Featured": {
     "messageformat": "แนะนำ"
@@ -3524,6 +3551,9 @@
   "icu:MessageRequests--unblock-group-confirm-body": {
     "messageformat": "สมาชิกกลุ่มจะสามารถเพิ่มคุณเข้ากลุ่มนี้อีก"
   },
+  "icu:MessageRequests--unblock-signal-confirm-body": {
+    "messageformat": "คุณจะได้รับข้อมูลอัปเดตและข่าวสารจาก Signal"
+  },
   "icu:MessageRequests--block-and-report-spam-success-toast": {
     "messageformat": "รายงานว่าเป็นสแปมและบล็อกแล้ว"
   },
@@ -3538,6 +3568,9 @@
   },
   "icu:MessageRequests--block-group-confirm-body": {
     "messageformat": "คุณจะไม่ได้รับข้อความหรือข่าวสารจากกลุ่มนี้อีกต่อไป และสมาชิกจะไม่สามารถเพิ่มคุณกลับเข้ามาในกลุ่มนี้ได้อีก"
+  },
+  "icu:MessageRequests--block-signal-confirm-body": {
+    "messageformat": "คุณจะไม่ได้รับข้อมูลอัปเดตและข่าวสารจาก Signal อีกต่อไป"
   },
   "icu:MessageRequests--reportAndMaybeBlock": {
     "messageformat": "รายงาน..."
@@ -3866,6 +3899,9 @@
   "icu:callingDeviceSelection__settings": {
     "messageformat": "การตั้งค่า"
   },
+  "icu:callingDeviceSelection__settings-v2": {
+    "messageformat": "Call Settings"
+  },
   "icu:calling__participants--pluralized": {
     "messageformat": "{people, plural, other {{people,number} คนอยู่ในสาย}}"
   },
@@ -3970,6 +4006,15 @@
   },
   "icu:callingDeviceSelection__select--default": {
     "messageformat": "ค่าเริ่มต้น"
+  },
+  "icu:callingDeviceSelection__select--default-nonwin": {
+    "messageformat": "Default: {deviceName}"
+  },
+  "icu:callingDeviceSelection__select--default_console": {
+    "messageformat": "Default: {deviceName}"
+  },
+  "icu:callingDeviceSelection__select--default_communications": {
+    "messageformat": "Default Communications: {deviceName}"
   },
   "icu:muteNotificationsTitle": {
     "messageformat": "ปิดเสียงการแจ้งเตือน"
@@ -4823,6 +4868,69 @@
   "icu:CompositionArea__AttachMenu__Poll": {
     "messageformat": "โพล"
   },
+  "icu:CompositionArea__AttachMenu__Contact": {
+    "messageformat": "Contact"
+  },
+  "icu:ShareContactDialog__SelectContact__Title": {
+    "messageformat": "Select contact"
+  },
+  "icu:ShareContactDialog__SelectContact__SearchPlaceholder": {
+    "messageformat": "Search"
+  },
+  "icu:ShareContactDialog__SelectContact__EmptyState": {
+    "messageformat": "No contacts"
+  },
+  "icu:ShareContactDialog__SelectContact__NoResults": {
+    "messageformat": "No results for “{searchQuery}”"
+  },
+  "icu:ShareContactDialog__ShareContact__Title": {
+    "messageformat": "Share contact"
+  },
+  "icu:ShareContactDialog__ShareContact__Description": {
+    "messageformat": "Anyone you share this profile with will be able to message {name}."
+  },
+  "icu:ShareContactDialog__ShareContact__Send": {
+    "messageformat": "Send contact"
+  },
+  "icu:ShareContactDialog__ShareContact__EditName": {
+    "messageformat": "Edit name"
+  },
+  "icu:ShareContactDialog__EditName__Title": {
+    "messageformat": "Edit name"
+  },
+  "icu:ShareContactDialog__EditName__Prefix": {
+    "messageformat": "Prefix"
+  },
+  "icu:ShareContactDialog__EditName__GivenName": {
+    "messageformat": "First name"
+  },
+  "icu:ShareContactDialog__EditName__MiddleName": {
+    "messageformat": "Middle name"
+  },
+  "icu:ShareContactDialog__EditName__FamilyName": {
+    "messageformat": "Last name"
+  },
+  "icu:ShareContactDialog__EditName__Suffix": {
+    "messageformat": "Suffix"
+  },
+  "icu:ShareContactDialog__EditName__Organization": {
+    "messageformat": "Organization"
+  },
+  "icu:ShareContactDialog__ShareContact__EditPhoto": {
+    "messageformat": "Edit photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__Title": {
+    "messageformat": "Select a photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__ContactPhoto": {
+    "messageformat": "Contact photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__ProfilePhoto": {
+    "messageformat": "Profile photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__DefaultAvatar": {
+    "messageformat": "Default avatar"
+  },
   "icu:CompositionArea--attach-plus": {
     "messageformat": "แนบไฟล์หรือสร้างโพล"
   },
@@ -4861,9 +4969,6 @@
   },
   "icu:CompositionInput__editing-message": {
     "messageformat": "แก้ไขข้อความ"
-  },
-  "icu:countMutedConversationsDescription": {
-    "messageformat": "นับรวมแชทที่ปิดเสียงไว้ในจำนวนแจ้งเตือน"
   },
   "icu:ContactModal--nickname": {
     "messageformat": "ชื่อเล่น"
@@ -5263,18 +5368,6 @@
   },
   "icu:UnreadReminders__notification__replySummary--many": {
     "messageformat": "{replyCount, plural, other {การตอบกลับ {replyCount,number} ครั้งจาก {person1} และคนอื่นๆ}}"
-  },
-  "icu:ConversationNotificationsSettings__mentions__label": {
-    "messageformat": "การกล่าวถึง"
-  },
-  "icu:ConversationNotificationsSettings__mentions__info": {
-    "messageformat": "รับการแจ้งเตือนเมื่อคุณถูกกล่าวถึงในแชทที่ปิดเสียงไว้"
-  },
-  "icu:ConversationNotificationsSettings__mentions__select__always-notify": {
-    "messageformat": "แจ้งเตือนตลอด"
-  },
-  "icu:ConversationNotificationsSettings__mentions__select__dont-notify-for-mentions-if-muted": {
-    "messageformat": "ไม่ต้องแจ้งเตือนหากปิดเสียงอยู่"
   },
   "icu:GroupLinkManagement--clipboard": {
     "messageformat": "คัดลอกลิงก์กลุ่ม"
@@ -6193,9 +6286,6 @@
   "icu:Preferences__SignalAccountKeys__Description": {
     "messageformat": "คุณจำเป็นต้องใช้ข้อมูลลงชื่อเข้าใช้นี้ในการกู้คืนบัญชีและข้อมูล โปรดเก็บไว้ในที่ปลอดภัยและอย่าเปิดเผยกับใคร"
   },
-  "icu:Preferences__SignalAccountKeys__AccountKey": {
-    "messageformat": "กุญแจเข้าบัญชี"
-  },
   "icu:Preferences__SignalAccountKeys__AccountID": {
     "messageformat": "ไอดีบัญชี"
   },
@@ -6257,7 +6347,7 @@
     "messageformat": "Signal PIN"
   },
   "icu:Preferences--signal-pin__footer": {
-    "messageformat": "PINs keep information stored with Signal encrypted so only you can access it. Your PIN cannot be recovered. Your profile, settings, and contacts will restore when you reinstall Signal. <learnMoreLink>Learn more</learnMoreLink>"
+    "messageformat": "PIN ช่วยรักษาข้อมูลที่เก็บอยู่ใน Signal ให้เข้ารหัสอยู่เสมอ เพื่อที่ข้อมูลดังกล่าวจะมีคุณเพียงคนเดียวเท่านั้นที่สามารถเข้าถึงได้ โดย PIN นี้จะไม่สามารถกู้คืนได้ เมื่อคุณติดตั้งแอปอีกครั้ง ระบบจะสามารถกู้คืนโปรไฟล์ การตั้งค่า และผู้ติดต่อของคุณ <learnMoreLink>เรียนรู้เพิ่มเติม</learnMoreLink>"
   },
   "icu:Preferences--signal-pin-advanced-settings": {
     "messageformat": "การตั้งค่า PIN ขั้นสูง"
@@ -6272,7 +6362,7 @@
     "messageformat": "หากคุณปิดใช้งาน PIN คุณจะสูญเสียข้อมูลเมื่อคุณลงทะเบียนบัญชี Signal ใหม่ นอกจากว่าคุณได้สำรองข้อมูลและกู้มันคืนมาเอง คุณไม่สามารถเปิดการใช้งานกุญแจลงทะเบียนในขณะที่ PIN ปิดการใช้งานอยู่"
   },
   "icu:DisableSignalPinErrorDialog--reg-lock--title": {
-    "messageformat": "Disable PIN failed due to registration lock"
+    "messageformat": "ปิดใช้งาน PIN ไม่สำเร็จเนื่องจากใช้กุญแจลงทะเบียนอยู่"
   },
   "icu:DisableSignalPinErrorDialog--reg-lock--body": {
     "messageformat": "คุณต้องปิดใช้งานกุญแจลงทะเบียนก่อนจึงจะสามารถปิดใช้งาน PIN ได้"
@@ -6281,7 +6371,7 @@
     "messageformat": "ตกลง"
   },
   "icu:DisableSignalPinErrorDialog--backups--title": {
-    "messageformat": "Disable PIN failed due to backups"
+    "messageformat": "ปิดใช้งาน PIN ไม่สำเร็จเนื่องจากใช้การสำรองข้อมูลอยู่"
   },
   "icu:DisableSignalPinErrorDialog--backups--body": {
     "messageformat": "คุณต้องปิดใช้งานการสำรองข้อมูลก่อนจึงจะสามารถปิดใช้งาน PIN ได้"
@@ -6304,9 +6394,6 @@
   "icu:Preferences--registration-lock__footer": {
     "messageformat": "กำหนดให้รหัส PIN ของ Signal คุณ สมัครหมายเลขโทรศัพท์กับ Signal อีกครั้ง"
   },
-  "icu:Preferences--notification-content": {
-    "messageformat": "ข้อความแจ้งเตือน"
-  },
   "icu:Preferences__Chats__TextInputSection__Title": {
     "messageformat": "การพิมพ์ข้อความ"
   },
@@ -6318,9 +6405,6 @@
   },
   "icu:Preferences__Notifications__SoundsSection__Title": {
     "messageformat": "เสียง"
-  },
-  "icu:Preferences__Notifications__AppBadgeSection__Title": {
-    "messageformat": "ป้ายกำกับแอป"
   },
   "icu:Preferences__Notifications__AppBadgeSection__Title-v2": {
     "messageformat": "ป้ายกำกับสำหรับข้อความที่ยังไม่ได้อ่าน"
@@ -6700,6 +6784,9 @@
   "icu:Preferences--blocked-users--description": {
     "messageformat": "ผู้ใช้ที่ถูกบล็อกจะไม่สามารถโทรหรือส่งข้อความหาคุณได้"
   },
+  "icu:Preferences--add-blocked": {
+    "messageformat": "เพิ่มผู้ใช้หรือกลุ่มที่ต้องการบล็อก"
+  },
   "icu:Preferences--blocked-users": {
     "messageformat": "ผู้ใช้ที่ถูกบล็อก"
   },
@@ -6708,6 +6795,12 @@
   },
   "icu:Preferences--blocked--blocked-on": {
     "messageformat": "บล็อกเมื่อ {blockedAt}"
+  },
+  "icu:Preferences--BlockChooser--Done": {
+    "messageformat": "เสร็จสิ้น"
+  },
+  "icu:Preferences--BlockChooser--Search--Placeholder": {
+    "messageformat": "ค้นหา"
   },
   "icu:Preferences--signal-backups": {
     "messageformat": "การสำรองข้อมูลที่ปลอดภัยของ Signal"
@@ -7105,6 +7198,36 @@
   "icu:InstallScreenUpdateDialog--cannot-update__body": {
     "messageformat": "อัปเดต Signal เดสก์ท็อปไม่สำเร็จ แต่มีเวอร์ชันใหม่ให้ใช้งานแทน โปรดไปที่ {downloadUrl} เพื่อติดตั้งเวอร์ชันใหม่ด้วยตัวเอง จากนั้นติดต่อฝ่ายสนับสนุนหรือแจ้งรายงานข้อบกพร่องเกี่ยวกับปัญหานี้"
   },
+  "icu:EntryPoint--signal-logo": {
+    "messageformat": "Signal Logo"
+  },
+  "icu:EntryPoint--Title--Line1": {
+    "messageformat": "Take privacy with you."
+  },
+  "icu:EntryPoint--Title--Line2": {
+    "messageformat": "Be yourself in every message."
+  },
+  "icu:EntryPoint--link-button": {
+    "messageformat": "Link your account"
+  },
+  "icu:EntryPoint--more-options-button": {
+    "messageformat": "More options"
+  },
+  "icu:EntryPoint--nonprofit": {
+    "messageformat": "Signal is a 501c3 nonprofit"
+  },
+  "icu:EntryPoint--terms": {
+    "messageformat": "Terms & privacy policy"
+  },
+  "icu:EntryPoint--MoreOptions--Title": {
+    "messageformat": "More options"
+  },
+  "icu:EntryPoint--MoreOptions--RegistrationButton--Title": {
+    "messageformat": "Create a new account"
+  },
+  "icu:EntryPoint--MoreOptions--RegistrationButton--Description": {
+    "messageformat": "Create a new Signal account using your phone number."
+  },
   "icu:StandaloneRegistration--signal-logo": {
     "messageformat": "โลโก้ Signal"
   },
@@ -7124,7 +7247,7 @@
     "messageformat": "โปรดลองอีกครั้งใน {duration}"
   },
   "icu:StandaloneRegistration--PhoneNumber--RegionCodeSelector--Label": {
-    "messageformat": "Select region code"
+    "messageformat": "เลือกรหัสประเทศ"
   },
   "icu:StandaloneRegistration--PhoneNumber--placeholder": {
     "messageformat": "หมายเลขโทรศัพท์"
@@ -7299,6 +7422,21 @@
   },
   "icu:StandaloneRegistration--VerificationCode--CannotSendCodeTemporary--ok-button": {
     "messageformat": "ตกลง"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Title": {
+    "messageformat": "Having trouble registering?"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet1": {
+    "messageformat": "Make sure your phone has a cellular signal to receive your SMS or call"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet2": {
+    "messageformat": "Confirm you can receive a phone call to the number"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet3": {
+    "messageformat": "Check that you have entered your phone number correctly"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Footer": {
+    "messageformat": "If you still can’t register, follow these <troubleshootingLink>troubleshooting steps</troubleshootingLink> or <contactSupportLink>Contact Support</contactSupportLink>."
   },
   "icu:StandaloneRegistration--ProfileEntry--header": {
     "messageformat": "สร้างโปรไฟล์ของคุณ"
@@ -7649,10 +7787,10 @@
     "messageformat": "เปิดใช้งาน “Signal”"
   },
   "icu:MediaPermissionsModal__step-2--windows--microphone": {
-    "messageformat": "Enable microphone access for Signal"
+    "messageformat": "อนุญาตสิทธิ์ให้ Signal เข้าถึงไมโครโฟน"
   },
   "icu:MediaPermissionsModal__step-2--windows--camera": {
-    "messageformat": "Enable camera access for Signal"
+    "messageformat": "อนุญาตสิทธิ์ให้ Signal เข้าถึงกล้อง"
   },
   "icu:MediaPermissionsModal__open": {
     "messageformat": "ไปที่การตั้งค่า"
@@ -8204,7 +8342,7 @@
     "messageformat": "ชื่อผู้ใช้จะต้องมีชุดตัวเลขร่วมด้วยเสมอ"
   },
   "icu:EditUsernameModalBody__discriminator-label": {
-    "messageformat": "Username digits"
+    "messageformat": "ตัวเลขหลังชื่อผู้ใช้"
   },
   "icu:EditUsernameModalBody__learn-more": {
     "messageformat": "เรียนรู้เพิ่มเติม"
@@ -8340,13 +8478,13 @@
     "messageformat": "เปลี่ยน Signal PIN ของคุณ"
   },
   "icu:PinChangeModal__title--create--without-pin": {
-    "messageformat": "Create your Signal PIN"
+    "messageformat": "สร้าง Signal PIN ของคุณ"
   },
   "icu:PinChangeModal__body--create": {
     "messageformat": "คุณสามารถเปลี่ยนรหัส PIN ได้ตราบเท่าที่คุณยังลงทะเบียนอุปกรณ์นี้ <learnMoreLink>เรียนรู้เพิ่มเติม</learnMoreLink>"
   },
   "icu:PinChangeModal__body--create--without-pin": {
-    "messageformat": "PINs keep information stored with Signal encrypted so only you can access it. Your profile, settings, and contacts will restore when you reinstall. You won't need your PIN to open the app. <learnMoreLink>Learn more</learnMoreLink>"
+    "messageformat": "PIN ช่วยรักษาข้อมูลที่เก็บอยู่ใน Signal ให้เข้ารหัสอยู่เสมอ เพื่อที่ข้อมูลดังกล่าวจะมีคุณเพียงคนเดียวเท่านั้นที่สามารถเข้าถึงได้ เมื่อคุณติดตั้งแอปอีกครั้ง ระบบจะสามารถกู้คืนโปรไฟล์ การตั้งค่า และผู้ติดต่อของคุณ โดยคุณไม่จำเป็นต้องมี PIN นี้เพื่อเปิดแอป <learnMoreLink>เรียนรู้เพิ่มเติม</learnMoreLink>"
   },
   "icu:PinChangeModal__title--confirm": {
     "messageformat": "ยืนยันรหัส PIN สำหรับ Signal ของคุณ"
@@ -8588,12 +8726,6 @@
   "icu:CallLinkPendingParticipantModal__DenyButtonLabel": {
     "messageformat": "ปฏิเสธการเข้าร่วม"
   },
-  "icu:CallLinkRestrictionsSelect__Option--Off": {
-    "messageformat": "ปิด"
-  },
-  "icu:CallLinkRestrictionsSelect__Option--On": {
-    "messageformat": "เปิด"
-  },
   "icu:CallLinkAddNameModal__Title": {
     "messageformat": "เพิ่มชื่อการโทร"
   },
@@ -8641,6 +8773,39 @@
   },
   "icu:SaveMultiDialog__title": {
     "messageformat": "บันทึกไฟล์แนบ"
+  },
+  "icu:EmbeddedContact__message": {
+    "messageformat": "ข้อความ"
+  },
+  "icu:ContactDetail__message": {
+    "messageformat": "ข้อความ"
+  },
+  "icu:ContactDetail__add-to-group": {
+    "messageformat": "เพิ่มเข้ากลุ่ม"
+  },
+  "icu:ContactDetail__nickname": {
+    "messageformat": "ชื่อเล่น"
+  },
+  "icu:ContactDetail__note": {
+    "messageformat": "บันทึก"
+  },
+  "icu:email-v2": {
+    "messageformat": "อีเมล"
+  },
+  "icu:home-v2": {
+    "messageformat": "บ้าน"
+  },
+  "icu:mobile-v2": {
+    "messageformat": "มือถือ"
+  },
+  "icu:work-v2": {
+    "messageformat": "ที่ทำงาน"
+  },
+  "icu:phone-v2": {
+    "messageformat": "โทรศัพท์"
+  },
+  "icu:address-v2": {
+    "messageformat": "ที่อยู่"
   },
   "icu:WhatsNew__modal-title": {
     "messageformat": "ฟีเจอร์และบริการใหม่ๆ"
@@ -8806,6 +8971,9 @@
   },
   "icu:DonationReceipt__footer-text-v2": {
     "messageformat": "ขอบคุณที่ร่วมสนับสนุน Signal การบริจาคของคุณจะช่วยเป็นพลังให้กับภารกิจในการปกป้องการแสดงออกอย่างอิสระ พร้อมมอบการสื่อสารที่ปลอดภัยและไร้พรมแดนให้แก่ผู้คนหลายล้านทั่วโลกผ่านเทคโนโลยีความเป็นส่วนตัวแบบโอเพนซอร์ส หากคุณเป็นผู้พำนักอาศัยในสหรัฐอเมริกา โปรดเก็บใบเสร็จนี้ไว้เพื่อเป็นหลักฐานในการชำระภาษี โดย Signal Technology Foundation เป็นองค์กรที่ไม่แสวงหากำไรและได้รับการยกเว้นภาษีภายใต้มาตรา 501c3 ของประมวลกฎหมายภาษีอากรของสหรัฐอเมริกา หมายเลขประจำตัวผู้เสียภาษีให้แก่รัฐบาลกลางของเราคือ 82-4506840 ทั้งนี้ Signal ไม่มีสินค้าหรือบริการเป็นการตอบแทนสำหรับการบริจาคนี้"
+  },
+  "icu:MessageCta__Donate": {
+    "messageformat": "บริจาคเลย"
   },
   "icu:Donations__OfflineTooltip": {
     "messageformat": "คุณออฟไลน์อยู่ โปรดเชื่อมต่ออินเทอร์เน็ตเพื่อดำเนินการบริจาค"
@@ -9005,6 +9173,9 @@
   "icu:CallQualitySurvey__WhatIssuesDidYouHave__SomethingElse__TextArea__AccessibilityLabel": {
     "messageformat": "คำอธิบายเกี่ยวกับปัญหา"
   },
+  "icu:CallQualitySurvey__WhatIssuesDidYouHave__SomethingElse__TextArea__Placeholder": {
+    "messageformat": "อธิบายถึงปัญหาที่คุณพบ"
+  },
   "icu:CallQualitySurvey__WhatIssuesDidYouHave__SomethingElse__TextArea__HelpText": {
     "messageformat": "โปรดแจ้งรายละเอียดต่างๆ ที่เกี่ยวข้องกับปัญหาที่คุณพบ ข้อมูลทั้งหมดของคุณจะถูกรวบรวมอย่างเป็นส่วนตัว รวมถึงจะถูกนำไปใช้เพื่อจุดประสงค์ในการปรับปรุงและพัฒนาการโทรของ Signal เท่านั้น"
   },
@@ -9114,16 +9285,25 @@
     "messageformat": "มีการปรับเปลี่ยนเล็กน้อย พร้อมแก้ไขบั๊ก และการพัฒนาประสิทธิภาพให้ดียิ่งขึ้น ขอขอบคุณที่เลือกใช้ Signal!",
     "ignoreUnused": true
   },
-  "icu:WhatsNew__8.26--0": {
-    "messageformat": "พัฒนาระบบค้นหาสมาชิกในกลุ่มให้สะดวกยิ่งขึ้นอีก"
-  },
-  "icu:WhatsNew__8.27--0": {
-    "messageformat": "เพิ่มตัวเลือกในหน้าตั้งค่าการแจ้งเตือนให้คุณปรับแต่งรูปแบบและเงื่อนไขในการแสดงการแจ้งเตือนได้ตามต้องการ"
-  },
   "icu:WhatsNew__8.30--0": {
-    "messageformat": "Thanks to a few performance improvements, your CPU will be slightly happier during video calls (even if you're not smiling)."
+    "messageformat": "พัฒนาประสิทธิภาพในการใช้งานวิดีโอคอล"
   },
   "icu:WhatsNew__8.30--1": {
-    "messageformat": "We also added a convenient shortcut to open your system settings on Windows if you try to join a video call and Signal doesn't have permission to access the camera. Now it's easier to see what you need to do so that people can see you."
+    "messageformat": "พร้อมเพิ่มทางลัดใหม่ที่ให้คุณเปิดหน้าการตั้งค่าระบบบน Windows ได้สะดวกยิ่งขึ้นเมื่อคุณต้องการเข้าร่วมวิดีโอคอลแต่ Signal ยังไม่ได้รับสิทธิ์เข้าถึงกล้อง"
+  },
+  "icu:WhatsNew__8.32--0": {
+    "messageformat": "เพิ่มการรองรับให้คุณสามารถใช้ตัวกรองข้อความที่ยังไม่ได้อ่านได้ในโฟลเดอร์ข้อความและระบบค้นหาด้วยเช่นกัน"
+  },
+  "icu:WhatsNew__8.32--1": {
+    "messageformat": "ปรับปรุงความเสถียรในการอัปโหลดแม้เครือข่ายจะมีสัญญาณไม่ดี ขอขอบคุณ <GH3mmmbulus></GH3mmmbulus>!"
+  },
+  "icu:WhatsNew__8.32--2": {
+    "messageformat": "แก้ไขให้ปุ่มลัด (N) กลายเป็นอีโมจิ &quot;ไม่ชอบ&quot; (thumbs down) ได้อย่างถูกต้องแล้ว ขอยกนิ้วให้ <lnicola></lnicola> ที่ช่วยจัดการบั๊กในครั้งนี้"
+  },
+  "icu:WhatsNew__8.34--0": {
+    "messageformat": "Signal Desktop now supports contact sharing too, so you can maintain eye contact with your computer screen without having to make physical contact with your smartphone."
+  },
+  "icu:WhatsNew__8.34--1": {
+    "messageformat": "Improved handling and performance for connected audio devices."
   }
 }

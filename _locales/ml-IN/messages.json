@@ -2,8 +2,20 @@
   "icu:AxoAlertDialog.Cancel": {
     "messageformat": "റദ്ദാക്കുക"
   },
+  "icu:AxoAlertDialog.Ok": {
+    "messageformat": "ഓകെ"
+  },
   "icu:AxoButton.Pending": {
     "messageformat": "ശേഷിക്കുന്നു"
+  },
+  "icu:AxoColorSlider.Hue": {
+    "messageformat": "Hue"
+  },
+  "icu:AxoColorSlider.Saturation": {
+    "messageformat": "Saturation"
+  },
+  "icu:AxoColorSlider.Lightness": {
+    "messageformat": "Lightness"
   },
   "icu:AxoDialog.Back": {
     "messageformat": "തിരികെ പോകുക"
@@ -73,12 +85,6 @@
   },
   "icu:LinkedDevicesOnboardingDialog__bullet--2": {
     "messageformat": "ലിങ്ക് ചെയ്‌തവ കൈകാര്യം ചെയ്യുന്നത് നിങ്ങളുടെ പ്രൈമറി ഉപകരണമാണ്, നിങ്ങൾക്ക് 5 ഉപകരണങ്ങൾ വരെ ലിങ്ക് ചെയ്യാം."
-  },
-  "icu:LinkedDevicesOnboardingDialog__bullet--3": {
-    "messageformat": "അക്കൗണ്ട് ക്രമീകരണങ്ങളും ബാക്കപ്പുകളും ഉൾപ്പെടെയുള്ള കാര്യങ്ങൾ നിങ്ങളുടെ പ്രൈമറി ഉപകരണത്തിൽ മാത്രമേ മാനേജ് ചെയ്യാനാകൂ."
-  },
-  "icu:LinkedDevicesOnboardingDialog__bullet--3--1": {
-    "messageformat": "അക്കൗണ്ട് ക്രമീകരണങ്ങളും ബാക്കപ്പുകളും നിങ്ങളുടെ പ്രാഥമിക ഉപകരണത്തിൽ മാത്രമേ കൈകാര്യം ചെയ്യാൻ കഴിയൂ."
   },
   "icu:LinkedDevicesOnboardingDialog__bullet--3--2": {
     "messageformat": "അക്കൗണ്ട് ക്രമീകരണങ്ങളും Signal സുരക്ഷിത ബാക്കപ്പുകളും നിങ്ങളുടെ പ്രധാന ഉപകരണത്തിൽ മാത്രമേ കൈകാര്യം ചെയ്യാൻ കഴിയൂ."
@@ -281,6 +287,9 @@
   "icu:archivedConversations": {
     "messageformat": "ആർക്കൈവ് ചെയ്‌ത ചാറ്റുകൾ"
   },
+  "icu:LeftPane__MoreActionsLabel": {
+    "messageformat": "More actions"
+  },
   "icu:LeftPane__MoreActionsMenu__AddChatFolder": {
     "messageformat": "ചാറ്റ് ഫോൾഡർ ചേർക്കുക"
   },
@@ -382,9 +391,6 @@
   },
   "icu:NavTabs__ItemIconLabel--UnreadCount": {
     "messageformat": "വായിക്കാത്ത {count,number} എണ്ണം"
-  },
-  "icu:NavTabs__ItemIconLabel--MarkedUnread": {
-    "messageformat": "വായിച്ചിട്ടില്ലാത്തതായി അടയാളപ്പെടുത്തി"
   },
   "icu:NavTabs__ItemLabel--Chats": {
     "messageformat": "ചാറ്റുകൾ"
@@ -653,20 +659,11 @@
   "icu:SafetyNumberNotReady__learn-more": {
     "messageformat": "കൂടുതൽ അറിയുക"
   },
-  "icu:KeyTransparencyErrorDialog__Title": {
-    "messageformat": "നിങ്ങളുടെ ഉപകരണത്തിന് നിലവിൽ ഓട്ടോമാറ്റിക്ക് കീ വെരിഫിക്കേഷന്‍ ലഭ്യമല്ല. ഡീബഗ് ലോഗ് സമർപ്പിക്കണോ?"
-  },
   "icu:KeyTransparencyErrorDialog__Title-v2": {
     "messageformat": "നിങ്ങളുടെ ഉപകരണത്തിൽ ഓട്ടോമാറ്റിക് കീ വെരിഫിക്കേഷൻ ഇപ്പോൾ ലഭ്യമല്ല. ഞങ്ങൾക്ക് സേവനം മെച്ചപ്പെടുത്താൻ സഹായിക്കുന്നതിനായി ഒരു റിപ്പോർട്ട് സമർപ്പിക്കാമോ?"
   },
-  "icu:KeyTransparencyErrorDialog__Description": {
-    "messageformat": "പ്രശ്‌നം നിർണ്ണയിക്കാനും പരിഹരിക്കാനും ഡീബഗ് ലോഗുകൾ ഞങ്ങളെ സഹായിക്കുന്നു, അവയിൽ തിരിച്ചറിയാനാകുന്ന വിവരങ്ങൾ ഉൾപ്പെടുന്നുമില്ല."
-  },
   "icu:KeyTransparencyErrorDialog__Description-v2": {
     "messageformat": "നിങ്ങളുടെ ഡീബഗ് ലോഗുകൾ ഉൾപ്പെടുത്തുന്നത് പ്രശ്നം കണ്ടെത്താനും പരിഹരിക്കാനും ഞങ്ങളെ സഹായിക്കുന്നു, അവയിൽ തിരിച്ചറിയാൻ സാധിക്കുന്ന വ്യക്തിഗത വിവരങ്ങൾ ഉണ്ടാകില്ല. പങ്കിടുന്നത് നിങ്ങളുടെ മാത്രം തീരുമാനമാണ്."
-  },
-  "icu:KeyTransparencyErrorDialog__ShareDebugLog__Label": {
-    "messageformat": "ഡീബഗ് ലോഗ് പങ്കിടുക"
   },
   "icu:KeyTransparencyErrorDialog__ShareDebugLog__Label-v2": {
     "messageformat": "ഡീബഗ് ലോഗ് ഉൾപ്പെടുത്തുക"
@@ -685,6 +682,9 @@
   },
   "icu:KeyTransparencyOnboardingDialog__Description": {
     "messageformat": "ഫോൺ നമ്പർ വഴി നിങ്ങൾ കണക്റ്റുചെയ്‌തിരിക്കുന്ന കോൺടാക്‌റ്റുകൾക്ക്, കീ ട്രാൻസ്പരൻസി എന്ന പ്രക്രിയ ഉപയോഗിച്ച് കണക്ഷൻ സുരക്ഷിതമാണോ എന്ന് Signal-ന് ഓട്ടോമാറ്റിയ്ക്കായി സ്ഥിരീകരിക്കാൻ കഴിയും. അധിക സുരക്ഷയ്ക്കായി, ഒരു QR കോഡ് ഉപയോഗിച്ചോ സുരക്ഷാ നമ്പറുകൾ താരതമ്യം ചെയ്തോ നിങ്ങൾക്ക് ഇപ്പോഴും കണക്ഷനുകൾ നേരിട്ട് പരിശോധിച്ചുറപ്പിക്കാന്‍ കഴിയും."
+  },
+  "icu:KeyTransparencyOnboardingDialog__Description-v2": {
+    "messageformat": "<paragraph>ഫോൺ നമ്പർ വഴി നിങ്ങൾ കണക്റ്റുചെയ്‌തിരിക്കുന്ന കോൺടാക്‌റ്റുകൾക്ക്, കീ ട്രാൻസ്പരൻസി എന്ന പ്രക്രിയ ഉപയോഗിച്ച് കണക്ഷൻ സുരക്ഷിതമാണോ എന്ന് Signal-ന് ഓട്ടോമാറ്റിയ്ക്കായി സ്ഥിരീകരിക്കാൻ കഴിയും.</paragraph><paragraph>അധിക സുരക്ഷയ്ക്കായി, ഒരു QR കോഡ് ഉപയോഗിച്ചോ സുരക്ഷാ നമ്പറുകൾ താരതമ്യം ചെയ്തോ നിങ്ങൾക്ക് ഇപ്പോഴും കണക്ഷനുകൾ നേരിട്ട് പരിശോധിച്ചുറപ്പിക്കാന്‍ കഴിയും.</paragraph>"
   },
   "icu:KeyTransparencyOnboardingDialog__Continue": {
     "messageformat": "തുടരുക"
@@ -1493,6 +1493,9 @@
   "icu:ConversationMerge--learn-more": {
     "messageformat": "കൂടുതൽ അറിയുക"
   },
+  "icu:ConversationMerge--explainer-dialog--label": {
+    "messageformat": "സന്ദേശ ചരിത്രം ലയിപ്പിച്ചു"
+  },
   "icu:ConversationMerge--explainer-dialog--line-1": {
     "messageformat": "{obsoleteConversationTitle} എന്നയാളുമായുള്ള സന്ദേശ കൈമാറ്റത്തിന് ശേഷം, ഈ നമ്പർ {conversationTitle} എന്നയാളുടേതാണെന്ന് നിങ്ങൾ മനസ്സിലാക്കി. അവരുടെ ഫോൺ നമ്പർ സ്വകാര്യമാണ്."
   },
@@ -1753,6 +1756,9 @@
   },
   "icu:Preferences__EditChatFolderPage__SelectChatsDialog__Search__Placeholder": {
     "messageformat": "തിരയൽ"
+  },
+  "icu:Preferences__EditChatFolderPage__SelectChatsDialog__NoChats": {
+    "messageformat": "ചാറ്റുകളൊന്നുമില്ല"
   },
   "icu:Preferences__EditChatFolderPage__SelectChatsDialog__ChatTypesSection__Title": {
     "messageformat": "ചാറ്റ് തരങ്ങൾ"
@@ -2246,6 +2252,24 @@
   "icu:deleteAccountDialogBody": {
     "messageformat": "ഇത് നിങ്ങളുടെ അക്കൗണ്ട് വിവരങ്ങളും പ്രൊഫൈലും എല്ലാ സന്ദേശങ്ങളും ഇല്ലാതാക്കും. നിങ്ങളെ എല്ലാ Signal ഗ്രൂപ്പുകളിൽ നിന്നും നീക്കുകയും ചെയ്യും. ഈ പ്രോസസ് പൂർത്തിയായതിന് ശേഷം ആപ്പ് അടയ്ക്കും."
   },
+  "icu:DeleteAccountConfirmDialog--Title": {
+    "messageformat": "Delete account"
+  },
+  "icu:DeleteAccountConfirmDialog--Description": {
+    "messageformat": "This will delete your account info, profile, and all of your messages. You will also be removed from all Signal groups."
+  },
+  "icu:DeleteAccountConfirmDialog--ConfirmNumber": {
+    "messageformat": "Confirm your phone number"
+  },
+  "icu:DeleteAccountConfirmDialog--CountryCodePlaceholder": {
+    "messageformat": "Country code"
+  },
+  "icu:DeleteAccountConfirmDialog--NumberPlaceholder": {
+    "messageformat": "Phone number"
+  },
+  "icu:DeleteAccountConfirmDialog--DeleteButton": {
+    "messageformat": "Delete"
+  },
   "icu:deleteOldIndexedDBData": {
     "messageformat": "Signal Desktop-ന്റെ ഒരു മുൻ ഇൻസ്റ്റലേഷനിൽ നിന്ന് കാലഹരണപ്പെട്ട ഡാറ്റ നിങ്ങളുടെ പക്കലുണ്ട്. നിങ്ങൾ തുടരാൻ തീരുമാനിക്കുകയാണെങ്കിൽ, അത് ഇല്ലാതാക്കപ്പെടും കൂടാതെ നിങ്ങൾ ആദ്യം മുതൽ ആരംഭിക്കും."
   },
@@ -2398,9 +2422,6 @@
   },
   "icu:callRingtoneNotificationDescription": {
     "messageformat": "കോളിംഗ് ശബ്ദങ്ങൾ പ്ലേ ചെയ്യുക"
-  },
-  "icu:callSystemNotificationDescription": {
-    "messageformat": "കോളുകൾക്കായുള്ള അറിയിപ്പുകൾ കാണിക്കുക"
   },
   "icu:incomingCallNotificationDescription": {
     "messageformat": "ഇൻകമിംഗ് കോളുകൾ പ്രവർത്തനക്ഷമമാക്കുക"
@@ -2999,6 +3020,9 @@
   "icu:FunPanelSticker__SubNavLabel": {
     "messageformat": "സ്റ്റിക്കർ പായ്ക്കുകൾ"
   },
+  "icu:FunPanelStickers__SubNavCategoryLabel--Favorites": {
+    "messageformat": "Favorites"
+  },
   "icu:FunPanelStickers__SubNavCategoryLabel--Recents": {
     "messageformat": "അടുത്തിടെ ഉപയോഗിച്ചവ"
   },
@@ -3010,6 +3034,9 @@
   },
   "icu:FunPanelStickers__SectionTitle--Recents": {
     "messageformat": "അടുത്തിടെ ഉപയോഗിച്ചവ"
+  },
+  "icu:FunPanelStickers__SectionTitle--Favorites": {
+    "messageformat": "Favorites"
   },
   "icu:FunPanelStickers__SectionTitle--Featured": {
     "messageformat": "ഫീച്ചർ ചെയ്തവ"
@@ -3524,6 +3551,9 @@
   "icu:MessageRequests--unblock-group-confirm-body": {
     "messageformat": "ഗ്രൂപ്പ് അംഗങ്ങൾക്ക് നിങ്ങളെ വീണ്ടും ഈ ഗ്രൂപ്പിലേക്ക് ചേർക്കാൻ കഴിയും."
   },
+  "icu:MessageRequests--unblock-signal-confirm-body": {
+    "messageformat": "നിങ്ങൾക്ക് Signal അപ്‌ഡേറ്റുകളും വാർത്തകളും ലഭിക്കും."
+  },
   "icu:MessageRequests--block-and-report-spam-success-toast": {
     "messageformat": "സ്പാം റിപ്പോർട്ട് ചെയ്ത ശേഷം ബ്ലോക്ക് ചെയ്തു"
   },
@@ -3538,6 +3568,9 @@
   },
   "icu:MessageRequests--block-group-confirm-body": {
     "messageformat": "ഈ ഗ്രൂപ്പിൽ നിന്ന് നിങ്ങൾക്ക് ഇനി സന്ദേശങ്ങള്‍-ളോ അപ്‌ഡേറ്റുകളോ ലഭിക്കില്ല കൂടാതെ അംഗങ്ങൾക്ക് നിങ്ങളെ ഈ ഗ്രൂപ്പിലേക്ക് വീണ്ടും ചേർക്കാനാകില്ല."
+  },
+  "icu:MessageRequests--block-signal-confirm-body": {
+    "messageformat": "നിങ്ങൾക്ക് ഇനി Signal അപ്‌ഡേറ്റുകളും വാർത്തകളും ലഭിക്കില്ല."
   },
   "icu:MessageRequests--reportAndMaybeBlock": {
     "messageformat": "റിപ്പോർട്ട് ചെയ്യുക..."
@@ -3866,6 +3899,9 @@
   "icu:callingDeviceSelection__settings": {
     "messageformat": "ക്രമീകരണങ്ങൾ"
   },
+  "icu:callingDeviceSelection__settings-v2": {
+    "messageformat": "Call Settings"
+  },
   "icu:calling__participants--pluralized": {
     "messageformat": "{people, plural, one {{people,number} കോളിൽ} other {{people,number} കോളിൽ}}"
   },
@@ -3970,6 +4006,15 @@
   },
   "icu:callingDeviceSelection__select--default": {
     "messageformat": "സ്ഥിരസ്ഥിതി"
+  },
+  "icu:callingDeviceSelection__select--default-nonwin": {
+    "messageformat": "Default: {deviceName}"
+  },
+  "icu:callingDeviceSelection__select--default_console": {
+    "messageformat": "Default: {deviceName}"
+  },
+  "icu:callingDeviceSelection__select--default_communications": {
+    "messageformat": "Default Communications: {deviceName}"
   },
   "icu:muteNotificationsTitle": {
     "messageformat": "അറിയിപ്പുകൾ മ്യൂട്ട് ചെയ്യുക"
@@ -4823,6 +4868,69 @@
   "icu:CompositionArea__AttachMenu__Poll": {
     "messageformat": "പോൾ"
   },
+  "icu:CompositionArea__AttachMenu__Contact": {
+    "messageformat": "Contact"
+  },
+  "icu:ShareContactDialog__SelectContact__Title": {
+    "messageformat": "Select contact"
+  },
+  "icu:ShareContactDialog__SelectContact__SearchPlaceholder": {
+    "messageformat": "Search"
+  },
+  "icu:ShareContactDialog__SelectContact__EmptyState": {
+    "messageformat": "No contacts"
+  },
+  "icu:ShareContactDialog__SelectContact__NoResults": {
+    "messageformat": "No results for “{searchQuery}”"
+  },
+  "icu:ShareContactDialog__ShareContact__Title": {
+    "messageformat": "Share contact"
+  },
+  "icu:ShareContactDialog__ShareContact__Description": {
+    "messageformat": "Anyone you share this profile with will be able to message {name}."
+  },
+  "icu:ShareContactDialog__ShareContact__Send": {
+    "messageformat": "Send contact"
+  },
+  "icu:ShareContactDialog__ShareContact__EditName": {
+    "messageformat": "Edit name"
+  },
+  "icu:ShareContactDialog__EditName__Title": {
+    "messageformat": "Edit name"
+  },
+  "icu:ShareContactDialog__EditName__Prefix": {
+    "messageformat": "Prefix"
+  },
+  "icu:ShareContactDialog__EditName__GivenName": {
+    "messageformat": "First name"
+  },
+  "icu:ShareContactDialog__EditName__MiddleName": {
+    "messageformat": "Middle name"
+  },
+  "icu:ShareContactDialog__EditName__FamilyName": {
+    "messageformat": "Last name"
+  },
+  "icu:ShareContactDialog__EditName__Suffix": {
+    "messageformat": "Suffix"
+  },
+  "icu:ShareContactDialog__EditName__Organization": {
+    "messageformat": "Organization"
+  },
+  "icu:ShareContactDialog__ShareContact__EditPhoto": {
+    "messageformat": "Edit photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__Title": {
+    "messageformat": "Select a photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__ContactPhoto": {
+    "messageformat": "Contact photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__ProfilePhoto": {
+    "messageformat": "Profile photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__DefaultAvatar": {
+    "messageformat": "Default avatar"
+  },
   "icu:CompositionArea--attach-plus": {
     "messageformat": "അറ്റാച്ചുമെൻ്റ് അല്ലെങ്കിൽ പോൾ ചേർക്കുക"
   },
@@ -4861,9 +4969,6 @@
   },
   "icu:CompositionInput__editing-message": {
     "messageformat": "സന്ദേശം എഡിറ്റ് ചെയ്യുക"
-  },
-  "icu:countMutedConversationsDescription": {
-    "messageformat": "ബാഡ്‌ജ് എണ്ണത്തിൽ മ്യൂട്ട് ചെയ്‌ത ചാറ്റുകളും ഉൾപ്പെടുന്നു"
   },
   "icu:ContactModal--nickname": {
     "messageformat": "വിളിപ്പേര്"
@@ -5263,18 +5368,6 @@
   },
   "icu:UnreadReminders__notification__replySummary--many": {
     "messageformat": "{replyCount, plural, one {{person1} എന്നയാളിൽ നിന്നും മറ്റുള്ളവരിൽ നിന്നുമുള്ള {replyCount,number} മറുപടി} other {{person1} എന്നയാളിൽ നിന്നും മറ്റുള്ളവരിൽ നിന്നുമുള്ള {replyCount,number} മറുപടികൾ}}"
-  },
-  "icu:ConversationNotificationsSettings__mentions__label": {
-    "messageformat": "സൂചനകൾ"
-  },
-  "icu:ConversationNotificationsSettings__mentions__info": {
-    "messageformat": "മ്യൂട്ട് ചെയ്ത ചാറ്റുകളിൽ നിങ്ങളെ പരാമർശിക്കുമ്പോൾ അറിയിപ്പുകൾ നേടുക"
-  },
-  "icu:ConversationNotificationsSettings__mentions__select__always-notify": {
-    "messageformat": "എപ്പോഴും അറിയിക്കുക"
-  },
-  "icu:ConversationNotificationsSettings__mentions__select__dont-notify-for-mentions-if-muted": {
-    "messageformat": "മ്യൂട്ട് ചെയ്തത് ആണെങ്കിൽ അറിയിക്കേണ്ട"
   },
   "icu:GroupLinkManagement--clipboard": {
     "messageformat": "ഗ്രൂപ്പ് ലിങ്ക് പകർത്തി."
@@ -6193,9 +6286,6 @@
   "icu:Preferences__SignalAccountKeys__Description": {
     "messageformat": "ഇത് സുരക്ഷിതമായ ഒരു സ്ഥലത്ത് സൂക്ഷിക്കുക, നിങ്ങളുടെ അക്കൗണ്ടും ഡാറ്റയും വീണ്ടെടുക്കുന്നതിന് ലോഗിൻ വിവരങ്ങൾ ആവശ്യമാണ്. ഇത് ഒരിക്കലും ആരുമായും പങ്കിടരുത്."
   },
-  "icu:Preferences__SignalAccountKeys__AccountKey": {
-    "messageformat": "അക്കൗണ്ട് കീ"
-  },
   "icu:Preferences__SignalAccountKeys__AccountID": {
     "messageformat": "അക്കൗണ്ട് ഐഡി"
   },
@@ -6257,7 +6347,7 @@
     "messageformat": "Signal PIN"
   },
   "icu:Preferences--signal-pin__footer": {
-    "messageformat": "PINs keep information stored with Signal encrypted so only you can access it. Your PIN cannot be recovered. Your profile, settings, and contacts will restore when you reinstall Signal. <learnMoreLink>Learn more</learnMoreLink>"
+    "messageformat": "നിങ്ങൾക്ക് മാത്രം ആക്സസ് ചെയ്യാൻ കഴിയുന്ന തരത്തിൽ, Signal-ൽ ഉള്ള നിങ്ങളുടെ വിവരങ്ങൾ എൻക്രിപ്റ്റ് ചെയ്ത് സൂക്ഷിക്കാൻ PIN-കൾ സഹായിക്കുന്നു. നിങ്ങളുടെ PIN വീണ്ടെടുക്കാൻ കഴിയില്ല. നിങ്ങൾ Signal വീണ്ടും ഇൻസ്റ്റാൾ ചെയ്യുമ്പോൾ നിങ്ങളുടെ പ്രൊഫൈൽ, ക്രമീകരണങ്ങൾ, കോൺടാക്റ്റുകൾ എന്നിവ പുനഃസ്ഥാപിക്കപ്പെടും. <learnMoreLink>കൂടുതലറിയുക</learnMoreLink>"
   },
   "icu:Preferences--signal-pin-advanced-settings": {
     "messageformat": "വിപുല PIN ക്രമീകരണങ്ങൾ"
@@ -6272,19 +6362,19 @@
     "messageformat": "നിങ്ങൾ‌ PIN (പിൻ) അപ്രാപ്‌തമാക്കുകയാണെങ്കിൽ‌, നിങ്ങൾ‌ സ്വമേധയാ ബാക്കപ്പുചെയ്‌ത് പുന.സ്ഥാപിച്ചില്ലെങ്കിൽ,‌ നിങ്ങൾ‌ സിഗ്നൽ‌ വീണ്ടും രജിസ്റ്റർ‌ ചെയ്യുമ്പോൾ‌ എല്ലാ ഡാറ്റയും നഷ്‌ടപ്പെടും. PIN (പിൻ) പ്രവർത്തനരഹിതമാക്കിയിരിക്കുമ്പോൾ നിങ്ങൾക്ക് രജിസ്ട്രേഷൻ ലോക്ക് ഓണാക്കാൻ കഴിയില്ല."
   },
   "icu:DisableSignalPinErrorDialog--reg-lock--title": {
-    "messageformat": "Disable PIN failed due to registration lock"
+    "messageformat": "രജിസ്ട്രേഷൻ ലോക്ക് കാരണം PIN പ്രവർത്തനരഹിതമാക്കാൻ കഴിഞ്ഞില്ല"
   },
   "icu:DisableSignalPinErrorDialog--reg-lock--body": {
-    "messageformat": "You must disable Registration Lock before disabling your PIN."
+    "messageformat": "നിങ്ങളുടെ PIN പ്രവർത്തനരഹിതമാക്കുന്നതിന് മുൻപ് നിങ്ങൾ രജിസ്ട്രേഷൻ ലോക്ക് പ്രവർത്തനരഹിതമാക്കണം."
   },
   "icu:DisableSignalPinErrorDialog--reg-lock--ok": {
     "messageformat": "ഓകെ"
   },
   "icu:DisableSignalPinErrorDialog--backups--title": {
-    "messageformat": "Disable PIN failed due to backups"
+    "messageformat": "ബാക്കപ്പുകൾ കാരണം PIN പ്രവർത്തനരഹിതമാക്കാൻ കഴിഞ്ഞില്ല"
   },
   "icu:DisableSignalPinErrorDialog--backups--body": {
-    "messageformat": "You must disable backups before disabling your PIN."
+    "messageformat": "നിങ്ങളുടെ PIN പ്രവർത്തനരഹിതമാക്കുന്നതിന് മുൻപ് നിങ്ങൾ ബാക്കപ്പുകൾ പ്രവർത്തനരഹിതമാക്കണം."
   },
   "icu:Preferences--enable-signal-pin": {
     "messageformat": "PIN പ്രവർത്തനക്ഷമമാക്കുക"
@@ -6302,10 +6392,7 @@
     "messageformat": "രജിസ്ട്രേഷൻ ലോക്ക്"
   },
   "icu:Preferences--registration-lock__footer": {
-    "messageformat": "Require your Signal PIN to register your phone number again with Signal."
-  },
-  "icu:Preferences--notification-content": {
-    "messageformat": "നോട്ടിഫിക്കേഷൻ ഉള്ളടക്കം"
+    "messageformat": "Signal-ൽ നിങ്ങളുടെ ഫോണ്‍ നമ്പര്‍ വീണ്ടും രജിസ്റ്റർ ചെയ്യാൻ നിങ്ങളുടെ Signal PIN ആവശ്യമാണ്."
   },
   "icu:Preferences__Chats__TextInputSection__Title": {
     "messageformat": "ടെക്‌സ്‌റ്റ് ഇൻപുട്ട്"
@@ -6318,9 +6405,6 @@
   },
   "icu:Preferences__Notifications__SoundsSection__Title": {
     "messageformat": "ശബ്ദങ്ങൾ"
-  },
-  "icu:Preferences__Notifications__AppBadgeSection__Title": {
-    "messageformat": "ആപ്പ് ബാഡ്ജ്"
   },
   "icu:Preferences__Notifications__AppBadgeSection__Title-v2": {
     "messageformat": "വായിക്കാത്ത ബാഡ്ജുകൾ"
@@ -6700,6 +6784,9 @@
   "icu:Preferences--blocked-users--description": {
     "messageformat": "ബ്ലോക്ക് ചെയ്ത ഉപയോക്താക്കൾക്ക് നിങ്ങളെ വിളിക്കാനോ നിങ്ങൾക്ക് സന്ദേശങ്ങള്‍ അയയ്ക്കാനോ കഴിയില്ല"
   },
+  "icu:Preferences--add-blocked": {
+    "messageformat": "ബ്ലോക്ക് ചെയ്‌ത ഉപയോക്താവിനെയോ ഗ്രൂപ്പിനെയോ ചേർക്കുക"
+  },
   "icu:Preferences--blocked-users": {
     "messageformat": "ബ്ലോക്ക് ചെയ്ത ഉപയോക്താക്കൾ"
   },
@@ -6708,6 +6795,12 @@
   },
   "icu:Preferences--blocked--blocked-on": {
     "messageformat": "{blockedAt}-ന് ബ്ലോക്ക് ചെയ്തു"
+  },
+  "icu:Preferences--BlockChooser--Done": {
+    "messageformat": "ചെയ്‌തു"
+  },
+  "icu:Preferences--BlockChooser--Search--Placeholder": {
+    "messageformat": "തിരയൽ"
   },
   "icu:Preferences--signal-backups": {
     "messageformat": "Signal സുരക്ഷിത ബാക്കപ്പുകൾ"
@@ -7105,6 +7198,36 @@
   "icu:InstallScreenUpdateDialog--cannot-update__body": {
     "messageformat": "Signal ഡെസ്‌ക്ടോപ് അപ്ഡേറ്റ് ചെയ്യാനായില്ല, പക്ഷെ പുതിയൊരു പതിപ്പ് കൂടി ലഭ്യമാണ്. {downloadUrl} എന്നതിലേക്ക് പോയി മാനുവലായി പുതിയ പതിപ്പ് ഇൻസ്റ്റാൾ ചെയ്യൂ, അതിന് ശേഷം ഈ പ്രശ്നവുമായി ബന്ധപ്പെട്ട് പിന്തുണയുമായി ബന്ധപ്പെടുക അല്ലെങ്കിൽ ഒരു ബഗ് ഫയൽ ചെയ്യുക."
   },
+  "icu:EntryPoint--signal-logo": {
+    "messageformat": "Signal Logo"
+  },
+  "icu:EntryPoint--Title--Line1": {
+    "messageformat": "Take privacy with you."
+  },
+  "icu:EntryPoint--Title--Line2": {
+    "messageformat": "Be yourself in every message."
+  },
+  "icu:EntryPoint--link-button": {
+    "messageformat": "Link your account"
+  },
+  "icu:EntryPoint--more-options-button": {
+    "messageformat": "More options"
+  },
+  "icu:EntryPoint--nonprofit": {
+    "messageformat": "Signal is a 501c3 nonprofit"
+  },
+  "icu:EntryPoint--terms": {
+    "messageformat": "Terms & privacy policy"
+  },
+  "icu:EntryPoint--MoreOptions--Title": {
+    "messageformat": "More options"
+  },
+  "icu:EntryPoint--MoreOptions--RegistrationButton--Title": {
+    "messageformat": "Create a new account"
+  },
+  "icu:EntryPoint--MoreOptions--RegistrationButton--Description": {
+    "messageformat": "Create a new Signal account using your phone number."
+  },
   "icu:StandaloneRegistration--signal-logo": {
     "messageformat": "Signal ലോഗോ"
   },
@@ -7124,7 +7247,7 @@
     "messageformat": "{duration} സമയത്തിന് ശേഷം വീണ്ടും ശ്രമിക്കുക"
   },
   "icu:StandaloneRegistration--PhoneNumber--RegionCodeSelector--Label": {
-    "messageformat": "Select region code"
+    "messageformat": "രാജ്യ കോഡ് തിരെഞ്ഞെടുക്കുക"
   },
   "icu:StandaloneRegistration--PhoneNumber--placeholder": {
     "messageformat": "ഫോൺ നമ്പർ"
@@ -7299,6 +7422,21 @@
   },
   "icu:StandaloneRegistration--VerificationCode--CannotSendCodeTemporary--ok-button": {
     "messageformat": "ഓകെ"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Title": {
+    "messageformat": "Having trouble registering?"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet1": {
+    "messageformat": "Make sure your phone has a cellular signal to receive your SMS or call"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet2": {
+    "messageformat": "Confirm you can receive a phone call to the number"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet3": {
+    "messageformat": "Check that you have entered your phone number correctly"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Footer": {
+    "messageformat": "If you still can’t register, follow these <troubleshootingLink>troubleshooting steps</troubleshootingLink> or <contactSupportLink>Contact Support</contactSupportLink>."
   },
   "icu:StandaloneRegistration--ProfileEntry--header": {
     "messageformat": "നിങ്ങളുടെ പ്രൊഫൈൽ സജ്ജമാക്കുക"
@@ -7649,10 +7787,10 @@
     "messageformat": "\"Signal\" ഓണാക്കുക"
   },
   "icu:MediaPermissionsModal__step-2--windows--microphone": {
-    "messageformat": "Enable microphone access for Signal"
+    "messageformat": "Signal-നായി മൈക്രോഫോൺ ആക്സസ് പ്രവർത്തനക്ഷമമാക്കുക"
   },
   "icu:MediaPermissionsModal__step-2--windows--camera": {
-    "messageformat": "Enable camera access for Signal"
+    "messageformat": "Signal-നായി ക്യാമറ ആക്സസ് പ്രവർത്തനക്ഷമമാക്കുക"
   },
   "icu:MediaPermissionsModal__open": {
     "messageformat": "ക്രമീകരണത്തിലേക്ക് പോകുക"
@@ -8204,7 +8342,7 @@
     "messageformat": "ഉപയോക്തൃനാമങ്ങൾക്കൊപ്പം ഒരു കൂട്ടം സംഖ്യകളും ഉണ്ടാകും."
   },
   "icu:EditUsernameModalBody__discriminator-label": {
-    "messageformat": "Username digits"
+    "messageformat": "ഉപയോക്തൃനാമത്തിലെ അക്കങ്ങൾ"
   },
   "icu:EditUsernameModalBody__learn-more": {
     "messageformat": "കൂടുതലറിയുക"
@@ -8340,13 +8478,13 @@
     "messageformat": "നിങ്ങളുടെ Signal PIN മാറ്റുക"
   },
   "icu:PinChangeModal__title--create--without-pin": {
-    "messageformat": "Create your Signal PIN"
+    "messageformat": "നിങ്ങളുടെ Signal PIN നിർമ്മിക്കുക"
   },
   "icu:PinChangeModal__body--create": {
     "messageformat": "ഈ ഉപകരണം രജിസ്റ്റർ ചെയ്തിരിക്കുന്ന കാലത്തോളം നിങ്ങൾക്ക് നിങ്ങളുടെ PIN മാറ്റാവുന്നതാണ്. <learnMoreLink>കൂടുതലറിയുക</learnMoreLink>"
   },
   "icu:PinChangeModal__body--create--without-pin": {
-    "messageformat": "PINs keep information stored with Signal encrypted so only you can access it. Your profile, settings, and contacts will restore when you reinstall. You won't need your PIN to open the app. <learnMoreLink>Learn more</learnMoreLink>"
+    "messageformat": "നിങ്ങൾക്ക് മാത്രം ആക്സസ് ചെയ്യാൻ കഴിയുന്ന തരത്തിൽ, Signal-ൽ ഉള്ള നിങ്ങളുടെ വിവരങ്ങൾ എൻക്രിപ്റ്റ് ചെയ്ത് സൂക്ഷിക്കാൻ PIN-കൾ സഹായിക്കുന്നു. നിങ്ങൾ ആപ്പ് വീണ്ടും ഇൻസ്റ്റാൾ ചെയ്യുമ്പോൾ നിങ്ങളുടെ പ്രൊഫൈൽ, ക്രമീകരണങ്ങൾ, കോൺടാക്റ്റുകൾ എന്നിവ പുനഃസ്ഥാപിക്കപ്പെടും. ആപ്പ് തുറക്കാൻ നിങ്ങൾക്ക് PIN ആവശ്യമില്ല. <learnMoreLink>കൂടുതലറിയുക</learnMoreLink>"
   },
   "icu:PinChangeModal__title--confirm": {
     "messageformat": "നിങ്ങളുടെ Signal PIN ഉറപ്പാക്കു"
@@ -8588,12 +8726,6 @@
   "icu:CallLinkPendingParticipantModal__DenyButtonLabel": {
     "messageformat": "പ്രവേശനം നിഷേധിക്കുക"
   },
-  "icu:CallLinkRestrictionsSelect__Option--Off": {
-    "messageformat": "ഓഫ്"
-  },
-  "icu:CallLinkRestrictionsSelect__Option--On": {
-    "messageformat": "ഓൺ"
-  },
   "icu:CallLinkAddNameModal__Title": {
     "messageformat": "കോളിന്‍റെ പേര് ചേർക്കുക"
   },
@@ -8641,6 +8773,39 @@
   },
   "icu:SaveMultiDialog__title": {
     "messageformat": "അറ്റാച്ചുമെന്റുകൾ സംരക്ഷിക്കുക"
+  },
+  "icu:EmbeddedContact__message": {
+    "messageformat": "സന്ദേശം"
+  },
+  "icu:ContactDetail__message": {
+    "messageformat": "സന്ദേശം"
+  },
+  "icu:ContactDetail__add-to-group": {
+    "messageformat": "ഒരു ഗ്രൂപ്പിലേക്ക് ചേർക്കുക"
+  },
+  "icu:ContactDetail__nickname": {
+    "messageformat": "വിളിപ്പേര്"
+  },
+  "icu:ContactDetail__note": {
+    "messageformat": "കുറിപ്പുകൾ"
+  },
+  "icu:email-v2": {
+    "messageformat": "ഇമെയിൽ"
+  },
+  "icu:home-v2": {
+    "messageformat": "ഹോം"
+  },
+  "icu:mobile-v2": {
+    "messageformat": "മൊബൈൽ"
+  },
+  "icu:work-v2": {
+    "messageformat": "ജോലി"
+  },
+  "icu:phone-v2": {
+    "messageformat": "ഫോൺ"
+  },
+  "icu:address-v2": {
+    "messageformat": "മേൽവിലാസം"
   },
   "icu:WhatsNew__modal-title": {
     "messageformat": "പുതിയതായി എന്തുണ്ട്"
@@ -8806,6 +8971,9 @@
   },
   "icu:DonationReceipt__footer-text-v2": {
     "messageformat": "Signal-നെ പിന്തുണച്ചതിന് നന്ദി. സ്വതന്ത്രമായ അഭിപ്രായപ്രകടനം സംരക്ഷിക്കുന്നതിനും ലോകമെമ്പാടുമുള്ള ദശലക്ഷക്കണക്കിന് ആളുകൾക്ക് ഓപ്പൺ സോഴ്‌സ് സ്വകാര്യതാ സാങ്കേതികവിദ്യയിലൂടെ സുരക്ഷിതമായ ആഗോള ആശയവിനിമയം സാധ്യമാക്കുന്നതിനുമുള്ള ദൗത്യത്തിന് നിങ്ങളുടെ സംഭാവന ഇന്ധനം പകരുന്നു. നിങ്ങൾ യുണൈറ്റഡ് സ്റ്റേറ്റ്സിൽ താമസിക്കുന്ന ആളാണെങ്കിൽ, നിങ്ങളുടെ നികുതി രേഖകൾക്കായി ഈ രസീത് സൂക്ഷിക്കുക. Signal ടെക്നോളജി ഫൗണ്ടേഷൻ, ഇന്റേണൽ റവന്യൂ കോഡിന്റെ സെക്ഷൻ 501c3 പ്രകാരം യുണൈറ്റഡ് സ്റ്റേറ്റ്സിലെ നികുതി ഇളവ് ലഭിച്ച ഒരു ലാഭേച്ഛയില്ലാത്ത സ്ഥാപനമാണ്. ഞങ്ങളുടെ ഫെഡറൽ ടാക്സ് ഐഡി 82-4506840 ആണ്. ഈ സംഭാവനയ്ക്ക് പകരമായി Signal യാതൊരു സാധനങ്ങളോ സേവനങ്ങളോ നൽകിയിട്ടില്ല."
+  },
+  "icu:MessageCta__Donate": {
+    "messageformat": "ഇപ്പോൾ സംഭാവന ചെയ്യുക"
   },
   "icu:Donations__OfflineTooltip": {
     "messageformat": "നിങ്ങൾ ഓഫ്‌ലൈനാണ്. സംഭാവന പൂർത്തിയാക്കാൻ ഇൻ്റർനെറ്റുമായി ബന്ധിപ്പിക്കുക."
@@ -9005,6 +9173,9 @@
   "icu:CallQualitySurvey__WhatIssuesDidYouHave__SomethingElse__TextArea__AccessibilityLabel": {
     "messageformat": "പ്രശ്നങ്ങളുടെ വിവരണം"
   },
+  "icu:CallQualitySurvey__WhatIssuesDidYouHave__SomethingElse__TextArea__Placeholder": {
+    "messageformat": "നിങ്ങളുടെ പ്രശ്നം വിവരിക്കുക"
+  },
   "icu:CallQualitySurvey__WhatIssuesDidYouHave__SomethingElse__TextArea__HelpText": {
     "messageformat": "പ്രശ്നവുമായി ബന്ധപ്പെട്ട എന്തെങ്കിലും വിശദാംശങ്ങൾ ഉൾപ്പെടുത്തുക. നിങ്ങൾ ഇവിടെ പങ്കിടുന്ന എന്തും സ്വകാര്യമായി സൂക്ഷിക്കും, Signal-ലെ കോളുകൾ മെച്ചപ്പെടുത്താൻ മാത്രമേ അത് ഉപയോഗിക്കൂ."
   },
@@ -9114,16 +9285,25 @@
     "messageformat": "ചെറിയ മാറ്റങ്ങളും ബഗ് പരിഹരിക്കലുകളും പ്രകടന മെച്ചപ്പെടുത്തലുകളും. Signal ഉപയോഗിക്കുന്നതിന് നന്ദി!",
     "ignoreUnused": true
   },
-  "icu:WhatsNew__8.26--0": {
-    "messageformat": "സ്വയം കണ്ടെത്തുന്നത് ഒരു ആജീവനാന്ത പ്രക്രിയയായിരിക്കാം, എന്നാൽ ഇത് കുറച്ചുകൂടി എളുപ്പമാക്കുന്നതിന് ഗ്രൂപ്പ് അംഗങ്ങളുടെ തിരയലിൽ ഇനി മുതൽ നിങ്ങൾ “നിങ്ങൾ” എന്ന് ദൃശ്യമാകും."
-  },
-  "icu:WhatsNew__8.27--0": {
-    "messageformat": "നിങ്ങളുടെ Signal അറിയിപ്പുകളിൽ കൂടുതൽ നിയന്ത്രണം നൽകുന്നതിനായി കൂടുതൽ കൃത്യമായ ക്രമീകരണങ്ങൾ ഈ അപ്‌ഡേറ്റ് വഴി അവതരിപ്പിക്കുന്നു. ഇപ്പോൾ നിങ്ങൾക്ക് ആപ്പ് ബാഡ്ജിൽ എന്താണ് കാണിക്കേണ്ടതെന്ന് തിരഞ്ഞെടുക്കാം, ഒപ്പം മ്യൂട്ട് ചെയ്ത ത്രെഡുകളുടെ അറിയിപ്പ് ക്രമീകരണങ്ങളിൽ മാറ്റം വരുത്താം, കൂടാതെ മറ്റു പലതും! പലവിധ മാറ്റങ്ങൾ വരുത്തി പഴയ സ്ഥിതിയിലേക്ക് എങ്ങനെ തിരിച്ചെത്തണമെന്ന് അറിയാതെ വിഷമിക്കുകയാണെങ്കിൽ, ഡിഫോൾട്ട് അറിയിപ്പ് ക്രമീകരണങ്ങൾ പുനഃസ്ഥാപിക്കാൻ സൗകര്യപ്രദമായ ഒരു ബട്ടണും ഞങ്ങൾ ഉൾപ്പെടുത്തിയിട്ടുണ്ട്."
-  },
   "icu:WhatsNew__8.30--0": {
-    "messageformat": "Thanks to a few performance improvements, your CPU will be slightly happier during video calls (even if you're not smiling)."
+    "messageformat": "പ്രവർത്തനക്ഷമതയിലെ ചില മെച്ചപ്പെടുത്തലുകൾ കാരണം, വീഡിയോ കോളുകളിൽ നിങ്ങൾ പുഞ്ചിരിച്ചില്ലെങ്കിലും നിങ്ങളുടെ CPU കൂടുതൽ ആശ്വാസത്തിലായിരിക്കും."
   },
   "icu:WhatsNew__8.30--1": {
-    "messageformat": "We also added a convenient shortcut to open your system settings on Windows if you try to join a video call and Signal doesn't have permission to access the camera. Now it's easier to see what you need to do so that people can see you."
+    "messageformat": "നിങ്ങൾ ഒരു വീഡിയോ കോളിൽ ചേരാൻ ശ്രമിക്കുമ്പോൾ ക്യാമറ ആക്സസ് ചെയ്യാൻ Signal-ന് അനുമതിയില്ലെങ്കിൽ, Windows-ൽ സിസ്റ്റം ക്രമീകരണങ്ങൾ തുറക്കാനുള്ള സൗകര്യപ്രദമായ ഒരു കുറുക്കുവഴിയും ഞങ്ങൾ ഉൾപ്പെടുത്തിയിട്ടുണ്ട്. മറ്റുള്ളവർക്ക് നിങ്ങളെ കാണാൻ കഴിയുന്നതിനായി നിങ്ങൾ എന്താണ് ചെയ്യേണ്ടതെന്ന് അറിയുന്നത് ഇപ്പോൾ കൂടുതൽ എളുപ്പമാണ്."
+  },
+  "icu:WhatsNew__8.32--0": {
+    "messageformat": "സന്ദേശ ഫോൾഡറുകളിലും തിരയൽ ഇന്റർഫേസിലും ഇപ്പോൾ വായിക്കാത്തവയുടെ ഫിൽട്ടർ ലഭ്യമാണ്, അതിനാൽ വിട്ടുപോയവ എളുപ്പത്തിൽ കാണാനാകും."
+  },
+  "icu:WhatsNew__8.32--1": {
+    "messageformat": "മോശം നെറ്റ്‌വർക്ക് സാഹചര്യങ്ങളിലും അപ്‌ലോഡ് കൂടുതൽ കാര്യക്ഷമമാക്കി. നന്ദി, <GH3mmmbulus></GH3mmmbulus>!"
+  },
+  "icu:WhatsNew__8.32--2": {
+    "messageformat": "&quot;(N)&quot; കുറുക്കുവഴി കൃത്യമായി തംബ്‌സ് ഡൗൺ ഇമോജിയെ കാണിക്കുന്നു. തകരാർ പരിഹരിച്ചതിന് <lnicola></lnicola> യ്ക്ക് അഭിനന്ദനങ്ങൾ."
+  },
+  "icu:WhatsNew__8.34--0": {
+    "messageformat": "Signal Desktop now supports contact sharing too, so you can maintain eye contact with your computer screen without having to make physical contact with your smartphone."
+  },
+  "icu:WhatsNew__8.34--1": {
+    "messageformat": "Improved handling and performance for connected audio devices."
   }
 }

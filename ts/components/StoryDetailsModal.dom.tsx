@@ -11,7 +11,6 @@ import type {
 } from '../types/Stories.std.ts';
 import { Avatar, AvatarSize } from './Avatar.dom.tsx';
 import { ContactName } from './conversation/ContactName.dom.tsx';
-import { ContextMenu } from './ContextMenu.dom.tsx';
 import { I18n } from './I18n.dom.tsx';
 import { Modal } from './Modal.dom.tsx';
 import { SendStatus } from '../messages/MessageSendState.std.ts';
@@ -25,6 +24,8 @@ import { Time } from './Time.dom.tsx';
 import { groupBy } from '../util/mapUtil.std.ts';
 import { format as formatRelativeTime } from '../util/expirationTimer.std.ts';
 import { formatFileSize } from '../util/formatFileSize.std.ts';
+import { AxoDropdownMenu } from '../axo/AxoDropdownMenu.dom.tsx';
+import { AxoTheme } from '../axo/AxoTheme.dom.tsx';
 
 export type PropsType = {
   getPreferredBadge: PreferredBadgeSelectorType;
@@ -119,10 +120,7 @@ export function StoryDetailsModal({
           );
 
           return (
-            <div
-              key={sendStatusLabel}
-              className="StoryDetailsModal__contact-group"
-            >
+            <div key={sendStatusLabel}>
               <div className="StoryDetailsModal__contact-group__header">
                 {sendStatusLabel}
               </div>
@@ -165,7 +163,7 @@ export function StoryDetailsModal({
   } else {
     content = (
       <div className="StoryDetailsModal__contact-container">
-        <div className="StoryDetailsModal__contact-group">
+        <div>
           <div className="StoryDetailsModal__contact-group__header">
             {i18n('icu:sent')}
           </div>
@@ -183,9 +181,7 @@ export function StoryDetailsModal({
               title={sender.title}
             />
             <div className="StoryDetailsModal__contact__text">
-              <div className="StoryDetailsModal__contact__name">
-                <ContactName title={sender.title} />
-              </div>
+              <ContactName title={sender.title} />
             </div>
             <Time
               className="StoryDetailsModal__status-timestamp"
@@ -204,94 +200,89 @@ export function StoryDetailsModal({
       DurationInSeconds.fromMillis(expirationTimestamp - Date.now())
     : undefined;
 
-  const menuOptions = [
-    {
-      icon: 'StoryDetailsModal__copy-icon',
-      label: i18n('icu:StoryDetailsModal__copy-timestamp'),
-      onClick: () => {
-        void window.navigator.clipboard.writeText(String(timestamp));
-      },
-    },
-  ];
-
-  if (isInternalUser && attachment) {
-    menuOptions.push({
-      icon: 'StoryDetailsModal__download-icon',
-      label: i18n('icu:StoryDetailsModal__download-attachment'),
-      onClick: () => {
-        saveAttachment(attachment);
-      },
-    });
-  }
-
   return (
     <Modal
       modalName="StoryDetailsModal"
       hasXButton
       i18n={i18n}
-      moduleClassName="StoryDetailsModal"
+      className="StoryDetailsModal"
       onClose={onClose}
       theme={Theme.Dark}
       title={
-        <ContextMenu
-          i18n={i18n}
-          menuOptions={menuOptions}
-          moduleClassName="StoryDetailsModal__debugger"
-          popperOptions={{
-            placement: 'bottom',
-            strategy: 'absolute',
-          }}
-          theme={Theme.Dark}
-        >
-          <div>
-            <I18n
-              i18n={i18n}
-              id="icu:StoryDetailsModal__sent-time"
-              components={{
-                time: (
-                  <Time
-                    className="StoryDetailsModal__debugger__button__text"
-                    timestamp={timestamp}
-                  >
-                    {formatDateTimeLong(i18n, timestamp)}
-                  </Time>
-                ),
-              }}
-            />
-          </div>
-          {attachment && (
-            <div>
-              <I18n
-                i18n={i18n}
-                id="icu:StoryDetailsModal__file-size"
-                components={{
-                  size: (
-                    <span className="StoryDetailsModal__debugger__button__text">
-                      {formatFileSize(attachment.size)}
-                    </span>
-                  ),
+        <AxoTheme.Override theme="force-dark">
+          <AxoDropdownMenu.Root>
+            <AxoDropdownMenu.Trigger>
+              <button type="button" className="StoryDetailsModal__debugger">
+                <div>
+                  <I18n
+                    i18n={i18n}
+                    id="icu:StoryDetailsModal__sent-time"
+                    components={{
+                      time: (
+                        <Time
+                          className="StoryDetailsModal__debugger__button__text"
+                          timestamp={timestamp}
+                        >
+                          {formatDateTimeLong(i18n, timestamp)}
+                        </Time>
+                      ),
+                    }}
+                  />
+                </div>
+                {attachment && (
+                  <div>
+                    <I18n
+                      i18n={i18n}
+                      id="icu:StoryDetailsModal__file-size"
+                      components={{
+                        size: (
+                          <span className="StoryDetailsModal__debugger__button__text">
+                            {formatFileSize(attachment.size)}
+                          </span>
+                        ),
+                      }}
+                    />
+                  </div>
+                )}
+                {timeRemaining && timeRemaining > 0 && (
+                  <div>
+                    <I18n
+                      i18n={i18n}
+                      id="icu:StoryDetailsModal__disappears-in"
+                      components={{
+                        countdown: (
+                          <span className="StoryDetailsModal__debugger__button__text">
+                            {formatRelativeTime(i18n, timeRemaining, {
+                              largest: 2,
+                            })}
+                          </span>
+                        ),
+                      }}
+                    />
+                  </div>
+                )}
+              </button>
+            </AxoDropdownMenu.Trigger>
+            <AxoDropdownMenu.Content>
+              <AxoDropdownMenu.Item
+                symbol="copy"
+                onSelect={() => {
+                  void window.navigator.clipboard.writeText(String(timestamp));
                 }}
-              />
-            </div>
-          )}
-          {timeRemaining && timeRemaining > 0 && (
-            <div>
-              <I18n
-                i18n={i18n}
-                id="icu:StoryDetailsModal__disappears-in"
-                components={{
-                  countdown: (
-                    <span className="StoryDetailsModal__debugger__button__text">
-                      {formatRelativeTime(i18n, timeRemaining, {
-                        largest: 2,
-                      })}
-                    </span>
-                  ),
-                }}
-              />
-            </div>
-          )}
-        </ContextMenu>
+              >
+                {i18n('icu:StoryDetailsModal__copy-timestamp')}
+              </AxoDropdownMenu.Item>
+              {isInternalUser && attachment && (
+                <AxoDropdownMenu.Item
+                  symbol="download"
+                  onSelect={() => saveAttachment(attachment)}
+                >
+                  {i18n('icu:StoryDetailsModal__download-attachment')}
+                </AxoDropdownMenu.Item>
+              )}
+            </AxoDropdownMenu.Content>
+          </AxoDropdownMenu.Root>
+        </AxoTheme.Override>
       }
     >
       {content}

@@ -2,8 +2,20 @@
   "icu:AxoAlertDialog.Cancel": {
     "messageformat": "Anuluj"
   },
+  "icu:AxoAlertDialog.Ok": {
+    "messageformat": "OK"
+  },
   "icu:AxoButton.Pending": {
     "messageformat": "Wysyłanie"
+  },
+  "icu:AxoColorSlider.Hue": {
+    "messageformat": "Hue"
+  },
+  "icu:AxoColorSlider.Saturation": {
+    "messageformat": "Saturation"
+  },
+  "icu:AxoColorSlider.Lightness": {
+    "messageformat": "Lightness"
   },
   "icu:AxoDialog.Back": {
     "messageformat": "Wstecz"
@@ -73,12 +85,6 @@
   },
   "icu:LinkedDevicesOnboardingDialog__bullet--2": {
     "messageformat": "Połączonymi urządzeniami zarządzasz na głównym urządzeniu. Możesz połączyć ze swoim kontem maksymalnie 5 urządzeń."
-  },
-  "icu:LinkedDevicesOnboardingDialog__bullet--3": {
-    "messageformat": "Ustawieniami konta możesz zarządzać tylko na głównym urządzeniu. Dotyczy to m.in. ustawień konta i kopii zapasowych."
-  },
-  "icu:LinkedDevicesOnboardingDialog__bullet--3--1": {
-    "messageformat": "Ustawieniami konta i tworzeniem kopii zapasowych możesz zarządzać tylko z poziomu głównego urządzenia."
   },
   "icu:LinkedDevicesOnboardingDialog__bullet--3--2": {
     "messageformat": "Ustawieniami konta i tworzeniem Bezpiecznych kopii zapasowych Signal można zarządzać tylko na głównym urządzeniu."
@@ -281,6 +287,9 @@
   "icu:archivedConversations": {
     "messageformat": "Zarchiwizowane czaty"
   },
+  "icu:LeftPane__MoreActionsLabel": {
+    "messageformat": "More actions"
+  },
   "icu:LeftPane__MoreActionsMenu__AddChatFolder": {
     "messageformat": "Dodaj folder z czatami"
   },
@@ -382,9 +391,6 @@
   },
   "icu:NavTabs__ItemIconLabel--UnreadCount": {
     "messageformat": "Liczba nieodczytanych wiadomości: {count,number}"
-  },
-  "icu:NavTabs__ItemIconLabel--MarkedUnread": {
-    "messageformat": "Oznaczono jako nieodczytane"
   },
   "icu:NavTabs__ItemLabel--Chats": {
     "messageformat": "Czaty"
@@ -653,20 +659,11 @@
   "icu:SafetyNumberNotReady__learn-more": {
     "messageformat": "Dowiedz się więcej"
   },
-  "icu:KeyTransparencyErrorDialog__Title": {
-    "messageformat": "Automatyczna weryfikacja kluczy jest obecnie niedostępna na Twoim urządzeniu. Przesłać dziennik debugowania?"
-  },
   "icu:KeyTransparencyErrorDialog__Title-v2": {
     "messageformat": "Automatyczna weryfikacja kluczy jest obecnie niedostępna na Twoim urządzeniu. Chcesz przesłać dziennik debugowania, aby pomóc nam udoskonalać usługę?"
   },
-  "icu:KeyTransparencyErrorDialog__Description": {
-    "messageformat": "Dzienniki debugowania ułatwiają nam namierzenie i naprawę błędu. Nie zawierają danych umożliwiających identyfikację."
-  },
   "icu:KeyTransparencyErrorDialog__Description-v2": {
     "messageformat": "W tym dzienniki debugowania, które ułatwiają nam namierzenie i naprawę błędu. Nie zawierają one danych umożliwiających identyfikację. Udostępnianie dzienników debugowania jest opcjonalne."
-  },
-  "icu:KeyTransparencyErrorDialog__ShareDebugLog__Label": {
-    "messageformat": "Udostępnij dziennik debugowania"
   },
   "icu:KeyTransparencyErrorDialog__ShareDebugLog__Label-v2": {
     "messageformat": "Załącz dzienniki debugowania"
@@ -685,6 +682,9 @@
   },
   "icu:KeyTransparencyOnboardingDialog__Description": {
     "messageformat": "W przypadku osób, z którymi kontakt został nawiązany za pomocą numeru telefonu, Signal może automatycznie potwierdzić, czy połączenie jest bezpieczne – robi to za pomocą mechanizmu przejrzystości kluczy. Jeśli chcesz mieć absolutną pewność, że komunikujesz się z właściwą osobą, możesz dodatkowo weryfikować kontakty ręcznie za pomocą kodu QR lub przez porównanie numerów bezpieczeństwa."
+  },
+  "icu:KeyTransparencyOnboardingDialog__Description-v2": {
+    "messageformat": "<paragraph>W przypadku osób, z którymi kontakt został nawiązany za pomocą numeru telefonu, Signal może automatycznie potwierdzić, czy połączenie jest bezpieczne – robi to za pomocą mechanizmu przejrzystości kluczy.</paragraph><paragraph>Jeśli chcesz mieć absolutną pewność, że komunikujesz się z właściwą osobą, możesz dodatkowo weryfikować kontakty ręcznie za pomocą kodu QR lub przez porównanie numerów bezpieczeństwa.</paragraph>"
   },
   "icu:KeyTransparencyOnboardingDialog__Continue": {
     "messageformat": "Kontynuuj"
@@ -1493,6 +1493,9 @@
   "icu:ConversationMerge--learn-more": {
     "messageformat": "Dowiedz się więcej"
   },
+  "icu:ConversationMerge--explainer-dialog--label": {
+    "messageformat": "Połączono historię wiadomości"
+  },
   "icu:ConversationMerge--explainer-dialog--line-1": {
     "messageformat": "Wymiana wiadomości z numerem {obsoleteConversationTitle} pozwoliła potwierdzić, że osobą, do której należy ten numer, jest {conversationTitle}. Ten numer jest ukryty."
   },
@@ -1753,6 +1756,9 @@
   },
   "icu:Preferences__EditChatFolderPage__SelectChatsDialog__Search__Placeholder": {
     "messageformat": "Wyszukaj"
+  },
+  "icu:Preferences__EditChatFolderPage__SelectChatsDialog__NoChats": {
+    "messageformat": "Brak czatów"
   },
   "icu:Preferences__EditChatFolderPage__SelectChatsDialog__ChatTypesSection__Title": {
     "messageformat": "Rodzaje czatów"
@@ -2246,6 +2252,24 @@
   "icu:deleteAccountDialogBody": {
     "messageformat": "Spowoduje to usunięcie danych Twojego konta, profilu i wszystkich wiadomości. Opuścisz też wszystkie grupy Signal. Następnie aplikacja zostanie zamknięta."
   },
+  "icu:DeleteAccountConfirmDialog--Title": {
+    "messageformat": "Delete account"
+  },
+  "icu:DeleteAccountConfirmDialog--Description": {
+    "messageformat": "This will delete your account info, profile, and all of your messages. You will also be removed from all Signal groups."
+  },
+  "icu:DeleteAccountConfirmDialog--ConfirmNumber": {
+    "messageformat": "Confirm your phone number"
+  },
+  "icu:DeleteAccountConfirmDialog--CountryCodePlaceholder": {
+    "messageformat": "Country code"
+  },
+  "icu:DeleteAccountConfirmDialog--NumberPlaceholder": {
+    "messageformat": "Phone number"
+  },
+  "icu:DeleteAccountConfirmDialog--DeleteButton": {
+    "messageformat": "Delete"
+  },
   "icu:deleteOldIndexedDBData": {
     "messageformat": "Masz przestarzałe dane z dawnej instalacji Signal Desktop. Jeśli przejdziesz dalej, dane zostaną usunięte, a Ty możesz skonfigurować aplikację od nowa."
   },
@@ -2398,9 +2422,6 @@
   },
   "icu:callRingtoneNotificationDescription": {
     "messageformat": "Powiadamiaj o połączeniach z dźwiękiem"
-  },
-  "icu:callSystemNotificationDescription": {
-    "messageformat": "Pokazuj powiadomienia dotyczące połączeń"
   },
   "icu:incomingCallNotificationDescription": {
     "messageformat": "Włącz połączenia przychodzące"
@@ -2999,6 +3020,9 @@
   "icu:FunPanelSticker__SubNavLabel": {
     "messageformat": "Pakiety naklejek"
   },
+  "icu:FunPanelStickers__SubNavCategoryLabel--Favorites": {
+    "messageformat": "Favorites"
+  },
   "icu:FunPanelStickers__SubNavCategoryLabel--Recents": {
     "messageformat": "Ostatnio używane"
   },
@@ -3010,6 +3034,9 @@
   },
   "icu:FunPanelStickers__SectionTitle--Recents": {
     "messageformat": "Ostatnio używane"
+  },
+  "icu:FunPanelStickers__SectionTitle--Favorites": {
+    "messageformat": "Favorites"
   },
   "icu:FunPanelStickers__SectionTitle--Featured": {
     "messageformat": "Polecane"
@@ -3524,6 +3551,9 @@
   "icu:MessageRequests--unblock-group-confirm-body": {
     "messageformat": "Osoby z tej grupy znów będą mogły Cię do niej dodać."
   },
+  "icu:MessageRequests--unblock-signal-confirm-body": {
+    "messageformat": "Będziesz na bieżąco z nowościami w aplikacji Signal."
+  },
   "icu:MessageRequests--block-and-report-spam-success-toast": {
     "messageformat": "Zgłoszono jako spam i zablokowano."
   },
@@ -3538,6 +3568,9 @@
   },
   "icu:MessageRequests--block-group-confirm-body": {
     "messageformat": "Nie będziesz już otrzymywać wiadomości ani powiadomień z tej grupy, a jej członkowie nie będą mogli z powrotem Cię do niej dodać."
+  },
+  "icu:MessageRequests--block-signal-confirm-body": {
+    "messageformat": "Nie będziesz już otrzymywać wiadomości na temat nowości w aplikacji Signal."
   },
   "icu:MessageRequests--reportAndMaybeBlock": {
     "messageformat": "Zgłoś…"
@@ -3866,6 +3899,9 @@
   "icu:callingDeviceSelection__settings": {
     "messageformat": "Ustawienia"
   },
+  "icu:callingDeviceSelection__settings-v2": {
+    "messageformat": "Call Settings"
+  },
   "icu:calling__participants--pluralized": {
     "messageformat": "{people, plural, one {{people,number} uczestnik} few {{people,number} uczestników} many {{people,number} uczestników} other {{people,number} uczestnika}}"
   },
@@ -3970,6 +4006,15 @@
   },
   "icu:callingDeviceSelection__select--default": {
     "messageformat": "Domyślnie"
+  },
+  "icu:callingDeviceSelection__select--default-nonwin": {
+    "messageformat": "Default: {deviceName}"
+  },
+  "icu:callingDeviceSelection__select--default_console": {
+    "messageformat": "Default: {deviceName}"
+  },
+  "icu:callingDeviceSelection__select--default_communications": {
+    "messageformat": "Default Communications: {deviceName}"
   },
   "icu:muteNotificationsTitle": {
     "messageformat": "Wycisz powiadomienia"
@@ -4823,6 +4868,69 @@
   "icu:CompositionArea__AttachMenu__Poll": {
     "messageformat": "Ankieta"
   },
+  "icu:CompositionArea__AttachMenu__Contact": {
+    "messageformat": "Contact"
+  },
+  "icu:ShareContactDialog__SelectContact__Title": {
+    "messageformat": "Select contact"
+  },
+  "icu:ShareContactDialog__SelectContact__SearchPlaceholder": {
+    "messageformat": "Search"
+  },
+  "icu:ShareContactDialog__SelectContact__EmptyState": {
+    "messageformat": "No contacts"
+  },
+  "icu:ShareContactDialog__SelectContact__NoResults": {
+    "messageformat": "No results for “{searchQuery}”"
+  },
+  "icu:ShareContactDialog__ShareContact__Title": {
+    "messageformat": "Share contact"
+  },
+  "icu:ShareContactDialog__ShareContact__Description": {
+    "messageformat": "Anyone you share this profile with will be able to message {name}."
+  },
+  "icu:ShareContactDialog__ShareContact__Send": {
+    "messageformat": "Send contact"
+  },
+  "icu:ShareContactDialog__ShareContact__EditName": {
+    "messageformat": "Edit name"
+  },
+  "icu:ShareContactDialog__EditName__Title": {
+    "messageformat": "Edit name"
+  },
+  "icu:ShareContactDialog__EditName__Prefix": {
+    "messageformat": "Prefix"
+  },
+  "icu:ShareContactDialog__EditName__GivenName": {
+    "messageformat": "First name"
+  },
+  "icu:ShareContactDialog__EditName__MiddleName": {
+    "messageformat": "Middle name"
+  },
+  "icu:ShareContactDialog__EditName__FamilyName": {
+    "messageformat": "Last name"
+  },
+  "icu:ShareContactDialog__EditName__Suffix": {
+    "messageformat": "Suffix"
+  },
+  "icu:ShareContactDialog__EditName__Organization": {
+    "messageformat": "Organization"
+  },
+  "icu:ShareContactDialog__ShareContact__EditPhoto": {
+    "messageformat": "Edit photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__Title": {
+    "messageformat": "Select a photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__ContactPhoto": {
+    "messageformat": "Contact photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__ProfilePhoto": {
+    "messageformat": "Profile photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__DefaultAvatar": {
+    "messageformat": "Default avatar"
+  },
   "icu:CompositionArea--attach-plus": {
     "messageformat": "Dodaj załącznik lub ankietę"
   },
@@ -4861,9 +4969,6 @@
   },
   "icu:CompositionInput__editing-message": {
     "messageformat": "Edytuj wiadomość"
-  },
-  "icu:countMutedConversationsDescription": {
-    "messageformat": "Uwzględniaj wyciszone czaty w liczniku nieodczytanych wiadomości"
   },
   "icu:ContactModal--nickname": {
     "messageformat": "Pseudonim"
@@ -5263,18 +5368,6 @@
   },
   "icu:UnreadReminders__notification__replySummary--many": {
     "messageformat": "{replyCount, plural, one {{replyCount,number} odpowiedź od {person1} i innych osób} few {{replyCount,number} odpowiedzi od {person1} i innych osób} many {{replyCount,number} odpowiedzi od {person1} i innych osób} other {{replyCount,number} odpowiedzi od {person1} i innych osób}}"
-  },
-  "icu:ConversationNotificationsSettings__mentions__label": {
-    "messageformat": "Wzmianki"
-  },
-  "icu:ConversationNotificationsSettings__mentions__info": {
-    "messageformat": "Otrzymuj powiadomienia o wzmiankach o Tobie w wyciszonych czatach"
-  },
-  "icu:ConversationNotificationsSettings__mentions__select__always-notify": {
-    "messageformat": "Zawsze powiadamiaj"
-  },
-  "icu:ConversationNotificationsSettings__mentions__select__dont-notify-for-mentions-if-muted": {
-    "messageformat": "Nie powiadamiaj, jeśli wyciszono"
   },
   "icu:GroupLinkManagement--clipboard": {
     "messageformat": "Link do grupy skopiowany."
@@ -6193,9 +6286,6 @@
   "icu:Preferences__SignalAccountKeys__Description": {
     "messageformat": "Skopiuj go do bezpiecznego miejsca. Będzie potrzebny do odzyskania konta i danych. Nikomu go nie podawaj."
   },
-  "icu:Preferences__SignalAccountKeys__AccountKey": {
-    "messageformat": "Klucz konta"
-  },
   "icu:Preferences__SignalAccountKeys__AccountID": {
     "messageformat": "Identyfikator konta"
   },
@@ -6257,7 +6347,7 @@
     "messageformat": "PIN Signal"
   },
   "icu:Preferences--signal-pin__footer": {
-    "messageformat": "PINs keep information stored with Signal encrypted so only you can access it. Your PIN cannot be recovered. Your profile, settings, and contacts will restore when you reinstall Signal. <learnMoreLink>Learn more</learnMoreLink>"
+    "messageformat": "Dzięki PIN-owi Twoje dane przechowywane w aplikacji Signal są szyfrowane i tylko Ty masz do nich dostęp. PIN-u nie można odzyskać. PIN pozwoli Ci przywrócić profil, ustawienia i kontakty, gdy ponownie zainstalujesz aplikację. <learnMoreLink>Dowiedz się więcej</learnMoreLink>"
   },
   "icu:Preferences--signal-pin-advanced-settings": {
     "messageformat": "Zaawansowane ustawienia PIN-u"
@@ -6272,7 +6362,7 @@
     "messageformat": "Jeśli wyłączysz PIN, przy ponownej rejestracji w aplikacji Signal stracisz wszystkie dane (chyba że masz utworzoną ręcznie kopię zapasową do przywrócenia). Gdy PIN jest wyłączony, nie można też korzystać z funkcji blokady rejestracji."
   },
   "icu:DisableSignalPinErrorDialog--reg-lock--title": {
-    "messageformat": "Disable PIN failed due to registration lock"
+    "messageformat": "Nie można wyłączyć PIN-u, gdy włączona jest blokada rejestracji"
   },
   "icu:DisableSignalPinErrorDialog--reg-lock--body": {
     "messageformat": "Aby wyłączyć PIN, musisz najpierw wyłączyć blokadę rejestracji."
@@ -6281,7 +6371,7 @@
     "messageformat": "OK"
   },
   "icu:DisableSignalPinErrorDialog--backups--title": {
-    "messageformat": "Disable PIN failed due to backups"
+    "messageformat": "Nie można wyłączyć PIN-u, gdy włączone jest tworzenie kopii zapasowych Signal"
   },
   "icu:DisableSignalPinErrorDialog--backups--body": {
     "messageformat": "Aby wyłączyć PIN, musisz najpierw wyłączyć tworzenie kopii zapasowych."
@@ -6304,9 +6394,6 @@
   "icu:Preferences--registration-lock__footer": {
     "messageformat": "Wymagaj PIN-u Signal, aby ponownie zarejestrować numer telefonu w aplikacji."
   },
-  "icu:Preferences--notification-content": {
-    "messageformat": "Treść powiadomień"
-  },
   "icu:Preferences__Chats__TextInputSection__Title": {
     "messageformat": "Wprowadzanie tekstu"
   },
@@ -6318,9 +6405,6 @@
   },
   "icu:Preferences__Notifications__SoundsSection__Title": {
     "messageformat": "Dźwięki"
-  },
-  "icu:Preferences__Notifications__AppBadgeSection__Title": {
-    "messageformat": "Odznaka aplikacji"
   },
   "icu:Preferences__Notifications__AppBadgeSection__Title-v2": {
     "messageformat": "Licznik nieodczytanych wiadomości"
@@ -6700,6 +6784,9 @@
   "icu:Preferences--blocked-users--description": {
     "messageformat": "Zablokowane osoby nie mogą do Ciebie dzwonić ani wysyłać Ci wiadomości"
   },
+  "icu:Preferences--add-blocked": {
+    "messageformat": "Dodaj zablokowanego użytkownika lub grupę"
+  },
   "icu:Preferences--blocked-users": {
     "messageformat": "Zablokowane osoby"
   },
@@ -6708,6 +6795,12 @@
   },
   "icu:Preferences--blocked--blocked-on": {
     "messageformat": "Zablokowano {blockedAt}"
+  },
+  "icu:Preferences--BlockChooser--Done": {
+    "messageformat": "Gotowe"
+  },
+  "icu:Preferences--BlockChooser--Search--Placeholder": {
+    "messageformat": "Wyszukaj"
   },
   "icu:Preferences--signal-backups": {
     "messageformat": "Bezpieczne kopie zapasowe Signal"
@@ -7105,6 +7198,36 @@
   "icu:InstallScreenUpdateDialog--cannot-update__body": {
     "messageformat": "Nie udało się zaktualizować aplikacji Signal, ale jest dostępna jej nowa wersja. Przejdź na stronę {downloadUrl}, aby zainstalować nową wersję ręcznie. Następnie skontaktuj się z pomocą techniczną albo prześlij zgłoszenie o błędzie."
   },
+  "icu:EntryPoint--signal-logo": {
+    "messageformat": "Signal Logo"
+  },
+  "icu:EntryPoint--Title--Line1": {
+    "messageformat": "Take privacy with you."
+  },
+  "icu:EntryPoint--Title--Line2": {
+    "messageformat": "Be yourself in every message."
+  },
+  "icu:EntryPoint--link-button": {
+    "messageformat": "Link your account"
+  },
+  "icu:EntryPoint--more-options-button": {
+    "messageformat": "More options"
+  },
+  "icu:EntryPoint--nonprofit": {
+    "messageformat": "Signal is a 501c3 nonprofit"
+  },
+  "icu:EntryPoint--terms": {
+    "messageformat": "Terms & privacy policy"
+  },
+  "icu:EntryPoint--MoreOptions--Title": {
+    "messageformat": "More options"
+  },
+  "icu:EntryPoint--MoreOptions--RegistrationButton--Title": {
+    "messageformat": "Create a new account"
+  },
+  "icu:EntryPoint--MoreOptions--RegistrationButton--Description": {
+    "messageformat": "Create a new Signal account using your phone number."
+  },
   "icu:StandaloneRegistration--signal-logo": {
     "messageformat": "Logo Signal"
   },
@@ -7124,7 +7247,7 @@
     "messageformat": "Spróbuj ponownie za {duration}"
   },
   "icu:StandaloneRegistration--PhoneNumber--RegionCodeSelector--Label": {
-    "messageformat": "Select region code"
+    "messageformat": "Wybierz kod kraju"
   },
   "icu:StandaloneRegistration--PhoneNumber--placeholder": {
     "messageformat": "Numer telefonu"
@@ -7299,6 +7422,21 @@
   },
   "icu:StandaloneRegistration--VerificationCode--CannotSendCodeTemporary--ok-button": {
     "messageformat": "OK"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Title": {
+    "messageformat": "Having trouble registering?"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet1": {
+    "messageformat": "Make sure your phone has a cellular signal to receive your SMS or call"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet2": {
+    "messageformat": "Confirm you can receive a phone call to the number"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet3": {
+    "messageformat": "Check that you have entered your phone number correctly"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Footer": {
+    "messageformat": "If you still can’t register, follow these <troubleshootingLink>troubleshooting steps</troubleshootingLink> or <contactSupportLink>Contact Support</contactSupportLink>."
   },
   "icu:StandaloneRegistration--ProfileEntry--header": {
     "messageformat": "Skonfiguruj swój profil"
@@ -7649,10 +7787,10 @@
     "messageformat": "Włącz opcję „Signal”"
   },
   "icu:MediaPermissionsModal__step-2--windows--microphone": {
-    "messageformat": "Enable microphone access for Signal"
+    "messageformat": "Zezwól Signal na dostęp do mikrofonu"
   },
   "icu:MediaPermissionsModal__step-2--windows--camera": {
-    "messageformat": "Enable camera access for Signal"
+    "messageformat": "Zezwól aplikacji Signal na dostęp do kamery"
   },
   "icu:MediaPermissionsModal__open": {
     "messageformat": "Przejdź do ustawień"
@@ -8204,7 +8342,7 @@
     "messageformat": "Nazwy użytkowników zawsze są parowane z zestawem cyfr."
   },
   "icu:EditUsernameModalBody__discriminator-label": {
-    "messageformat": "Username digits"
+    "messageformat": "Cyfry w nazwie użytkownika"
   },
   "icu:EditUsernameModalBody__learn-more": {
     "messageformat": "Dowiedz się więcej"
@@ -8340,13 +8478,13 @@
     "messageformat": "Zmień swój identyfikator PIN Signal"
   },
   "icu:PinChangeModal__title--create--without-pin": {
-    "messageformat": "Create your Signal PIN"
+    "messageformat": "Utwórz PIN Signal"
   },
   "icu:PinChangeModal__body--create": {
     "messageformat": "Możesz zmienić PIN, pod warunkiem że to urządzenie zostało zarejestrowane. <learnMoreLink>Dowiedz się więcej</learnMoreLink>"
   },
   "icu:PinChangeModal__body--create--without-pin": {
-    "messageformat": "PINs keep information stored with Signal encrypted so only you can access it. Your profile, settings, and contacts will restore when you reinstall. You won't need your PIN to open the app. <learnMoreLink>Learn more</learnMoreLink>"
+    "messageformat": "Dzięki PIN-owi Twoje dane przechowywane w aplikacji Signal są szyfrowane i tylko Ty masz do nich dostęp. PIN pozwoli Ci przywrócić profil, ustawienia i kontakty, gdy ponownie zainstalujesz aplikację. Nie potrzebujesz PIN-u, aby otwierać aplikację. <learnMoreLink>Dowiedz się więcej</learnMoreLink>"
   },
   "icu:PinChangeModal__title--confirm": {
     "messageformat": "Potwierdź swój PIN Signal"
@@ -8588,12 +8726,6 @@
   "icu:CallLinkPendingParticipantModal__DenyButtonLabel": {
     "messageformat": "Odrzuć"
   },
-  "icu:CallLinkRestrictionsSelect__Option--Off": {
-    "messageformat": "Wyłączone"
-  },
-  "icu:CallLinkRestrictionsSelect__Option--On": {
-    "messageformat": "Włączone"
-  },
   "icu:CallLinkAddNameModal__Title": {
     "messageformat": "Dodaj nazwę połączenia"
   },
@@ -8641,6 +8773,39 @@
   },
   "icu:SaveMultiDialog__title": {
     "messageformat": "Zapisz załączniki"
+  },
+  "icu:EmbeddedContact__message": {
+    "messageformat": "Wiadomość"
+  },
+  "icu:ContactDetail__message": {
+    "messageformat": "Wiadomość"
+  },
+  "icu:ContactDetail__add-to-group": {
+    "messageformat": "Dodaj do grupy"
+  },
+  "icu:ContactDetail__nickname": {
+    "messageformat": "Pseudonim"
+  },
+  "icu:ContactDetail__note": {
+    "messageformat": "Notatki"
+  },
+  "icu:email-v2": {
+    "messageformat": "E-mail"
+  },
+  "icu:home-v2": {
+    "messageformat": "Dom"
+  },
+  "icu:mobile-v2": {
+    "messageformat": "Komórka"
+  },
+  "icu:work-v2": {
+    "messageformat": "Praca"
+  },
+  "icu:phone-v2": {
+    "messageformat": "Numer telefonu"
+  },
+  "icu:address-v2": {
+    "messageformat": "Adres"
   },
   "icu:WhatsNew__modal-title": {
     "messageformat": "Co nowego"
@@ -8806,6 +8971,9 @@
   },
   "icu:DonationReceipt__footer-text-v2": {
     "messageformat": "Dziękujemy za wsparcie aplikacji Signal. Twoja darowizna wspomaga rozwój otwartoźródłowej technologii, która zapewnia prywatność, chroni wolność słowa i umożliwia bezpieczną komunikację milionom osób na całym świecie. Jeśli mieszkasz w Stanach Zjednoczonych, zachowaj to potwierdzenie, aby uwzględnić darowiznę w zeznaniu podatkowym. Signal Technology Foundation jest organizacją non profit zwolnioną z podatku w USA na podstawie zapisu 501c3 Internal Revenue Code (Kodeksu Podatkowego). Nasz federalny numer identyfikacji podatkowej to 82-4506840. W zamian za tę darowiznę Signal nie przekazał żadnych towarów ani nie świadczył żadnych usług."
+  },
+  "icu:MessageCta__Donate": {
+    "messageformat": "Wpłać darowiznę teraz"
   },
   "icu:Donations__OfflineTooltip": {
     "messageformat": "Jesteś offline. Aby przekazać darowiznę, połącz się z internetem."
@@ -9005,6 +9173,9 @@
   "icu:CallQualitySurvey__WhatIssuesDidYouHave__SomethingElse__TextArea__AccessibilityLabel": {
     "messageformat": "Opis problemów"
   },
+  "icu:CallQualitySurvey__WhatIssuesDidYouHave__SomethingElse__TextArea__Placeholder": {
+    "messageformat": "Opisz swój problem"
+  },
   "icu:CallQualitySurvey__WhatIssuesDidYouHave__SomethingElse__TextArea__HelpText": {
     "messageformat": "Prosimy o podanie wszystkich istotnych szczegółów dotyczących problemu. Informacje te będą traktowane poufnie i zostaną wykorzystane wyłącznie do ulepszenia połączeń w aplikacji Signal."
   },
@@ -9114,16 +9285,25 @@
     "messageformat": "Drobne ulepszenia, poprawki błędów i większa funkcjonalność. Cieszymy się, że korzystasz z aplikacji Signal!",
     "ignoreUnused": true
   },
-  "icu:WhatsNew__8.26--0": {
-    "messageformat": "Poszukiwanie siebie może być zagadnieniem na całe życie, ale od teraz – aby nieco Ci to ułatwić – przy wyszukiwaniu osób w grupie będziesz się wyświetlać jako „Ty”."
-  },
-  "icu:WhatsNew__8.27--0": {
-    "messageformat": "W tej aktualizacji rozbudowaliśmy ustawienia powiadomień, żeby dać Ci nad nimi jeszcze większą kontrolę. Możesz teraz wybrać, co pojawia się na plakietce aplikacji, dostosować powiadomienia w przypadku wyciszonych czatów i nie tylko. Dodaliśmy też wygodny przycisk do przywracania domyślnych ustawień powiadomień – na wypadek, gdyby udało Ci się pozmieniać tyle opcji, że samodzielny powrót do punktu wyjścia przestałby wchodzić w grę."
-  },
   "icu:WhatsNew__8.30--0": {
-    "messageformat": "Thanks to a few performance improvements, your CPU will be slightly happier during video calls (even if you're not smiling)."
+    "messageformat": "Wprowadziliśmy kilka usprawnień wydajności, dzięki którym procesor mniej się napracuje podczas połączeń wideo."
   },
   "icu:WhatsNew__8.30--1": {
-    "messageformat": "We also added a convenient shortcut to open your system settings on Windows if you try to join a video call and Signal doesn't have permission to access the camera. Now it's easier to see what you need to do so that people can see you."
+    "messageformat": "Dodaliśmy też wygodny skrót do ustawień systemowych Windows. Pojawi się, gdy spróbujesz dołączyć do połączenia wideo, a aplikacja Signal nie będzie miała dostępu do kamery. Teraz od razu zobaczysz, co trzeba zrobić, żeby inni mogli Cię zobaczyć."
+  },
+  "icu:WhatsNew__8.32--0": {
+    "messageformat": "Filtr nieprzeczytanych jest teraz dostępny także w folderach wiadomości i wyszukiwarce, więc łatwo sprawdzisz, co Ci umknęło."
+  },
+  "icu:WhatsNew__8.32--1": {
+    "messageformat": "Poprawiliśmy niezawodność przesyłania przy słabym połączeniu z siecią. Dzięki, <GH3mmmbulus></GH3mmmbulus>!"
+  },
+  "icu:WhatsNew__8.32--2": {
+    "messageformat": "Skrót „(N)” prawidłowo wskazuje teraz emoji kciuka w dół. <lnicola></lnicola>, kciuk w górę za tę poprawkę!"
+  },
+  "icu:WhatsNew__8.34--0": {
+    "messageformat": "Signal Desktop now supports contact sharing too, so you can maintain eye contact with your computer screen without having to make physical contact with your smartphone."
+  },
+  "icu:WhatsNew__8.34--1": {
+    "messageformat": "Improved handling and performance for connected audio devices."
   }
 }

@@ -3,8 +3,7 @@
 
 import path from 'node:path';
 import lodash from 'lodash';
-import type { ThunkAction, ThunkDispatch } from 'redux-thunk';
-import { v4 as generateUuid } from 'uuid';
+import { v7 as generateUuid } from 'uuid';
 
 import type { ReadonlyDeep } from 'type-fest';
 import type {
@@ -20,22 +19,26 @@ import {
   isImageAttachment,
   isVideoAttachment,
 } from '../../util/Attachment.std.ts';
+import { writeNewAttachmentData } from '../../util/migrations.preload.ts';
+import { getExistingAttachmentDataForReuse } from '../../util/attachments/deduplicateAttachment.preload.ts';
+import { migrateDataToFileSystem } from '../../util/attachments/migrateDataToFilesystem.std.ts';
 import { isViewOnceEligible } from '../../util/viewOnceEligibility.std.ts';
 import { DataReader, DataWriter } from '../../sql/Client.preload.ts';
 import type { BoundActionCreatorsMapObject } from '../../hooks/useBoundActions.std.ts';
 import type { DraftBodyRanges } from '../../types/BodyRange.std.ts';
-import type { LinkPreviewForUIType } from '../../types/message/LinkPreviews.std.ts';
+import type { LinkPreviewDraftType } from '../../types/LinkPreview.std.ts';
 import type {
   PinMessageData,
   ReadonlyMessageAttributesType,
-} from '../../model-types.d.ts';
+} from '../../model-types.std.ts';
 import { noopAction, type NoopActionType } from './noop.std.ts';
 import type { ShowToastActionType } from './toast.preload.ts';
-import type { StateType as RootStateType } from '../reducer.preload.ts';
 import { createLogger } from '../../logging/log.std.ts';
 import * as Errors from '../../types/errors.std.ts';
 import type { PollCreateType } from '../../types/Polls.dom.ts';
 import { enqueuePollCreateForSend } from '../../util/enqueuePollCreateForSend.dom.ts';
+import { enqueueSharedContactForSend } from '../../util/enqueueSharedContactForSend.preload.ts';
+import type { ShareContactType } from '../../util/shareContact.std.ts';
 import {
   ADD_PREVIEW as ADD_LINK_PREVIEW,
   REMOVE_PREVIEW as REMOVE_LINK_PREVIEW,
@@ -52,7 +55,7 @@ import { blockSendUntilConversationsAreVerified } from '../../util/blockSendUnti
 import { clearConversationDraftAttachments } from '../../util/clearConversationDraftAttachments.preload.ts';
 import { deleteDraftAttachment } from '../../util/deleteDraftAttachment.preload.ts';
 import {
-  getLinkPreviewForSend,
+  getLinkPreviewsForSend,
   hasLinkPreviewLoaded,
   maybeGrabLinkPreview,
   removeLinkPreview,
@@ -72,7 +75,7 @@ import { isFileDangerous } from '../../util/isFileDangerous.std.ts';
 import { stringToMIMEType } from '../../types/MIME.std.ts';
 import { isNotNil } from '../../util/isNotNil.std.ts';
 import { replaceIndex } from '../../util/replaceIndex.std.ts';
-import { resolveAttachmentDraftData } from '../../util/resolveAttachmentDraftData.preload.ts';
+import { promoteDraftAttachment } from '../../util/promoteDraftAttachment.preload.ts';
 import { resolveDraftAttachmentOnDisk } from '../../util/resolveDraftAttachmentOnDisk.preload.ts';
 import { shouldShowInvalidMessageToast } from '../../util/shouldShowInvalidMessageToast.preload.ts';
 import { writeDraftAttachment } from '../../util/writeDraftAttachment.preload.ts';
@@ -102,7 +105,12 @@ import {
   isImageTypeSupported,
   isVideoTypeSupported,
 } from '../../util/GoogleChrome.std.ts';
-import type { StateThunk } from '../types.std.ts';
+import { getPlaintextHashForInMemoryAttachment } from '../../AttachmentCrypto.node.ts';
+import type {
+  AsyncStateThunk,
+  StateDispatch,
+  SyncStateThunk,
+} from '../types.std.ts';
 import { itemStorage } from '../../textsecure/Storage.preload.ts';
 import {
   getActivePanel,
@@ -124,7 +132,7 @@ type ComposerStateByConversationType = {
   disabledCounter: number;
   isViewOnce: boolean;
   linkPreviewLoading: boolean;
-  linkPreviewResult?: LinkPreviewForUIType;
+  linkPreviewResult?: LinkPreviewDraftType;
   quotedMessage?: QuotedMessageForComposerType;
   sendCounter: number;
   shouldSendHighQualityAttachments?: boolean;
@@ -290,6 +298,7 @@ export const actions = {
   setQuoteByMessageId,
   setQuotedMessage,
   setViewOnce,
+  shareContact,
   updateComposerDisabled,
 };
 
@@ -306,7 +315,7 @@ export const useComposerActions = (): BoundActionCreatorsMapObject<
   typeof actions
 > => useBoundActions(actions);
 
-function onClearDraft(conversationId: string): StateThunk<NoopActionType> {
+function onClearDraft(conversationId: string): SyncStateThunk<NoopActionType> {
   return dispatch => {
     const conversation = window.ConversationController.get(conversationId);
     if (!conversation) {
@@ -376,12 +385,7 @@ function scrollToQuotedMessage({
   authorId: string;
   conversationId: string;
   sentAt: number;
-}>): ThunkAction<
-  void,
-  RootStateType,
-  unknown,
-  ShowToastActionType | ScrollToMessageActionType
-> {
+}>): AsyncStateThunk<ShowToastActionType | ScrollToMessageActionType> {
   return async (dispatch, getState) => {
     const messages = await DataReader.getMessagesBySentAt(sentAt);
     const message = messages.find(item =>
@@ -406,13 +410,13 @@ function scrollToQuotedMessage({
       return;
     }
 
-    scrollToMessage(conversationId, message.id)(dispatch, getState, undefined);
+    void dispatch(scrollToMessage(conversationId, message.id));
   };
 }
 
 function scrollToPinnedMessage(
   pinMessage: PinMessageData
-): StateThunk<ShowToastActionType | ScrollToMessageActionType> {
+): AsyncStateThunk<ShowToastActionType | ScrollToMessageActionType> {
   return async (dispatch, getState) => {
     const ourAci = itemStorage.user.getCheckedAci();
 
@@ -438,7 +442,9 @@ function scrollToPinnedMessage(
       return;
     }
 
-    dispatch(scrollToMessage(pinnedMessage.conversationId, pinnedMessage.id));
+    void dispatch(
+      scrollToMessage(pinnedMessage.conversationId, pinnedMessage.id)
+    );
   };
 }
 
@@ -446,12 +452,7 @@ function scrollToPollMessage(
   pollAuthorAci: AciString,
   pollTimestamp: number,
   conversationId: string
-): ThunkAction<
-  void,
-  RootStateType,
-  unknown,
-  ShowToastActionType | ScrollToMessageActionType
-> {
+): AsyncStateThunk<ShowToastActionType | ScrollToMessageActionType> {
   return async (dispatch, getState) => {
     const ourAci = itemStorage.user.getCheckedAci();
 
@@ -476,17 +477,13 @@ function scrollToPollMessage(
       return;
     }
 
-    scrollToMessage(conversationId, pollMessage.id)(
-      dispatch,
-      getState,
-      undefined
-    );
+    void dispatch(scrollToMessage(conversationId, pollMessage.id));
   };
 }
 
 export function saveDraftRecordingIfNeeded(
   conversationId: string
-): ThunkAction<void, RootStateType, unknown, never> {
+): SyncStateThunk {
   return (dispatch, getState) => {
     const state = getState();
 
@@ -494,12 +491,12 @@ export function saveDraftRecordingIfNeeded(
       return;
     }
 
-    dispatch(
+    void dispatch(
       completeRecording(conversationId, attachment => {
         dispatch(
           addPendingAttachment(conversationId, { ...attachment, pending: true })
         );
-        dispatch(addAttachment(conversationId, attachment));
+        void dispatch(addAttachment(conversationId, attachment));
 
         const conversation = window.ConversationController.get(conversationId);
         if (!conversation) {
@@ -522,9 +519,7 @@ type WithPreSendChecksOptions = Readonly<{
 async function withPreSendChecks(
   conversationId: string,
   options: WithPreSendChecksOptions,
-  dispatch: ThunkDispatch<
-    RootStateType,
-    unknown,
+  dispatch: StateDispatch<
     UpdateComposerDisabledActionType | ShowToastActionType
   >,
   body: () => Promise<void>
@@ -600,10 +595,7 @@ function sendEditedMessage(
     quoteAuthorAci?: AciString;
     quoteSentAt?: number;
   }
-): ThunkAction<
-  void,
-  RootStateType,
-  unknown,
+): AsyncStateThunk<
   | UpdateComposerDisabledActionType
   | ShowToastActionType
   | IncrementSendActionType
@@ -627,7 +619,7 @@ function sendEditedMessage(
         await doSendEditedMessage(conversationId, {
           body: message,
           bodyRanges,
-          preview: getLinkPreviewForSend(message),
+          preview: await getLinkPreviewsForSend(message),
           quoteAuthorAci,
           quoteSentAt,
           targetMessageId,
@@ -656,10 +648,7 @@ function sendMultiMediaMessage(
     isViewOnce?: boolean;
     timestamp?: number;
   }
-): ThunkAction<
-  void,
-  RootStateType,
-  unknown,
+): AsyncStateThunk<
   | IncrementSendActionType
   | NoopActionType
   | ResetComposerActionType
@@ -687,10 +676,25 @@ function sendMultiMediaMessage(
     await withPreSendChecks(conversationId, options, dispatch, async () => {
       let attachments: Array<AttachmentType> = [];
       if (voiceNoteAttachment) {
-        attachments = [voiceNoteAttachment];
+        strictAssert(
+          !voiceNoteAttachment.pending,
+          'Voice note is still pending'
+        );
+        const {
+          data,
+          // oxlint-disable-next-line typescript/no-unused-vars
+          screenshotData: _screenshotData,
+          ...rest
+        } = voiceNoteAttachment;
+        const onDisk = await migrateDataToFileSystem(rest, data, {
+          writeNewAttachmentData,
+          getExistingAttachmentDataForReuse,
+          getPlaintextHashForInMemoryAttachment,
+        });
+        attachments = [onDisk];
       } else if (draftAttachments) {
         attachments = (
-          await Promise.all(draftAttachments.map(resolveAttachmentDraftData))
+          await Promise.all(draftAttachments.map(promoteDraftAttachment))
         ).filter(isNotNil);
       }
 
@@ -716,7 +720,7 @@ function sendMultiMediaMessage(
             body: message,
             attachments,
             quote,
-            preview: getLinkPreviewForSend(message),
+            preview: await getLinkPreviewsForSend(message),
             bodyRanges,
             isViewOnce,
           },
@@ -733,11 +737,7 @@ function sendMultiMediaMessage(
                   draftAttachments
                 )
               );
-              setQuoteByMessageId(conversationId, undefined)(
-                dispatch,
-                getState,
-                undefined
-              );
+              void dispatch(setQuoteByMessageId(conversationId, undefined));
               dispatch(incrementSendCounter(conversationId));
 
               if (state.items.audioMessage) {
@@ -762,10 +762,7 @@ function sendStickerMessage(
     packId: string;
     stickerId: number;
   }
-): ThunkAction<
-  void,
-  RootStateType,
-  unknown,
+): AsyncStateThunk<
   | NoopActionType
   | ShowToastActionType
   | IncrementSendActionType
@@ -823,11 +820,7 @@ function sendStickerMessage(
           extraReduxActions: isDraftPresent
             ? undefined
             : () => {
-                setQuoteByMessageId(conversationId, undefined)(
-                  dispatch,
-                  getState,
-                  undefined
-                );
+                void dispatch(setQuoteByMessageId(conversationId, undefined));
               },
         };
       } else {
@@ -853,12 +846,7 @@ function sendStickerMessage(
 function sendPoll(
   conversationId: string,
   poll: PollCreateType
-): ThunkAction<
-  void,
-  RootStateType,
-  unknown,
-  NoopActionType | ShowToastActionType
-> {
+): AsyncStateThunk<NoopActionType | ShowToastActionType> {
   return async dispatch => {
     const conversation = window.ConversationController.get(conversationId);
     if (!conversation) {
@@ -896,6 +884,47 @@ function sendPoll(
   };
 }
 
+function shareContact(
+  conversationId: string,
+  contact: ShareContactType
+): AsyncStateThunk<NoopActionType | ShowToastActionType> {
+  return async dispatch => {
+    const conversation = window.ConversationController.get(conversationId);
+    if (!conversation) {
+      throw new Error('shareContact: No conversation found');
+    }
+
+    const recipientsByConversation = getRecipientsByConversation([
+      conversation.attributes,
+    ]);
+
+    try {
+      const sendAnyway = await blockSendUntilConversationsAreVerified(
+        recipientsByConversation,
+        SafetyNumberChangeSource.MessageSend
+      );
+      if (!sendAnyway) {
+        return;
+      }
+
+      const toast = shouldShowInvalidMessageToast(conversation.attributes);
+      if (toast != null) {
+        dispatch({
+          type: SHOW_TOAST,
+          payload: toast,
+        });
+        return;
+      }
+
+      await enqueueSharedContactForSend(conversation, contact);
+    } catch (error) {
+      log.error('shareContact error:', Errors.toLogFormat(error));
+    }
+
+    dispatch(noopAction('shareContact'));
+  };
+}
+
 // Not cool that we have to pull from ConversationModel here
 // but if the current selected conversation isn't the one that we're operating
 // on then we won't be able to grab attachments from state so we resort to the
@@ -910,7 +939,7 @@ function getAttachmentsFromConversationModel(
 export function setQuoteByMessageId(
   conversationId: string,
   messageId: string | undefined
-): ThunkAction<void, RootStateType, unknown, SetQuotedMessageActionType> {
+): AsyncStateThunk<SetQuotedMessageActionType> {
   return async (dispatch, getState) => {
     const conversation = window.ConversationController.get(conversationId);
     if (!conversation) {
@@ -921,7 +950,7 @@ export function setQuoteByMessageId(
     if (activePanel != null && messageId != null) {
       // Reset the conversation panels and scroll to the message
       // in case we're inside of a conversation panel like pinned messages
-      dispatch(scrollToMessage(conversationId, messageId));
+      void dispatch(scrollToMessage(conversationId, messageId));
     }
 
     const draftEditMessage = conversation.get('draftEditMessage');
@@ -936,7 +965,7 @@ export function setQuoteByMessageId(
           quote: undefined,
         },
       });
-      dispatch(setComposerFocus(conversation.id));
+      void dispatch(setComposerFocus(conversation.id));
       return;
     }
 
@@ -995,20 +1024,27 @@ export function setQuoteByMessageId(
     );
     dispatch(disableViewOnceIfIneligible(conversationId));
 
-    dispatch(setComposerFocus(conversation.id));
+    void dispatch(setComposerFocus(conversation.id));
   };
 }
 
 function addAttachment(
   conversationId: string,
   attachment: InMemoryAttachmentDraftType
-): ThunkAction<void, RootStateType, unknown, ReplaceAttachmentsActionType> {
-  return async (dispatch, getState) => {
+): AsyncStateThunk<ReplaceAttachmentsActionType> {
+  return async dispatch => {
     // We do async operations first so multiple in-process addAttachments don't stomp on
     //   each other.
     const onDisk = await writeDraftAttachment(attachment);
-    const toAdd = { ...onDisk, clientUuid: generateUuid() };
+    await dispatch(addDraftAttachment(conversationId, onDisk));
+  };
+}
 
+function addDraftAttachment(
+  conversationId: string,
+  attachment: AttachmentDraftType
+): AsyncStateThunk<ReplaceAttachmentsActionType> {
+  return async (dispatch, getState) => {
     const state = getState();
 
     const isSelectedConversation =
@@ -1026,34 +1062,30 @@ function addAttachment(
     // We expect there to either be a pending draft attachment or an existing
     // attachment that we'll be replacing.
     const hasDraftAttachmentPending = draftAttachments.some(
-      draftAttachment => draftAttachment.path === attachment.path
+      draftAttachment => draftAttachment.clientUuid === attachment.clientUuid
     );
 
     // User has canceled the draft so we don't need to continue processing
     if (!hasDraftAttachmentPending) {
-      await deleteDraftAttachment(toAdd);
+      await deleteDraftAttachment(attachment);
       return;
     }
 
     // Remove any pending attachments that were transcoding
     const index = draftAttachments.findIndex(
-      draftAttachment => draftAttachment.path === attachment.path
+      draftAttachment => draftAttachment.clientUuid === attachment.clientUuid
     );
     let nextAttachments = draftAttachments;
     if (index < 0) {
       log.warn(
         `addAttachment: Failed to find pending attachment with path ${attachment.path}`
       );
-      nextAttachments = [...draftAttachments, toAdd];
+      nextAttachments = [...draftAttachments, attachment];
     } else {
-      nextAttachments = replaceIndex(draftAttachments, index, toAdd);
+      nextAttachments = replaceIndex(draftAttachments, index, attachment);
     }
 
-    replaceAttachments(conversationId, nextAttachments)(
-      dispatch,
-      getState,
-      null
-    );
+    dispatch(replaceAttachments(conversationId, nextAttachments));
 
     const conversation = window.ConversationController.get(conversationId);
     if (conversation) {
@@ -1081,7 +1113,7 @@ function addAttachment(
 function addPendingAttachment(
   conversationId: string,
   pendingAttachment: AttachmentDraftType
-): ThunkAction<void, RootStateType, unknown, ReplaceAttachmentsActionType> {
+): SyncStateThunk<ReplaceAttachmentsActionType> {
   return (dispatch, getState) => {
     const state = getState();
 
@@ -1120,7 +1152,7 @@ function addPendingAttachment(
 
 export function setComposerFocus(
   conversationId: string
-): ThunkAction<void, RootStateType, unknown, SetFocusActionType> {
+): AsyncStateThunk<SetFocusActionType> {
   return async (dispatch, getState) => {
     if (getSelectedConversationId(getState()) !== conversationId) {
       return;
@@ -1147,7 +1179,7 @@ function onEditorStateChange({
   conversationId: string | undefined;
   messageText: string;
   sendCounter: number;
-}): ThunkAction<void, RootStateType, unknown, NoopActionType> {
+}): SyncStateThunk<NoopActionType> {
   return (dispatch, getState) => {
     if (!conversationId) {
       throw new Error(
@@ -1202,10 +1234,7 @@ function processAttachments({
   conversationId: string;
   files: ReadonlyArray<File>;
   flags: number | null;
-}): ThunkAction<
-  void,
-  RootStateType,
-  unknown,
+}): AsyncStateThunk<
   NoopActionType | ShowToastActionType | UpdateComposerDisabledActionType
 > {
   return async (dispatch, getState) => {
@@ -1255,11 +1284,7 @@ function processAttachments({
       } else {
         const pendingAttachment = getPendingAttachment(file);
         if (pendingAttachment) {
-          addPendingAttachment(conversationId, pendingAttachment)(
-            dispatch,
-            getState,
-            undefined
-          );
+          dispatch(addPendingAttachment(conversationId, pendingAttachment));
           filesToProcess.push({ file, pendingAttachment });
           // we keep a running count of the draft attachments so we can show a
           // toast in case we add too many attachments at once
@@ -1277,30 +1302,21 @@ function processAttachments({
             const attachment = await processAttachment(file, {
               generateScreenshot: true,
               flags,
+              clientUuid: pendingAttachment.clientUuid,
             });
             if (!attachment) {
-              removeAttachment(conversationId, pendingAttachment)(
-                dispatch,
-                getState,
-                undefined
+              void dispatch(
+                removeAttachment(conversationId, pendingAttachment)
               );
               return;
             }
-            addAttachment(conversationId, attachment)(
-              dispatch,
-              getState,
-              undefined
-            );
+            void dispatch(addDraftAttachment(conversationId, attachment));
           } catch (err) {
             log.error(
               'handleAttachmentsProcessing: failed to process attachment:',
               Errors.toLogFormat(err)
             );
-            removeAttachment(conversationId, pendingAttachment)(
-              dispatch,
-              getState,
-              undefined
-            );
+            void dispatch(removeAttachment(conversationId, pendingAttachment));
             toastToShow = { toastType: ToastType.UnableToLoadAttachment };
           }
         })
@@ -1399,7 +1415,7 @@ function getPendingAttachment(file: File): AttachmentDraftType | undefined {
 function removeAttachment(
   conversationId: string,
   draft: AttachmentDraftType
-): ThunkAction<void, RootStateType, unknown, ReplaceAttachmentsActionType> {
+): AsyncStateThunk<ReplaceAttachmentsActionType> {
   return async (dispatch, getState) => {
     const state = getState();
 
@@ -1410,9 +1426,8 @@ function removeAttachment(
 
     const targetAttachmentIndex = attachments.findIndex(attachment => {
       return (
-        (attachment.clientUuid != null &&
-          attachment.clientUuid === draft.clientUuid) ||
-        (attachment.path != null && attachment.path === draft.path)
+        attachment.clientUuid != null &&
+        attachment.clientUuid === draft.clientUuid
       );
     });
     if (targetAttachmentIndex === -1) {
@@ -1435,11 +1450,7 @@ function removeAttachment(
       await DataWriter.updateConversation(conversation.attributes);
     }
 
-    replaceAttachments(conversationId, nextAttachments)(
-      dispatch,
-      getState,
-      null
-    );
+    dispatch(replaceAttachments(conversationId, nextAttachments));
 
     if (
       targetAttachment.path &&
@@ -1453,10 +1464,7 @@ function removeAttachment(
 export function replaceAttachments(
   conversationId: string,
   attachments: ReadonlyArray<AttachmentDraftType>
-): ThunkAction<
-  void,
-  RootStateType,
-  unknown,
+): SyncStateThunk<
   ReplaceAttachmentsActionType | SetViewOnceActionType | ShowToastActionType
 > {
   return (dispatch, getState) => {
@@ -1477,7 +1485,7 @@ export function replaceAttachments(
         attachments: attachments.map(resolveDraftAttachmentOnDisk),
       },
     });
-    dispatch(setComposerFocus(conversationId));
+    void dispatch(setComposerFocus(conversationId));
     dispatch(disableViewOnceIfIneligible(conversationId));
   };
 }
@@ -1485,12 +1493,7 @@ export function replaceAttachments(
 function reactToMessage(
   messageId: string,
   reaction: { emoji: Emoji.Variant; remove: boolean }
-): ThunkAction<
-  void,
-  RootStateType,
-  unknown,
-  NoopActionType | ShowToastActionType
-> {
+): AsyncStateThunk<NoopActionType | ShowToastActionType> {
   return async dispatch => {
     const { emoji, remove } = reaction;
     try {
@@ -1519,12 +1522,7 @@ function reactToMessage(
 
 function endPoll(
   messageId: string
-): ThunkAction<
-  void,
-  RootStateType,
-  unknown,
-  NoopActionType | ShowToastActionType
-> {
+): AsyncStateThunk<NoopActionType | ShowToastActionType> {
   return async dispatch => {
     try {
       await enqueuePollTerminateForSend({ messageId });
@@ -1649,12 +1647,7 @@ export function setViewOnce({
   conversationId: string;
   value: boolean;
   toastNotify: boolean;
-}): ThunkAction<
-  void,
-  RootStateType,
-  unknown,
-  SetViewOnceActionType | ShowToastActionType
-> {
+}): AsyncStateThunk<SetViewOnceActionType | ShowToastActionType> {
   return async (dispatch, getState) => {
     const composerState = getComposerStateForConversation(
       getState().composer,
@@ -1701,12 +1694,7 @@ export function setViewOnce({
 function disableViewOnceIfIneligible(
   conversationId: string,
   toastNotify = true
-): ThunkAction<
-  void,
-  RootStateType,
-  unknown,
-  SetViewOnceActionType | ShowToastActionType
-> {
+): SyncStateThunk<SetViewOnceActionType | ShowToastActionType> {
   return (dispatch, getState) => {
     const composerState = getComposerStateForConversation(
       getState().composer,
@@ -1719,7 +1707,7 @@ function disableViewOnceIfIneligible(
         Boolean(composerState.quotedMessage)
       )
     ) {
-      dispatch(
+      void dispatch(
         setViewOnce({
           conversationId,
           value: false,

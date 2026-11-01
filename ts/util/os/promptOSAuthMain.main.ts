@@ -3,10 +3,6 @@
 
 import { app, systemPreferences } from 'electron';
 import { exec } from 'node:child_process';
-import {
-  checkAvailability as checkAvailabilityWindowsUcv,
-  requestVerification as requestVerificationWindowsUcv,
-} from '@signalapp/windows-ucv';
 
 import { createLogger } from '../../logging/log.std.ts';
 import OS from './osMain.node.ts';
@@ -70,15 +66,17 @@ async function promptOSAuthMacOS(
 async function promptOSAuthWindows(
   text: string
 ): Promise<PromptOSAuthResultType> {
-  // For Windows a verification device is required for the UserConsentVerifier API.
-  const availability = await checkAvailabilityWindowsUcv();
-  log.info(`Windows UCV availability=${availability}`);
-  if (availability !== 'available') {
-    return 'unsupported';
-  }
-
   try {
-    const result = await requestVerificationWindowsUcv(text);
+    // Load only when authentication is requested. A broken native installation
+    // must fail authentication closed, rather than prevent all messaging startup.
+    const { checkAvailability, requestVerification } =
+      await import('@signalapp/windows-ucv');
+    const availability = await checkAvailability();
+    log.info(`Windows UCV availability=${availability}`);
+    if (availability !== 'available') {
+      return 'unsupported';
+    }
+    const result = await requestVerification(text);
     if (result === 'verified') {
       return 'success';
     }

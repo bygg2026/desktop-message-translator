@@ -15,9 +15,25 @@
     "messageformat": "Cancel",
     "description": "Axo Design System > Alert Dialog Component > Cancel Button > Generic default Label"
   },
+  "icu:AxoAlertDialog.Ok": {
+    "messageformat": "OK",
+    "description": "Axo Design System > Alert Dialog Component > Ok Button > Generic default Label"
+  },
   "icu:AxoButton.Pending": {
     "messageformat": "Pending",
     "description": "Axo Design System > Button Component > Pending State > Generic accessibility label"
+  },
+  "icu:AxoColorSlider.Hue": {
+    "messageformat": "Hue",
+    "description": "Axo Design System > Axo Color Slider Component > Hue Channel > Generic accessibility label"
+  },
+  "icu:AxoColorSlider.Saturation": {
+    "messageformat": "Saturation",
+    "description": "Axo Design System > Axo Color Slider Component > Saturation Channel > Generic accessibility label"
+  },
+  "icu:AxoColorSlider.Lightness": {
+    "messageformat": "Lightness",
+    "description": "Axo Design System > Axo Color Slider Component > Lightness Channel > Generic accessibility label"
   },
   "icu:AxoDialog.Back": {
     "messageformat": "Back",
@@ -27,9 +43,57 @@
     "messageformat": "Close",
     "description": "Axo Design System > Dialog Component > Close Button > Generic accessibility label"
   },
+  "icu:AxoLoadingIndicator.Loading": {
+    "messageformat": "Loading",
+    "description": "Axo Design System > Loading Indicator Component > Spinner > Generic accessibility label"
+  },
+  "icu:AxoMediaButton.Play": {
+    "messageformat": "Play",
+    "description": "Axo Design System > Media Button Component > Play Button > Generic accessibility label"
+  },
+  "icu:AxoMediaButton.Pause": {
+    "messageformat": "Pause",
+    "description": "Axo Design System > Media Button Component > Pause Button > Generic accessibility label"
+  },
+  "icu:AxoMediaButton.Download": {
+    "messageformat": "Download",
+    "description": "Axo Design System > Media Button Component > Download Button > Generic accessibility label"
+  },
+  "icu:AxoMediaButton.CancelDownload": {
+    "messageformat": "Cancel download",
+    "description": "Axo Design System > Media Button Component > Cancel Download Button (while downloading) > Generic accessibility label"
+  },
+  "icu:AxoOutgoingStatus.Sending": {
+    "messageformat": "Sending",
+    "description": "Axo Design System > Outgoing Message Status Component > Sending Status > Generic accessibility label for a message that is still being sent"
+  },
+  "icu:AxoOutgoingStatus.Sent": {
+    "messageformat": "Sent",
+    "description": "Axo Design System > Outgoing Message Status Component > Sent Status > Generic accessibility label for a message that was sent"
+  },
+  "icu:AxoOutgoingStatus.Delivered": {
+    "messageformat": "Delivered",
+    "description": "Axo Design System > Outgoing Message Status Component > Delivered Status > Generic accessibility label for a message that was delivered"
+  },
+  "icu:AxoOutgoingStatus.Read": {
+    "messageformat": "Read",
+    "description": "Axo Design System > Outgoing Message Status Component > Read Status > Generic accessibility label for a message that was read by the recipient"
+  },
+  "icu:AxoOutgoingStatus.Paused": {
+    "messageformat": "Sending paused",
+    "description": "Axo Design System > Outgoing Message Status Component > Paused Status > Generic accessibility label for a message whose sending is paused"
+  },
+  "icu:AxoOutgoingStatus.Error": {
+    "messageformat": "Failed to send",
+    "description": "Axo Design System > Outgoing Message Status Component > Error Status > Generic accessibility label for a message that failed to send"
+  },
   "icu:AxoPasswordField.Reveal": {
     "messageformat": "Show Password",
     "description": "Axo Design System > Password Field Component > Reveal Button > Generic accessibility label"
+  },
+  "icu:AxoProgressIndicator.Loading": {
+    "messageformat": "Loading",
+    "description": "Axo Design System > Progress Indicator Component > Progress Ring > Generic accessibility label"
   },
   "icu:AxoTextField.Clear": {
     "messageformat": "Clear",
@@ -110,14 +174,6 @@
   "icu:LinkedDevicesOnboardingDialog__bullet--2": {
     "messageformat": "Your primary device manages what’s linked, you can link up to 5 devices.",
     "description": "Second bullet point of the Linked Devices Onboarding Dialog"
-  },
-  "icu:LinkedDevicesOnboardingDialog__bullet--3": {
-    "messageformat": "Account settings are managed on your primary device only, including account settings and backups.",
-    "description": "(Deleted 2026/09/10) Third bullet point of the Linked Devices Onboarding Dialog"
-  },
-  "icu:LinkedDevicesOnboardingDialog__bullet--3--1": {
-    "messageformat": "Account settings and backups can only be managed on your primary device.",
-    "description": "(Deleted 2026/09/23) Third bullet point of the Linked Devices Onboarding Dialog"
   },
   "icu:LinkedDevicesOnboardingDialog__bullet--3--2": {
     "messageformat": "Account settings and Signal Secure Backups can only be managed on your primary device.",
@@ -387,6 +443,10 @@
     "messageformat": "Archived Chats",
     "description": "Shown in place of the search box when showing archived conversation list"
   },
+  "icu:LeftPane__MoreActionsLabel": {
+    "messageformat": "More actions",
+    "description": "Chats Tab > Chats List > Header > More Actions Button (opens context menu) > Accessibility Label"
+  },
   "icu:LeftPane__MoreActionsMenu__AddChatFolder": {
     "messageformat": "Add chat folder",
     "description": "Chats Tab > Chats List > Header > More Actions > Menu Item > Add chat folder (when you don't have any chat folders)"
@@ -522,10 +582,6 @@
   "icu:NavTabs__ItemIconLabel--UnreadCount": {
     "messageformat": "{count, number} unread",
     "description": "Nav Tabs > Unread badge > Accessibility Text"
-  },
-  "icu:NavTabs__ItemIconLabel--MarkedUnread": {
-    "messageformat": "Marked unread",
-    "description": "(Deleted 2026/09/03) Nav Tabs > Unread badge > when conversation is marked unread > Accessibility Text"
   },
   "icu:NavTabs__ItemLabel--Chats": {
     "messageformat": "Chats",
@@ -872,7 +928,7 @@
   },
   "icu:SafetyNumberViewer__KeyTransparency__popup__okay": {
     "messageformat": "Okay",
-    "description": "A dismiss button text for an education modal in Key Transparency section"
+    "description": "(Deleted 2026/10/20) A dismiss button text for an education modal in Key Transparency section"
   },
   "icu:SafetyNumberNotReady__body": {
     "messageformat": "A safety number will be created with this person after you exchange messages with them.",
@@ -882,25 +938,13 @@
     "messageformat": "Learn more",
     "description": "Text of 'Learn more' button of SafetyNumberNotReady modal"
   },
-  "icu:KeyTransparencyErrorDialog__Title": {
-    "messageformat": "Automatic Key Verification is currently unavailable for your device. Submit debug log?",
-    "description": "(Deleted 2026/09/03) Key Transparency Error Dialog > Title"
-  },
   "icu:KeyTransparencyErrorDialog__Title-v2": {
     "messageformat": "Automatic Key Verification is currently unavailable for your device. Submit a report to help us improve?",
     "description": "Key Transparency Error Dialog > Title"
   },
-  "icu:KeyTransparencyErrorDialog__Description": {
-    "messageformat": "Debug logs helps us diagnose and fix the issue, and do not contain identifying information.",
-    "description": "(Deleted 2026/09/03) Key Transparency Error Dialog > Description"
-  },
   "icu:KeyTransparencyErrorDialog__Description-v2": {
     "messageformat": "Including your debug logs help us diagnose and fix the issue, and do not contain identifying information. Sharing is optional.",
     "description": "Key Transparency Error Dialog > Description"
-  },
-  "icu:KeyTransparencyErrorDialog__ShareDebugLog__Label": {
-    "messageformat": "Share debug log",
-    "description": "(Deleted 2026/09/03) Key Transparency Error Dialog > Share debug log > Label"
   },
   "icu:KeyTransparencyErrorDialog__ShareDebugLog__Label-v2": {
     "messageformat": "Include debug log",
@@ -924,6 +968,10 @@
   },
   "icu:KeyTransparencyOnboardingDialog__Description": {
     "messageformat": "For contacts you’re connected to by phone number, Signal can automatically confirm whether the connection is secure using a process called key transparency. For added security, you can still verify connections manually using a QR code or by comparing safety numbers.",
+    "description": "(Deleted 2026/10/20) Key Transparency Onboarding Dialog > Description"
+  },
+  "icu:KeyTransparencyOnboardingDialog__Description-v2": {
+    "messageformat": "<paragraph>For contacts you’re connected to by phone number, Signal can automatically confirm whether the connection is secure using a process called key transparency.</paragraph><paragraph>For added security, you can still verify connections manually using a QR code or by comparing safety numbers.</paragraph>",
     "description": "Key Transparency Onboarding Dialog > Description"
   },
   "icu:KeyTransparencyOnboardingDialog__Continue": {
@@ -1252,27 +1300,27 @@
   },
   "icu:home": {
     "messageformat": "home",
-    "description": "Shown on contact detail screen as a label for an address/phone/email"
+    "description": "(Deleted 2026/10/15) Shown on contact detail screen as a label for an address/phone/email"
   },
   "icu:work": {
     "messageformat": "work",
-    "description": "Shown on contact detail screen as a label for an address/phone/email"
+    "description": "(Deleted 2026/10/15) Shown on contact detail screen as a label for an address/phone/email"
   },
   "icu:mobile": {
     "messageformat": "mobile",
-    "description": "Shown on contact detail screen as a label for a phone or email"
+    "description": "(Deleted 2026/10/15) Shown on contact detail screen as a label for a phone or email"
   },
   "icu:email": {
     "messageformat": "email",
-    "description": "Generic label shown if contact email has custom type but no label"
+    "description": "(Deleted 2026/10/15) Generic label shown if contact email has custom type but no label"
   },
   "icu:phone": {
     "messageformat": "phone",
-    "description": "Generic label shown if contact phone has custom type but no label"
+    "description": "(Deleted 2026/10/15) Generic label shown if contact phone has custom type but no label"
   },
   "icu:address": {
     "messageformat": "address",
-    "description": "Generic label shown if contact address has custom type but no label"
+    "description": "(Deleted 2026/10/15) Generic label shown if contact address has custom type but no label"
   },
   "icu:poBox": {
     "messageformat": "PO Box",
@@ -1812,7 +1860,7 @@
   },
   "icu:PinMessageDisappearingMessagesWarningDialog__Okay": {
     "messageformat": "Okay",
-    "description": "Message > Context Menu > Pin Message (when pinning disappearing message) > Dialog > Okay Button"
+    "description": "(Deleted 2026/10/20) Message > Context Menu > Pin Message (when pinning disappearing message) > Dialog > Okay Button"
   },
   "icu:PinnedMessagesBar__AccessibilityLabel": {
     "messageformat": "{pinsCount, plural, one {Pinned message} other {Pinned messages}}",
@@ -1986,6 +2034,10 @@
     "messageformat": "Learn More",
     "description": "Shown on a button below a 'conversations were merged' timeline notification"
   },
+  "icu:ConversationMerge--explainer-dialog--label": {
+    "messageformat": "Message history merged",
+    "description": "Accessibility label for dialog shown after clicking 'learn more' button on a conversation merge event."
+  },
   "icu:ConversationMerge--explainer-dialog--line-1": {
     "messageformat": "After messaging with {obsoleteConversationTitle} you learned this number belongs to {conversationTitle}. Their phone number is private.",
     "description": "Contents of a dialog shown after clicking 'learn more' button on a conversation merge event."
@@ -2004,7 +2056,7 @@
   },
   "icu:TitleTransition--notification": {
     "messageformat": "You started this chat with {oldTitle}",
-    "description": "Shown when we've received profile information for a contact we have been messaging by username/phone number"
+    "description": "Shown when we've received profile information for a contact we have been messaging by username/phone number/name from a shared contact"
   },
   "icu:imageAttachmentAlt": {
     "messageformat": "Image attached to message",
@@ -2333,6 +2385,10 @@
   "icu:Preferences__EditChatFolderPage__SelectChatsDialog__Search__Placeholder": {
     "messageformat": "Search",
     "description": "Preferences > Edit Chat Folder Page > Select Chats Dialog > Search > Placeholder"
+  },
+  "icu:Preferences__EditChatFolderPage__SelectChatsDialog__NoChats": {
+    "messageformat": "No chats",
+    "description": "Preferences > Edit Chat Folder Page > Select Chats Dialog > No Chats"
   },
   "icu:Preferences__EditChatFolderPage__SelectChatsDialog__ChatTypesSection__Title": {
     "messageformat": "Chat types",
@@ -2985,6 +3041,30 @@
     "messageformat": "This will delete your account info, profile, and all of your messages. You will also be removed from all Signal groups. The app will close after this process is complete.",
     "description": "Description of dialog shown when users choose to delete their account"
   },
+  "icu:DeleteAccountConfirmDialog--Title": {
+    "messageformat": "Delete account",
+    "description": "Title of big confirm dialog first shown when user chooses to delete their account"
+  },
+  "icu:DeleteAccountConfirmDialog--Description": {
+    "messageformat": "This will delete your account info, profile, and all of your messages. You will also be removed from all Signal groups.",
+    "description": "Description shown in big confirm dialog first shown when user chooses to delete their account"
+  },
+  "icu:DeleteAccountConfirmDialog--ConfirmNumber": {
+    "messageformat": "Confirm your phone number",
+    "description": "Guidance for text entry in big confirm dialog first shown when user chooses to delete their account"
+  },
+  "icu:DeleteAccountConfirmDialog--CountryCodePlaceholder": {
+    "messageformat": "Country code",
+    "description": "Placeholder (default will be provided, this is only if user deletes that text) for country code text in big confirm dialog first shown when user chooses to delete their account"
+  },
+  "icu:DeleteAccountConfirmDialog--NumberPlaceholder": {
+    "messageformat": "Phone number",
+    "description": "Placeholder for phone number text box in big confirm dialog first shown when user chooses to delete their account"
+  },
+  "icu:DeleteAccountConfirmDialog--DeleteButton": {
+    "messageformat": "Delete",
+    "description": "Button in big confirm dialog first shown when user chooses to delete their account"
+  },
   "icu:deleteOldIndexedDBData": {
     "messageformat": "You have obsolete data from a prior installation of Signal Desktop. If you choose to continue, it will be deleted and you will start from scratch.",
     "description": "Shown if user last ran Signal Desktop before October 2018"
@@ -3187,10 +3267,6 @@
   "icu:callRingtoneNotificationDescription": {
     "messageformat": "Play calling sounds",
     "description": "Description for call ringtone notification setting"
-  },
-  "icu:callSystemNotificationDescription": {
-    "messageformat": "Show notifications for calls",
-    "description": "(Deleted 2026/09/23) Description for call notification setting"
   },
   "icu:incomingCallNotificationDescription": {
     "messageformat": "Enable incoming calls",
@@ -3978,6 +4054,10 @@
     "messageformat": "Sticker Packs",
     "description": "FunPicker > Stickers Panel > Sub Nav > Label"
   },
+  "icu:FunPanelStickers__SubNavCategoryLabel--Favorites": {
+    "messageformat": "Favorites",
+    "description": "FunPicker > Stickers Panel > Sub Nav > Category Label > Favorites"
+  },
   "icu:FunPanelStickers__SubNavCategoryLabel--Recents": {
     "messageformat": "Recently Used",
     "description": "FunPicker > Stickers Panel > Sub Nav > Category Label > Recents"
@@ -3993,6 +4073,10 @@
   "icu:FunPanelStickers__SectionTitle--Recents": {
     "messageformat": "Recently Used",
     "description": "FunPicker > Stickers Panel > Section Title > Recents"
+  },
+  "icu:FunPanelStickers__SectionTitle--Favorites": {
+    "messageformat": "Favorites",
+    "description": "FunPicker > Stickers Panel > Section Title > Favorites"
   },
   "icu:FunPanelStickers__SectionTitle--Featured": {
     "messageformat": "Featured",
@@ -4124,19 +4208,19 @@
   },
   "icu:FunPicker__Label--StickerReply": {
     "messageformat": "Reply",
-    "description": "When replying to a message and previewing a sticker to send, this is the label for the preview view."
+    "description": "(Deleted 2026/10/28) When replying to a message and previewing a sticker to send, this is the label for the preview view."
   },
   "icu:FunPicker__Label--SendStickerReply": {
     "messageformat": "Send",
-    "description": "When replying to a message and previewing a sticker to send, this is the accessibility label for the Send button. Sticker Picker > Preview sticker > Send button > Accessibility label"
+    "description": "(Deleted 2026/10/28) When replying to a message and previewing a sticker to send, this is the accessibility label for the Send button. Sticker Picker > Preview sticker > Send button > Accessibility label"
   },
   "icu:FunPicker__Label--CancelStickerReply": {
     "messageformat": "Cancel",
-    "description": "When replying to a message and previewing a sticker to send, this is the accessibility label for the Cancel button. Sticker Picker > Preview sticker > Cancel button > Accessibility label"
+    "description": "(Deleted 2026/10/28) When replying to a message and previewing a sticker to send, this is the accessibility label for the Cancel button. Sticker Picker > Preview sticker > Cancel button > Accessibility label"
   },
   "icu:FunPicker__Label--Sticker": {
     "messageformat": "Sticker",
-    "description": "When replying to a message and previewing a sticker to send, this is the accessibility label for the sticker preview image."
+    "description": "(Deleted 2026/10/28) When replying to a message and previewing a sticker to send, this is the accessibility label for the sticker preview image."
   },
   "icu:confirmation-dialog--Cancel": {
     "messageformat": "Cancel",
@@ -4674,6 +4758,10 @@
     "messageformat": "Group members will be able to add you to this group again.",
     "description": "Shown as the body in the confirmation modal for unblocking a group message request"
   },
+  "icu:MessageRequests--unblock-signal-confirm-body": {
+    "messageformat": "You will receive Signal updates and news.",
+    "description": "Shown as the body in the confirmation modal for unblocking the official signal chat"
+  },
   "icu:MessageRequests--block-and-report-spam-success-toast": {
     "messageformat": "Reported as spam and blocked.",
     "description": "Shown in a toast when you successfully block a user and report them as spam"
@@ -4693,6 +4781,10 @@
   "icu:MessageRequests--block-group-confirm-body": {
     "messageformat": "You will no longer receive messages or updates from this group and members won't be able to add you to this group again.",
     "description": "Shown as the body in the confirmation modal for blocking a group message request"
+  },
+  "icu:MessageRequests--block-signal-confirm-body": {
+    "messageformat": "You will no longer receive Signal updates and news.",
+    "description": "Shown as the body in the confirmation modal for blocking the official signal chat"
   },
   "icu:MessageRequests--reportAndMaybeBlock": {
     "messageformat": "Report...",
@@ -5128,6 +5220,10 @@
   },
   "icu:callingDeviceSelection__settings": {
     "messageformat": "Settings",
+    "description": "(Deleted 2026/10/28) Title for device selection settings"
+  },
+  "icu:callingDeviceSelection__settings-v2": {
+    "messageformat": "Call Settings",
     "description": "Title for device selection settings"
   },
   "icu:calling__participants--pluralized": {
@@ -5268,7 +5364,19 @@
   },
   "icu:callingDeviceSelection__select--default": {
     "messageformat": "Default",
-    "description": "Shown when the device is the default device"
+    "description": "(Deleted 2026/10/28) Shown when the device is the default device"
+  },
+  "icu:callingDeviceSelection__select--default-nonwin": {
+    "messageformat": "Default: {deviceName}",
+    "description": "Shown on Mac or Linux to indicate that the specified audio device is the default"
+  },
+  "icu:callingDeviceSelection__select--default_console": {
+    "messageformat": "Default: {deviceName}",
+    "description": "Shown on Windows to indicate that the specified audio device is the default console device. See https://learn.microsoft.com/en-us/windows/win32/coreaudio/device-roles."
+  },
+  "icu:callingDeviceSelection__select--default_communications": {
+    "messageformat": "Default Communications: {deviceName}",
+    "description": "Shown on Windows to indicate that the specified audio device is the default communications device. See https://learn.microsoft.com/en-us/windows/win32/coreaudio/device-roles"
   },
   "icu:muteNotificationsTitle": {
     "messageformat": "Mute notifications",
@@ -5364,7 +5472,7 @@
   },
   "icu:Confirmation--confirm": {
     "messageformat": "Okay",
-    "description": "Button to dismiss popup dialog when user-initiated task has gone wrong"
+    "description": "(Deleted 2026/10/20) Button to dismiss popup dialog when user-initiated task has gone wrong"
   },
   "icu:MessageMaxEditsModal__Title": {
     "messageformat": "Can't edit message",
@@ -6104,7 +6212,7 @@
   },
   "icu:GroupV1--Migration--migrate": {
     "messageformat": "Upgrade",
-    "description": "Shown on Migrate dialog to kick off the process"
+    "description": "(Deleted 2026/10/28) Shown on Migrate dialog to kick off the process"
   },
   "icu:GroupV1--Migration--info--title": {
     "messageformat": "What are New Groups?",
@@ -6112,7 +6220,7 @@
   },
   "icu:GroupV1--Migration--migrate--title": {
     "messageformat": "Upgrade to New Group",
-    "description": "Shown on Migration popup after choosing to migrate group"
+    "description": "(Deleted 2026/10/28) Shown on Migration popup after choosing to migrate group"
   },
   "icu:GroupV1--Migration--info--summary": {
     "messageformat": "New Groups have features like @mentions and group admins, and will support more features in the future.",
@@ -6124,7 +6232,7 @@
   },
   "icu:GroupV1--Migration--migrate--keep-history": {
     "messageformat": "All message history and media will be kept from before the upgrade.",
-    "description": "Shown on Migration popup before GV1 migration"
+    "description": "(Deleted 2026/10/28) Shown on Migration popup before GV1 migration"
   },
   "icu:GroupV1--Migration--info--invited--you": {
     "messageformat": "You will need to accept an invite to join this group again, and will not receive group messages until you accept.",
@@ -6144,15 +6252,15 @@
   },
   "icu:GroupV1--Migration--info--removed--before--many": {
     "messageformat": "These members are not capable of joining New Groups, and will be removed from the group:",
-    "description": "Shown on Learn More popup after or Migration popup before GV1 migration"
+    "description": "(Deleted 2026/10/28) Shown on Learn More popup after or Migration popup before GV1 migration"
   },
   "icu:GroupV1--Migration--info--removed--before--one": {
     "messageformat": "This member is not capable of joining New Groups, and will be removed from the group:",
-    "description": "Shown on Learn More popup after or Migration popup before GV1 migration"
+    "description": "(Deleted 2026/10/28) Shown on Learn More popup after or Migration popup before GV1 migration"
   },
   "icu:GroupV1--Migration--info--removed--before--count": {
     "messageformat": "{count, plural, one {# member is} other {# members are}} not capable of joining New Groups, and will be removed from the group.",
-    "description": "Shown on Learn More popup after or Migration popup before GV1 migration"
+    "description": "(Deleted 2026/10/28) Shown on Learn More popup after or Migration popup before GV1 migration"
   },
   "icu:GroupV1--Migration--info--removed--after--many": {
     "messageformat": "These members were not capable of joining New Groups, and were removed from the group:",
@@ -6406,6 +6514,90 @@
     "messageformat": "Poll",
     "description": "Menu item to create a poll"
   },
+  "icu:CompositionArea__AttachMenu__Contact": {
+    "messageformat": "Contact",
+    "description": "Menu item to share a contact"
+  },
+  "icu:ShareContactDialog__SelectContact__Title": {
+    "messageformat": "Select contact",
+    "description": "ShareContactDialog > Select contact step > Dialog title"
+  },
+  "icu:ShareContactDialog__SelectContact__SearchPlaceholder": {
+    "messageformat": "Search",
+    "description": "ShareContactDialog > Select contact step > Search field placeholder"
+  },
+  "icu:ShareContactDialog__SelectContact__EmptyState": {
+    "messageformat": "No contacts",
+    "description": "ShareContactDialog > Select contact step > Shown when there are no contacts to share"
+  },
+  "icu:ShareContactDialog__SelectContact__NoResults": {
+    "messageformat": "No results for “{searchQuery}”",
+    "description": "ShareContactDialog > Select contact step > Shown when no contacts match the search query"
+  },
+  "icu:ShareContactDialog__ShareContact__Title": {
+    "messageformat": "Share contact",
+    "description": "ShareContactDialog > Share contact step > Dialog title"
+  },
+  "icu:ShareContactDialog__ShareContact__Description": {
+    "messageformat": "Anyone you share this profile with will be able to message {name}.",
+    "description": "ShareContactDialog > Share contact step > Explains that sharing a Signal contact lets recipients message them"
+  },
+  "icu:ShareContactDialog__ShareContact__Send": {
+    "messageformat": "Send contact",
+    "description": "ShareContactDialog > Share contact step > Accessibility label for the send button"
+  },
+  "icu:ShareContactDialog__ShareContact__EditName": {
+    "messageformat": "Edit name",
+    "description": "ShareContactDialog > Share contact step > Accessibility label for the button to edit the contact's name"
+  },
+  "icu:ShareContactDialog__EditName__Title": {
+    "messageformat": "Edit name",
+    "description": "ShareContactDialog > Edit name step > Dialog title"
+  },
+  "icu:ShareContactDialog__EditName__Prefix": {
+    "messageformat": "Prefix",
+    "description": "ShareContactDialog > Edit name step > Placeholder and label for the name prefix field (e.g. Dr.)"
+  },
+  "icu:ShareContactDialog__EditName__GivenName": {
+    "messageformat": "First name",
+    "description": "ShareContactDialog > Edit name step > Placeholder and label for the first name field"
+  },
+  "icu:ShareContactDialog__EditName__MiddleName": {
+    "messageformat": "Middle name",
+    "description": "ShareContactDialog > Edit name step > Placeholder and label for the middle name field"
+  },
+  "icu:ShareContactDialog__EditName__FamilyName": {
+    "messageformat": "Last name",
+    "description": "ShareContactDialog > Edit name step > Placeholder and label for the last name field"
+  },
+  "icu:ShareContactDialog__EditName__Suffix": {
+    "messageformat": "Suffix",
+    "description": "ShareContactDialog > Edit name step > Placeholder and label for the name suffix field (e.g. Jr.)"
+  },
+  "icu:ShareContactDialog__EditName__Organization": {
+    "messageformat": "Organization",
+    "description": "ShareContactDialog > Edit name step > Placeholder and label for the organization (company) field"
+  },
+  "icu:ShareContactDialog__ShareContact__EditPhoto": {
+    "messageformat": "Edit photo",
+    "description": "ShareContactDialog > Share contact step > Accessibility label for the button to choose which photo to share for the contact"
+  },
+  "icu:ShareContactDialog__SelectPhoto__Title": {
+    "messageformat": "Select a photo",
+    "description": "ShareContactDialog > Select photo step > Dialog title"
+  },
+  "icu:ShareContactDialog__SelectPhoto__ContactPhoto": {
+    "messageformat": "Contact photo",
+    "description": "ShareContactDialog > Select photo and Share contact steps > Accessibility label for the photo from the user's phone contacts"
+  },
+  "icu:ShareContactDialog__SelectPhoto__ProfilePhoto": {
+    "messageformat": "Profile photo",
+    "description": "ShareContactDialog > Select photo and Share contact steps > Accessibility label for the contact's Signal profile photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__DefaultAvatar": {
+    "messageformat": "Default avatar",
+    "description": "ShareContactDialog > Select photo and Share contact steps > Accessibility label for the default avatar showing the contact's initials"
+  },
   "icu:CompositionArea--attach-plus": {
     "messageformat": "Add attachment or poll",
     "description": "Aria label for plus button that opens attachment menu"
@@ -6457,10 +6649,6 @@
   "icu:CompositionInput__editing-message": {
     "messageformat": "Edit message",
     "description": "Status text displayed above composition input when editing a message"
-  },
-  "icu:countMutedConversationsDescription": {
-    "messageformat": "Include muted chats in badge count",
-    "description": "(Deleted 2026/09/23) Description for counting muted conversations in badge setting"
   },
   "icu:ContactModal--nickname": {
     "messageformat": "Nickname",
@@ -6994,22 +7182,6 @@
     "messageformat": "{replyCount, plural, one {# reply} other {# replies}} from {person1} and others",
     "description": "Body of the 'unread reminder' notification for a muted chat when three or more people replied to you"
   },
-  "icu:ConversationNotificationsSettings__mentions__label": {
-    "messageformat": "Mentions",
-    "description": "(Deleted 2026/09/03) In the conversation notifications settings, this is the label for the mentions option"
-  },
-  "icu:ConversationNotificationsSettings__mentions__info": {
-    "messageformat": "Receive notifications when you're mentioned in muted chats",
-    "description": "(Deleted 2026/09/03) In the conversation notifications settings, this is the sub-label for the mentions option"
-  },
-  "icu:ConversationNotificationsSettings__mentions__select__always-notify": {
-    "messageformat": "Always notify",
-    "description": "(Deleted 2026/09/03) In the conversation notifications settings, this is the option that always notifies you for @mentions"
-  },
-  "icu:ConversationNotificationsSettings__mentions__select__dont-notify-for-mentions-if-muted": {
-    "messageformat": "Don't notify if muted",
-    "description": "(Deleted 2026/09/03) In the conversation notifications settings, this is the option that doesn't notify you for @mentions if the conversation is muted"
-  },
   "icu:GroupLinkManagement--clipboard": {
     "messageformat": "Group link copied.",
     "description": "Shown in a toast when a user selects to copy group link"
@@ -7253,7 +7425,7 @@
   },
   "icu:DeleteAttachmentModal__Cancel": {
     "messageformat": "Cancel",
-    "description": "Text of a button in confirmation modal when deleting an attachment from media gallery"
+    "description": "(Deleted 2026/10/20) Text of a button in confirmation modal when deleting an attachment from media gallery"
   },
   "icu:SelectModeActions__toast--TooManyMessagesToForward": {
     "messageformat": "You can only forward up to 30 messages",
@@ -8232,10 +8404,6 @@
     "messageformat": "Store this in a safe place, your login info is required to recover your account and data. Never share it with anyone.",
     "description": "Description displayed in PDF version of Signal Account Keys preferences page"
   },
-  "icu:Preferences__SignalAccountKeys__AccountKey": {
-    "messageformat": "Account key",
-    "description": "(Deleted 2026/09/10) Label for the Account Key in Signal Account Keys preferences page"
-  },
   "icu:Preferences__SignalAccountKeys__AccountID": {
     "messageformat": "Account ID",
     "description": "Label for the Account ID in Signal Account Keys preferences page"
@@ -8380,10 +8548,6 @@
     "messageformat": "Require your Signal PIN to register your phone number again with Signal.",
     "description": "Footer text for Registration Lock setting"
   },
-  "icu:Preferences--notification-content": {
-    "messageformat": "Notification content",
-    "description": "(Deleted 2026/09/03) Label for the notification content setting select box"
-  },
   "icu:Preferences__Chats__TextInputSection__Title": {
     "messageformat": "Text input",
     "description": "Preferences > Chats > Text Input Section > Title"
@@ -8399,10 +8563,6 @@
   "icu:Preferences__Notifications__SoundsSection__Title": {
     "messageformat": "Sounds",
     "description": "Preferences > Notifications > Sounds Section > Title"
-  },
-  "icu:Preferences__Notifications__AppBadgeSection__Title": {
-    "messageformat": "App badge",
-    "description": "(Deleted 2026/09/23) Preferences > Notifications > App Badge Section > Title"
   },
   "icu:Preferences__Notifications__AppBadgeSection__Title-v2": {
     "messageformat": "Unread badges",
@@ -8908,6 +9068,10 @@
     "messageformat": "Blocked users will not be able to call you or send you messages",
     "description": "Description at the top of the blocked preferences subpage"
   },
+  "icu:Preferences--add-blocked": {
+    "messageformat": "Add Blocked User or Group",
+    "description": "Button to allow user to search for contacts or groups to block"
+  },
   "icu:Preferences--blocked-users": {
     "messageformat": "Blocked Users",
     "description": "Header for blocked section on the blocked preferences subpage"
@@ -8919,6 +9083,14 @@
   "icu:Preferences--blocked--blocked-on": {
     "messageformat": "Blocked on {blockedAt}",
     "description": "A second line shown under the contact's name in block list if we have a timestamp for that blocked contact or group"
+  },
+  "icu:Preferences--BlockChooser--Done": {
+    "messageformat": "Done",
+    "description": "Button shown at the bottom of the block chooser dialog"
+  },
+  "icu:Preferences--BlockChooser--Search--Placeholder": {
+    "messageformat": "Search",
+    "description": "Search box placeholder shown at top of the block chooser dialog"
   },
   "icu:Preferences--signal-backups": {
     "messageformat": "Signal Secure Backups",
@@ -9448,6 +9620,46 @@
     "messageformat": "Signal Desktop failed to update, but there is a new version available. Go to {downloadUrl} and install the new version manually, then either contact support or file a bug about this problem.",
     "description": "The body of the update dialog on install screen when update cannot be installed."
   },
+  "icu:EntryPoint--signal-logo": {
+    "messageformat": "Signal Logo",
+    "description": "Alt text for the signal logo at the top left of the first screen shown in the app"
+  },
+  "icu:EntryPoint--Title--Line1": {
+    "messageformat": "Take privacy with you.",
+    "description": "Title text shown in the middle of the first screen shown in the app, line 1"
+  },
+  "icu:EntryPoint--Title--Line2": {
+    "messageformat": "Be yourself in every message.",
+    "description": "Title text shown in the middle of the first screen shown in the app, line 2"
+  },
+  "icu:EntryPoint--link-button": {
+    "messageformat": "Link your account",
+    "description": "Button on the first screen shown in the app, which takes you to the 'link device' flow"
+  },
+  "icu:EntryPoint--more-options-button": {
+    "messageformat": "More options",
+    "description": "Button on the first screen shown in the app, which takes you to the 'register standalone' flow"
+  },
+  "icu:EntryPoint--nonprofit": {
+    "messageformat": "Signal is a 501c3 nonprofit",
+    "description": "Reminder that signal is a nonprofit at the bottom of the first screen shown in the app"
+  },
+  "icu:EntryPoint--terms": {
+    "messageformat": "Terms & privacy policy",
+    "description": "Link to privacy policy at the bottom of the first screen shown in the app"
+  },
+  "icu:EntryPoint--MoreOptions--Title": {
+    "messageformat": "More options",
+    "description": "Title of dialog shown when user clicks More options"
+  },
+  "icu:EntryPoint--MoreOptions--RegistrationButton--Title": {
+    "messageformat": "Create a new account",
+    "description": "Title of first button, to create a totally new account, on dialog shown when user clicks More options"
+  },
+  "icu:EntryPoint--MoreOptions--RegistrationButton--Description": {
+    "messageformat": "Create a new Signal account using your phone number.",
+    "description": "Description of first button, to create a totally new account, on dialog shown when user clicks More options"
+  },
   "icu:StandaloneRegistration--signal-logo": {
     "messageformat": "Signal Logo",
     "description": "Alt text for the signal logo at the top left of the standalone registration screens"
@@ -9473,8 +9685,8 @@
     "description": "Wait time countdown shown on the standalone registration screen where phone number is entered"
   },
   "icu:StandaloneRegistration--PhoneNumber--RegionCodeSelector--Label": {
-    "messageformat": "Select region code",
-    "description": "Accessibility label for region code selector in phone number input in standalone registration"
+    "messageformat": "Select country code",
+    "description": "Accessibility label for country code selector in phone number input in standalone registration"
   },
   "icu:StandaloneRegistration--PhoneNumber--placeholder": {
     "messageformat": "Phone number",
@@ -9707,6 +9919,26 @@
   "icu:StandaloneRegistration--VerificationCode--CannotSendCodeTemporary--ok-button": {
     "messageformat": "OK",
     "description": "Button to dismiss popup shown when the server told us we can't get the code to the user's number, temporarily"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Title": {
+    "messageformat": "Having trouble registering?",
+    "description": "Title of dialog to help user when they are having trouble registering"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet1": {
+    "messageformat": "Make sure your phone has a cellular signal to receive your SMS or call",
+    "description": "Description bullet 1 in dialog to help user when they are having trouble registering"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet2": {
+    "messageformat": "Confirm you can receive a phone call to the number",
+    "description": "Description bullet 2 in dialog to help user when they are having trouble registering"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet3": {
+    "messageformat": "Check that you have entered your phone number correctly",
+    "description": "Description bullet 3 in dialog to help user when they are having trouble registering"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Footer": {
+    "messageformat": "If you still can’t register, follow these <troubleshootingLink>troubleshooting steps</troubleshootingLink> or <contactSupportLink>Contact Support</contactSupportLink>.",
+    "description": "Additional text in footer of dialog to help user when they are having trouble registering"
   },
   "icu:StandaloneRegistration--ProfileEntry--header": {
     "messageformat": "Set up your profile",
@@ -10896,7 +11128,7 @@
   },
   "icu:ContextMenu--button": {
     "messageformat": "Context menu",
-    "description": "Default aria-label for the context menu buttons"
+    "description": "(Deleted 2026/10/28) Default aria-label for the context menu buttons"
   },
   "icu:EditUsernameModalBody__username-label": {
     "messageformat": "Username",
@@ -11422,14 +11654,6 @@
     "messageformat": "Deny entry",
     "description": "Call Link Pending Participant Modal > Deny Join Request Button Label"
   },
-  "icu:CallLinkRestrictionsSelect__Option--Off": {
-    "messageformat": "Off",
-    "description": "(Deleted 2026/09/10) Call Link Edit Modal > Require admin approval checkbox > Option > Off"
-  },
-  "icu:CallLinkRestrictionsSelect__Option--On": {
-    "messageformat": "On",
-    "description": "(Deleted 2026/09/10) Call Link Edit Modal > Require admin approval checkbox > Option > On"
-  },
   "icu:CallLinkAddNameModal__Title": {
     "messageformat": "Add call name",
     "description": "Call Link Add Name Modal > Title"
@@ -11493,6 +11717,50 @@
   "icu:SaveMultiDialog__title": {
     "messageformat": "Save attachments",
     "description": "Title of the dialog to save multiple attachments"
+  },
+  "icu:EmbeddedContact__message": {
+    "messageformat": "Message",
+    "description": "Button in a shared contact message in the timeline. Starts a conversation with the shared contact."
+  },
+  "icu:ContactDetail__message": {
+    "messageformat": "Message",
+    "description": "In the shared contact details view, label for the button that starts a conversation with the contact."
+  },
+  "icu:ContactDetail__add-to-group": {
+    "messageformat": "Add to a group",
+    "description": "In the shared contact details view, label for the row that opens a dialog to add the contact to a group."
+  },
+  "icu:ContactDetail__nickname": {
+    "messageformat": "Nickname",
+    "description": "In the shared contact details view, label for the nickname the sender gave to the shared contact."
+  },
+  "icu:ContactDetail__note": {
+    "messageformat": "Notes",
+    "description": "In the shared contact details view, label for the note the sender wrote about the shared contact."
+  },
+  "icu:email-v2": {
+    "messageformat": "Email",
+    "description": "In the shared contact details view, generic label for an email address with a custom type but no label"
+  },
+  "icu:home-v2": {
+    "messageformat": "Home",
+    "description": "In the shared contact details view, label for a home address, phone number, or email"
+  },
+  "icu:mobile-v2": {
+    "messageformat": "Mobile",
+    "description": "In the shared contact details view, label for a mobile phone number or email"
+  },
+  "icu:work-v2": {
+    "messageformat": "Work",
+    "description": "In the shared contact details view, label for a work address, phone number, or email"
+  },
+  "icu:phone-v2": {
+    "messageformat": "Phone",
+    "description": "In the shared contact details view, generic label for a phone number with a custom type but no label"
+  },
+  "icu:address-v2": {
+    "messageformat": "Address",
+    "description": "In the shared contact details view, generic label for a postal address with a custom type but no label"
   },
   "icu:WhatsNew__modal-title": {
     "messageformat": "What's New",
@@ -11713,6 +11981,10 @@
   "icu:DonationReceipt__footer-text-v2": {
     "messageformat": "Thank you for supporting Signal. Your contribution helps fuel the mission of protecting free expression and enabling secure global communication for millions around the world, through open source privacy technology. If you’re a resident of the United States, please retain this receipt for your tax records. Signal Technology Foundation is a tax-exempt nonprofit organization in the United States under section 501c3 of the Internal Revenue Code. Our Federal Tax ID is 82-4506840. Signal did not provide any goods or services in consideration of this contribution.",
     "description": "Footer text shown on donation receipts explaining tax deductibility and Signal's mission"
+  },
+  "icu:MessageCta__Donate": {
+    "messageformat": "Donate Now",
+    "description": "In the Signal Release Notes chat, button text shown when the release note asks the user to donate to Signal."
   },
   "icu:Donations__OfflineTooltip": {
     "messageformat": "You are offline. Please connect to the internet to complete a donation.",
@@ -11978,6 +12250,10 @@
     "messageformat": "Issues description",
     "description": "Call Quality Survey Dialog > What issues did you have? > Something else > Textarea > Accessibility Label"
   },
+  "icu:CallQualitySurvey__WhatIssuesDidYouHave__SomethingElse__TextArea__Placeholder": {
+    "messageformat": "Describe your issue",
+    "description": "Call Quality Survey Dialog > What issues did you have? > Something else > Textarea > Placeholder"
+  },
   "icu:CallQualitySurvey__WhatIssuesDidYouHave__SomethingElse__TextArea__HelpText": {
     "messageformat": "Please include any details relevant to the issue. Anything you share here will be kept private and will only be used to help improve calls in Signal.",
     "description": "Call Quality Survey Dialog > What issues did you have? > Something else > Textarea > Help Text"
@@ -12121,20 +12397,32 @@
     "description": "Release notes for releases that only include bug fixes",
     "ignoreUnused": true
   },
-  "icu:WhatsNew__8.26--0": {
-    "messageformat": "Finding yourself can be a lifelong process, but now you'll appear as “You” in the group member search to make it a little easier.",
-    "description": "(Deleted 2026/09/03) Release notes for 8.26"
-  },
-  "icu:WhatsNew__8.27--0": {
-    "messageformat": "This update introduces more granular settings to give you significantly more control over your Signal notifications. Now you can choose what appears on the app badge, adjust notification preferences for muted threads, and more! We also added a convenient button to restore the default notification settings if you ever make so many changes that you don't even know how to get ahold of yourself anymore.",
-    "description": "(Deleted 2026/09/10) Release notes for 8.27"
-  },
   "icu:WhatsNew__8.30--0": {
     "messageformat": "Thanks to a few performance improvements, your CPU will be slightly happier during video calls (even if you're not smiling).",
-    "description": " Release notes for 8.30"
+    "description": "(Deleted 2026/10/07)  Release notes for 8.30"
   },
   "icu:WhatsNew__8.30--1": {
     "messageformat": "We also added a convenient shortcut to open your system settings on Windows if you try to join a video call and Signal doesn't have permission to access the camera. Now it's easier to see what you need to do so that people can see you.",
-    "description": " Release notes for 8.30"
+    "description": "(Deleted 2026/10/07)  Release notes for 8.30"
+  },
+  "icu:WhatsNew__8.32--0": {
+    "messageformat": "The unread filter is now also supported in message folders and the search interface, so you can easily see what you've been missing.",
+    "description": "(Deleted 2026/10/20) Release notes for 8.32"
+  },
+  "icu:WhatsNew__8.32--1": {
+    "messageformat": "Improved upload reliability under poor network conditions. Thanks, <GH3mmmbulus></GH3mmmbulus>!",
+    "description": "(Deleted 2026/10/20) Release notes for 8.32"
+  },
+  "icu:WhatsNew__8.32--2": {
+    "messageformat": "The \"(N)\" shortcut correctly points to the thumbs down emoji. Thumbs up to <lnicola></lnicola> for the bugfix.",
+    "description": "(Deleted 2026/10/20) Release notes for 8.32"
+  },
+  "icu:WhatsNew__8.34--0": {
+    "messageformat": "Signal Desktop now supports contact sharing too, so you can maintain eye contact with your computer screen without having to make physical contact with your smartphone.",
+    "description": "Release notes for 8.34"
+  },
+  "icu:WhatsNew__8.34--1": {
+    "messageformat": "Improved handling and performance for connected audio devices.",
+    "description": "Release notes for 8.34"
   }
 }

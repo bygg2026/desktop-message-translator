@@ -2,8 +2,20 @@
   "icu:AxoAlertDialog.Cancel": {
     "messageformat": "取消"
   },
+  "icu:AxoAlertDialog.Ok": {
+    "messageformat": "好"
+  },
   "icu:AxoButton.Pending": {
     "messageformat": "等候中"
+  },
+  "icu:AxoColorSlider.Hue": {
+    "messageformat": "Hue"
+  },
+  "icu:AxoColorSlider.Saturation": {
+    "messageformat": "Saturation"
+  },
+  "icu:AxoColorSlider.Lightness": {
+    "messageformat": "Lightness"
   },
   "icu:AxoDialog.Back": {
     "messageformat": "返回"
@@ -73,12 +85,6 @@
   },
   "icu:LinkedDevicesOnboardingDialog__bullet--2": {
     "messageformat": "你的主要裝置負責管理已連結的裝置，最多可連結 5 個裝置。"
-  },
-  "icu:LinkedDevicesOnboardingDialog__bullet--3": {
-    "messageformat": "帳戶設定僅能在主要裝置上進行管理，包括帳戶設定和備份。"
-  },
-  "icu:LinkedDevicesOnboardingDialog__bullet--3--1": {
-    "messageformat": "只能於你的主要裝置上管理帳戶設定和備份。"
   },
   "icu:LinkedDevicesOnboardingDialog__bullet--3--2": {
     "messageformat": "只能於你的主要裝置上管理帳戶設定和「Signal 安全備份」。"
@@ -281,6 +287,9 @@
   "icu:archivedConversations": {
     "messageformat": "已封存的聊天"
   },
+  "icu:LeftPane__MoreActionsLabel": {
+    "messageformat": "More actions"
+  },
   "icu:LeftPane__MoreActionsMenu__AddChatFolder": {
     "messageformat": "新增聊天資料夾"
   },
@@ -382,9 +391,6 @@
   },
   "icu:NavTabs__ItemIconLabel--UnreadCount": {
     "messageformat": "{count,number} 則未讀"
-  },
-  "icu:NavTabs__ItemIconLabel--MarkedUnread": {
-    "messageformat": "標記為未讀"
   },
   "icu:NavTabs__ItemLabel--Chats": {
     "messageformat": "聊天"
@@ -653,20 +659,11 @@
   "icu:SafetyNumberNotReady__learn-more": {
     "messageformat": "了解更多"
   },
-  "icu:KeyTransparencyErrorDialog__Title": {
-    "messageformat": "你的裝置目前無法使用「自動金鑰驗證」。要提交除錯日誌嗎？"
-  },
   "icu:KeyTransparencyErrorDialog__Title-v2": {
     "messageformat": "你的裝置目前無法使用「自動金鑰驗證」。要提交回報協助我們改善嗎？"
   },
-  "icu:KeyTransparencyErrorDialog__Description": {
-    "messageformat": "除錯日誌可協助我們診斷並修正問題，而且不包含識別資料。"
-  },
   "icu:KeyTransparencyErrorDialog__Description-v2": {
     "messageformat": "提供除錯日誌可協助我們診斷並修正問題，而且不包含識別資料。分享與否是選擇性的。"
-  },
-  "icu:KeyTransparencyErrorDialog__ShareDebugLog__Label": {
-    "messageformat": "分享除錯日誌"
   },
   "icu:KeyTransparencyErrorDialog__ShareDebugLog__Label-v2": {
     "messageformat": "包括偵錯紀錄"
@@ -685,6 +682,9 @@
   },
   "icu:KeyTransparencyOnboardingDialog__Description": {
     "messageformat": "對於透過電話號碼建立聯繫的聯絡人，Signal 會透過稱為「金鑰透明度」的程序，自動確認聯絡對象是否安全。為了增加安全性，你仍然可以使用二維碼或比對安全碼手動驗證聯絡人。"
+  },
+  "icu:KeyTransparencyOnboardingDialog__Description-v2": {
+    "messageformat": "<paragraph>對於透過電話號碼建立聯繫的聯絡人，Signal 會透過稱為「金鑰透明度」的程序，自動確認聯絡對象是否安全。</paragraph><paragraph>為了增加安全性，你仍然可以使用二維碼或比對安全碼手動驗證聯絡人。</paragraph>"
   },
   "icu:KeyTransparencyOnboardingDialog__Continue": {
     "messageformat": "繼續"
@@ -1493,6 +1493,9 @@
   "icu:ConversationMerge--learn-more": {
     "messageformat": "了解更多"
   },
+  "icu:ConversationMerge--explainer-dialog--label": {
+    "messageformat": "訊息紀錄已經合併"
+  },
   "icu:ConversationMerge--explainer-dialog--line-1": {
     "messageformat": "與 {obsoleteConversationTitle} 通訊後，你得知此號碼是屬於 {conversationTitle}。其電話號碼已設定為私人狀態。"
   },
@@ -1753,6 +1756,9 @@
   },
   "icu:Preferences__EditChatFolderPage__SelectChatsDialog__Search__Placeholder": {
     "messageformat": "搜尋"
+  },
+  "icu:Preferences__EditChatFolderPage__SelectChatsDialog__NoChats": {
+    "messageformat": "沒有聊天"
   },
   "icu:Preferences__EditChatFolderPage__SelectChatsDialog__ChatTypesSection__Title": {
     "messageformat": "聊天類型"
@@ -2246,6 +2252,24 @@
   "icu:deleteAccountDialogBody": {
     "messageformat": "這將刪除你的帳戶資訊、個人資料及所有訊息。您也將被移出所有 Signal 群組。完成處理後，應用程式將會關閉。"
   },
+  "icu:DeleteAccountConfirmDialog--Title": {
+    "messageformat": "Delete account"
+  },
+  "icu:DeleteAccountConfirmDialog--Description": {
+    "messageformat": "This will delete your account info, profile, and all of your messages. You will also be removed from all Signal groups."
+  },
+  "icu:DeleteAccountConfirmDialog--ConfirmNumber": {
+    "messageformat": "Confirm your phone number"
+  },
+  "icu:DeleteAccountConfirmDialog--CountryCodePlaceholder": {
+    "messageformat": "Country code"
+  },
+  "icu:DeleteAccountConfirmDialog--NumberPlaceholder": {
+    "messageformat": "Phone number"
+  },
+  "icu:DeleteAccountConfirmDialog--DeleteButton": {
+    "messageformat": "Delete"
+  },
   "icu:deleteOldIndexedDBData": {
     "messageformat": "你先前安裝的 Signal 桌面版中有過時的資料，如果選擇繼續，它將被刪除，並且將從頭開始。"
   },
@@ -2398,9 +2422,6 @@
   },
   "icu:callRingtoneNotificationDescription": {
     "messageformat": "播放來電音效"
-  },
-  "icu:callSystemNotificationDescription": {
-    "messageformat": "顯示來電通知"
   },
   "icu:incomingCallNotificationDescription": {
     "messageformat": "啟用來電"
@@ -2999,6 +3020,9 @@
   "icu:FunPanelSticker__SubNavLabel": {
     "messageformat": "貼圖包"
   },
+  "icu:FunPanelStickers__SubNavCategoryLabel--Favorites": {
+    "messageformat": "Favorites"
+  },
   "icu:FunPanelStickers__SubNavCategoryLabel--Recents": {
     "messageformat": "最近使用"
   },
@@ -3010,6 +3034,9 @@
   },
   "icu:FunPanelStickers__SectionTitle--Recents": {
     "messageformat": "最近使用"
+  },
+  "icu:FunPanelStickers__SectionTitle--Favorites": {
+    "messageformat": "Favorites"
   },
   "icu:FunPanelStickers__SectionTitle--Featured": {
     "messageformat": "精選"
@@ -3524,6 +3551,9 @@
   "icu:MessageRequests--unblock-group-confirm-body": {
     "messageformat": "群組成員將能夠再次將你新增到該群組。"
   },
+  "icu:MessageRequests--unblock-signal-confirm-body": {
+    "messageformat": "你將收到 Signal 更新資訊及最新消息。"
+  },
   "icu:MessageRequests--block-and-report-spam-success-toast": {
     "messageformat": "已檢舉垃圾訊息並封鎖。"
   },
@@ -3538,6 +3568,9 @@
   },
   "icu:MessageRequests--block-group-confirm-body": {
     "messageformat": "你將不再收到來自該群組的訊息或更新，成員將無法再次將你新增到該群組。"
+  },
+  "icu:MessageRequests--block-signal-confirm-body": {
+    "messageformat": "你將不再收到 Signal 更新資訊及最新消息。"
   },
   "icu:MessageRequests--reportAndMaybeBlock": {
     "messageformat": "舉報…"
@@ -3866,6 +3899,9 @@
   "icu:callingDeviceSelection__settings": {
     "messageformat": "設定"
   },
+  "icu:callingDeviceSelection__settings-v2": {
+    "messageformat": "Call Settings"
+  },
   "icu:calling__participants--pluralized": {
     "messageformat": "{people, plural, other {{people,number} 通話中}}"
   },
@@ -3970,6 +4006,15 @@
   },
   "icu:callingDeviceSelection__select--default": {
     "messageformat": "預設"
+  },
+  "icu:callingDeviceSelection__select--default-nonwin": {
+    "messageformat": "Default: {deviceName}"
+  },
+  "icu:callingDeviceSelection__select--default_console": {
+    "messageformat": "Default: {deviceName}"
+  },
+  "icu:callingDeviceSelection__select--default_communications": {
+    "messageformat": "Default Communications: {deviceName}"
   },
   "icu:muteNotificationsTitle": {
     "messageformat": "將通知調整為靜音"
@@ -4823,6 +4868,69 @@
   "icu:CompositionArea__AttachMenu__Poll": {
     "messageformat": "投票"
   },
+  "icu:CompositionArea__AttachMenu__Contact": {
+    "messageformat": "Contact"
+  },
+  "icu:ShareContactDialog__SelectContact__Title": {
+    "messageformat": "Select contact"
+  },
+  "icu:ShareContactDialog__SelectContact__SearchPlaceholder": {
+    "messageformat": "Search"
+  },
+  "icu:ShareContactDialog__SelectContact__EmptyState": {
+    "messageformat": "No contacts"
+  },
+  "icu:ShareContactDialog__SelectContact__NoResults": {
+    "messageformat": "No results for “{searchQuery}”"
+  },
+  "icu:ShareContactDialog__ShareContact__Title": {
+    "messageformat": "Share contact"
+  },
+  "icu:ShareContactDialog__ShareContact__Description": {
+    "messageformat": "Anyone you share this profile with will be able to message {name}."
+  },
+  "icu:ShareContactDialog__ShareContact__Send": {
+    "messageformat": "Send contact"
+  },
+  "icu:ShareContactDialog__ShareContact__EditName": {
+    "messageformat": "Edit name"
+  },
+  "icu:ShareContactDialog__EditName__Title": {
+    "messageformat": "Edit name"
+  },
+  "icu:ShareContactDialog__EditName__Prefix": {
+    "messageformat": "Prefix"
+  },
+  "icu:ShareContactDialog__EditName__GivenName": {
+    "messageformat": "First name"
+  },
+  "icu:ShareContactDialog__EditName__MiddleName": {
+    "messageformat": "Middle name"
+  },
+  "icu:ShareContactDialog__EditName__FamilyName": {
+    "messageformat": "Last name"
+  },
+  "icu:ShareContactDialog__EditName__Suffix": {
+    "messageformat": "Suffix"
+  },
+  "icu:ShareContactDialog__EditName__Organization": {
+    "messageformat": "Organization"
+  },
+  "icu:ShareContactDialog__ShareContact__EditPhoto": {
+    "messageformat": "Edit photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__Title": {
+    "messageformat": "Select a photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__ContactPhoto": {
+    "messageformat": "Contact photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__ProfilePhoto": {
+    "messageformat": "Profile photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__DefaultAvatar": {
+    "messageformat": "Default avatar"
+  },
   "icu:CompositionArea--attach-plus": {
     "messageformat": "新增附件或投票"
   },
@@ -4861,9 +4969,6 @@
   },
   "icu:CompositionInput__editing-message": {
     "messageformat": "編輯訊息"
-  },
-  "icu:countMutedConversationsDescription": {
-    "messageformat": "在徽章計數中包括已靜音的聊天"
   },
   "icu:ContactModal--nickname": {
     "messageformat": "暱稱"
@@ -5263,18 +5368,6 @@
   },
   "icu:UnreadReminders__notification__replySummary--many": {
     "messageformat": "{replyCount, plural, other {{person1}及其他人的 {replyCount,number} 個回覆}}"
-  },
-  "icu:ConversationNotificationsSettings__mentions__label": {
-    "messageformat": "提及"
-  },
-  "icu:ConversationNotificationsSettings__mentions__info": {
-    "messageformat": "當你在靜音聊天中被提到時接收通知"
-  },
-  "icu:ConversationNotificationsSettings__mentions__select__always-notify": {
-    "messageformat": "總是通知"
-  },
-  "icu:ConversationNotificationsSettings__mentions__select__dont-notify-for-mentions-if-muted": {
-    "messageformat": "靜音時不通知"
   },
   "icu:GroupLinkManagement--clipboard": {
     "messageformat": "群組連結已複製。"
@@ -6193,9 +6286,6 @@
   "icu:Preferences__SignalAccountKeys__Description": {
     "messageformat": "請將你的登入資訊存放在安全的地方，你需要此資訊才能恢復帳戶和資料。切勿與任何人分享此資訊。"
   },
-  "icu:Preferences__SignalAccountKeys__AccountKey": {
-    "messageformat": "帳戶金鑰"
-  },
   "icu:Preferences__SignalAccountKeys__AccountID": {
     "messageformat": "帳戶 ID"
   },
@@ -6257,7 +6347,7 @@
     "messageformat": "Signal PIN 碼"
   },
   "icu:Preferences--signal-pin__footer": {
-    "messageformat": "PINs keep information stored with Signal encrypted so only you can access it. Your PIN cannot be recovered. Your profile, settings, and contacts will restore when you reinstall Signal. <learnMoreLink>Learn more</learnMoreLink>"
+    "messageformat": "PIN 碼會將儲存在 Signal 中的資訊加密，確保只有你能存取。你的 PIN 碼無法恢復。當你重新安裝 Signal 時，你的個人資料、設定和聯絡人將會還原。<learnMoreLink>了解更多</learnMoreLink>"
   },
   "icu:Preferences--signal-pin-advanced-settings": {
     "messageformat": "進階 PIN 碼設定"
@@ -6272,7 +6362,7 @@
     "messageformat": "如果你停用 PIN 碼，則除非你進行手動備份和還原，否則當你重新註冊 Signal 時，將會遺失所有資料。停用 PIN 碼時無法開啟註冊鎖定。"
   },
   "icu:DisableSignalPinErrorDialog--reg-lock--title": {
-    "messageformat": "Disable PIN failed due to registration lock"
+    "messageformat": "由於已啟用註冊鎖定，無法停用 PIN 碼"
   },
   "icu:DisableSignalPinErrorDialog--reg-lock--body": {
     "messageformat": "你必須先停用註冊鎖定，才能停用 PIN 碼。"
@@ -6281,7 +6371,7 @@
     "messageformat": "好"
   },
   "icu:DisableSignalPinErrorDialog--backups--title": {
-    "messageformat": "Disable PIN failed due to backups"
+    "messageformat": "由於已啟用備份，無法停用 PIN 碼"
   },
   "icu:DisableSignalPinErrorDialog--backups--body": {
     "messageformat": "你必須先停用「備份」，才能停用 PIN 碼。"
@@ -6304,9 +6394,6 @@
   "icu:Preferences--registration-lock__footer": {
     "messageformat": "需要你的Signal PIN碼才能再次使用Signal註冊你的電話號碼。"
   },
-  "icu:Preferences--notification-content": {
-    "messageformat": "通知內容"
-  },
   "icu:Preferences__Chats__TextInputSection__Title": {
     "messageformat": "文字輸入"
   },
@@ -6318,9 +6405,6 @@
   },
   "icu:Preferences__Notifications__SoundsSection__Title": {
     "messageformat": "音效"
-  },
-  "icu:Preferences__Notifications__AppBadgeSection__Title": {
-    "messageformat": "應用程式徽章"
   },
   "icu:Preferences__Notifications__AppBadgeSection__Title-v2": {
     "messageformat": "未讀通知標記"
@@ -6700,6 +6784,9 @@
   "icu:Preferences--blocked-users--description": {
     "messageformat": "已封鎖的用戶將無法與你通話或傳送訊息"
   },
+  "icu:Preferences--add-blocked": {
+    "messageformat": "新增已封鎖的用戶或群組"
+  },
   "icu:Preferences--blocked-users": {
     "messageformat": "已封鎖聯絡人"
   },
@@ -6708,6 +6795,12 @@
   },
   "icu:Preferences--blocked--blocked-on": {
     "messageformat": "已於 {blockedAt}封鎖"
+  },
+  "icu:Preferences--BlockChooser--Done": {
+    "messageformat": "完成"
+  },
+  "icu:Preferences--BlockChooser--Search--Placeholder": {
+    "messageformat": "搜尋"
   },
   "icu:Preferences--signal-backups": {
     "messageformat": "Signal 安全備份"
@@ -7105,6 +7198,36 @@
   "icu:InstallScreenUpdateDialog--cannot-update__body": {
     "messageformat": "Signal 桌面無法更新，但有一個新版本可供使用。前往 {downloadUrl} 並手動安裝新版本，然後聯絡支援或提交有關此問題的程式錯誤。"
   },
+  "icu:EntryPoint--signal-logo": {
+    "messageformat": "Signal Logo"
+  },
+  "icu:EntryPoint--Title--Line1": {
+    "messageformat": "Take privacy with you."
+  },
+  "icu:EntryPoint--Title--Line2": {
+    "messageformat": "Be yourself in every message."
+  },
+  "icu:EntryPoint--link-button": {
+    "messageformat": "Link your account"
+  },
+  "icu:EntryPoint--more-options-button": {
+    "messageformat": "More options"
+  },
+  "icu:EntryPoint--nonprofit": {
+    "messageformat": "Signal is a 501c3 nonprofit"
+  },
+  "icu:EntryPoint--terms": {
+    "messageformat": "Terms & privacy policy"
+  },
+  "icu:EntryPoint--MoreOptions--Title": {
+    "messageformat": "More options"
+  },
+  "icu:EntryPoint--MoreOptions--RegistrationButton--Title": {
+    "messageformat": "Create a new account"
+  },
+  "icu:EntryPoint--MoreOptions--RegistrationButton--Description": {
+    "messageformat": "Create a new Signal account using your phone number."
+  },
   "icu:StandaloneRegistration--signal-logo": {
     "messageformat": "Signal 標誌"
   },
@@ -7124,7 +7247,7 @@
     "messageformat": "請在 {duration}後再試"
   },
   "icu:StandaloneRegistration--PhoneNumber--RegionCodeSelector--Label": {
-    "messageformat": "Select region code"
+    "messageformat": "選擇國碼"
   },
   "icu:StandaloneRegistration--PhoneNumber--placeholder": {
     "messageformat": "電話號碼"
@@ -7299,6 +7422,21 @@
   },
   "icu:StandaloneRegistration--VerificationCode--CannotSendCodeTemporary--ok-button": {
     "messageformat": "好"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Title": {
+    "messageformat": "Having trouble registering?"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet1": {
+    "messageformat": "Make sure your phone has a cellular signal to receive your SMS or call"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet2": {
+    "messageformat": "Confirm you can receive a phone call to the number"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet3": {
+    "messageformat": "Check that you have entered your phone number correctly"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Footer": {
+    "messageformat": "If you still can’t register, follow these <troubleshootingLink>troubleshooting steps</troubleshootingLink> or <contactSupportLink>Contact Support</contactSupportLink>."
   },
   "icu:StandaloneRegistration--ProfileEntry--header": {
     "messageformat": "設定你的資訊"
@@ -7649,10 +7787,10 @@
     "messageformat": "開啟「Signal」"
   },
   "icu:MediaPermissionsModal__step-2--windows--microphone": {
-    "messageformat": "Enable microphone access for Signal"
+    "messageformat": "為 Signal 啟用麥克風存取權限"
   },
   "icu:MediaPermissionsModal__step-2--windows--camera": {
-    "messageformat": "Enable camera access for Signal"
+    "messageformat": "為 Signal 啟用相機存取權限"
   },
   "icu:MediaPermissionsModal__open": {
     "messageformat": "前往「設定」"
@@ -8204,7 +8342,7 @@
     "messageformat": "用戶名稱都會與一組數字配對。"
   },
   "icu:EditUsernameModalBody__discriminator-label": {
-    "messageformat": "Username digits"
+    "messageformat": "用戶名稱的數字"
   },
   "icu:EditUsernameModalBody__learn-more": {
     "messageformat": "了解更多"
@@ -8340,13 +8478,13 @@
     "messageformat": "變更你的 Signal PIN 碼"
   },
   "icu:PinChangeModal__title--create--without-pin": {
-    "messageformat": "Create your Signal PIN"
+    "messageformat": "建立你的 Signal PIN 碼"
   },
   "icu:PinChangeModal__body--create": {
     "messageformat": "只要註冊了此裝置，你就可以變更PIN碼。 <learnMoreLink>了解更多</learnMoreLink>"
   },
   "icu:PinChangeModal__body--create--without-pin": {
-    "messageformat": "PINs keep information stored with Signal encrypted so only you can access it. Your profile, settings, and contacts will restore when you reinstall. You won't need your PIN to open the app. <learnMoreLink>Learn more</learnMoreLink>"
+    "messageformat": "PIN 碼會將儲存在 Signal 中的資訊加密，確保只有你能存取。當你重新安裝時，你的個人資料、設定和聯絡人將會還原。開啟應用程式不需輸入 PIN 碼。<learnMoreLink>了解更多</learnMoreLink>"
   },
   "icu:PinChangeModal__title--confirm": {
     "messageformat": "確認你的 Signal PIN 碼"
@@ -8588,12 +8726,6 @@
   "icu:CallLinkPendingParticipantModal__DenyButtonLabel": {
     "messageformat": "拒絕加入"
   },
-  "icu:CallLinkRestrictionsSelect__Option--Off": {
-    "messageformat": "關"
-  },
-  "icu:CallLinkRestrictionsSelect__Option--On": {
-    "messageformat": "開"
-  },
   "icu:CallLinkAddNameModal__Title": {
     "messageformat": "新增通話名稱"
   },
@@ -8641,6 +8773,39 @@
   },
   "icu:SaveMultiDialog__title": {
     "messageformat": "儲存附件"
+  },
+  "icu:EmbeddedContact__message": {
+    "messageformat": "傳送訊息"
+  },
+  "icu:ContactDetail__message": {
+    "messageformat": "傳送訊息"
+  },
+  "icu:ContactDetail__add-to-group": {
+    "messageformat": "新增至群組"
+  },
+  "icu:ContactDetail__nickname": {
+    "messageformat": "暱稱"
+  },
+  "icu:ContactDetail__note": {
+    "messageformat": "筆記"
+  },
+  "icu:email-v2": {
+    "messageformat": "電郵"
+  },
+  "icu:home-v2": {
+    "messageformat": "住家"
+  },
+  "icu:mobile-v2": {
+    "messageformat": "行動電話"
+  },
+  "icu:work-v2": {
+    "messageformat": "工作"
+  },
+  "icu:phone-v2": {
+    "messageformat": "電話號碼"
+  },
+  "icu:address-v2": {
+    "messageformat": "地址"
   },
   "icu:WhatsNew__modal-title": {
     "messageformat": "有甚麼新的"
@@ -8806,6 +8971,9 @@
   },
   "icu:DonationReceipt__footer-text-v2": {
     "messageformat": "感謝你對 Signal 的支持。你的捐款有助於推動保護自由表達的使命，並透過開放原始碼隱私技術，讓全球數百萬人能夠進行安全的全球通訊。若你是美國居民，請保留此收據作為你的稅務紀錄。Signal Technology Foundation 是在美國依據《國稅法規》(IRC) 第 501c3 條的免稅非盈利組織。我們的聯邦稅識別號碼為 82-4506840。Signal 並未因這筆捐款而提供任何商品或服務。"
+  },
+  "icu:MessageCta__Donate": {
+    "messageformat": "立即捐款"
   },
   "icu:Donations__OfflineTooltip": {
     "messageformat": "你處於離線狀態。請連結網路以完成捐款。"
@@ -9005,6 +9173,9 @@
   "icu:CallQualitySurvey__WhatIssuesDidYouHave__SomethingElse__TextArea__AccessibilityLabel": {
     "messageformat": "問題描述"
   },
+  "icu:CallQualitySurvey__WhatIssuesDidYouHave__SomethingElse__TextArea__Placeholder": {
+    "messageformat": "描述你的問題"
+  },
   "icu:CallQualitySurvey__WhatIssuesDidYouHave__SomethingElse__TextArea__HelpText": {
     "messageformat": "請提供與問題相關的任何詳細資訊。你在此分享的任何內容都將保密，並僅用於協助改善 Signal 中的通話。"
   },
@@ -9114,16 +9285,25 @@
     "messageformat": "細微的調整、問題修復和效能改善。感謝各位使用 Signal！",
     "ignoreUnused": true
   },
-  "icu:WhatsNew__8.26--0": {
-    "messageformat": "尋找自我可能是一輩子的過程，但現在你在群組成員搜尋中會顯示為「你」，讓尋找自己容易一些。"
-  },
-  "icu:WhatsNew__8.27--0": {
-    "messageformat": "此更新引入了更精細的設定選項，讓你能對 Signal 的通知有更全面的控制。現在，你可以選擇應用程式徽章上顯示的內容、調整靜音討論串的通知偏好設定，以及更多功能！我們還新增了一個方便的按鈕，讓你在進行了太多變更甚至陷入迷茫時，能輕鬆還原預設的通知設定。"
-  },
   "icu:WhatsNew__8.30--0": {
-    "messageformat": "Thanks to a few performance improvements, your CPU will be slightly happier during video calls (even if you're not smiling)."
+    "messageformat": "幸好有幾項效能優化，在進行視訊通話時，你的 CPU 會稍微輕鬆一點。"
   },
   "icu:WhatsNew__8.30--1": {
-    "messageformat": "We also added a convenient shortcut to open your system settings on Windows if you try to join a video call and Signal doesn't have permission to access the camera. Now it's easier to see what you need to do so that people can see you."
+    "messageformat": "此外，我們還新增了一個方便的捷徑，當你嘗試加入視訊通話時，若 Signal 沒有權限存取相機，即可透過此捷徑開啟 Windows 的系統設定。想讓別人看見你，現在更容易。"
+  },
+  "icu:WhatsNew__8.32--0": {
+    "messageformat": "訊息資料夾和搜尋介面現已支援「未讀」篩選器，讓你能輕鬆查看錯過的內容。"
+  },
+  "icu:WhatsNew__8.32--1": {
+    "messageformat": "在網絡狀況不佳的情況下，提升了上傳的可靠性。謝謝，<GH3mmmbulus></GH3mmmbulus>！"
+  },
+  "icu:WhatsNew__8.32--2": {
+    "messageformat": "「(N)」捷徑正確對應倒讚表情符號。為<lnicola></lnicola>修復錯誤按讚。"
+  },
+  "icu:WhatsNew__8.34--0": {
+    "messageformat": "Signal Desktop now supports contact sharing too, so you can maintain eye contact with your computer screen without having to make physical contact with your smartphone."
+  },
+  "icu:WhatsNew__8.34--1": {
+    "messageformat": "Improved handling and performance for connected audio devices."
   }
 }

@@ -11,7 +11,11 @@ import {
   MOCK_THIS_MESSAGE_EMOJIS,
 } from '../../test-helpers/funPickerMocks.dom.tsx';
 import { FunProvider } from './FunProvider.dom.tsx';
-import { packs, recentStickers } from '../../test-helpers/stickersMocks.std.ts';
+import {
+  favoriteStickers,
+  packs,
+  recentStickers,
+} from '../../test-helpers/stickersMocks.std.ts';
 import { Select } from '../Select.dom.tsx';
 import { Emoji } from '../../axo/emoji.std.ts';
 
@@ -56,6 +60,8 @@ function Template(props: TemplateProps): JSX.Element {
       onOpenCustomizePreferredReactionsModal={() => null}
       onSelectEmoji={action('onSelectEmoji')}
       // Stickers
+      favoriteStickers={favoriteStickers}
+      isFavoriteStickersEnabled
       isStickerReplySendEnabled
       installedStickerPacks={packs}
       showStickerPickerHint={false}
@@ -74,7 +80,6 @@ function Template(props: TemplateProps): JSX.Element {
           options={skinToneOptions}
           value={skinTone}
           onChange={handleSkinToneChange}
-          moduleClassName="emoji-skin-tone-select"
         />
         <FunEmojiPicker {...props} open={open} onOpenChange={handleOpenChange}>
           <Button>Open EmojiPicker</Button>

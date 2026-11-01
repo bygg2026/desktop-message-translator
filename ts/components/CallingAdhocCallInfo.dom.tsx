@@ -9,7 +9,7 @@ import type { CallLinkType } from '../types/CallLink.std.ts';
 import type { LocalizerType } from '../types/Util.std.ts';
 import { sortByTitle } from '../util/sortByTitle.std.ts';
 import { ModalHost } from './ModalHost.dom.tsx';
-import { AVATAR_COLOR_COUNT, AvatarColors } from '../types/Colors.std.ts';
+import { AVATAR_COLOR_COUNT, AvatarColors } from '../types/Avatar.std.ts';
 import { CallingParticipantListItem } from './CallingParticipantListItem.dom.tsx';
 import type {
   CallingParticipantType,
@@ -111,7 +111,7 @@ function UnknownContacts({
       </div>
       <button
         aria-label="icu:CallingAdhocCallInfo__UnknownContactInfoButton"
-        className="CallingAdhocCallInfo__UnknownContactInfoButton module-calling-participants-list__status-icon module-calling-participants-list__unknown-contact"
+        className="CallingAdhocCallInfo__UnknownContactInfoButton module-calling-participants-list__status-icon"
         onClick={showUnknownContactDialog}
         type="button"
       />
@@ -183,12 +183,12 @@ export function CallingAdhocCallInfo({
           'icu:CallingAdhocCallInfo__UnknownContactInfoDialogBody'
         )}
       >
-        <AxoConfirmDialog.Cancel>{i18n('icu:ok')}</AxoConfirmDialog.Cancel>
+        <AxoConfirmDialog.Ok />
       </AxoConfirmDialog.Root>
 
       <ModalHost
         modalName="CallingAdhocCallInfo"
-        moduleClassName="CallingAdhocCallInfo"
+        className="CallingAdhocCallInfo__modal"
         onClose={onClose}
       >
         <div className="CallingAdhocCallInfo module-calling-participants-list">
@@ -224,7 +224,7 @@ export function CallingAdhocCallInfo({
             )}
           </ul>
           <div className="CallingAdhocCallInfo__Divider" />
-          <div className="CallingAdhocCallInfo__CallLinkInfo">
+          <div>
             <button
               className="CallingAdhocCallInfo__MenuItem"
               onClick={onCopyCallLink}

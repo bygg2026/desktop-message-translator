@@ -2,14 +2,9 @@
 # SPDX-License-Identifier: AGPL-3.0-only
 
 
-name: CI
+name: Upstream CI (manual)
 on:
-  push:
-    branches:
-      - development
-      - main
-      - '[0-9]+.[0-9]+.x'
-  pull_request:
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -121,6 +116,10 @@ jobs:
       - name: Check unused icons
         background: true
         run: pnpm run check:unused-icons
+
+      - name: Check unused styles
+        background: true
+        run: pnpm run check:unused-styles:check
 
   macos:
     name: MacOS

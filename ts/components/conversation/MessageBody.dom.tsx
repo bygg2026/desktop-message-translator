@@ -1,7 +1,6 @@
 // Copyright 2018 Signal Messenger, LLC
 // SPDX-License-Identifier: AGPL-3.0-only
 
-import { useEffect, useState } from 'react';
 import type { KeyboardEvent, JSX, ReactNode } from 'react';
 import type { AttachmentType } from '../../types/Attachment.std.ts';
 import { canBeDownloaded, isDownloaded } from '../../util/Attachment.std.ts';
@@ -9,7 +8,8 @@ import type { ShowConversationType } from '../../state/ducks/conversations.prelo
 import type { HydratedBodyRangesType } from '../../types/BodyRange.std.ts';
 import type { LocalizerType } from '../../types/Util.std.ts';
 import { MessageTextRenderer } from './MessageTextRenderer.dom.tsx';
-import type { RenderLocation } from './MessageTextRenderer.dom.tsx';
+import { RenderLocation } from './MessageTextRenderer.dom.tsx';
+import { IncomingTranslation } from './IncomingTranslation.dom.tsx';
 import { UserText } from '../UserText.dom.tsx';
 import { shouldLinkifyMessage } from '../../types/LinkPreview.std.ts';
 import { FunJumboEmojiSize } from '../fun/FunEmoji.dom.tsx';
@@ -63,50 +63,6 @@ export type Props = {
   originalText: string;
 };
 
-const translationCache = new Map<string, Promise<string | null>>();
-
-function translateToChinese(text: string): Promise<string | null> {
-  const trimmed = text.trim();
-
-  if (!trimmed) {
-    return Promise.resolve(null);
-  }
-
-  return window.SignalContext.getTranslationConfig().then(config => {
-    if (!config.enabled) {
-      return null;
-    }
-
-    const cacheKey = `${config.provider}|${config.receiveLanguage}|${trimmed}`;
-
-    const cached = translationCache.get(cacheKey);
-
-    if (cached) {
-      return cached;
-    }
-
-    console.log(
-      '[TRANSLATE UI] request:',
-      config.provider,
-      config.receiveLanguage,
-      trimmed
-    );
-
-    const request = window.SignalContext.translateText(
-      trimmed,
-      'receive'
-    ).catch(error => {
-      console.error('[TRANSLATE UI] failed:', error);
-      translationCache.delete(cacheKey);
-      throw error;
-    });
-
-    translationCache.set(cacheKey, request);
-
-    return request;
-  });
-}
-
 /**
  * This component makes it very easy to use all three of our message formatting
  * components: `Emojify`, `Linkify`, and `AddNewLines`. Because each of them is fully
@@ -131,30 +87,6 @@ export function MessageBody({
   textAttachment,
   originalText,
 }: Props): JSX.Element {
-  const [translation, setTranslation] = useState<string | null>(null);
-
-  useEffect(() => {
-    let cancelled = false;
-
-    setTranslation(null);
-
-    void translateToChinese(text)
-      .then(result => {
-        if (!cancelled) {
-          setTranslation(result);
-        }
-      })
-      .catch(() => {
-        if (!cancelled) {
-          setTranslation(null);
-        }
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [text]);
-
   const shouldDisableLinks =
     disableLinks || !shouldLinkifyMessage(originalText);
   const textWithSuffix =
@@ -234,9 +166,7 @@ export function MessageBody({
       )}
       {prefix && (
         <>
-          <span className="MessageBody__prefix">
-            <UserText text={prefix} />
-          </span>{' '}
+          <UserText text={prefix} />{' '}
         </>
       )}
 
@@ -258,19 +188,9 @@ export function MessageBody({
       />
 
       {endNotification}
-      {translation && (
-        <span
-          style={{
-            display: 'block',
-            marginTop: '4px',
-            fontSize: '12px',
-            opacity: 0.72,
-            whiteSpace: 'pre-wrap',
-          }}
-        >
-          {translation}
-        </span>
-      )}
+      {(direction === 'incoming' || direction === 'outgoing') &&
+        renderLocation === RenderLocation.Timeline &&
+        !textAttachment?.pending && <IncomingTranslation text={originalText} />}
     </span>
   );
 }

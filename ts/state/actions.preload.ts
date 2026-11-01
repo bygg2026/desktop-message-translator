@@ -1,7 +1,6 @@
 // Copyright 2019 Signal Messenger, LLC
 // SPDX-License-Identifier: AGPL-3.0-only
 
-import { actions as accounts } from './ducks/accounts.preload.ts';
 import { actions as app } from './ducks/app.preload.ts';
 import { actions as audioPlayer } from './ducks/audioPlayer.preload.ts';
 import { actions as audioRecorder } from './ducks/audioRecorder.preload.ts';
@@ -9,6 +8,8 @@ import { actions as backups } from './ducks/backups.preload.ts';
 import { actions as badges } from './ducks/badges.preload.ts';
 import { actions as callHistory } from './ducks/callHistory.preload.ts';
 import { actions as calling } from './ducks/calling.preload.ts';
+import { actions as account } from './ducks/account.preload.ts';
+import { actions as chatColors } from './ducks/chatColors.preload.ts';
 import { actions as chatFolders } from './ducks/chatFolders.preload.ts';
 import { actions as composer } from './ducks/composer.preload.ts';
 import { actions as conversations } from './ducks/conversations.preload.ts';
@@ -41,7 +42,7 @@ import { actions as username } from './ducks/username.preload.ts';
 import type { ReduxActions } from './types.std.ts';
 
 export const actionCreators: ReduxActions = {
-  accounts,
+  account,
   app,
   audioPlayer,
   audioRecorder,
@@ -49,6 +50,7 @@ export const actionCreators: ReduxActions = {
   badges,
   callHistory,
   calling,
+  chatColors,
   chatFolders,
   composer,
   conversations,

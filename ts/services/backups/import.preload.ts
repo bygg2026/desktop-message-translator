@@ -11,7 +11,7 @@ import pMap from 'p-map';
 import { Writable } from 'node:stream';
 import lodash from 'lodash';
 import { CallLinkRootKey } from '@signalapp/ringrtc';
-import { MuteExpiration, TimestampMs } from '@signalapp/types';
+import { MuteExpiration, TimestampMs, Uint32 } from '@signalapp/types';
 
 import { Backups, SignalService } from '../../protobuf/index.std.ts';
 import { DataReader, DataWriter } from '../../sql/Client.preload.ts';
@@ -44,12 +44,8 @@ import {
   createPacksFromBackup,
   type StickerPackPointerType,
 } from '../../types/Stickers.preload.ts';
-import type {
-  ConversationColorType,
-  CustomColorsItemType,
-  CustomColorType,
-  CustomColorDataType,
-} from '../../types/Colors.std.ts';
+import type { ChatStyle } from '../../types/ChatStyle.std.ts';
+import { toConversationBubbleColorAttributes } from '../../util/conversationBubbleColor.std.ts';
 import { SEALED_SENDER } from '../../types/SealedSender.std.ts';
 import type {
   ConversationAttributesType,
@@ -58,7 +54,7 @@ import type {
   MessageReactionType,
   EditHistoryType,
   QuotedMessageType,
-} from '../../model-types.d.ts';
+} from '../../model-types.std.ts';
 import { assertDev, strictAssert } from '../../util/assert.std.ts';
 import { upgradeMessageSchema } from '../../util/migrations.preload.ts';
 import {
@@ -102,7 +98,6 @@ import type { GroupV2ChangeDetailType } from '../../types/groups.std.ts';
 import { queueAttachmentDownloads } from '../../util/queueAttachmentDownloads.preload.ts';
 import { isNotNil } from '../../util/isNotNil.std.ts';
 import { isGroup } from '../../util/whatTypeOfConversation.dom.ts';
-import { rgbIntToHSL } from '../../util/rgbToHSL.std.ts';
 import {
   convertBackupMessageAttachmentToAttachment,
   convertFilePointerToAttachment,
@@ -174,6 +169,8 @@ import {
   STORAGE_KEY_DEFAULTS,
   type UnreadCountBadgeType,
 } from '../../types/StorageKeys.std.ts';
+import { fromAciUuidBytes } from '../../util/ServiceId.node.ts';
+import type { AxoColor } from '../../axo/AxoColor.std.ts';
 
 const { isNumber } = lodash;
 
@@ -285,10 +282,13 @@ export class BackupImportStream extends Writable {
   >();
 
   #flushMessagesPromise: Promise<void> | undefined;
-  readonly #stickerPacks = new Array<StickerPackPointerType>();
+  readonly #installedStickerPacks = new Array<StickerPackPointerType>();
   #ourConversation?: ConversationAttributesType;
   readonly #pinnedConversations = new Array<[number, string]>();
-  readonly #customColorById = new Map<number, CustomColorDataType>();
+  readonly #customChatColorIdByBackupId = new Map<
+    number,
+    ChatStyle.CustomChatColorId
+  >();
   #releaseNotesRecipientId: bigint | undefined;
   #releaseNotesChatId: bigint | undefined;
   readonly #pinnedMessages: Array<PinnedMessageParams> = [];
@@ -406,7 +406,7 @@ export class BackupImportStream extends Writable {
       }
 
       // Store sticker packs and schedule downloads
-      await createPacksFromBackup(this.#stickerPacks);
+      await createPacksFromBackup(this.#installedStickerPacks);
 
       // Add placeholder call history for unused admin call links to show in calls tab
       for (const [callLink, hasCall] of this.#adminCallLinksToHasCall) {
@@ -596,8 +596,8 @@ export class BackupImportStream extends Writable {
         }
 
         await this.#fromChatItem(item.chatItem, { aboutMe });
-      } else if (item.stickerPack) {
-        await this.#fromStickerPack(item.stickerPack);
+      } else if (item.installedStickerPack) {
+        await this.#fromStickerPack(item.installedStickerPack);
       } else if (item.adHocCall) {
         await this.#fromAdHocCall(item.adHocCall);
       } else if (item.notificationProfile) {
@@ -798,6 +798,9 @@ export class BackupImportStream extends Writable {
     strictAssert(Bytes.isNotEmpty(profileKey), 'Missing profile key');
     await itemStorage.put('profileKey', profileKey);
     this.#ourConversation.profileKey = Bytes.toBase64(profileKey);
+    this.#ourConversation.accessKey = Bytes.toBase64(
+      deriveAccessKeyFromProfileKey(profileKey)
+    );
     await this.#updateConversation(this.#ourConversation);
 
     if (username != null) {
@@ -1078,18 +1081,17 @@ export class BackupImportStream extends Writable {
     }
 
     // It is important to import custom chat colors before default styles
-    // because we build the uuid => integer id map for the colors.
+    // because we build the backup id => database id map for the colors.
     await this.#fromCustomChatColors(accountSettings?.customChatColors);
 
     const defaultChatStyle = this.#fromChatStyle(
       accountSettings?.defaultChatStyle
     );
 
-    if (defaultChatStyle.color != null) {
-      await itemStorage.put('defaultConversationColor', {
-        color: defaultChatStyle.color,
-        customColorData: defaultChatStyle.customColorData,
-      });
+    if (defaultChatStyle.bubbleColor != null) {
+      await DataWriter.updateAccountDefaultBubbleColor(
+        defaultChatStyle.bubbleColor
+      );
     }
 
     if (defaultChatStyle.wallpaperPhotoPointer != null) {
@@ -1185,6 +1187,8 @@ export class BackupImportStream extends Writable {
       systemGivenName: dropNull(contact.systemGivenName),
       systemFamilyName: dropNull(contact.systemFamilyName),
       systemNickname: dropNull(contact.systemNickname),
+      sharedGivenName: dropNull(contact.sharedName?.given),
+      sharedFamilyName: dropNull(contact.sharedName?.family),
       hideStory: contact.hideStory,
       username: dropNull(contact.username),
       expireTimerVersion: 1,
@@ -1628,12 +1632,11 @@ export class BackupImportStream extends Writable {
     if (chatStyle.wallpaperPreset != null) {
       conversation.wallpaperPreset = chatStyle.wallpaperPreset;
     }
-    if (chatStyle.color != null) {
-      conversation.conversationColor = chatStyle.color;
-    }
-    if (chatStyle.customColorData != null) {
-      conversation.customColor = chatStyle.customColorData.value;
-      conversation.customColorId = chatStyle.customColorData.id;
+    if (chatStyle.bubbleColor != null) {
+      Object.assign(
+        conversation,
+        toConversationBubbleColorAttributes(chatStyle.bubbleColor)
+      );
     }
     if (chatStyle.dimWallpaperInDarkMode != null) {
       conversation.dimWallpaperInDarkMode = chatStyle.dimWallpaperInDarkMode;
@@ -2621,7 +2624,20 @@ export class BackupImportStream extends Writable {
       const { contact: details } = item.contactMessage;
       strictAssert(details != null, 'contactMessage must have a contact');
 
-      const { avatar, name, number, email, address, organization } = details;
+      const {
+        avatar,
+        name,
+        number,
+        email,
+        address,
+        organization,
+        nickname,
+        note,
+        aci,
+      } = details;
+
+      const givenNickname = nickname?.given || undefined;
+      const familyNickname = nickname?.family || undefined;
 
       return {
         message: {
@@ -2704,6 +2720,15 @@ export class BackupImportStream extends Writable {
                     isProfile: false,
                   }
                 : undefined,
+              aci: Bytes.isEmpty(aci) ? undefined : fromAciUuidBytes(aci),
+              note: note || undefined,
+              nickname:
+                givenNickname || familyNickname
+                  ? {
+                      givenName: givenNickname,
+                      familyName: familyNickname,
+                    }
+                  : undefined,
             },
           ],
           reactions: this.#fromReactions(item.contactMessage.reactions),
@@ -2947,10 +2972,11 @@ export class BackupImportStream extends Writable {
     }
 
     if (update.learnedProfileChange) {
-      const { e164, username } = update.learnedProfileChange.previousName ?? {};
-      if (e164 == null && username == null) {
+      const { e164, username, sharedName } =
+        update.learnedProfileChange.previousName ?? {};
+      if (e164 == null && username == null && sharedName == null) {
         log.error(
-          `${options.timestamp}: learnedProfileChange had no previous e164 or username`
+          `${options.timestamp}: learnedProfileChange had no previous e164, username, or sharedName`
         );
         this.#frameErrorCount += 1;
       }
@@ -2962,6 +2988,8 @@ export class BackupImportStream extends Writable {
               type: 'private',
               e164: e164 && e164 !== 0n ? `+${e164}` : undefined,
               username: dropNull(username),
+              // The backup only has the combined name
+              sharedGivenName: dropNull(sharedName),
             },
           },
         },
@@ -3920,7 +3948,7 @@ export class BackupImportStream extends Writable {
     );
     const key = Bytes.toBase64(packKeyBytes);
 
-    this.#stickerPacks.push({ id, key });
+    this.#installedStickerPacks.push({ id, key });
   }
 
   async #fromAdHocCall({
@@ -4102,24 +4130,17 @@ export class BackupImportStream extends Writable {
       return;
     }
 
-    const order = new Array<string>();
-    const customColors: CustomColorsItemType = {
-      version: 1,
-      colors: {},
-      order,
-    };
+    const backupIds: Array<number> = [];
+    const colors: Array<ChatStyle.CustomChatColor['color']> = [];
 
     for (const customChatColor of customChatColors) {
       const { color } = customChatColor;
 
-      const uuid = generateUuid();
-      let value: CustomColorType;
-
-      order.push(uuid);
+      let value: ChatStyle.CustomChatColor['color'];
 
       if (color?.solid) {
         value = {
-          start: rgbIntToDesktopHSL(color.solid),
+          solid: color.solid as AxoColor.ARGBInt,
         };
       } else if (color?.gradient) {
         strictAssert(color.gradient != null, 'Either solid or gradient');
@@ -4137,11 +4158,15 @@ export class BackupImportStream extends Writable {
         // rotate in the opposite direction (sadly!) and our start is shifted by 90
         // degrees
         const desktopAngle = 360 - backupAngle - 90;
+        // Wraps into the range [0, 360], even for out of range backup angles
+        const angle = Uint32.fromNumber(((desktopAngle % 360) + 360) % 360);
 
         value = {
-          start: rgbIntToDesktopHSL(start),
-          end: rgbIntToDesktopHSL(end),
-          deg: (desktopAngle + 360) % 360,
+          gradient: {
+            start: start as AxoColor.ARGBInt,
+            end: end as AxoColor.ARGBInt,
+            angle,
+          },
         };
       } else {
         log.error(
@@ -4151,28 +4176,27 @@ export class BackupImportStream extends Writable {
         continue;
       }
 
-      customColors.colors[uuid] = value;
-      this.#customColorById.set(toNumber(customChatColor.id) || 0, {
-        id: uuid,
-        value,
-      });
+      backupIds.push(toNumber(customChatColor.id) || 0);
+      colors.push(value);
     }
 
-    await itemStorage.put('customColors', customColors);
+    // Inserted in order so the database ids keep the same order
+    const created = await DataWriter.createCustomChatColors(colors);
+    created.forEach((customChatColor, index) => {
+      const backupId = backupIds[index];
+      strictAssert(backupId != null, 'Missing backup id for custom color');
+      this.#customChatColorIdByBackupId.set(backupId, customChatColor.id);
+    });
   }
 
-  #fromChatStyle(chatStyle: Backups.ChatStyle | null | undefined): Omit<
-    LocalChatStyle,
-    'customColorId'
-  > & {
-    customColorData: CustomColorDataType | undefined;
-  } {
+  #fromChatStyle(
+    chatStyle: Backups.ChatStyle | null | undefined
+  ): LocalChatStyle {
     if (!chatStyle) {
       return {
         wallpaperPhotoPointer: undefined,
         wallpaperPreset: undefined,
-        color: undefined,
-        customColorData: undefined,
+        bubbleColor: undefined,
         dimWallpaperInDarkMode: undefined,
         autoBubbleColor: true,
       };
@@ -4196,96 +4220,98 @@ export class BackupImportStream extends Writable {
       wallpaperPreset = chatStyle.wallpaper.wallpaperPreset;
     }
 
-    let color: ConversationColorType | undefined;
-    let customColorData: CustomColorDataType | undefined;
+    let bubbleColor: ChatStyle['bubbleColor'] | undefined;
     let autoBubbleColor = false;
     if (chatStyle.bubbleColor?.autoBubbleColor) {
       autoBubbleColor = true;
-      if (wallpaperPreset != null) {
-        color = WALLPAPER_TO_BUBBLE_COLOR.get(wallpaperPreset);
+      const bubbleColorPreset =
+        wallpaperPreset != null
+          ? WALLPAPER_TO_BUBBLE_COLOR.get(wallpaperPreset)
+          : null;
+      if (bubbleColorPreset != null) {
+        bubbleColor = { bubbleColorPreset };
       } else {
-        color = undefined;
+        bubbleColor = undefined;
       }
     } else if (chatStyle.bubbleColor?.bubbleColorPreset != null) {
       const { BubbleColorPreset } = Backups.ChatStyle;
 
       switch (chatStyle.bubbleColor.bubbleColorPreset) {
         case BubbleColorPreset.SOLID_CRIMSON:
-          color = 'crimson';
+          bubbleColor = { bubbleColorPreset: 'crimson' };
           break;
         case BubbleColorPreset.SOLID_VERMILION:
-          color = 'vermilion';
+          bubbleColor = { bubbleColorPreset: 'vermilion' };
           break;
         case BubbleColorPreset.SOLID_BURLAP:
-          color = 'burlap';
+          bubbleColor = { bubbleColorPreset: 'burlap' };
           break;
         case BubbleColorPreset.SOLID_FOREST:
-          color = 'forest';
+          bubbleColor = { bubbleColorPreset: 'forest' };
           break;
         case BubbleColorPreset.SOLID_WINTERGREEN:
-          color = 'wintergreen';
+          bubbleColor = { bubbleColorPreset: 'wintergreen' };
           break;
         case BubbleColorPreset.SOLID_TEAL:
-          color = 'teal';
+          bubbleColor = { bubbleColorPreset: 'teal' };
           break;
         case BubbleColorPreset.SOLID_BLUE:
-          color = 'blue';
+          bubbleColor = { bubbleColorPreset: 'blue' };
           break;
         case BubbleColorPreset.SOLID_INDIGO:
-          color = 'indigo';
+          bubbleColor = { bubbleColorPreset: 'indigo' };
           break;
         case BubbleColorPreset.SOLID_VIOLET:
-          color = 'violet';
+          bubbleColor = { bubbleColorPreset: 'violet' };
           break;
         case BubbleColorPreset.SOLID_PLUM:
-          color = 'plum';
+          bubbleColor = { bubbleColorPreset: 'plum' };
           break;
         case BubbleColorPreset.SOLID_TAUPE:
-          color = 'taupe';
+          bubbleColor = { bubbleColorPreset: 'taupe' };
           break;
         case BubbleColorPreset.SOLID_STEEL:
-          color = 'steel';
+          bubbleColor = { bubbleColorPreset: 'steel' };
           break;
         case BubbleColorPreset.GRADIENT_EMBER:
-          color = 'ember';
+          bubbleColor = { bubbleColorPreset: 'ember' };
           break;
         case BubbleColorPreset.GRADIENT_MIDNIGHT:
-          color = 'midnight';
+          bubbleColor = { bubbleColorPreset: 'midnight' };
           break;
         case BubbleColorPreset.GRADIENT_INFRARED:
-          color = 'infrared';
+          bubbleColor = { bubbleColorPreset: 'infrared' };
           break;
         case BubbleColorPreset.GRADIENT_LAGOON:
-          color = 'lagoon';
+          bubbleColor = { bubbleColorPreset: 'lagoon' };
           break;
         case BubbleColorPreset.GRADIENT_FLUORESCENT:
-          color = 'fluorescent';
+          bubbleColor = { bubbleColorPreset: 'fluorescent' };
           break;
         case BubbleColorPreset.GRADIENT_BASIL:
-          color = 'basil';
+          bubbleColor = { bubbleColorPreset: 'basil' };
           break;
         case BubbleColorPreset.GRADIENT_SUBLIME:
-          color = 'sublime';
+          bubbleColor = { bubbleColorPreset: 'sublime' };
           break;
         case BubbleColorPreset.GRADIENT_SEA:
-          color = 'sea';
+          bubbleColor = { bubbleColorPreset: 'sea' };
           break;
         case BubbleColorPreset.GRADIENT_TANGERINE:
-          color = 'tangerine';
+          bubbleColor = { bubbleColorPreset: 'tangerine' };
           break;
         case BubbleColorPreset.SOLID_ULTRAMARINE:
         default:
-          color = 'ultramarine';
+          bubbleColor = { bubbleColorPreset: 'ultramarine' };
           break;
       }
     } else if (chatStyle.bubbleColor?.customColorId != null) {
-      const entry = this.#customColorById.get(
+      const customChatColorId = this.#customChatColorIdByBackupId.get(
         toNumber(chatStyle.bubbleColor.customColorId)
       );
 
-      if (entry) {
-        color = 'custom';
-        customColorData = entry;
+      if (customChatColorId != null) {
+        bubbleColor = { customChatColorId };
       } else {
         log.error('Chat style referenced missing custom color');
         this.#frameErrorCount += 1;
@@ -4301,8 +4327,7 @@ export class BackupImportStream extends Writable {
     const shouldImportWallpaper = isTestOrMockEnvironment();
 
     return {
-      color,
-      customColorData,
+      bubbleColor,
       ...(shouldImportWallpaper
         ? {
             autoBubbleColor,
@@ -4326,17 +4351,6 @@ export class BackupImportStream extends Writable {
   #isMediaEnabledBackup() {
     return this.#isLocalBackup() || this.#backupTier === BackupLevel.Paid;
   }
-}
-
-function rgbIntToDesktopHSL(intValue: number): {
-  hue: number;
-  saturation: number;
-  lightness: number;
-} {
-  const { h: hue, s: saturation, l: lightness } = rgbIntToHSL(intValue);
-
-  // Desktop stores saturation not as 0.123 (0 to 1.0) but 12.3 (percentage)
-  return { hue, saturation: saturation * 100, lightness };
 }
 
 function fromGroupCallStateProto(

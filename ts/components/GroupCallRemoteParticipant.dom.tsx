@@ -16,7 +16,7 @@ import lodash from 'lodash';
 import type { VideoFrameSource } from '@signalapp/ringrtc';
 import type { GroupCallRemoteParticipantType } from '../types/Calling.std.ts';
 import type { LocalizerType } from '../types/Util.std.ts';
-import { AvatarColors } from '../types/Colors.std.ts';
+import { AvatarColors } from '../types/Avatar.std.ts';
 import { CallBackgroundBlur } from './CallBackgroundBlur.dom.tsx';
 import {
   CallingAudioIndicator,
@@ -398,7 +398,7 @@ export const GroupCallRemoteParticipant: FC<PropsType> = memo(
 
       const nameElement = (
         <ContactName
-          module="module-ongoing-call__group-call-remote-participant__info__contact-name"
+          className="module-ongoing-call__group-call-remote-participant__info__contact-name"
           title={title}
         />
       );
@@ -602,7 +602,7 @@ export const GroupCallRemoteParticipant: FC<PropsType> = memo(
           title={errorDialogTitle}
           description={errorDialogBody}
         >
-          <AxoConfirmDialog.Cancel>{i18n('icu:ok')}</AxoConfirmDialog.Cancel>
+          <AxoConfirmDialog.Ok />
         </AxoConfirmDialog.Root>
         {maybeWrapWithParticipantMenu(
           'AxoContextMenu',

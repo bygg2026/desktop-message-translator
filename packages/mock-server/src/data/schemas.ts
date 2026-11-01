@@ -105,6 +105,26 @@ export type UploadProfileResponse =
       signature: string;
     };
 
+export const AccountAttributesSchema = z.object({
+  fetchesMessages: z.boolean(),
+  registrationId: RegistrationIdSchema,
+  pniRegistrationId: RegistrationIdSchema.optional(),
+  name: z.string().optional().nullable(),
+  capabilities: z.object({
+    attachmentBackfill: z.boolean().optional(),
+    spqr: z.boolean(),
+    usernameChangeSyncMessage: z.boolean(),
+    // TODO(indutny): read it
+    optionalPhoneNumber: z.boolean().optional(),
+  }),
+  registrationLock: z.string().optional().nullable(),
+  unidentifiedAccessKey: z.string().optional().nullable(),
+  unrestrictedUnidentifiedAccess: z.boolean(),
+  discoverableByPhoneNumber: z.boolean(),
+  recoveryPassword: z.string(),
+  phoneNumberIdentityRegistrationId: z.string().optional(),
+});
+
 export const RegisterAccountSchema = z.object({
   sessionId: z.string(),
   recoveryPassword: z.string().optional(),
@@ -114,7 +134,7 @@ export const RegisterAccountSchema = z.object({
     pniRegistrationId: RegistrationIdSchema.optional(),
     name: z.string().optional(),
     capabilities: z.object({
-      attachmentBackfill: z.boolean(),
+      attachmentBackfill: z.boolean().optional(),
       spqr: z.boolean(),
       usernameChangeSyncMessage: z.boolean(),
       // TODO(indutny): read it

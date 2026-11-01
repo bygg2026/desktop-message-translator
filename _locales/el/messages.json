@@ -2,8 +2,20 @@
   "icu:AxoAlertDialog.Cancel": {
     "messageformat": "Ακύρωση"
   },
+  "icu:AxoAlertDialog.Ok": {
+    "messageformat": "OK"
+  },
   "icu:AxoButton.Pending": {
     "messageformat": "Εκκρεμεί"
+  },
+  "icu:AxoColorSlider.Hue": {
+    "messageformat": "Hue"
+  },
+  "icu:AxoColorSlider.Saturation": {
+    "messageformat": "Saturation"
+  },
+  "icu:AxoColorSlider.Lightness": {
+    "messageformat": "Lightness"
   },
   "icu:AxoDialog.Back": {
     "messageformat": "Πίσω"
@@ -73,12 +85,6 @@
   },
   "icu:LinkedDevicesOnboardingDialog__bullet--2": {
     "messageformat": "Η κύρια συσκευή σου διαχειρίζεται τις συνδέσεις, μπορείς να συνδέσεις έως και 5 συσκευές."
-  },
-  "icu:LinkedDevicesOnboardingDialog__bullet--3": {
-    "messageformat": "Η διαχείριση των ρυθμίσεων λογαριασμού πραγματοποιείται αποκλειστικά στην κύρια συσκευή σου, συμπεριλαμβανομένων των ρυθμίσεων λογαριασμού και των αντιγράφων ασφαλείας."
-  },
-  "icu:LinkedDevicesOnboardingDialog__bullet--3--1": {
-    "messageformat": "Η διαχείριση των ρυθμίσεων λογαριασμού και των αντιγράφων ασφαλείας μπορεί να πραγματοποιηθεί μόνο από την κύρια συσκευή σου."
   },
   "icu:LinkedDevicesOnboardingDialog__bullet--3--2": {
     "messageformat": "Η διαχείριση των ρυθμίσεων λογαριασμού και των ασφαλών αντιγράφων Signal μπορεί να πραγματοποιηθεί μόνο από την κύρια συσκευή σου."
@@ -281,6 +287,9 @@
   "icu:archivedConversations": {
     "messageformat": "Αρχειοθετημένες συνομιλίες"
   },
+  "icu:LeftPane__MoreActionsLabel": {
+    "messageformat": "More actions"
+  },
   "icu:LeftPane__MoreActionsMenu__AddChatFolder": {
     "messageformat": "Προσθήκη φακέλου συνομιλίας"
   },
@@ -382,9 +391,6 @@
   },
   "icu:NavTabs__ItemIconLabel--UnreadCount": {
     "messageformat": "{count,number} μη αναγνωσμένα"
-  },
-  "icu:NavTabs__ItemIconLabel--MarkedUnread": {
-    "messageformat": "Επισημάνθηκε ως μη αναγνωσμένο"
   },
   "icu:NavTabs__ItemLabel--Chats": {
     "messageformat": "Συνομιλίες"
@@ -653,20 +659,11 @@
   "icu:SafetyNumberNotReady__learn-more": {
     "messageformat": "Μάθε περισσότερα"
   },
-  "icu:KeyTransparencyErrorDialog__Title": {
-    "messageformat": "Η Αυτόματη Επαλήθευση Κλειδιού δεν είναι διαθέσιμη προς το παρόν για τη συσκευή σου. Αποστολή αρχείου καταγραφής αποσφαλμάτωσης;"
-  },
   "icu:KeyTransparencyErrorDialog__Title-v2": {
     "messageformat": "Η Αυτόματη επαλήθευση κλειδιού δεν είναι διαθέσιμη προς το παρόν για τη συσκευή σου. Θέλεις να υποβάλεις μια αναφορά για να μας βοηθήσεις να βελτιωθούμε;"
   },
-  "icu:KeyTransparencyErrorDialog__Description": {
-    "messageformat": "Τα αρχεία καταγραφής αποσφαλμάτωσης βοηθούν να διαγνώσουμε και να διορθώσουμε το πρόβλημα και δεν περιλαμβάνουν πληροφορίες ταυτοποίησης."
-  },
   "icu:KeyTransparencyErrorDialog__Description-v2": {
     "messageformat": "Η συμπερίληψη των αρχείων καταγραφής αποσφαλμάτωσης μας βοηθά να διαγνώσουμε και να διορθώσουμε το πρόβλημα και δεν περιλαμβάνουν πληροφορίες ταυτοποίησης. Η κοινοποίηση είναι προαιρετική."
-  },
-  "icu:KeyTransparencyErrorDialog__ShareDebugLog__Label": {
-    "messageformat": "Κοινή χρήση αρχείου καταγραφής αποσφαλμάτωσης"
   },
   "icu:KeyTransparencyErrorDialog__ShareDebugLog__Label-v2": {
     "messageformat": "Συμπερίλαβε αρχείο καταγραφής εντοπισμού σφαλμάτων"
@@ -685,6 +682,9 @@
   },
   "icu:KeyTransparencyOnboardingDialog__Description": {
     "messageformat": "Για τις επαφές με τις οποίες έχεις συνδεθεί μέσω αριθμού τηλεφώνου, το Signal μπορεί να επιβεβαιώσει αυτόματα εάν η σύνδεση είναι ασφαλής χρησιμοποιώντας μια διαδικασία που ονομάζεται διαφάνεια κλειδιού. Για επιπλέον ασφάλεια, μπορείς ακόμα να επαληθεύσεις τις συνδέσεις χειροκίνητα χρησιμοποιώντας έναν κωδικό QR ή ή συγκρίνοντας τους αριθμούς ασφαλείας."
+  },
+  "icu:KeyTransparencyOnboardingDialog__Description-v2": {
+    "messageformat": "<paragraph>Για τις επαφές με τις οποίες έχεις συνδεθεί μέσω αριθμού τηλεφώνου, το Signal μπορεί να επιβεβαιώσει αυτόματα εάν η σύνδεση είναι ασφαλής χρησιμοποιώντας μια διαδικασία που ονομάζεται διαφάνεια κλειδιού.</paragraph><paragraph>Για επιπλέον ασφάλεια, μπορείς ακόμα να επαληθεύσεις τις συνδέσεις χειροκίνητα χρησιμοποιώντας έναν κωδικό QR ή ή συγκρίνοντας τους αριθμούς ασφαλείας.</paragraph>"
   },
   "icu:KeyTransparencyOnboardingDialog__Continue": {
     "messageformat": "Συνέχεια"
@@ -1493,6 +1493,9 @@
   "icu:ConversationMerge--learn-more": {
     "messageformat": "Μάθε περισσότερα"
   },
+  "icu:ConversationMerge--explainer-dialog--label": {
+    "messageformat": "Το ιστορικό μηνυμάτων σου έχει συγχωνευθεί"
+  },
   "icu:ConversationMerge--explainer-dialog--line-1": {
     "messageformat": "Μετά από μήνυμα με τον χρήστη {obsoleteConversationTitle} έμαθες ότι αυτός ο αριθμός ανήκει στον χρήστη {conversationTitle}. Ο αριθμός τηλεφώνου τους είναι ιδιωτικός."
   },
@@ -1753,6 +1756,9 @@
   },
   "icu:Preferences__EditChatFolderPage__SelectChatsDialog__Search__Placeholder": {
     "messageformat": "Αναζήτηση"
+  },
+  "icu:Preferences__EditChatFolderPage__SelectChatsDialog__NoChats": {
+    "messageformat": "Καμία συνομιλία"
   },
   "icu:Preferences__EditChatFolderPage__SelectChatsDialog__ChatTypesSection__Title": {
     "messageformat": "Τύποι συνομιλιών"
@@ -2246,6 +2252,24 @@
   "icu:deleteAccountDialogBody": {
     "messageformat": "Με αυτή την ενέργεια, τα στοιχεία του λογαριασμού σου, το προφίλ σου και όλα σου τα μηνύματα θα διαγραφούν. Επιπλέον, θα αφαιρεθείς από όλες τις ομάδες Signal. Η εφαρμογή θα κλείσει αφού ολοκληρωθεί αυτή η διαδικασία."
   },
+  "icu:DeleteAccountConfirmDialog--Title": {
+    "messageformat": "Delete account"
+  },
+  "icu:DeleteAccountConfirmDialog--Description": {
+    "messageformat": "This will delete your account info, profile, and all of your messages. You will also be removed from all Signal groups."
+  },
+  "icu:DeleteAccountConfirmDialog--ConfirmNumber": {
+    "messageformat": "Confirm your phone number"
+  },
+  "icu:DeleteAccountConfirmDialog--CountryCodePlaceholder": {
+    "messageformat": "Country code"
+  },
+  "icu:DeleteAccountConfirmDialog--NumberPlaceholder": {
+    "messageformat": "Phone number"
+  },
+  "icu:DeleteAccountConfirmDialog--DeleteButton": {
+    "messageformat": "Delete"
+  },
   "icu:deleteOldIndexedDBData": {
     "messageformat": "Υπάρχουν παρωχημένα δεδομένα από μια προηγούμενη εγκατάσταση του Signal Desktop. Αν επιλέξεις να συνεχίσεις, αυτά θα διαγραφούν και θα ξεκινήσεις από την αρχή."
   },
@@ -2398,9 +2422,6 @@
   },
   "icu:callRingtoneNotificationDescription": {
     "messageformat": "Αναπαραγωγή ήχων κλήσης"
-  },
-  "icu:callSystemNotificationDescription": {
-    "messageformat": "Εμφάνιση ειδοποιήσεων για κλήσεις"
   },
   "icu:incomingCallNotificationDescription": {
     "messageformat": "Ενεργοποίηση εισερχόμενων κλήσεων"
@@ -2999,6 +3020,9 @@
   "icu:FunPanelSticker__SubNavLabel": {
     "messageformat": "Πακέτα αυτοκόλλητων"
   },
+  "icu:FunPanelStickers__SubNavCategoryLabel--Favorites": {
+    "messageformat": "Favorites"
+  },
   "icu:FunPanelStickers__SubNavCategoryLabel--Recents": {
     "messageformat": "Πρόσφατα χρησιμοποιημένα"
   },
@@ -3010,6 +3034,9 @@
   },
   "icu:FunPanelStickers__SectionTitle--Recents": {
     "messageformat": "Πρόσφατα χρησιμοποιημένα"
+  },
+  "icu:FunPanelStickers__SectionTitle--Favorites": {
+    "messageformat": "Favorites"
   },
   "icu:FunPanelStickers__SectionTitle--Featured": {
     "messageformat": "Προτεινόμενα"
@@ -3524,6 +3551,9 @@
   "icu:MessageRequests--unblock-group-confirm-body": {
     "messageformat": "Τα μέλη της ομάδας θα μπορούν να σε ξαναπροσθέσουν στην ομάδα."
   },
+  "icu:MessageRequests--unblock-signal-confirm-body": {
+    "messageformat": "Θα λαμβάνεις ενημερώσεις και νέα από τη Signal."
+  },
   "icu:MessageRequests--block-and-report-spam-success-toast": {
     "messageformat": "Αναφέρθηκε ως ανεπιθύμητο και αποκλείστηκε."
   },
@@ -3538,6 +3568,9 @@
   },
   "icu:MessageRequests--block-group-confirm-body": {
     "messageformat": "Δεν θα λαμβάνεις άλλα μηνύματα ή ενημερώσεις από αυτή την ομάδα, και τα μέλη της δεν θα μπορούν να σε ξαναπροσθέσουν σε αυτήν."
+  },
+  "icu:MessageRequests--block-signal-confirm-body": {
+    "messageformat": "Δεν θα λαμβάνεις ενημερώσεις και νέα από τη Signal."
   },
   "icu:MessageRequests--reportAndMaybeBlock": {
     "messageformat": "Αναφορά..."
@@ -3866,6 +3899,9 @@
   "icu:callingDeviceSelection__settings": {
     "messageformat": "Ρυθμίσεις"
   },
+  "icu:callingDeviceSelection__settings-v2": {
+    "messageformat": "Call Settings"
+  },
   "icu:calling__participants--pluralized": {
     "messageformat": "{people, plural, one {{people,number} στην κλήση} other {{people,number} στην κλήση}}"
   },
@@ -3970,6 +4006,15 @@
   },
   "icu:callingDeviceSelection__select--default": {
     "messageformat": "Προκαθορισμένη"
+  },
+  "icu:callingDeviceSelection__select--default-nonwin": {
+    "messageformat": "Default: {deviceName}"
+  },
+  "icu:callingDeviceSelection__select--default_console": {
+    "messageformat": "Default: {deviceName}"
+  },
+  "icu:callingDeviceSelection__select--default_communications": {
+    "messageformat": "Default Communications: {deviceName}"
   },
   "icu:muteNotificationsTitle": {
     "messageformat": "Σίγαση ειδοποιήσεων"
@@ -4823,6 +4868,69 @@
   "icu:CompositionArea__AttachMenu__Poll": {
     "messageformat": "Δημοσκόπηση"
   },
+  "icu:CompositionArea__AttachMenu__Contact": {
+    "messageformat": "Contact"
+  },
+  "icu:ShareContactDialog__SelectContact__Title": {
+    "messageformat": "Select contact"
+  },
+  "icu:ShareContactDialog__SelectContact__SearchPlaceholder": {
+    "messageformat": "Search"
+  },
+  "icu:ShareContactDialog__SelectContact__EmptyState": {
+    "messageformat": "No contacts"
+  },
+  "icu:ShareContactDialog__SelectContact__NoResults": {
+    "messageformat": "No results for “{searchQuery}”"
+  },
+  "icu:ShareContactDialog__ShareContact__Title": {
+    "messageformat": "Share contact"
+  },
+  "icu:ShareContactDialog__ShareContact__Description": {
+    "messageformat": "Anyone you share this profile with will be able to message {name}."
+  },
+  "icu:ShareContactDialog__ShareContact__Send": {
+    "messageformat": "Send contact"
+  },
+  "icu:ShareContactDialog__ShareContact__EditName": {
+    "messageformat": "Edit name"
+  },
+  "icu:ShareContactDialog__EditName__Title": {
+    "messageformat": "Edit name"
+  },
+  "icu:ShareContactDialog__EditName__Prefix": {
+    "messageformat": "Prefix"
+  },
+  "icu:ShareContactDialog__EditName__GivenName": {
+    "messageformat": "First name"
+  },
+  "icu:ShareContactDialog__EditName__MiddleName": {
+    "messageformat": "Middle name"
+  },
+  "icu:ShareContactDialog__EditName__FamilyName": {
+    "messageformat": "Last name"
+  },
+  "icu:ShareContactDialog__EditName__Suffix": {
+    "messageformat": "Suffix"
+  },
+  "icu:ShareContactDialog__EditName__Organization": {
+    "messageformat": "Organization"
+  },
+  "icu:ShareContactDialog__ShareContact__EditPhoto": {
+    "messageformat": "Edit photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__Title": {
+    "messageformat": "Select a photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__ContactPhoto": {
+    "messageformat": "Contact photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__ProfilePhoto": {
+    "messageformat": "Profile photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__DefaultAvatar": {
+    "messageformat": "Default avatar"
+  },
   "icu:CompositionArea--attach-plus": {
     "messageformat": "Προσθήκη συνημμένου ή δημοσκόπησης"
   },
@@ -4861,9 +4969,6 @@
   },
   "icu:CompositionInput__editing-message": {
     "messageformat": "Επεξεργασία μηνύματος"
-  },
-  "icu:countMutedConversationsDescription": {
-    "messageformat": "Να συμπεριλαμβάνονται οι συνομιλίες σε σίγαση στη μέτρηση σημάτων"
   },
   "icu:ContactModal--nickname": {
     "messageformat": "Ψευδώνυμο"
@@ -5263,18 +5368,6 @@
   },
   "icu:UnreadReminders__notification__replySummary--many": {
     "messageformat": "{replyCount, plural, one {{replyCount,number} απάντηση από τον χρήστη {person1} και άλλους} other {{replyCount,number} απαντήσεις από τον χρήστη {person1} και άλλους}}"
-  },
-  "icu:ConversationNotificationsSettings__mentions__label": {
-    "messageformat": "Αναφορές"
-  },
-  "icu:ConversationNotificationsSettings__mentions__info": {
-    "messageformat": "Λήψη ειδοποιήσεων όταν σε αναφέρουν σε συνομιλίες σε σίγαση"
-  },
-  "icu:ConversationNotificationsSettings__mentions__select__always-notify": {
-    "messageformat": "Πάντα να ειδοποιούμαι"
-  },
-  "icu:ConversationNotificationsSettings__mentions__select__dont-notify-for-mentions-if-muted": {
-    "messageformat": "Να μην ειδοποιούμαι αν είναι σε σίγαση"
   },
   "icu:GroupLinkManagement--clipboard": {
     "messageformat": "Ο σύνδεσμος ομάδας αντιγράφτηκε."
@@ -6193,9 +6286,6 @@
   "icu:Preferences__SignalAccountKeys__Description": {
     "messageformat": "Αποθήκευσέ το σε ασφαλές μέρος, καθώς θα χρειαστείς τα στοιχεία σύνδεσής σου για να ανακτήσεις τον λογαριασμό και τα δεδομένα σου. Μην το μοιράζεσαι ποτέ με κανέναν."
   },
-  "icu:Preferences__SignalAccountKeys__AccountKey": {
-    "messageformat": "Κλειδί λογαριασμού"
-  },
   "icu:Preferences__SignalAccountKeys__AccountID": {
     "messageformat": "ID λογαριασμού"
   },
@@ -6257,7 +6347,7 @@
     "messageformat": "PIN Signal"
   },
   "icu:Preferences--signal-pin__footer": {
-    "messageformat": "PINs keep information stored with Signal encrypted so only you can access it. Your PIN cannot be recovered. Your profile, settings, and contacts will restore when you reinstall Signal. <learnMoreLink>Learn more</learnMoreLink>"
+    "messageformat": "Τα PIN διατηρούν κρυπτογραφημένες τις πληροφορίες που είναι αποθηκευμένες στο Signal, ώστε μόνο εσύ να έχεις πρόσβαση σε αυτές. Δεν ήταν δυνατή η επαναφορά του PIN σου. Θα γίνει επαναφορά του προφίλ, των ρυθμίσεων και των επαφών σου όταν κάνεις επανεγκατάσταση. <learnMoreLink>Μάθε περισσότερα</learnMoreLink>"
   },
   "icu:Preferences--signal-pin-advanced-settings": {
     "messageformat": "Ρυθμίσεις PIN για προχωρημένους"
@@ -6272,7 +6362,7 @@
     "messageformat": "Αν απενεργοποιήσεις το PIN, θα χάσεις όλα τα δεδομένα όταν επανεγγραφτείς στο Signal, εκτός εάν δημιουργήσεις χειροκίνητα αντίγραφο ασφαλείας και το ανακτήσεις. Δεν μπορείς να ενεργοποιήσεις το Κλείδωμα Εγγραφής όσο το PIN είναι απενεργοποιημένο."
   },
   "icu:DisableSignalPinErrorDialog--reg-lock--title": {
-    "messageformat": "Disable PIN failed due to registration lock"
+    "messageformat": "Η απενεργοποίηση του PIN απέτυχε λόγω του κλειδώματος εγγραφής"
   },
   "icu:DisableSignalPinErrorDialog--reg-lock--body": {
     "messageformat": "Πρέπει να απενεργοποιήσεις το κλείδωμα εγγραφής πριν απενεργοποιήσεις το PIN σου."
@@ -6281,7 +6371,7 @@
     "messageformat": "OK"
   },
   "icu:DisableSignalPinErrorDialog--backups--title": {
-    "messageformat": "Disable PIN failed due to backups"
+    "messageformat": "Η απενεργοποίηση του PIN απέτυχε λόγω των αντιγράφων ασφαλείας"
   },
   "icu:DisableSignalPinErrorDialog--backups--body": {
     "messageformat": "Πρέπει να απενεργοποιήσεις τα Αντίγραφα ασφαλείας πριν απενεργοποιήσεις το PIN σου."
@@ -6304,9 +6394,6 @@
   "icu:Preferences--registration-lock__footer": {
     "messageformat": "Να απαιτείται το PIN Signal σου για να εγγραφεί ο αριθμός τηλεφώνου σου ξανά στο Signal."
   },
-  "icu:Preferences--notification-content": {
-    "messageformat": "Περιεχόμενο ειδοποίησης"
-  },
   "icu:Preferences__Chats__TextInputSection__Title": {
     "messageformat": "Εισαγωγή κειμένου"
   },
@@ -6318,9 +6405,6 @@
   },
   "icu:Preferences__Notifications__SoundsSection__Title": {
     "messageformat": "Ήχοι"
-  },
-  "icu:Preferences__Notifications__AppBadgeSection__Title": {
-    "messageformat": "Σήμα εφαρμογής"
   },
   "icu:Preferences__Notifications__AppBadgeSection__Title-v2": {
     "messageformat": "Μη αναγνωσμένα σήματα"
@@ -6700,6 +6784,9 @@
   "icu:Preferences--blocked-users--description": {
     "messageformat": "Οι αποκλεισμένοι χρήστες δεν θα μπορούν να σε καλέσουν ή να σου στείλουν μηνύματα"
   },
+  "icu:Preferences--add-blocked": {
+    "messageformat": "Προσθήκη αποκλεισμένου χρήστη ή ομάδας"
+  },
   "icu:Preferences--blocked-users": {
     "messageformat": "Αποκλεισμένοι χρήστες"
   },
@@ -6708,6 +6795,12 @@
   },
   "icu:Preferences--blocked--blocked-on": {
     "messageformat": "Αποκλείστηκε στις {blockedAt}"
+  },
+  "icu:Preferences--BlockChooser--Done": {
+    "messageformat": "Τέλος"
+  },
+  "icu:Preferences--BlockChooser--Search--Placeholder": {
+    "messageformat": "Αναζήτηση"
   },
   "icu:Preferences--signal-backups": {
     "messageformat": "Signal Secure Backups"
@@ -7105,6 +7198,36 @@
   "icu:InstallScreenUpdateDialog--cannot-update__body": {
     "messageformat": "Η ενημέρωση του Signal Desktop απέτυχε, αλλά υπάρχει διαθέσιμη νέα έκδοση. Πήγαινε στο {downloadUrl} και κάνε εγκατάσταση της νέας έκδοσης με μη αυτόματο τρόπο και, στη συνέχεια, επικοινώνησε με την υποστήριξη ή γράψε το σφάλμα σχετικά με αυτό το πρόβλημα."
   },
+  "icu:EntryPoint--signal-logo": {
+    "messageformat": "Signal Logo"
+  },
+  "icu:EntryPoint--Title--Line1": {
+    "messageformat": "Take privacy with you."
+  },
+  "icu:EntryPoint--Title--Line2": {
+    "messageformat": "Be yourself in every message."
+  },
+  "icu:EntryPoint--link-button": {
+    "messageformat": "Link your account"
+  },
+  "icu:EntryPoint--more-options-button": {
+    "messageformat": "More options"
+  },
+  "icu:EntryPoint--nonprofit": {
+    "messageformat": "Signal is a 501c3 nonprofit"
+  },
+  "icu:EntryPoint--terms": {
+    "messageformat": "Terms & privacy policy"
+  },
+  "icu:EntryPoint--MoreOptions--Title": {
+    "messageformat": "More options"
+  },
+  "icu:EntryPoint--MoreOptions--RegistrationButton--Title": {
+    "messageformat": "Create a new account"
+  },
+  "icu:EntryPoint--MoreOptions--RegistrationButton--Description": {
+    "messageformat": "Create a new Signal account using your phone number."
+  },
   "icu:StandaloneRegistration--signal-logo": {
     "messageformat": "Λογότυπο Signal"
   },
@@ -7124,7 +7247,7 @@
     "messageformat": "Δοκίμασε ξανά σε {duration}."
   },
   "icu:StandaloneRegistration--PhoneNumber--RegionCodeSelector--Label": {
-    "messageformat": "Select region code"
+    "messageformat": "Επιλογή κωδικού χώρας"
   },
   "icu:StandaloneRegistration--PhoneNumber--placeholder": {
     "messageformat": "Αριθμός τηλεφώνου"
@@ -7299,6 +7422,21 @@
   },
   "icu:StandaloneRegistration--VerificationCode--CannotSendCodeTemporary--ok-button": {
     "messageformat": "OK"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Title": {
+    "messageformat": "Having trouble registering?"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet1": {
+    "messageformat": "Make sure your phone has a cellular signal to receive your SMS or call"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet2": {
+    "messageformat": "Confirm you can receive a phone call to the number"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet3": {
+    "messageformat": "Check that you have entered your phone number correctly"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Footer": {
+    "messageformat": "If you still can’t register, follow these <troubleshootingLink>troubleshooting steps</troubleshootingLink> or <contactSupportLink>Contact Support</contactSupportLink>."
   },
   "icu:StandaloneRegistration--ProfileEntry--header": {
     "messageformat": "Δημιούργησε το προφίλ σου"
@@ -7649,10 +7787,10 @@
     "messageformat": "Ενεργοποίησε το \"Signal\""
   },
   "icu:MediaPermissionsModal__step-2--windows--microphone": {
-    "messageformat": "Enable microphone access for Signal"
+    "messageformat": "Ενεργοποίηση πρόσβασης στο μικρόφωνο για το Signal"
   },
   "icu:MediaPermissionsModal__step-2--windows--camera": {
-    "messageformat": "Enable camera access for Signal"
+    "messageformat": "Ενεργοποίηση πρόσβασης στην κάμερα για το Signal"
   },
   "icu:MediaPermissionsModal__open": {
     "messageformat": "Πήγαινε στις ρυθμίσεις"
@@ -8204,7 +8342,7 @@
     "messageformat": "Τα ονόματα χρήστη συνδυάζονται πάντα με ένα σύνολο αριθμών."
   },
   "icu:EditUsernameModalBody__discriminator-label": {
-    "messageformat": "Username digits"
+    "messageformat": "Ψηφία ονόματος χρήστη"
   },
   "icu:EditUsernameModalBody__learn-more": {
     "messageformat": "Μάθε περισσότερα"
@@ -8340,13 +8478,13 @@
     "messageformat": "Άλλαξε το PIN σου στο Signal"
   },
   "icu:PinChangeModal__title--create--without-pin": {
-    "messageformat": "Create your Signal PIN"
+    "messageformat": "Δημιουργία του PIN Signal σου"
   },
   "icu:PinChangeModal__body--create": {
     "messageformat": "Μπορείς να αλλάξεις το PIN σου εφ' όσον αυτή η συσκευή είναι εγγεγραμμένη. <learnMoreLink>Μάθε περισσότερα</learnMoreLink>"
   },
   "icu:PinChangeModal__body--create--without-pin": {
-    "messageformat": "PINs keep information stored with Signal encrypted so only you can access it. Your profile, settings, and contacts will restore when you reinstall. You won't need your PIN to open the app. <learnMoreLink>Learn more</learnMoreLink>"
+    "messageformat": "Τα PIN διατηρούν κρυπτογραφημένες τις πληροφορίες που είναι αποθηκευμένες στο Signal, ώστε μόνο εσύ να έχεις πρόσβαση σε αυτές. Θα γίνει επαναφορά του προφίλ, των ρυθμίσεων και των επαφών όταν κάνεις επανεγκατάσταση. Δεν θα χρειάζεσαι το PIN σου για να ανοίξεις την εφαρμογή. <learnMoreLink>Μάθε περισσότερα</learnMoreLink>"
   },
   "icu:PinChangeModal__title--confirm": {
     "messageformat": "Επιβεβαίωση PIN Signal"
@@ -8588,12 +8726,6 @@
   "icu:CallLinkPendingParticipantModal__DenyButtonLabel": {
     "messageformat": "Απαγόρευση εισόδου"
   },
-  "icu:CallLinkRestrictionsSelect__Option--Off": {
-    "messageformat": "Ανενεργό"
-  },
-  "icu:CallLinkRestrictionsSelect__Option--On": {
-    "messageformat": "Ενεργό"
-  },
   "icu:CallLinkAddNameModal__Title": {
     "messageformat": "Προσθήκη ονόματος κλήσης"
   },
@@ -8641,6 +8773,39 @@
   },
   "icu:SaveMultiDialog__title": {
     "messageformat": "Αποθήκευση συνημμένων"
+  },
+  "icu:EmbeddedContact__message": {
+    "messageformat": "Μήνυμα"
+  },
+  "icu:ContactDetail__message": {
+    "messageformat": "Μήνυμα"
+  },
+  "icu:ContactDetail__add-to-group": {
+    "messageformat": "Προσθήκη σε μια ομάδα"
+  },
+  "icu:ContactDetail__nickname": {
+    "messageformat": "Ψευδώνυμο"
+  },
+  "icu:ContactDetail__note": {
+    "messageformat": "Σημειώσεις"
+  },
+  "icu:email-v2": {
+    "messageformat": "Email"
+  },
+  "icu:home-v2": {
+    "messageformat": "Σπίτι"
+  },
+  "icu:mobile-v2": {
+    "messageformat": "Κινητό"
+  },
+  "icu:work-v2": {
+    "messageformat": "Εργασία"
+  },
+  "icu:phone-v2": {
+    "messageformat": "Τηλέφωνο"
+  },
+  "icu:address-v2": {
+    "messageformat": "Διεύθυνση"
   },
   "icu:WhatsNew__modal-title": {
     "messageformat": "Νέες δυνατότητες"
@@ -8806,6 +8971,9 @@
   },
   "icu:DonationReceipt__footer-text-v2": {
     "messageformat": "Σε ευχαριστούμε που στηρίζεις το Signal. Η συνεισφορά σου βοηθά στην ανάπτυξη της τεχνολογίας απορρήτου ανοιχτού κώδικα, που προστατεύει την ελευθερία της έκφρασης και δίνει τη δυνατότητα ασφαλών διεθνών επικοινωνιών για εκατομμύρια ανθρώπους σε όλο τον κόσμο. Αν είσαι κάτοικος των Ηνωμένων Πολιτειών, παρακαλούμε κράτα αυτή την απόδειξη για τα φορολογικά σου αρχεία. Το Signal Technology Foundation είναι ένας μη κερδοσκοπικός οργανισμός στις Ηνωμένες Πολιτείες, που έχει φοροαπαλλαγή σύμφωνα με την ενότητα 501c3 του Internal Revenue Code. Το Federal Tax ID μας είναι 82-4506840. Το Signal δεν παρείχε κανένα αγαθό ή υπηρεσία ως αντάλλαγμα για αυτή τη συνεισφορά."
+  },
+  "icu:MessageCta__Donate": {
+    "messageformat": "Κάνε δωρεά"
   },
   "icu:Donations__OfflineTooltip": {
     "messageformat": "Είσαι εκτός σύνδεσης. Συνδέσου στο διαδίκτυο για να ολοκληρώσεις μια δωρεά."
@@ -9005,6 +9173,9 @@
   "icu:CallQualitySurvey__WhatIssuesDidYouHave__SomethingElse__TextArea__AccessibilityLabel": {
     "messageformat": "Περιγραφή προβλημάτων"
   },
+  "icu:CallQualitySurvey__WhatIssuesDidYouHave__SomethingElse__TextArea__Placeholder": {
+    "messageformat": "Περίγραψε το πρόβλημά σου"
+  },
   "icu:CallQualitySurvey__WhatIssuesDidYouHave__SomethingElse__TextArea__HelpText": {
     "messageformat": "Πρόσθεσε τυχόν λεπτομέρειες σχετικές με το πρόβλημα. Οτιδήποτε κοινοποιείς εδώ θα παραμείνει ιδιωτικό και θα χρησιμοποιηθεί μόνο για τη βελτίωση των κλήσεων στο Signal."
   },
@@ -9114,16 +9285,25 @@
     "messageformat": "Μικρές τροποποιήσεις, επιδιορθώσεις σφαλμάτων και βελτιώσεις απόδοσης. Ευχαριστούμε που χρησιμοποιείς το Signal!",
     "ignoreUnused": true
   },
-  "icu:WhatsNew__8.26--0": {
-    "messageformat": "Βελτιώσεις στην αναζήτηση των μελών ομάδας."
-  },
-  "icu:WhatsNew__8.27--0": {
-    "messageformat": "Βελτιωμένες ρυθμίσεις ειδοποιήσεων με περισσότερες επιλογές σχετικά με τον τρόπο και τον χρόνο εμφάνισης των ειδοποιήσεων."
-  },
   "icu:WhatsNew__8.30--0": {
-    "messageformat": "Thanks to a few performance improvements, your CPU will be slightly happier during video calls (even if you're not smiling)."
+    "messageformat": "Βελτιώσεις στην απόδοση των βιντεοκλήσεων."
   },
   "icu:WhatsNew__8.30--1": {
-    "messageformat": "We also added a convenient shortcut to open your system settings on Windows if you try to join a video call and Signal doesn't have permission to access the camera. Now it's easier to see what you need to do so that people can see you."
+    "messageformat": "Προσθέσαμε επίσης μια εύχρηστη συντόμευση για να ανοίγεις τις ρυθμίσεις συστήματός στα Windows, σε περίπτωση που προσπαθήσεις να συμμετάσχεις σε μια βιντεοκλήση και το Signal δεν έχει άδεια πρόσβασης στην κάμερα."
+  },
+  "icu:WhatsNew__8.32--0": {
+    "messageformat": "Το φίλτρο για τα μη αναγνωσμένα μηνύματα είναι πλέον διαθέσιμο τόσο στους φακέλους μηνυμάτων όσο και στη λειτουργία αναζήτησης."
+  },
+  "icu:WhatsNew__8.32--1": {
+    "messageformat": "Βελτιώθηκε η αξιοπιστία της μεταφόρτωσης αρχείων σε συνθήκες ασταθούς σύνδεσης δικτύου. Ευχαριστούμε, <GH3mmmbulus></GH3mmmbulus>!"
+  },
+  "icu:WhatsNew__8.32--2": {
+    "messageformat": "Η συντόμευση &quot;(N)&quot; αντιστοιχίζεται πλέον σωστά στο emoji με τον αντίχειρα προς τα κάτω. Ευχαριστούμε, <lnicola></lnicola>, για τη διόρθωση σφάλματος."
+  },
+  "icu:WhatsNew__8.34--0": {
+    "messageformat": "Signal Desktop now supports contact sharing too, so you can maintain eye contact with your computer screen without having to make physical contact with your smartphone."
+  },
+  "icu:WhatsNew__8.34--1": {
+    "messageformat": "Improved handling and performance for connected audio devices."
   }
 }

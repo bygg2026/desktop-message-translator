@@ -1,5 +1,6 @@
 // Copyright 2019 Signal Messenger, LLC
 // SPDX-License-Identifier: AGPL-3.0-only
+// oxlint-disable signal-desktop/enforce-class-name-has-styles
 
 import '../ts/window.d.ts';
 
@@ -145,7 +146,6 @@ window.SignalContext = {
   getHourCyclePreference: () => HourCyclePreference.UnknownPreference,
   getPreferredSystemLocales: () => ['en'],
   getLocaleOverride: () => null,
-  getLocaleDisplayNames: () => ({ en: { en: 'English' } }),
   getResolvedMessagesLocale: () => 'en',
 
   getLocalizedEmojiList: async locale => {
@@ -222,6 +222,7 @@ const withGlobalTypesProvider = (Story, context) => {
   document.documentElement.setAttribute('dir', direction);
 
   return (
+    // oxlint-disable-next-line signal-desktop/enforce-static-class-names
     <div className={styles.container}>
       <StorybookThemeContext.Provider value={theme}>
         <Story {...context} />
@@ -257,6 +258,8 @@ function withFunProvider(Story, context) {
       recentGifs={[]}
       emojiSkinToneDefault={Emoji.SkinTone.None}
       onEmojiSkinToneDefaultChange={noop}
+      favoriteStickers={[]}
+      isFavoriteStickersEnabled
       isStickerReplySendEnabled
       installedStickerPacks={[]}
       showStickerPickerHint={false}

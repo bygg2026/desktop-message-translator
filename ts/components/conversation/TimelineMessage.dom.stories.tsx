@@ -9,7 +9,10 @@ import type { Meta, StoryFn } from '@storybook/react';
 import { tw } from '../../axo/tw.dom.tsx';
 
 import { SignalService } from '../../protobuf/index.std.ts';
-import { ConversationColors } from '../../types/Colors.std.ts';
+import {
+  ConversationColors,
+  DEFAULT_BUBBLE_COLOR,
+} from '../../types/ChatStyle.std.ts';
 import type { Props } from './TimelineMessage.dom.tsx';
 import { TimelineMessage } from './TimelineMessage.dom.tsx';
 import { MessageInteractivity, TextDirection } from './Message.dom.tsx';
@@ -31,7 +34,10 @@ import { pngUrl } from '../../storybook/Fixtures.std.ts';
 import { getDefaultConversation } from '../../test-helpers/getDefaultConversation.std.ts';
 import { WidthBreakpoint } from '../_util.std.ts';
 import { DAY, HOUR, MINUTE, SECOND } from '../../util/durations/index.std.ts';
-import { ContactFormType } from '../../types/EmbeddedContact.std.ts';
+import {
+  ContactFormType,
+  type EmbeddedContactForUIType,
+} from '../../types/EmbeddedContact.std.ts';
 import { GiftBadgeStates } from '../../types/GiftBadgeStates.std.ts';
 import {
   fakeAttachment,
@@ -45,6 +51,8 @@ import type { RenderAudioAttachmentProps } from '../../state/smart/renderAudioAt
 import type { PollVoteWithUserType } from '../../state/selectors/message.preload.ts';
 import { generateAci } from '../../test-helpers/serviceIdUtils.std.ts';
 import { Emoji } from '../../axo/emoji.std.ts';
+import { AxoColor } from '../../axo/AxoColor.std.ts';
+import { Uint32 } from '@signalapp/types';
 
 const { isBoolean, noop } = lodash;
 
@@ -53,7 +61,8 @@ const { i18n } = window.SignalContext;
 const quoteOptions = {
   none: undefined,
   basic: {
-    conversationColor: ConversationColors[2],
+    bubbleColor: { bubbleColorPreset: 'crimson' },
+    conversationTitle: 'Someone',
     text: 'The quoted message',
     isFromMe: false,
     sentAt: Date.now(),
@@ -63,7 +72,7 @@ const quoteOptions = {
     isViewOnce: false,
     isGiftBadge: false,
   },
-};
+} as const satisfies Record<string, Props['quote']>;
 
 export default {
   title: 'Components/Conversation/TimelineMessage',
@@ -254,11 +263,10 @@ const createProps = (overrideProps: Partial<Props> = {}): Props => ({
   canForward: true,
   canRetry: overrideProps.canRetry || false,
   canRetryDeleteForEveryone: overrideProps.canRetryDeleteForEveryone || false,
-  checkForAccount: action('checkForAccount'),
   clearTargetedMessage: action('clearSelectedMessage'),
   containerElementRef: createRef<HTMLElement | null>(),
   containerWidthBreakpoint: WidthBreakpoint.Wide,
-  conversationColor: overrideProps.conversationColor ?? ConversationColors[0],
+  bubbleColor: overrideProps.bubbleColor ?? DEFAULT_BUBBLE_COLOR,
   conversationTitle: overrideProps.conversationTitle ?? 'Conversation Title',
   conversationId: overrideProps.conversationId ?? '',
   conversationType: overrideProps.conversationType || 'direct',
@@ -276,6 +284,7 @@ const createProps = (overrideProps: Partial<Props> = {}): Props => ({
   expirationTimestamp: overrideProps.expirationTimestamp ?? 0,
   getPreferredBadge: overrideProps.getPreferredBadge || (() => undefined),
   giftBadge: overrideProps.giftBadge,
+  handleClickCtaButton: action('handleClickCtaButton'),
   handleDebugMessage: action('handleDebugMessage'),
   i18n,
   platform: 'darwin',
@@ -367,7 +376,9 @@ const createProps = (overrideProps: Partial<Props> = {}): Props => ({
   toggleDeleteMessagesModal: action('toggleDeleteMessagesModal'),
   toggleForwardMessagesModal: action('toggleForwardMessagesModal'),
   showLightbox: action('showLightbox'),
-  startConversation: action('startConversation'),
+  startConversationWithSharedContact: action(
+    'startConversationWithSharedContact'
+  ),
   status: overrideProps.status || 'sent',
   text: overrideProps.text ?? '',
   textDirection: overrideProps.textDirection || TextDirection.Default,
@@ -927,7 +938,7 @@ export const Quote = Template.bind({});
 Quote.args = {
   quote: {
     text: 'hello my good friend',
-    conversationColor: 'ultramarine',
+    bubbleColor: DEFAULT_BUBBLE_COLOR,
     conversationTitle: 'Convo',
     isFromMe: false,
     sentAt: 0,
@@ -1385,7 +1396,7 @@ LinkPreviewWithLongWord.args = {
 export const LinkPreviewWithQuote = Template.bind({});
 LinkPreviewWithQuote.args = {
   quote: {
-    conversationColor: ConversationColors[2],
+    bubbleColor: { bubbleColorPreset: 'vermilion' },
     conversationTitle: getDefaultConversation().title,
     text: 'The quoted message',
     isFromMe: false,
@@ -3392,7 +3403,7 @@ export function Colors(): JSX.Element {
         <div key={color}>
           {renderOneInBothDirections(
             createProps({
-              conversationColor: color,
+              bubbleColor: { bubbleColorPreset: color },
               text: `Here is a preview of the chat color: ${color}. The color is visible to only you.`,
             })
           )}
@@ -3468,18 +3479,24 @@ export function CustomColor(): JSX.Element {
       {renderThree({
         ...createProps({ text: 'Solid.' }),
         direction: 'outgoing',
-        customColor: {
-          start: { hue: 82, saturation: 35 },
+        bubbleColor: {
+          customColor: {
+            solid: AxoColor.parse('hsl(82, 35%, 30%)').argbInt(),
+          },
         },
       })}
       <br style={{ clear: 'both' }} />
       {renderThree({
         ...createProps({ text: 'Gradient.' }),
         direction: 'outgoing',
-        customColor: {
-          deg: 192,
-          start: { hue: 304, saturation: 85 },
-          end: { hue: 231, saturation: 76 },
+        bubbleColor: {
+          customColor: {
+            gradient: {
+              angle: Uint32.fromNumber(192),
+              start: AxoColor.parse('hsl(304, 85%, 40.33%)').argbInt(),
+              end: AxoColor.parse('hsl(231, 76%, 47%)').argbInt(),
+            },
+          },
         },
       })}
     </>
@@ -3560,7 +3577,7 @@ export const StoryReply = (): JSX.Element => {
     ...createProps({ direction: 'outgoing', text: 'Wow!' }),
     storyReplyContext: {
       authorTitle: conversation.firstName || conversation.title,
-      conversationColor: ConversationColors[0],
+      bubbleColor: DEFAULT_BUBBLE_COLOR,
       isFromMe: false,
       rawAttachment: fakeAttachment({
         url: '/fixtures/snow.jpg',
@@ -3578,7 +3595,7 @@ export const StoryReplyYours = (): JSX.Element => {
     ...createProps({ direction: 'incoming', text: 'Wow!' }),
     storyReplyContext: {
       authorTitle: conversation.firstName || conversation.title,
-      conversationColor: ConversationColors[0],
+      bubbleColor: DEFAULT_BUBBLE_COLOR,
       isFromMe: true,
       rawAttachment: fakeAttachment({
         url: '/fixtures/snow.jpg',
@@ -3596,7 +3613,7 @@ export const StoryReplyEmoji = (): JSX.Element => {
     ...createProps({ text: 'Wow!' }),
     storyReplyContext: {
       authorTitle: conversation.firstName || conversation.title,
-      conversationColor: ConversationColors[0],
+      bubbleColor: DEFAULT_BUBBLE_COLOR,
       emoji: Emoji.LIPSTICK,
       isFromMe: false,
       rawAttachment: fakeAttachment({
@@ -3608,7 +3625,8 @@ export const StoryReplyEmoji = (): JSX.Element => {
   });
 };
 
-const fullContact = {
+const aci = generateAci();
+const fullContact: EmbeddedContactForUIType = {
   avatar: {
     avatar: fakeAttachment({
       path: '/fixtures/giphy-GVNvOUpeYmI7e.gif',
@@ -3635,6 +3653,13 @@ const fullContact = {
       type: ContactFormType.HOME,
     },
   ],
+  aci,
+  note: 'note',
+  nickname: {
+    givenName: 'NickGiven',
+    familyName: 'NickFamily',
+  },
+  resolution: { type: 'aci', aci },
 };
 
 export const EmbeddedContactFullContact = Template.bind({});
@@ -3718,19 +3743,22 @@ EmbeddedContactAvatarPermanentError.args = {
 
 export const EmbeddedContactWithSendMessage = Template.bind({});
 EmbeddedContactWithSendMessage.args = {
-  contact: {
-    ...fullContact,
-    // oxlint-disable-next-line typescript/no-non-null-assertion
-    firstNumber: fullContact.number[0]!.value,
-    serviceId: generateAci(),
-  },
+  contact: fullContact,
   direction: 'incoming',
   canForward: false,
 };
 
+const emptyContact = {
+  aci: undefined,
+  nickname: undefined,
+  note: undefined,
+  resolution: { type: 'not-on-signal' },
+} satisfies EmbeddedContactForUIType;
+
 export const EmbeddedContactOnlyEmail = Template.bind({});
 EmbeddedContactOnlyEmail.args = {
   contact: {
+    ...emptyContact,
     email: fullContact.email,
   },
   canForward: false,
@@ -3739,6 +3767,7 @@ EmbeddedContactOnlyEmail.args = {
 export const EmbeddedContactGivenName = Template.bind({});
 EmbeddedContactGivenName.args = {
   contact: {
+    ...emptyContact,
     name: {
       givenName: 'Jerry',
     },
@@ -3746,9 +3775,22 @@ EmbeddedContactGivenName.args = {
   canForward: false,
 };
 
-export const EmbeddedContactOrganization = Template.bind({});
-EmbeddedContactOrganization.args = {
+export const EmbeddedContactOrganizationOnly = Template.bind({});
+EmbeddedContactOrganizationOnly.args = {
   contact: {
+    ...emptyContact,
+    organization: 'Company 5',
+  },
+  canForward: false,
+};
+
+export const EmbeddedContactNameAndOrganization = Template.bind({});
+EmbeddedContactNameAndOrganization.args = {
+  contact: {
+    ...emptyContact,
+    name: {
+      givenName: 'Jerry',
+    },
     organization: 'Company 5',
   },
   canForward: false,
@@ -3757,6 +3799,7 @@ EmbeddedContactOrganization.args = {
 export const EmbeddedContactGivenFamilyName = Template.bind({});
 EmbeddedContactGivenFamilyName.args = {
   contact: {
+    ...emptyContact,
     name: {
       givenName: 'Jerry',
       familyName: 'FamilyName',
@@ -3768,6 +3811,7 @@ EmbeddedContactGivenFamilyName.args = {
 export const EmbeddedContactFamilyName = Template.bind({});
 EmbeddedContactFamilyName.args = {
   contact: {
+    ...emptyContact,
     name: {
       familyName: 'FamilyName',
     },
@@ -4231,4 +4275,20 @@ SignalReleaseNoteMessage.args = {
       height: 400,
     }),
   ],
+};
+
+export const SignalReleaseNoteMessageCtaDonate = Template.bind({});
+SignalReleaseNoteMessageCtaDonate.args = {
+  isSignalConversation: true,
+  text: 'Signal. Proudly Nonprofit.\n\nDonating earns a badge on your profile. As an independent nonprofit, we rely on donations to securely send your messages, host your calls, and build new features.\n\nWe can’t do this without you.\n\nUS donations are tax deductible.',
+  attachments: [
+    fakeAttachment({
+      url: '/fixtures/donate-heart.png',
+      fileName: 'donate-heart.png',
+      contentType: IMAGE_PNG,
+      width: 400,
+      height: 400,
+    }),
+  ],
+  callToActionId: 'donate',
 };

@@ -2,8 +2,20 @@
   "icu:AxoAlertDialog.Cancel": {
     "messageformat": "Batal"
   },
+  "icu:AxoAlertDialog.Ok": {
+    "messageformat": "OK"
+  },
   "icu:AxoButton.Pending": {
     "messageformat": "Belum selesai"
+  },
+  "icu:AxoColorSlider.Hue": {
+    "messageformat": "Hue"
+  },
+  "icu:AxoColorSlider.Saturation": {
+    "messageformat": "Saturation"
+  },
+  "icu:AxoColorSlider.Lightness": {
+    "messageformat": "Lightness"
   },
   "icu:AxoDialog.Back": {
     "messageformat": "Kembali"
@@ -73,12 +85,6 @@
   },
   "icu:LinkedDevicesOnboardingDialog__bullet--2": {
     "messageformat": "Peranti utama anda mengurus peranti yang dipautkan, anda boleh memautkan hingga 5 peranti."
-  },
-  "icu:LinkedDevicesOnboardingDialog__bullet--3": {
-    "messageformat": "Tetapan akaun hanya diurus pada peranti utama anda, termasuk tetapan akaun dan sandaran."
-  },
-  "icu:LinkedDevicesOnboardingDialog__bullet--3--1": {
-    "messageformat": "Tetapan dan sandaran akaun hanya boleh diuruskan pada peranti utama anda."
   },
   "icu:LinkedDevicesOnboardingDialog__bullet--3--2": {
     "messageformat": "Tetapan akaun dan Sandaran Selamat Signal hanya boleh diuruskan pada peranti utama anda."
@@ -281,6 +287,9 @@
   "icu:archivedConversations": {
     "messageformat": "Sembang Diarkibkan"
   },
+  "icu:LeftPane__MoreActionsLabel": {
+    "messageformat": "More actions"
+  },
   "icu:LeftPane__MoreActionsMenu__AddChatFolder": {
     "messageformat": "Tambah folder sembang"
   },
@@ -382,9 +391,6 @@
   },
   "icu:NavTabs__ItemIconLabel--UnreadCount": {
     "messageformat": "{count,number} belum dibaca"
-  },
-  "icu:NavTabs__ItemIconLabel--MarkedUnread": {
-    "messageformat": "Ditanda belum dibaca"
   },
   "icu:NavTabs__ItemLabel--Chats": {
     "messageformat": "Sembang"
@@ -653,20 +659,11 @@
   "icu:SafetyNumberNotReady__learn-more": {
     "messageformat": "Ketahui lebih lanjut"
   },
-  "icu:KeyTransparencyErrorDialog__Title": {
-    "messageformat": "Pengesahan Kunci Automatik pada masa ini tidak tersedia untuk peranti anda. Hantar log nyahpepijat?"
-  },
   "icu:KeyTransparencyErrorDialog__Title-v2": {
     "messageformat": "Pengesahan Kunci Automatik pada masa ini tidak tersedia untuk peranti anda. Hantar laporan untuk membantu kami menambah baik?"
   },
-  "icu:KeyTransparencyErrorDialog__Description": {
-    "messageformat": "Log nyahpepijat membantu kami mengenal pasti dan membetulkan isu ini, dan tidak mengandungi maklumat pengenalan diri."
-  },
   "icu:KeyTransparencyErrorDialog__Description-v2": {
     "messageformat": "Menyertakan log nyahpepijat anda membantu kami mendiagnosis dan membetulkan isu tersebut, dan log ini tidak mengandungi maklumat pengenalan diri. Perkongsian adalah pilihan."
-  },
-  "icu:KeyTransparencyErrorDialog__ShareDebugLog__Label": {
-    "messageformat": "Kongsi log nyahpepijat"
   },
   "icu:KeyTransparencyErrorDialog__ShareDebugLog__Label-v2": {
     "messageformat": "Sertakan log nyahpepijat"
@@ -685,6 +682,9 @@
   },
   "icu:KeyTransparencyOnboardingDialog__Description": {
     "messageformat": "Bagi kenalan yang anda sambungkan melalui nombor telefon, Signal boleh mengesahkan secara automatik sama ada sambungan itu selamat menggunakan proses yang dipanggil ketelusan kunci. Untuk keselamatan tambahan, anda masih boleh mengesahkan sambungan secara manual menggunakan kod QR atau dengan membandingkan nombor keselamatan."
+  },
+  "icu:KeyTransparencyOnboardingDialog__Description-v2": {
+    "messageformat": "<paragraph>Bagi kenalan yang anda sambungkan melalui nombor telefon, Signal boleh mengesahkan secara automatik sama ada sambungan itu selamat, menggunakan proses yang dipanggil ketelusan kunci.</paragraph><paragraph>Untuk keselamatan tambahan, anda masih boleh mengesahkan sambungan secara manual menggunakan kod QR atau dengan membandingkan nombor keselamatan.</paragraph>"
   },
   "icu:KeyTransparencyOnboardingDialog__Continue": {
     "messageformat": "Teruskan"
@@ -1493,6 +1493,9 @@
   "icu:ConversationMerge--learn-more": {
     "messageformat": "Ketahui Lebih Lanjut"
   },
+  "icu:ConversationMerge--explainer-dialog--label": {
+    "messageformat": "Sejarah mesej digabungkan"
+  },
   "icu:ConversationMerge--explainer-dialog--line-1": {
     "messageformat": "Selepas menghantar mesej dengan {obsoleteConversationTitle} anda mengetahui nombor ini milik {conversationTitle} . Nombor telefon mereka adalah peribadi."
   },
@@ -1753,6 +1756,9 @@
   },
   "icu:Preferences__EditChatFolderPage__SelectChatsDialog__Search__Placeholder": {
     "messageformat": "Cari"
+  },
+  "icu:Preferences__EditChatFolderPage__SelectChatsDialog__NoChats": {
+    "messageformat": "Tiada sembang"
   },
   "icu:Preferences__EditChatFolderPage__SelectChatsDialog__ChatTypesSection__Title": {
     "messageformat": "Jenis sembang"
@@ -2246,6 +2252,24 @@
   "icu:deleteAccountDialogBody": {
     "messageformat": "Ini akan memadam maklumat akaun, profil dan semua mesej anda.Anda juga akan dikeluarkan daripada semua kumpulan Signal.Aplikasi akan ditutup selepas proses ini selesai."
   },
+  "icu:DeleteAccountConfirmDialog--Title": {
+    "messageformat": "Delete account"
+  },
+  "icu:DeleteAccountConfirmDialog--Description": {
+    "messageformat": "This will delete your account info, profile, and all of your messages. You will also be removed from all Signal groups."
+  },
+  "icu:DeleteAccountConfirmDialog--ConfirmNumber": {
+    "messageformat": "Confirm your phone number"
+  },
+  "icu:DeleteAccountConfirmDialog--CountryCodePlaceholder": {
+    "messageformat": "Country code"
+  },
+  "icu:DeleteAccountConfirmDialog--NumberPlaceholder": {
+    "messageformat": "Phone number"
+  },
+  "icu:DeleteAccountConfirmDialog--DeleteButton": {
+    "messageformat": "Delete"
+  },
   "icu:deleteOldIndexedDBData": {
     "messageformat": "Anda mempunyai data usang daripada pemasangan Signal Desktop terdahulu. Sekiranya anda memilih untuk meneruskan, data tersebut akan dipadamkan dan anda akan bermula dari awal."
   },
@@ -2398,9 +2422,6 @@
   },
   "icu:callRingtoneNotificationDescription": {
     "messageformat": "Mainkan bunyi panggilan"
-  },
-  "icu:callSystemNotificationDescription": {
-    "messageformat": "Tunjukkan pemberitahuan untuk panggilan"
   },
   "icu:incomingCallNotificationDescription": {
     "messageformat": "Dayakan panggilan masuk"
@@ -2999,6 +3020,9 @@
   "icu:FunPanelSticker__SubNavLabel": {
     "messageformat": "Pek Pelekat"
   },
+  "icu:FunPanelStickers__SubNavCategoryLabel--Favorites": {
+    "messageformat": "Favorites"
+  },
   "icu:FunPanelStickers__SubNavCategoryLabel--Recents": {
     "messageformat": "Digunakan Baru-baru Ini"
   },
@@ -3010,6 +3034,9 @@
   },
   "icu:FunPanelStickers__SectionTitle--Recents": {
     "messageformat": "Digunakan Baru-baru Ini"
+  },
+  "icu:FunPanelStickers__SectionTitle--Favorites": {
+    "messageformat": "Favorites"
   },
   "icu:FunPanelStickers__SectionTitle--Featured": {
     "messageformat": "Dipaparkan"
@@ -3524,6 +3551,9 @@
   "icu:MessageRequests--unblock-group-confirm-body": {
     "messageformat": "Ahli-ahli kumpulan akan dapat menambah anda kepada kumpulan ini lagi."
   },
+  "icu:MessageRequests--unblock-signal-confirm-body": {
+    "messageformat": "Anda akan menerima kemas kini dan berita Signal."
+  },
   "icu:MessageRequests--block-and-report-spam-success-toast": {
     "messageformat": "Dilaporkan sebagai spam dan disekat."
   },
@@ -3538,6 +3568,9 @@
   },
   "icu:MessageRequests--block-group-confirm-body": {
     "messageformat": "Anda tidak akan lagi menerima mesej atau kemas kini daripada kumpulan ini dan ahli-ahlinya tidak akan dapat menambah anda ke kumpulan ini lagi."
+  },
+  "icu:MessageRequests--block-signal-confirm-body": {
+    "messageformat": "Anda tidak lagi akan menerima kemas kini dan berita Signal."
   },
   "icu:MessageRequests--reportAndMaybeBlock": {
     "messageformat": "Laporkan..."
@@ -3866,6 +3899,9 @@
   "icu:callingDeviceSelection__settings": {
     "messageformat": "Tetapan"
   },
+  "icu:callingDeviceSelection__settings-v2": {
+    "messageformat": "Call Settings"
+  },
   "icu:calling__participants--pluralized": {
     "messageformat": "{people, plural, other {{people,number} orang dalam panggilan}}"
   },
@@ -3970,6 +4006,15 @@
   },
   "icu:callingDeviceSelection__select--default": {
     "messageformat": "Lalai"
+  },
+  "icu:callingDeviceSelection__select--default-nonwin": {
+    "messageformat": "Default: {deviceName}"
+  },
+  "icu:callingDeviceSelection__select--default_console": {
+    "messageformat": "Default: {deviceName}"
+  },
+  "icu:callingDeviceSelection__select--default_communications": {
+    "messageformat": "Default Communications: {deviceName}"
   },
   "icu:muteNotificationsTitle": {
     "messageformat": "Redamkan pemberitahuan"
@@ -4823,6 +4868,69 @@
   "icu:CompositionArea__AttachMenu__Poll": {
     "messageformat": "Undian"
   },
+  "icu:CompositionArea__AttachMenu__Contact": {
+    "messageformat": "Contact"
+  },
+  "icu:ShareContactDialog__SelectContact__Title": {
+    "messageformat": "Select contact"
+  },
+  "icu:ShareContactDialog__SelectContact__SearchPlaceholder": {
+    "messageformat": "Search"
+  },
+  "icu:ShareContactDialog__SelectContact__EmptyState": {
+    "messageformat": "No contacts"
+  },
+  "icu:ShareContactDialog__SelectContact__NoResults": {
+    "messageformat": "No results for “{searchQuery}”"
+  },
+  "icu:ShareContactDialog__ShareContact__Title": {
+    "messageformat": "Share contact"
+  },
+  "icu:ShareContactDialog__ShareContact__Description": {
+    "messageformat": "Anyone you share this profile with will be able to message {name}."
+  },
+  "icu:ShareContactDialog__ShareContact__Send": {
+    "messageformat": "Send contact"
+  },
+  "icu:ShareContactDialog__ShareContact__EditName": {
+    "messageformat": "Edit name"
+  },
+  "icu:ShareContactDialog__EditName__Title": {
+    "messageformat": "Edit name"
+  },
+  "icu:ShareContactDialog__EditName__Prefix": {
+    "messageformat": "Prefix"
+  },
+  "icu:ShareContactDialog__EditName__GivenName": {
+    "messageformat": "First name"
+  },
+  "icu:ShareContactDialog__EditName__MiddleName": {
+    "messageformat": "Middle name"
+  },
+  "icu:ShareContactDialog__EditName__FamilyName": {
+    "messageformat": "Last name"
+  },
+  "icu:ShareContactDialog__EditName__Suffix": {
+    "messageformat": "Suffix"
+  },
+  "icu:ShareContactDialog__EditName__Organization": {
+    "messageformat": "Organization"
+  },
+  "icu:ShareContactDialog__ShareContact__EditPhoto": {
+    "messageformat": "Edit photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__Title": {
+    "messageformat": "Select a photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__ContactPhoto": {
+    "messageformat": "Contact photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__ProfilePhoto": {
+    "messageformat": "Profile photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__DefaultAvatar": {
+    "messageformat": "Default avatar"
+  },
   "icu:CompositionArea--attach-plus": {
     "messageformat": "Tambah lampiran atau undian"
   },
@@ -4861,9 +4969,6 @@
   },
   "icu:CompositionInput__editing-message": {
     "messageformat": "Edit mesej"
-  },
-  "icu:countMutedConversationsDescription": {
-    "messageformat": "Sertakan perbualan yang diredam dalam kiraan lencana"
   },
   "icu:ContactModal--nickname": {
     "messageformat": "Nama pendek"
@@ -5263,18 +5368,6 @@
   },
   "icu:UnreadReminders__notification__replySummary--many": {
     "messageformat": "{replyCount, plural, other {{replyCount,number} balasan daripada {person1} dan yang lain}}"
-  },
-  "icu:ConversationNotificationsSettings__mentions__label": {
-    "messageformat": "Sebutan"
-  },
-  "icu:ConversationNotificationsSettings__mentions__info": {
-    "messageformat": "Terima pemberitahuan apabila anda disebut dalam sembang yang diredam"
-  },
-  "icu:ConversationNotificationsSettings__mentions__select__always-notify": {
-    "messageformat": "Sentiasa maklumkan"
-  },
-  "icu:ConversationNotificationsSettings__mentions__select__dont-notify-for-mentions-if-muted": {
-    "messageformat": "Jangan maklumkan jika diredam"
   },
   "icu:GroupLinkManagement--clipboard": {
     "messageformat": "Pautan kumpulan telah disalin."
@@ -6193,9 +6286,6 @@
   "icu:Preferences__SignalAccountKeys__Description": {
     "messageformat": "Simpan di tempat yang selamat, maklumat log masuk anda diperlukan untuk memulihkan akaun dan data anda. Jangan pernah kongsikan dengan sesiapa."
   },
-  "icu:Preferences__SignalAccountKeys__AccountKey": {
-    "messageformat": "Kunci akaun"
-  },
   "icu:Preferences__SignalAccountKeys__AccountID": {
     "messageformat": "ID Akaun"
   },
@@ -6257,7 +6347,7 @@
     "messageformat": "PIN Signal"
   },
   "icu:Preferences--signal-pin__footer": {
-    "messageformat": "PINs keep information stored with Signal encrypted so only you can access it. Your PIN cannot be recovered. Your profile, settings, and contacts will restore when you reinstall Signal. <learnMoreLink>Learn more</learnMoreLink>"
+    "messageformat": "PIN memastikan maklumat anda disimpan dengan Signal disulitkan supaya anda sahaja yang boleh mengaksesnya. PIN anda tidak boleh dipulihkan. Profil, tetapan dan kenalan anda akan dipulihkan apabila anda memasang semula Signal. <learnMoreLink>Ketahui lagi</learnMoreLink>"
   },
   "icu:Preferences--signal-pin-advanced-settings": {
     "messageformat": "Tetapan PIN lanjutan"
@@ -6272,7 +6362,7 @@
     "messageformat": "Sekiranya anda menyahdayakan PIN, anda akan kehilangan semua data apabila anda mendaftar semula Signal melainkan anda membuat sandaran dan pemulihan secara manual. Anda tidak dapat menghidupkan Kunci Pendaftaran semasa PIN dinyahdayakan."
   },
   "icu:DisableSignalPinErrorDialog--reg-lock--title": {
-    "messageformat": "Disable PIN failed due to registration lock"
+    "messageformat": "Nyahdaya PIN gagal kerana kunci pendaftaran"
   },
   "icu:DisableSignalPinErrorDialog--reg-lock--body": {
     "messageformat": "Anda mesti menyahdayakan kunci pendaftaran sebelum menyahdayakan PIN anda."
@@ -6281,7 +6371,7 @@
     "messageformat": "OK"
   },
   "icu:DisableSignalPinErrorDialog--backups--title": {
-    "messageformat": "Disable PIN failed due to backups"
+    "messageformat": "Nyahdaya PIN gagal kerana sandaran"
   },
   "icu:DisableSignalPinErrorDialog--backups--body": {
     "messageformat": "Anda mesti menyahdayakan Sandaran sebelum menyahdayakan PIN anda."
@@ -6304,9 +6394,6 @@
   "icu:Preferences--registration-lock__footer": {
     "messageformat": "Memerlukan PIN Signal anda untuk mendaftar semula nombor telefon anda dengan Signal."
   },
-  "icu:Preferences--notification-content": {
-    "messageformat": "Bahan kandungan notifikasi"
-  },
   "icu:Preferences__Chats__TextInputSection__Title": {
     "messageformat": "Input teks"
   },
@@ -6318,9 +6405,6 @@
   },
   "icu:Preferences__Notifications__SoundsSection__Title": {
     "messageformat": "Bunyi"
-  },
-  "icu:Preferences__Notifications__AppBadgeSection__Title": {
-    "messageformat": "Lencana Aplikasi"
   },
   "icu:Preferences__Notifications__AppBadgeSection__Title-v2": {
     "messageformat": "Lencana yang belum dibaca"
@@ -6700,6 +6784,9 @@
   "icu:Preferences--blocked-users--description": {
     "messageformat": "Pengguna yang disekat mungkin tidak dapat menghubungi anda atau menghantar mesej kepada anda"
   },
+  "icu:Preferences--add-blocked": {
+    "messageformat": "Tambah Pengguna atau Kumpulan Disekat"
+  },
   "icu:Preferences--blocked-users": {
     "messageformat": "Pengguna Disekat"
   },
@@ -6708,6 +6795,12 @@
   },
   "icu:Preferences--blocked--blocked-on": {
     "messageformat": "Disekat pada {blockedAt}"
+  },
+  "icu:Preferences--BlockChooser--Done": {
+    "messageformat": "Selesai"
+  },
+  "icu:Preferences--BlockChooser--Search--Placeholder": {
+    "messageformat": "Cari"
   },
   "icu:Preferences--signal-backups": {
     "messageformat": "Sandaran Selamat Signal"
@@ -7105,6 +7198,36 @@
   "icu:InstallScreenUpdateDialog--cannot-update__body": {
     "messageformat": "Signal Desktop gagal dikemas kini, tetapi terdapat versi baharu yang tersedia. Pergi ke {downloadUrl} dan pasang versi baharu secara manual, kemudian sama ada menghubungi sokongan atau failkan pepijat tentang masalah ini."
   },
+  "icu:EntryPoint--signal-logo": {
+    "messageformat": "Signal Logo"
+  },
+  "icu:EntryPoint--Title--Line1": {
+    "messageformat": "Take privacy with you."
+  },
+  "icu:EntryPoint--Title--Line2": {
+    "messageformat": "Be yourself in every message."
+  },
+  "icu:EntryPoint--link-button": {
+    "messageformat": "Link your account"
+  },
+  "icu:EntryPoint--more-options-button": {
+    "messageformat": "More options"
+  },
+  "icu:EntryPoint--nonprofit": {
+    "messageformat": "Signal is a 501c3 nonprofit"
+  },
+  "icu:EntryPoint--terms": {
+    "messageformat": "Terms & privacy policy"
+  },
+  "icu:EntryPoint--MoreOptions--Title": {
+    "messageformat": "More options"
+  },
+  "icu:EntryPoint--MoreOptions--RegistrationButton--Title": {
+    "messageformat": "Create a new account"
+  },
+  "icu:EntryPoint--MoreOptions--RegistrationButton--Description": {
+    "messageformat": "Create a new Signal account using your phone number."
+  },
   "icu:StandaloneRegistration--signal-logo": {
     "messageformat": "Logo Signal"
   },
@@ -7124,7 +7247,7 @@
     "messageformat": "Sila cuba lagi kemudian dalam masa {duration}"
   },
   "icu:StandaloneRegistration--PhoneNumber--RegionCodeSelector--Label": {
-    "messageformat": "Select region code"
+    "messageformat": "Pilih Kod Negara"
   },
   "icu:StandaloneRegistration--PhoneNumber--placeholder": {
     "messageformat": "Nombor telefon"
@@ -7299,6 +7422,21 @@
   },
   "icu:StandaloneRegistration--VerificationCode--CannotSendCodeTemporary--ok-button": {
     "messageformat": "OK"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Title": {
+    "messageformat": "Having trouble registering?"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet1": {
+    "messageformat": "Make sure your phone has a cellular signal to receive your SMS or call"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet2": {
+    "messageformat": "Confirm you can receive a phone call to the number"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet3": {
+    "messageformat": "Check that you have entered your phone number correctly"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Footer": {
+    "messageformat": "If you still can’t register, follow these <troubleshootingLink>troubleshooting steps</troubleshootingLink> or <contactSupportLink>Contact Support</contactSupportLink>."
   },
   "icu:StandaloneRegistration--ProfileEntry--header": {
     "messageformat": "Tetapkan profil anda"
@@ -7649,10 +7787,10 @@
     "messageformat": "Hidupkan \"Signal\""
   },
   "icu:MediaPermissionsModal__step-2--windows--microphone": {
-    "messageformat": "Enable microphone access for Signal"
+    "messageformat": "Dayakan akses mikrofon untuk Signal"
   },
   "icu:MediaPermissionsModal__step-2--windows--camera": {
-    "messageformat": "Enable camera access for Signal"
+    "messageformat": "Dayakan akses kamera untuk Signal"
   },
   "icu:MediaPermissionsModal__open": {
     "messageformat": "Pergi ke tetapan"
@@ -8204,7 +8342,7 @@
     "messageformat": "Nama pengguna sentiasa dipasangkan dengan set nombor."
   },
   "icu:EditUsernameModalBody__discriminator-label": {
-    "messageformat": "Username digits"
+    "messageformat": "Digit nama pengguna"
   },
   "icu:EditUsernameModalBody__learn-more": {
     "messageformat": "Ketahui Lebih Lanjut"
@@ -8340,13 +8478,13 @@
     "messageformat": "Tukar PIN Signal anda"
   },
   "icu:PinChangeModal__title--create--without-pin": {
-    "messageformat": "Create your Signal PIN"
+    "messageformat": "Cipta PIN Signal anda"
   },
   "icu:PinChangeModal__body--create": {
     "messageformat": "Anda boleh mengubah PIN anda selagi peranti ini didaftarkan. <learnMoreLink>Ketahui lagi</learnMoreLink>"
   },
   "icu:PinChangeModal__body--create--without-pin": {
-    "messageformat": "PINs keep information stored with Signal encrypted so only you can access it. Your profile, settings, and contacts will restore when you reinstall. You won't need your PIN to open the app. <learnMoreLink>Learn more</learnMoreLink>"
+    "messageformat": "PIN memastikan maklumat anda disimpan dengan Signal disulitkan supaya anda sahaja yang boleh mengaksesnya. Profil, tetapan dan kenalan anda akan dipulihkan apabila anda memasang semula. Anda tidak memerlukan PIN anda untuk membuka aplikasi. <learnMoreLink>Ketahui lagi</learnMoreLink>"
   },
   "icu:PinChangeModal__title--confirm": {
     "messageformat": "Sahkan PIN Signal anda"
@@ -8588,12 +8726,6 @@
   "icu:CallLinkPendingParticipantModal__DenyButtonLabel": {
     "messageformat": "Tolak kemasukan"
   },
-  "icu:CallLinkRestrictionsSelect__Option--Off": {
-    "messageformat": "Mati"
-  },
-  "icu:CallLinkRestrictionsSelect__Option--On": {
-    "messageformat": "Hidup"
-  },
   "icu:CallLinkAddNameModal__Title": {
     "messageformat": "Tambah nama panggilan"
   },
@@ -8641,6 +8773,39 @@
   },
   "icu:SaveMultiDialog__title": {
     "messageformat": "Simpan lampiran"
+  },
+  "icu:EmbeddedContact__message": {
+    "messageformat": "Mesej"
+  },
+  "icu:ContactDetail__message": {
+    "messageformat": "Mesej"
+  },
+  "icu:ContactDetail__add-to-group": {
+    "messageformat": "Tambah kepada kumpulan"
+  },
+  "icu:ContactDetail__nickname": {
+    "messageformat": "Nama pendek"
+  },
+  "icu:ContactDetail__note": {
+    "messageformat": "Nota"
+  },
+  "icu:email-v2": {
+    "messageformat": "E-mel"
+  },
+  "icu:home-v2": {
+    "messageformat": "Utama"
+  },
+  "icu:mobile-v2": {
+    "messageformat": "Mudah alih"
+  },
+  "icu:work-v2": {
+    "messageformat": "Kerja"
+  },
+  "icu:phone-v2": {
+    "messageformat": "Telefon"
+  },
+  "icu:address-v2": {
+    "messageformat": "Alamat"
   },
   "icu:WhatsNew__modal-title": {
     "messageformat": "Perkara Baharu"
@@ -8806,6 +8971,9 @@
   },
   "icu:DonationReceipt__footer-text-v2": {
     "messageformat": "Terima kasih kerana menyokong Signal. Sumbangan anda membantu menyokong misi melindungi kebebasan bersuara dan membolehkan komunikasi global yang selamat untuk jutaan orang di seluruh dunia, melalui teknologi privasi sumber terbuka. Jika anda penduduk Amerika Syarikat, sila simpan resit ini untuk rekod cukai anda. Signal Technology Foundation merupakan organisasi bukan berasaskan keuntungan yang dikecualikan cukai di Amerika Syarikat di bawah seksyen 501c3 Kod Hasil dalam Negeri. ID Cukai Persekutuan kami ialah 82-4506840. Signal tidak memberikan sebarang barangan atau perkhidmatan sebagai balasan bagi sumbangan ini."
+  },
+  "icu:MessageCta__Donate": {
+    "messageformat": "Derma Sekarang"
   },
   "icu:Donations__OfflineTooltip": {
     "messageformat": "Anda berada di luar talian. Sila sambung ke internet untuk menyelesaikan derma."
@@ -9005,6 +9173,9 @@
   "icu:CallQualitySurvey__WhatIssuesDidYouHave__SomethingElse__TextArea__AccessibilityLabel": {
     "messageformat": "Penerangan isu"
   },
+  "icu:CallQualitySurvey__WhatIssuesDidYouHave__SomethingElse__TextArea__Placeholder": {
+    "messageformat": "Nyatakan isu anda"
+  },
   "icu:CallQualitySurvey__WhatIssuesDidYouHave__SomethingElse__TextArea__HelpText": {
     "messageformat": "Sila sertakan sebarang butiran yang berkaitan dengan isu tersebut. Segala maklumat yang anda kongsikan di sini akan dirahsiakan dan hanya digunakan untuk membantu menambah baik panggilan di Signal."
   },
@@ -9114,16 +9285,25 @@
     "messageformat": "Sedikit pengubahsuaian, pembaikan pepijat dan peningkatan prestasi. Terima kasih kerana menggunakan Signal!",
     "ignoreUnused": true
   },
-  "icu:WhatsNew__8.26--0": {
-    "messageformat": "Penambahbaikan carian ahli kumpulan."
-  },
-  "icu:WhatsNew__8.27--0": {
-    "messageformat": "Tetapan pemberitahuan yang dipertingkatkan dengan pilihan yang lebih banyak tentang cara dan masa pemberitahuan dipaparkan."
-  },
   "icu:WhatsNew__8.30--0": {
-    "messageformat": "Thanks to a few performance improvements, your CPU will be slightly happier during video calls (even if you're not smiling)."
+    "messageformat": "Peningkatan prestasi untuk panggilan video."
   },
   "icu:WhatsNew__8.30--1": {
-    "messageformat": "We also added a convenient shortcut to open your system settings on Windows if you try to join a video call and Signal doesn't have permission to access the camera. Now it's easier to see what you need to do so that people can see you."
+    "messageformat": "Kami juga menambahkan pintasan mudah untuk membuka tetapan sistem anda pada Windows jika anda cuba untuk menyertai panggilan video dan Signal tidak mempunyai kebenaran untuk mengakses kamera."
+  },
+  "icu:WhatsNew__8.32--0": {
+    "messageformat": "Penapis belum dibaca kini juga disokong dalam folder mesej dan antara muka carian."
+  },
+  "icu:WhatsNew__8.32--1": {
+    "messageformat": "Kebolehpercayaan muat naik dipertingkatkan dalam keadaan rangkaian yang lemah. Terima kasih, <GH3mmmbulus></GH3mmmbulus>!"
+  },
+  "icu:WhatsNew__8.32--2": {
+    "messageformat": "Pintasan &quot;(N)&quot; memaparkan emoji ibu jari ke bawah dengan betul. Berikan tanda ibu jari ke atas kepada <lnicola></lnicola> untuk pembaikan pepijat ini."
+  },
+  "icu:WhatsNew__8.34--0": {
+    "messageformat": "Signal Desktop now supports contact sharing too, so you can maintain eye contact with your computer screen without having to make physical contact with your smartphone."
+  },
+  "icu:WhatsNew__8.34--1": {
+    "messageformat": "Improved handling and performance for connected audio devices."
   }
 }

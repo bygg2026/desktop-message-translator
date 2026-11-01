@@ -25,7 +25,7 @@ import { ReadStatus } from '../messages/MessageReadStatus.std.ts';
 import type {
   GroupV2MemberType,
   MessageAttributesType,
-} from '../model-types.d.ts';
+} from '../model-types.std.ts';
 import type { ReactionType } from '../types/Reactions.std.ts';
 import { ReactionReadStatus } from '../types/Reactions.std.ts';
 import type { AciString, ServiceIdString } from '../types/ServiceId.std.ts';
@@ -269,6 +269,20 @@ import {
   deleteExpiredChatFolders,
   deleteChatFolderById,
 } from './server/chatFolders.std.ts';
+import type { ChatStyle } from '../types/ChatStyle.std.ts';
+import { isBubbleColorPreset } from '../types/ChatStyle.std.ts';
+import {
+  getAllCustomChatColors,
+  createCustomChatColor,
+  createCustomChatColors,
+  updateCustomChatColor,
+  deleteCustomChatColor,
+  getExistingCustomChatColorId,
+} from './server/customChatColors.std.ts';
+import {
+  getAccount,
+  updateAccountDefaultBubbleColor,
+} from './server/account.std.ts';
 import {
   getAllPinnedMessages,
   getPinnedMessagesPreloadDataForConversation,
@@ -306,10 +320,6 @@ import * as durations from '../util/durations/index.std.ts';
 import type { AttachmentType } from '../types/Attachment.std.ts';
 import { isFile, isVisualMedia } from '../util/Attachment.std.ts';
 import { generateMessageId } from '../util/generateMessageId.node.ts';
-import type {
-  ConversationColorType,
-  CustomColorType,
-} from '../types/Colors.std.ts';
 import { sqlLogger } from './sqlLogger.node.ts';
 import { permissiveMessageAttachmentSchema } from './server/messageAttachments.std.ts';
 import {
@@ -318,12 +328,28 @@ import {
 } from '../util/messageFilePaths.std.ts';
 import { createMessagesOnInsertTrigger } from './migrations/1500-search-polls.std.ts';
 import { isValidPlaintextHash } from '../types/Crypto.std.ts';
-import { Emoji } from '../axo/emoji.std.ts';
+import type { Emoji } from '../axo/emoji.std.ts';
 import { WalCheckpoints } from './WalCheckpoints.std.ts';
 import {
   getExternalDraftFilesForConversation,
   getExternalAvatarFilesForConversation,
 } from '../util/conversationFilePaths.std.ts';
+import {
+  createFavoriteSticker,
+  createFavoriteStickerFromStickerRef,
+  deleteFavoriteSticker,
+  getAllFavoriteStickers,
+  getAllInstalledFavoriteStickers,
+  getFavoriteSticker,
+  getFavoriteStickersFromPack,
+  getSticker,
+  markFavoriteStickerDeleted,
+  maybeDeleteSticker,
+  rowToSticker,
+  type StickerRow,
+  updateFavoriteSticker,
+  updateFavoriteStickerStatus,
+} from './server/stickers.std.ts';
 
 const {
   fromPairs,
@@ -345,21 +371,10 @@ type ConversationRow = Readonly<{
   json: string;
   profileLastFetchedAt: null | number;
   expireTimerVersion: number;
+  bubbleColorPreset: null | string;
+  customChatColorId: null | number;
 }>;
 type ConversationRows = Array<ConversationRow>;
-type StickerRow = Readonly<{
-  id: number;
-  packId: string;
-  emoji: string | null;
-  height: number;
-  isCoverOnly: number;
-  lastUsed: number;
-  path: string;
-  width: number;
-  version: 1 | 2;
-  localKey: string | null;
-  size: number | null;
-}>;
 type StorageServiceRowFields = Readonly<{
   storageID?: string;
   storageVersion?: number;
@@ -527,6 +542,9 @@ export const DataReader: ServerReadableInterface = {
   hasAllChatsChatFolder,
   getOldestDeletedChatFolder,
 
+  getAllCustomChatColors,
+  getAccount,
+
   getAllMegaphones,
   getAllMegaphoneIds,
   hasMegaphone,
@@ -560,8 +578,13 @@ export const DataReader: ServerReadableInterface = {
   getAllStickerPacks,
   getInstalledStickerPacks,
   getUninstalledStickerPacks,
+  getSticker,
   getStickerPackInfo,
   getAllStickers,
+  getAllFavoriteStickers,
+  getFavoriteStickersFromPack,
+  getAllInstalledFavoriteStickers,
+  getFavoriteSticker,
   getRecentStickers,
   getRecentEmojis,
   getRecentGifs,
@@ -662,7 +685,7 @@ export const DataWriter: ServerWritableInterface = {
   updateConversations,
   _removeConversation,
   _removeAllConversations,
-  updateAllConversationColors,
+  removeAllConversationColors,
   removeAllProfileKeyCredentials,
   getUnreadByConversationAndMarkRead,
   getUnreadEditedMessagesAndMarkRead,
@@ -740,7 +763,8 @@ export const DataWriter: ServerWritableInterface = {
   resetBackupAttachmentDownloadStats,
 
   getAndProtectExistingAttachmentPath,
-  _protectAttachmentPathFromDeletion,
+  releaseAttachmentPathProtections,
+  protectAttachmentPathFromDeletion,
   resetProtectedAttachmentPaths,
 
   getNextAttachmentBackupJobs,
@@ -770,6 +794,14 @@ export const DataWriter: ServerWritableInterface = {
   uninstallStickerPack,
   removeUninstalledStickerPack,
   clearAllErrorStickerPackAttempts,
+  clearStickerPackAttempts,
+  createFavoriteSticker,
+  createFavoriteStickerFromStickerRef,
+  updateFavoriteSticker,
+  updateFavoriteStickerStatus,
+  markFavoriteStickerDeleted,
+  deleteFavoriteSticker,
+  maybeDeleteSticker,
 
   updateEmojiUsage,
 
@@ -811,6 +843,12 @@ export const DataWriter: ServerWritableInterface = {
   markChatFolderDeleted,
   deleteExpiredChatFolders,
   deleteChatFolderById,
+
+  createCustomChatColor,
+  createCustomChatColors,
+  updateCustomChatColor,
+  deleteCustomChatColor,
+  updateAccountDefaultBubbleColor,
 
   createMegaphone,
   updateMegaphone,
@@ -855,6 +893,14 @@ export const DataWriter: ServerWritableInterface = {
 function rowToConversation(row: ConversationRow): ConversationType {
   const { expireTimerVersion } = row;
   const parsedJson = JSON.parse(row.json);
+  const bubbleColorPreset =
+    row.bubbleColorPreset != null && isBubbleColorPreset(row.bubbleColorPreset)
+      ? row.bubbleColorPreset
+      : undefined;
+  const customChatColorId =
+    row.customChatColorId != null
+      ? (row.customChatColorId as ChatStyle.CustomChatColorId)
+      : undefined;
 
   let profileLastFetchedAt: undefined | number;
   if (isNormalNumber(row.profileLastFetchedAt)) {
@@ -871,20 +917,8 @@ function rowToConversation(row: ConversationRow): ConversationType {
     ...parsedJson,
     expireTimerVersion,
     profileLastFetchedAt,
-  };
-}
-
-function rowToSticker(row: StickerRow): StickerType {
-  return {
-    ...row,
-    isCoverOnly: Boolean(row.isCoverOnly),
-    emoji:
-      row.emoji != null
-        ? Emoji.unsafeCastMaybeInvalidStringToVariant(row.emoji)
-        : undefined,
-    version: row.version || 1,
-    localKey: dropNull(row.localKey),
-    size: dropNull(row.size),
+    bubbleColorPreset,
+    customChatColorId,
   };
 }
 
@@ -1952,9 +1986,15 @@ function saveConversation(db: WritableDB, data: ConversationType): void {
     type,
     serviceId,
     expireTimerVersion,
+    bubbleColorPreset,
   } = data;
 
   const membersList = getConversationMembersList(data);
+  const customChatColorId = getExistingCustomChatColorId(
+    db,
+    data.customChatColorId,
+    `saveConversation(${id})`
+  );
 
   db.prepare(
     `
@@ -1974,7 +2014,9 @@ function saveConversation(db: WritableDB, data: ConversationType): void {
       profileFamilyName,
       profileFullName,
       profileLastFetchedAt,
-      expireTimerVersion
+      expireTimerVersion,
+      bubbleColorPreset,
+      customChatColorId
     ) values (
       $id,
       $json,
@@ -1991,13 +2033,20 @@ function saveConversation(db: WritableDB, data: ConversationType): void {
       $profileFamilyName,
       $profileFullName,
       $profileLastFetchedAt,
-      $expireTimerVersion
+      $expireTimerVersion,
+      $bubbleColorPreset,
+      $customChatColorId
     );
     `
   ).run({
     id,
     json: objectToJSON(
-      omit(data, ['profileLastFetchedAt', 'expireTimerVersion'])
+      omit(data, [
+        'profileLastFetchedAt',
+        'expireTimerVersion',
+        'bubbleColorPreset',
+        'customChatColorId',
+      ])
     ),
 
     e164: e164 || null,
@@ -2013,6 +2062,8 @@ function saveConversation(db: WritableDB, data: ConversationType): void {
     profileFullName: combineNames(profileName, profileFamilyName) || null,
     profileLastFetchedAt: profileLastFetchedAt || null,
     expireTimerVersion,
+    bubbleColorPreset: bubbleColorPreset ?? null,
+    customChatColorId,
   });
 }
 
@@ -2040,9 +2091,15 @@ function updateConversation(db: WritableDB, data: ConversationType): void {
     serviceId,
     groupId,
     expireTimerVersion,
+    bubbleColorPreset,
   } = data;
 
   const membersList = getConversationMembersList(data);
+  const customChatColorId = getExistingCustomChatColorId(
+    db,
+    data.customChatColorId,
+    `updateConversation(${id})`
+  );
 
   db.prepare(
     `
@@ -2061,12 +2118,20 @@ function updateConversation(db: WritableDB, data: ConversationType): void {
       profileFamilyName = $profileFamilyName,
       profileFullName = $profileFullName,
       profileLastFetchedAt = $profileLastFetchedAt,
-      expireTimerVersion = $expireTimerVersion
+      expireTimerVersion = $expireTimerVersion,
+      bubbleColorPreset = $bubbleColorPreset,
+      customChatColorId = $customChatColorId
     WHERE id = $id;
     `
   ).run({
     id,
-    json: objectToJSON(omit(data, ['profileLastFetchedAt'])),
+    json: objectToJSON(
+      omit(data, [
+        'profileLastFetchedAt',
+        'bubbleColorPreset',
+        'customChatColorId',
+      ])
+    ),
 
     e164: e164 || null,
     serviceId: serviceId || null,
@@ -2081,6 +2146,8 @@ function updateConversation(db: WritableDB, data: ConversationType): void {
     profileFullName: combineNames(profileName, profileFamilyName) || null,
     profileLastFetchedAt: profileLastFetchedAt || null,
     expireTimerVersion,
+    bubbleColorPreset: bubbleColorPreset ?? null,
+    customChatColorId,
   });
 }
 
@@ -2112,7 +2179,12 @@ function getConversationById(
   const row = db
     .prepare(
       `
-      SELECT json, profileLastFetchedAt, expireTimerVersion
+      SELECT
+        json,
+        profileLastFetchedAt,
+        expireTimerVersion,
+        bubbleColorPreset,
+        customChatColorId
       FROM conversations
       WHERE id = $id
       `
@@ -2130,7 +2202,12 @@ function getAllConversations(db: ReadableDB): Array<ConversationType> {
   const rows: ConversationRows = db
     .prepare(
       `
-      SELECT json, profileLastFetchedAt, expireTimerVersion
+      SELECT
+        json,
+        profileLastFetchedAt,
+        expireTimerVersion,
+        bubbleColorPreset,
+        customChatColorId
       FROM conversations
       ORDER BY id ASC;
       `
@@ -2159,11 +2236,13 @@ function searchMessages(
     options,
     conversationId,
     contactServiceIdsMatchingQuery,
+    filterByUnread,
   }: {
     query: string;
     options?: { limit?: number };
     conversationId?: string;
     contactServiceIdsMatchingQuery?: Array<ServiceIdString>;
+    filterByUnread: boolean;
   }
 ): Array<ServerSearchResultMessageType> {
   const { limit = conversationId ? 100 : 500 } = options ?? {};
@@ -2213,41 +2292,31 @@ function searchMessages(
       )
       .run({ query: normalizedQuery });
 
-    if (conversationId === undefined) {
-      writable
-        .prepare(
-          `
-          INSERT INTO tmp_filtered_results (rowid)
-          SELECT
-            tmp_results.rowid
-          FROM
-            tmp_results
-          INNER JOIN
-            messages ON messages.rowid = tmp_results.rowid
-          ORDER BY messages.received_at DESC, messages.sent_at DESC
-          LIMIT $limit;
-        `
-        )
-        .run({ limit });
-    } else {
-      writable
-        .prepare(
-          `
-          INSERT INTO tmp_filtered_results (rowid)
-          SELECT
-            tmp_results.rowid
-          FROM
-            tmp_results
-          INNER JOIN
-            messages ON messages.rowid = tmp_results.rowid
-          WHERE
-            messages.conversationId = $conversationId
-          ORDER BY messages.received_at DESC, messages.sent_at DESC
-          LIMIT $limit;
-        `
-        )
-        .run({ conversationId, limit });
-    }
+    const conversationFilter =
+      conversationId != null
+        ? sqlFragment`messages.conversationId = ${conversationId}`
+        : sqlFragment`TRUE`;
+
+    const unreadFilter = filterByUnread
+      ? sqlFragment`messages.readStatus = ${sqlConstant(ReadStatus.Unread)}`
+      : sqlFragment`TRUE`;
+
+    const [insertTempQuery, insertTempParams] = sql`
+      INSERT INTO tmp_filtered_results (rowid)
+      SELECT
+        tmp_results.rowid
+      FROM
+        tmp_results
+      INNER JOIN
+        messages ON messages.rowid = tmp_results.rowid
+      WHERE
+        ${conversationFilter} AND
+        ${unreadFilter}
+      ORDER BY messages.received_at DESC, messages.sent_at DESC
+      LIMIT ${limit};
+    `;
+
+    writable.prepare(insertTempQuery).run(insertTempParams);
 
     // The `MATCH` is necessary in order to for `snippet()` helper function to
     // give us the right results. We can't call `snippet()` in the query above
@@ -2666,8 +2735,7 @@ function saveMessageAttachmentsForRootOrEditedVersion(
 
   const mainAttachments = message.attachments;
   if (mainAttachments) {
-    for (let i = 0; i < mainAttachments.length; i += 1) {
-      const attachment = mainAttachments[i];
+    for (const [index, attachment] of mainAttachments.entries()) {
       saveMessageAttachment({
         db,
         messageId,
@@ -2678,7 +2746,7 @@ function saveMessageAttachmentsForRootOrEditedVersion(
         receivedAtMs,
         attachmentType: 'attachment',
         attachment,
-        orderInMessage: i,
+        orderInMessage: index,
         editHistoryIndex,
         isViewOnce,
       });
@@ -2879,6 +2947,7 @@ function saveMessageAttachment({
     key: attachment.key,
     fileName: attachment.fileName,
     downloadPath: attachment.downloadPath,
+    transcodingTargetQuality: attachment.transcodingTargetQuality,
     transitCdnKey: attachment.cdnKey ?? attachment.cdnId,
     transitCdnNumber: attachment.cdnNumber,
     transitCdnUploadTimestamp: attachment.uploadTimestamp,
@@ -3042,7 +3111,7 @@ function getAndProtectExistingAttachmentPath(
   })();
 }
 
-function _protectAttachmentPathFromDeletion(
+function protectAttachmentPathFromDeletion(
   db: WritableDB,
   { path }: { path: string }
 ): string {
@@ -7279,6 +7348,16 @@ function clearAllErrorStickerPackAttempts(db: WritableDB): void {
     `
   ).run();
 }
+
+function clearStickerPackAttempts(db: WritableDB, packId: string): void {
+  const [query, params] = sql`
+    UPDATE sticker_packs
+    SET downloadAttempts = 0
+    WHERE id = ${packId}
+  `;
+  db.prepare(query).run(params);
+}
+
 function createOrUpdateSticker(db: WritableDB, sticker: StickerType): void {
   const {
     emoji,
@@ -8743,6 +8822,7 @@ function removeAll(db: WritableDB): void {
       DELETE FROM attachment_downloads;
       DELETE FROM attachment_backup_jobs;
       DELETE FROM attachment_downloads_backup_stats;
+      DELETE FROM account;
       DELETE FROM attachments_protected_from_deletion;
       DELETE FROM backup_cdn_object_metadata;
       DELETE FROM badgeImageFiles;
@@ -8751,8 +8831,10 @@ function removeAll(db: WritableDB): void {
       DELETE FROM callsHistory;
       DELETE FROM chatFolders;
       DELETE FROM conversations;
+      DELETE FROM customChatColors;
       DELETE FROM defunctCallLinks;
       DELETE FROM donationReceipts;
+      DELETE FROM favorite_stickers;
       DELETE FROM groupCallRingCancellations;
       DELETE FROM groupSendCombinedEndorsement;
       DELETE FROM groupSendMemberEndorsement;
@@ -8786,6 +8868,9 @@ function removeAll(db: WritableDB): void {
       DELETE FROM syncTasks;
       DELETE FROM unprocessed;
       DELETE FROM uninstalled_sticker_packs;
+
+      --- There must always be exactly one account row, this resets it
+      INSERT INTO account (id) VALUES (1);
 
       INSERT INTO messages_fts(messages_fts) VALUES('optimize');
 
@@ -9518,26 +9603,14 @@ function getStatisticsForLogging(db: ReadableDB): Record<string, string> {
   return mapValues(counts, formatCountForLogging);
 }
 
-function updateAllConversationColors(
-  db: WritableDB,
-  conversationColor?: ConversationColorType,
-  customColorData?: {
-    id: string;
-    value: CustomColorType;
-  }
-): void {
-  db.prepare(
-    `
+function removeAllConversationColors(db: WritableDB): void {
+  const [query, params] = sql`
     UPDATE conversations
-    SET json = JSON_PATCH(json, $patch);
-    `
-  ).run({
-    patch: JSON.stringify({
-      conversationColor: conversationColor || null,
-      customColor: customColorData?.value || null,
-      customColorId: customColorData?.id || null,
-    }),
-  });
+    SET
+      bubbleColorPreset = NULL,
+      customChatColorId = NULL;
+  `;
+  db.prepare(query).run(params);
 }
 
 function removeAllProfileKeyCredentials(db: WritableDB): void {

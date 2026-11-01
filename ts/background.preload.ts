@@ -21,14 +21,13 @@ import {
   resumeTasksWithTimeout,
   reportLongRunningTasks,
 } from './textsecure/TaskWithTimeout.std.ts';
-import type { MessageAttributesType } from './model-types.d.ts';
+import type { MessageAttributesType } from './model-types.std.ts';
 import * as Bytes from './Bytes.std.ts';
 import * as Timers from './Timers.preload.ts';
 import * as indexedDb from './indexeddb.dom.ts';
 import { ToastType } from './types/Toast.dom.tsx';
 import type { MenuOptionsType } from './types/menu.std.ts';
 import { SocketStatus } from './types/SocketStatus.std.ts';
-import { DEFAULT_CONVERSATION_COLOR } from './types/Colors.std.ts';
 import { ThemeType } from './types/Util.std.ts';
 import * as durations from './util/durations/index.std.ts';
 import { drop } from './util/drop.std.ts';
@@ -149,7 +148,6 @@ import {
   onNavigatorOffline,
   onNavigatorOnline,
   reconnect as reconnectWebAPI,
-  registerCapabilities as doRegisterCapabilities,
   registerRequestHandler,
   reportMessage,
   unregisterRequestHandler,
@@ -298,10 +296,14 @@ import { getBackupKeyHash } from './services/backups/crypto.preload.ts';
 import { Emoji } from './axo/emoji.std.ts';
 import { isTrustedContact } from './util/isConversationAccepted.preload.ts';
 import { registrationJobQueue } from './jobs/registrationJobQueue.preload.ts';
-import { PartialRegistrationType } from './types/StandaloneRegistration.std.ts';
+import {
+  isStandaloneEnabled,
+  PartialRegistrationType,
+} from './types/StandaloneRegistration.std.ts';
 import { PhoneNumberDiscoverability } from './util/phoneNumberDiscoverability.std.ts';
 import { getProfileData } from './state/ducks/standaloneInstaller.preload.ts';
 import { pinReminderService } from './services/pinReminder.preload.ts';
+import { updateCapabilities } from './util/updateCapabilities.preload.ts';
 
 const { isNumber, throttle } = lodash;
 
@@ -331,6 +333,7 @@ export async function cleanupSessionResets(): Promise<void> {
 
 async function startApp(): Promise<void> {
   if (window.initialTheme === ThemeType.light) {
+    // oxlint-disable-next-line signal-desktop/enforce-class-name-has-styles
     document.body.classList.add('light-theme');
   }
   if (window.initialTheme === ThemeType.dark) {
@@ -454,6 +457,8 @@ async function startApp(): Promise<void> {
 
   signalProtocolStore.on('removeAllData', () => {
     window.reduxActions.stories.removeAllStories();
+    window.reduxActions.chatColors.resetCustomChatColors();
+    window.reduxActions.account.resetAccount();
   });
 
   signalProtocolStore.on('nullMessage', ({ conversationId, idForTracking }) => {
@@ -748,12 +753,6 @@ async function startApp(): Promise<void> {
       'usernameChangeSync',
       queuedEventListener(onUsernameChangeSync)
     );
-
-    if (!itemStorage.get('defaultConversationColor')) {
-      drop(
-        itemStorage.put('defaultConversationColor', DEFAULT_CONVERSATION_COLOR)
-      );
-    }
 
     senderCertificateService.initialize({
       server: {
@@ -1468,16 +1467,6 @@ async function startApp(): Promise<void> {
         );
       }
 
-      // Existing accounts should default unreadReminders to off; new installs
-      // leave this unset, which defaults to true
-      if (
-        window.isBeforeVersion(lastVersion, '8.31.0-alpha') &&
-        itemStorage.get('showUnreadReminders') == null
-      ) {
-        log.info('Defaulting unreadReminders to false for existing accounts');
-        await itemStorage.put('showUnreadReminders', false);
-      }
-
       if (!itemStorage.get('avatarsHaveBeenMigrated', false)) {
         window.ConversationController.migrateAvatarsForNonAcceptedConversations();
       }
@@ -1487,7 +1476,7 @@ async function startApp(): Promise<void> {
 
     initializeExpiringMessageService();
     initializeNotificationProfilesService();
-    keyTransparency.start();
+    await keyTransparency.start();
 
     log.info('Blocked uuids cleanup: starting...');
     const blockedUuids = itemStorage.get(BLOCKED_UUIDS_ID, []);
@@ -1500,6 +1489,27 @@ async function startApp(): Promise<void> {
         `Blocked uuids cleanup: Found ${diff} non-ACIs in blocked list. Removing.`
       );
       await itemStorage.put(BLOCKED_UUIDS_ID, blockedAcis);
+    }
+
+    log.info('profileKey cleanup: starting...');
+    const storageProfileKey = itemStorage.get('profileKey');
+    const storageProfileKeyBase64 = storageProfileKey
+      ? Bytes.toBase64(storageProfileKey)
+      : undefined;
+
+    const me = window.ConversationController.getOurConversation();
+    const convoProfileKeyBase64 = me?.get('profileKey');
+
+    if (
+      me &&
+      convoProfileKeyBase64 &&
+      convoProfileKeyBase64 !== storageProfileKeyBase64
+    ) {
+      log.info(
+        'profileKey cleanup: storage and convo profileKeys did not match. Updating storage.'
+      );
+      const convoProfileKey = Bytes.fromBase64(convoProfileKeyBase64);
+      await ourProfileKeyService.set(convoProfileKey);
     }
 
     const signalItem = blockedAcis.find(item =>
@@ -1699,7 +1709,11 @@ async function startApp(): Promise<void> {
           try {
             await window.IPC.whenWindowVisible();
           } finally {
-            window.reduxActions.installer.startInstaller();
+            if (isStandaloneEnabled(window.getVersion())) {
+              window.reduxActions.app.openEntryPoint();
+            } else {
+              window.reduxActions.installer.startInstaller();
+            }
           }
         })()
       );
@@ -2027,7 +2041,7 @@ async function startApp(): Promise<void> {
 
     // Note: we always have to register our capabilities all at once, so we do this
     //   after connect on every startup
-    drop(registerCapabilities());
+    drop(updateCapabilities());
     drop(ensureAEP());
     drop(maybeQueueDeviceInfoFetch());
     Stickers.downloadQueuedPacks();
@@ -2084,22 +2098,6 @@ async function startApp(): Promise<void> {
       log.warn(
         'ensureAEP: AEP not captured, but sync requested recently.' +
           'Not running'
-      );
-    }
-  }
-
-  async function registerCapabilities() {
-    try {
-      await doRegisterCapabilities({
-        attachmentBackfill: true,
-        spqr: true,
-        usernameChangeSyncMessage: true,
-        optionalPhoneNumber: itemStorage.user.getOptionalNumber() == null,
-      });
-    } catch (error) {
-      log.error(
-        'Error: Unable to register our capabilities.',
-        Errors.toLogFormat(error)
       );
     }
   }
@@ -2534,12 +2532,21 @@ async function startApp(): Promise<void> {
     );
     const sender = window.ConversationController.get(messageDescriptor.id);
 
-    if (sender) {
-      // Will do the save for us
-      await sender.setProfileKey(profileKey, {
-        reason: 'handleMessageReceivedProfileUpdate',
-      });
+    if (!sender) {
+      return confirm();
     }
+
+    if (isMe(sender.attributes)) {
+      log.info(
+        'handleMessageReceivedProfileUpdate: Rejecting, targeted our own contact'
+      );
+      return confirm();
+    }
+
+    // Will do the save for us
+    await sender.setProfileKey(profileKey, {
+      reason: 'handleMessageReceivedProfileUpdate',
+    });
 
     return confirm();
   }
@@ -2738,6 +2745,7 @@ async function startApp(): Promise<void> {
         pinDuration: data.message.pinMessage.pinDuration,
         pinnedByAci: data.sourceAci,
         sentAtTimestamp: data.timestamp,
+        receivedAtCounter: data.receivedAtCounter,
         receivedAtTimestamp: data.receivedAtDate,
         expireTimer: data.message.expireTimer,
         expirationStartTimestamp: null,
@@ -2806,6 +2814,7 @@ async function startApp(): Promise<void> {
         fromConversationId: fromConversation.id,
         source: Polls.PollSource.FromSomeoneElse,
         targetTimestamp: parsedTerm.data.targetTimestamp,
+        receivedAtCounter: data.receivedAtCounter,
         receivedAtDate: data.receivedAtDate,
         timestamp,
         expireTimer,
@@ -2954,6 +2963,13 @@ async function startApp(): Promise<void> {
       e164: data.source,
       reason: logId,
     });
+
+    if (isMe(conversation.attributes)) {
+      log.info('onProfileKey: Rejecting, targeted our own information');
+      confirm();
+      return;
+    }
+
     const idForLogging = getConversationIdForLogging(conversation.attributes);
 
     if (!data.profileKey) {
@@ -3005,10 +3021,27 @@ async function startApp(): Promise<void> {
       'handleMessageSentProfileUpdate: missing profileKey'
     );
 
+    if (window.ConversationController.areWePrimaryDevice()) {
+      const ourProfileKey = me.get('profileKey');
+      if (ourProfileKey !== profileKey) {
+        log.warn(
+          'handleMessageSentProfileUpdate: Rejecting attempt to change our profileKey since we are primary device!'
+        );
+      }
+
+      return confirm();
+    }
+
     // Will do the save for us if needed
-    await me.setProfileKey(profileKey, {
+    const didChange = await me.setProfileKey(profileKey, {
       reason: 'handleMessageSentProfileUpdate',
     });
+    if (didChange) {
+      window.SignalCI?.handleEvent('setProfileKey', {
+        profileKeyBase64: profileKey,
+        reason: 'handleMessageSentProfileUpdate',
+      });
+    }
 
     return confirm();
   }
@@ -3294,6 +3327,7 @@ async function startApp(): Promise<void> {
         pinDuration: data.message.pinMessage.pinDuration,
         pinnedByAci: sourceServiceId,
         sentAtTimestamp: data.timestamp,
+        receivedAtCounter: data.receivedAtCounter,
         receivedAtTimestamp: data.receivedAtDate,
         expireTimer: data.message.expireTimer,
         expirationStartTimestamp: data.expirationStartTimestamp ?? null,
@@ -3368,6 +3402,7 @@ async function startApp(): Promise<void> {
         fromConversationId: ourConversationId,
         source: Polls.PollSource.FromSync,
         targetTimestamp: parsedTerm.data.targetTimestamp,
+        receivedAtCounter: data.receivedAtCounter,
         receivedAtDate: data.receivedAtDate,
         expireTimer,
         expirationStartTimestamp: data.expirationStartTimestamp,

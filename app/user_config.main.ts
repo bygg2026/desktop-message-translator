@@ -10,15 +10,23 @@ import config from './config.main.ts';
 import * as Errors from '../ts/types/errors.std.ts';
 import OS from '../ts/util/os/osMain.node.ts';
 
-let userData: string | undefined;
+import { accountDataPath, accountIdFromArgs } from './account_profiles.node.ts';
+
+export const activeAccountId = accountIdFromArgs(process.argv);
+let userData: string | undefined = accountDataPath(
+  app.getPath('appData'),
+  activeAccountId
+);
 // Use separate data directory for benchmarks & development
-if (config.has('storagePath')) {
+if (activeAccountId !== 'default') {
+  // Named accounts always retain their isolated directory.
+} else if (config.has('storagePath')) {
   userData = String(config.get('storagePath'));
 } else if (config.has('storageProfile')) {
   userData = join(
     app.getPath('appData'),
     // oxlint-disable-next-line typescript/restrict-template-expressions
-    `Signal-${config.get('storageProfile')}`
+    `Desktop Message Translator-${config.get('storageProfile')}`
   );
 } else if (OS.isAppImage()) {
   userData = join(app.getPath('appData'), `${app.getName()} AppImage`);

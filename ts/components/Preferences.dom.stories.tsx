@@ -1,14 +1,13 @@
 // Copyright 2021 Signal Messenger, LLC
 // SPDX-License-Identifier: AGPL-3.0-only
 
-import type { Meta, StoryFn } from '@storybook/react';
 import { useState } from 'react';
-import type { MutableRefObject, JSX } from 'react';
 import { action } from '@storybook/addon-actions';
 import lodash from 'lodash';
-
+import type { Meta, StoryFn } from '@storybook/react';
+import type { MutableRefObject, JSX } from 'react';
 import { Preferences } from './Preferences.dom.tsx';
-import { DEFAULT_CONVERSATION_COLOR } from '../types/Colors.std.ts';
+import { DEFAULT_BUBBLE_COLOR } from '../types/ChatStyle.std.ts';
 import { PhoneNumberSharingMode } from '../types/PhoneNumberSharingMode.std.ts';
 import { PhoneNumberDiscoverability } from '../util/phoneNumberDiscoverability.std.ts';
 import { sleep } from '../util/sleep.std.ts';
@@ -30,7 +29,6 @@ import {
   UsernameEditState,
   UsernameLinkState,
 } from '../state/ducks/usernameEnums.std.ts';
-import type { SettingsLocation } from '../types/Nav.std.ts';
 import { NavTab, ProfileEditorPage, SettingsPage } from '../types/Nav.std.ts';
 import { PreferencesDonations } from './PreferencesDonations.dom.tsx';
 import { strictAssert } from '../util/assert.std.ts';
@@ -42,31 +40,35 @@ import {
   NotificationProfilesCreateFlow,
 } from './PreferencesNotificationProfiles.dom.tsx';
 import { DayOfWeek } from '../types/NotificationProfile.std.ts';
+import { BackupLevel } from '../services/backups/types.std.ts';
+import { Emoji } from '../axo/emoji.std.ts';
+import { BadgeCategory } from '../badges/BadgeCategory.std.ts';
+import {
+  SVC_DEFAULT_MODE,
+  SVC_DEFAULT_MODE_FOR_SCREENSHARE,
+} from '../calling/constants.std.ts';
+import { PreferencesBlocked } from './preferences/PreferencesBlocked.dom.tsx';
+import { CurrentChatFolders } from '../types/CurrentChatFolders.std.ts';
 
+import type { SettingsLocation } from '../types/Nav.std.ts';
 import type { LocalizerType } from '../types/Util.std.ts';
 import type { PropsType } from './Preferences.dom.tsx';
 import type { WidthBreakpoint } from './_util.std.ts';
-import type { MessageAttributesType } from '../model-types.d.ts';
+import type { MessageAttributesType } from '../model-types.std.ts';
 import type {
   DonationReceipt,
   DonationWorkflow,
   OneTimeDonationHumanAmounts,
 } from '../types/Donations.std.ts';
 import type { AnyToast } from '../types/Toast.dom.tsx';
+import type { SmartPreferencesBlockedProps } from '../state/smart/PreferencesBlocked.preload.tsx';
 import type { SmartPreferencesChatFoldersPageProps } from '../state/smart/PreferencesChatFoldersPage.preload.tsx';
 import type { SmartPreferencesEditChatFolderPageProps } from '../state/smart/PreferencesEditChatFolderPage.preload.tsx';
-import { CurrentChatFolders } from '../types/CurrentChatFolders.std.ts';
 import type { ExternalProps as SmartNotificationProfilesProps } from '../state/smart/PreferencesNotificationProfiles.preload.tsx';
 import type { NotificationProfileIdString } from '../types/NotificationProfile.std.ts';
 import type { ExportResultType } from '../services/backups/types.std.ts';
-import { BackupLevel } from '../services/backups/types.std.ts';
-import { Emoji } from '../axo/emoji.std.ts';
 import type { BadgeType } from '../badges/types.std.ts';
-import { BadgeCategory } from '../badges/BadgeCategory.std.ts';
-import {
-  SVC_DEFAULT_MODE,
-  SVC_DEFAULT_MODE_FOR_SCREENSHARE,
-} from '../calling/constants.std.ts';
+import type { AudioDeviceList } from '@signalapp/ringrtc';
 
 const { shuffle } = lodash;
 
@@ -96,33 +98,39 @@ function conversationSelector(conversationId?: string) {
   return found;
 }
 
-const availableMicrophones = [
-  {
-    name: 'DefAuLt (Headphones)',
-    index: 0,
-    uniqueId: 'Default',
-    i18nKey: 'default_communication_device',
+const availableMicrophones: AudioDeviceList = {
+  devices: [
+    {
+      name: 'DefAuLt (Headphones)',
+      uniqueId: 'Default',
+    },
+  ],
+  defaults: {
+    isWindows: false,
+    device: { name: 'Monitor of UE Boom (Bluetooth)', uniqueId: 'bb.monitor' },
   },
-];
+};
 
-const availableSpeakers = [
-  {
-    name: 'Default',
-    index: 0,
-    uniqueId: 'Default',
-    i18nKey: 'default_communication_device',
+const availableSpeakers: AudioDeviceList = {
+  devices: [
+    {
+      name: 'Default',
+      uniqueId: 'Default',
+    },
+    {
+      name: "Natalie's Airpods (Bluetooth)",
+      uniqueId: 'aa',
+    },
+    {
+      name: 'UE Boom (Bluetooth)',
+      uniqueId: 'bb',
+    },
+  ],
+  defaults: {
+    isWindows: false,
+    device: { name: 'Default', uniqueId: 'Default' },
   },
-  {
-    name: "Natalie's Airpods (Bluetooth)",
-    index: 1,
-    uniqueId: 'aa',
-  },
-  {
-    name: 'UE Boom (Bluetooth)',
-    index: 2,
-    uniqueId: 'bb',
-  },
-];
+};
 
 const validateBackupResult: ExportResultType = {
   attachmentBackupJobs: [],
@@ -140,7 +148,7 @@ const validateBackupResult: ExportResultType = {
     notificationProfiles: 2,
     skippedConversations: 0,
     skippedMessages: 7,
-    stickerPacks: 8,
+    installedStickerPacks: 8,
     fixedDirectMessages: 9,
     unknownConversationReferences: {},
   },
@@ -249,7 +257,7 @@ function renderProfileEditor(): JSX.Element {
       renderUsernameEditor={() => <div />}
       replaceAvatar={action('replaceAvatar')}
       resetUsernameLink={action('resetUsernameLink')}
-      saveAttachment={action('saveAttachment')}
+      saveAttachmentToDisk={action('saveAttachmentToDisk')}
       saveAvatarToDisk={action('saveAvatarToDisk')}
       setEditState={action('setEditState')}
       setUsernameEditState={action('setUsernameEditState')}
@@ -323,6 +331,24 @@ function renderDonationsPane(props: {
 
 function renderToastManager(): JSX.Element {
   return <div />;
+}
+
+function renderPreferencesBlockedPage(
+  props: SmartPreferencesBlockedProps
+): JSX.Element {
+  return (
+    <PreferencesBlocked
+      i18n={i18n}
+      blockedContacts={[]}
+      blockedGroups={[]}
+      conversationsNotBlocked={[]}
+      getPreferredBadge={() => undefined}
+      onBlock={action('onBlock')}
+      onUnblock={action('onUnblock')}
+      theme={ThemeType.light}
+      goBack={props.goBack}
+    />
+  );
 }
 
 function renderPreferencesChatFoldersPage(
@@ -433,21 +459,14 @@ export default {
       {
         deviceId:
           'dfbe6effe70b0611ba0fdc2a9ea3f39f6cb110e6687948f7e5f016c111b7329c',
-        groupId:
-          '63ee218d2446869e40adfc958ff98263e51f74382b0143328ee4826f20a76f47',
-        kind: 'videoinput',
         label: 'FaceTime HD Camera (Built-in) (9fba:bced)',
       },
       {
         deviceId:
           'e2db196a31d50ff9b135299dc0beea67f65b1a25a06d8a4ce76976751bb7a08d',
-        groupId:
-          '218ba7f00d7b1239cca15b9116769e5e7d30cc01104ebf84d667643661e0ecf9',
-        kind: 'videoinput',
         label: 'Logitech Webcam (4e72:9058)',
       },
     ],
-    availableLocales: ['en'],
     availableMicrophones,
     availableSpeakers,
     backupFreeMediaDays: 45,
@@ -455,14 +474,15 @@ export default {
     backupSubscriptionStatus: { status: 'not-found' },
     backupTier: null,
     badge: undefined,
-    blockedContacts: [],
-    blockedGroups: [],
+    blockedContactCount: 0,
+    blockedGroupCount: 0,
     currentChatFoldersCount: 0,
-    customColors: {},
-    defaultConversationColor: DEFAULT_CONVERSATION_COLOR,
+    customChatColors: [],
+    defaultBubbleColor: DEFAULT_BUBBLE_COLOR,
     deviceName: 'Work Windows ME',
     emojiSkinToneDefault: Emoji.SkinTone.None,
     phoneNumber: '+1 555 123-4567',
+    e164: '+15551234567',
     hasAnyCurrentCustomChatFolders: false,
     hasAudioNotifications: true,
     hasAutoConvertEmoji: true,
@@ -530,8 +550,12 @@ export default {
     resolvedLocale: 'en',
     selectedCamera:
       'dfbe6effe70b0611ba0fdc2a9ea3f39f6cb110e6687948f7e5f016c111b7329c',
-    selectedMicrophone: availableMicrophones[0],
-    selectedSpeaker: availableSpeakers[1],
+    selectedMicrophone: { type: 'nonWindowsDefault' },
+    selectedSpeaker: {
+      type: 'specificDevice',
+      // oxlint-disable-next-line typescript/no-non-null-assertion
+      device: availableSpeakers.devices[1]!,
+    },
     sentMediaQualitySetting: 'standard',
     shouldShowUpdateDialog: false,
     themeSetting: 'system',
@@ -574,6 +598,7 @@ export default {
     renderProfileEditor,
     renderToastManager,
     renderUpdateDialog,
+    renderPreferencesBlockedPage,
     renderPreferencesChatFoldersPage,
     renderPreferencesEditChatFolderPage,
     getConversationsWithCustomColor: () => [],
@@ -588,7 +613,6 @@ export default {
     getMessageSampleForSchemaVersion: async () => [
       { id: 'messageId' } as MessageAttributesType,
     ],
-    getPreferredBadge: () => undefined,
     makeSyncRequest: action('makeSyncRequest'),
     onAudioNotificationsChange: action('onAudioNotificationsChange'),
     onAutoConvertEmojiChange: action('onAutoConvertEmojiChange'),
@@ -661,18 +685,13 @@ export default {
     refreshCloudBackupStatus: action('refreshCloudBackupStatus'),
     refreshBackupSubscriptionStatus: action('refreshBackupSubscriptionStatus'),
     removeCustomColor: action('removeCustomColor'),
-    removeCustomColorOnConversations: action(
-      'removeCustomColorOnConversations'
-    ),
     resumeBackupMediaDownload: action('resumeBackupMediaDownload'),
     pauseBackupMediaDownload: action('pauseBackupMediaDownload'),
     cancelBackupMediaDownload: action('cancelBackupMediaDownload'),
     resetAllChatColors: action('resetAllChatColors'),
     resetDefaultChatColor: action('resetDefaultChatColor'),
     savePreferredLeftPaneWidth: action('savePreferredLeftPaneWidth'),
-    setGlobalDefaultConversationColor: action(
-      'setGlobalDefaultConversationColor'
-    ),
+    setGlobalDefaultBubbleColor: action('setGlobalDefaultBubbleColor'),
     setSettingsLocation: action('setSettingsLocation'),
     showPinChangeModal: action('showPinChangeModal'),
     showToast: action('showToast'),
@@ -1154,59 +1173,39 @@ Internal.args = {
 
 export const PrivacyBlocked1Contact = Template.bind({});
 PrivacyBlocked1Contact.args = {
-  blockedContacts: [
-    { conversation: getDefaultConversation(), blockedAt: undefined },
-  ],
+  blockedContactCount: 1,
   settingsLocation: { page: SettingsPage.Privacy },
 };
 
 export const PrivacyBlocked1Group = Template.bind({});
 PrivacyBlocked1Group.args = {
-  blockedGroups: [
-    { conversation: getDefaultConversation(), blockedAt: undefined },
-  ],
+  blockedGroupCount: 1,
   settingsLocation: { page: SettingsPage.Privacy },
 };
 
 export const PrivacyBlocked1BothWithBlockedAt = Template.bind({});
 PrivacyBlocked1BothWithBlockedAt.args = {
-  blockedContacts: [
-    { conversation: getDefaultConversation(), blockedAt: Date.now() },
-  ],
-  blockedGroups: [
-    { conversation: getDefaultConversation(), blockedAt: Date.now() - DAY },
-  ],
+  blockedContactCount: 1,
+  blockedGroupCount: 1,
   settingsLocation: { page: SettingsPage.Privacy },
 };
 
 export const PrivacyBlockedManyContacts = Template.bind({});
 PrivacyBlockedManyContacts.args = {
-  blockedContacts: new Array(55).fill(undefined).map(() => ({
-    conversation: getDefaultConversation(),
-    blockedAt: undefined,
-  })),
+  blockedContactCount: 55,
   settingsLocation: { page: SettingsPage.Privacy },
 };
 
 export const PrivacyBlockedManyGroups = Template.bind({});
 PrivacyBlockedManyGroups.args = {
-  blockedGroups: new Array(55).fill(undefined).map(() => ({
-    conversation: getDefaultConversation(),
-    blockedAt: undefined,
-  })),
+  blockedGroupCount: 55,
   settingsLocation: { page: SettingsPage.Privacy },
 };
 
 export const PrivacyBlockedManyBoth = Template.bind({});
 PrivacyBlockedManyBoth.args = {
-  blockedContacts: new Array(20).fill(undefined).map(() => ({
-    conversation: getDefaultConversation(),
-    blockedAt: undefined,
-  })),
-  blockedGroups: new Array(20).fill(undefined).map(() => ({
-    conversation: getDefaultConversation(),
-    blockedAt: undefined,
-  })),
+  blockedContactCount: 20,
+  blockedGroupCount: 20,
   settingsLocation: { page: SettingsPage.Privacy },
 };
 

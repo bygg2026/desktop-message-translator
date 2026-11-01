@@ -2,10 +2,8 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import type { RefObject } from 'react';
-
-import type { ThunkAction, ThunkDispatch } from 'redux-thunk';
-import { ipcRenderer } from 'electron';
 import lodash from 'lodash';
+import { ipcRenderer } from 'electron';
 import type { ReadonlyDeep } from 'type-fest';
 import {
   CallLinkRootKey,
@@ -32,11 +30,11 @@ import type {
   ActiveCallReactionsType,
   ChangeIODevicePayloadType,
   GroupCallVideoRequest,
-  MediaDeviceSettings,
   ObservedRemoteMuteType,
   PresentedSource,
   PresentableSource,
   RemoveClientType,
+  MediaDeviceSettings,
 } from '../../types/Calling.std.ts';
 import {
   isCallLinkAdmin,
@@ -53,6 +51,8 @@ import {
   CallState,
   GroupCallConnectionState,
   GroupCallJoinState,
+  getEmptyAudioDeviceList,
+  getDefaultAudioPreference,
 } from '../../types/Calling.std.ts';
 import { CallMode } from '../../types/CallDisposition.std.ts';
 import { callingTones } from '../../util/callingTones.preload.ts';
@@ -135,6 +135,12 @@ import type { SignalService } from '../../protobuf/index.std.ts';
 import { Emoji } from '../../axo/emoji.std.ts';
 import type { ErrorModalDataProps } from '../../components/ErrorModal.dom.tsx';
 import { callLinkCleanupService } from '../../services/expiring/callLinkCleanupService.preload.ts';
+import type {
+  AsyncStateThunk,
+  StateDispatch,
+  SyncStateThunk,
+} from '../types.std.ts';
+import OS from '../../util/os/osMain.node.ts';
 
 const { omit } = lodash;
 
@@ -259,14 +265,16 @@ export type CQSSubmissionStateType = ReadonlyDeep<{
 }>;
 
 // oxlint-disable-next-line signal-desktop/enforce-type-alias-readonlydeep
-export type CallingStateType = MediaDeviceSettings & {
-  callsByConversation: CallsByConversationType;
-  adhocCalls: AdhocCallsType;
-  callLinks: CallLinksByRoomIdType;
-  activeCallState?: ActiveCallStateType | WaitingCallStateType;
-  capturerBaton?: DesktopCapturerBaton;
-  callQualitySurveySubmission: CQSSubmissionStateType;
-};
+export type CallingStateType = Readonly<
+  MediaDeviceSettings & {
+    callsByConversation: CallsByConversationType;
+    adhocCalls: AdhocCallsType;
+    callLinks: CallLinksByRoomIdType;
+    activeCallState?: ActiveCallStateType | WaitingCallStateType;
+    capturerBaton?: DesktopCapturerBaton;
+    callQualitySurveySubmission: CQSSubmissionStateType;
+  }
+>;
 
 export type AcceptCallType = ReadonlyDeep<{
   conversationId: string;
@@ -449,15 +457,6 @@ export type StartCallLinkLobbyByRoomIdType = ReadonlyDeep<{
   roomId: string;
 }>;
 
-type StartCallLinkLobbyThunkActionType = ReadonlyDeep<
-  ThunkAction<
-    void,
-    RootStateType,
-    unknown,
-    StartCallLinkLobbyActionType | ShowErrorModalActionType
-  >
->;
-
 // oxlint-disable-next-line signal-desktop/enforce-type-alias-readonlydeep
 type StartCallingLobbyPayloadType =
   | {
@@ -542,11 +541,7 @@ const doGroupCallPeek = ({
 }: {
   conversationId: string;
   callMode: CallMode.Group | CallMode.Adhoc;
-  dispatch: ThunkDispatch<
-    RootStateType,
-    unknown,
-    PeekGroupCallFulfilledActionType
-  >;
+  dispatch: StateDispatch<PeekGroupCallFulfilledActionType>;
   getState: () => RootStateType;
 }) => {
   let logId: string;
@@ -646,7 +641,7 @@ const doGroupCallPeek = ({
         );
       }
 
-      dispatch(updateLastMessage(conversationId));
+      void dispatch(updateLastMessage(conversationId));
     } else if (callMode === CallMode.Adhoc) {
       await calling.updateCallHistoryForAdhocCall(
         conversationId,
@@ -1021,6 +1016,7 @@ type SuggestLowerHandActionType = ReadonlyDeep<{
 
 type ToggleNeedsScreenRecordingPermissionsActionType = ReadonlyDeep<{
   type: 'calling/TOGGLE_NEEDS_SCREEN_RECORDING_PERMISSIONS';
+  payload: boolean;
 }>;
 
 type ToggleParticipantsActionType = ReadonlyDeep<{
@@ -1035,6 +1031,7 @@ type ToggleSelfViewExpandedActionType = ReadonlyDeep<{
 }>;
 type ToggleSettingsActionType = ReadonlyDeep<{
   type: 'calling/TOGGLE_SETTINGS';
+  payload: boolean;
 }>;
 
 type ChangeCallViewActionType = ReadonlyDeep<{
@@ -1131,7 +1128,7 @@ export type CallingActionType =
 
 function acceptCall(
   payload: AcceptCallType
-): ThunkAction<void, RootStateType, unknown, AcceptCallPendingActionType> {
+): AsyncStateThunk<AcceptCallPendingActionType> {
   return async (dispatch, getState) => {
     const { conversationId, asVideoCall } = payload;
 
@@ -1142,7 +1139,7 @@ function acceptCall(
       return;
     }
 
-    saveDraftRecordingIfNeeded(conversationId)(dispatch, getState, undefined);
+    dispatch(saveDraftRecordingIfNeeded(conversationId));
 
     switch (call.callMode) {
       case CallMode.Direct:
@@ -1167,7 +1164,7 @@ function acceptCall(
 
 function approveUser(
   payload: PendingUserActionPayloadType
-): ThunkAction<void, RootStateType, unknown, ApproveUserActionType> {
+): SyncStateThunk<ApproveUserActionType> {
   return (dispatch, getState) => {
     const activeCall = getActiveCall(getState().calling);
     if (!activeCall || !isGroupOrAdhocCallMode(activeCall.callMode)) {
@@ -1190,7 +1187,7 @@ function approveUser(
 
 function denyUser(
   payload: PendingUserActionPayloadType
-): ThunkAction<void, RootStateType, unknown, DenyUserActionType> {
+): SyncStateThunk<DenyUserActionType> {
   return (dispatch, getState) => {
     const activeCall = getActiveCall(getState().calling);
     if (!activeCall || !isGroupOrAdhocCallMode(activeCall.callMode)) {
@@ -1213,7 +1210,7 @@ function denyUser(
 
 function batchUserAction(
   payload: BatchUserActionPayloadType
-): ThunkAction<void, RootStateType, unknown, ShowToastActionType> {
+): SyncStateThunk<ShowToastActionType> {
   return (dispatch, getState) => {
     const activeCall = getActiveCall(getState().calling);
     if (!activeCall || !isGroupOrAdhocCallMode(activeCall.callMode)) {
@@ -1260,7 +1257,7 @@ function batchUserAction(
 
 function removeClient(
   payload: RemoveClientType
-): ThunkAction<void, RootStateType, unknown, RemoveClientActionType> {
+): SyncStateThunk<RemoveClientActionType> {
   return (dispatch, getState) => {
     const activeCall = getActiveCall(getState().calling);
     if (!activeCall || !isGroupOrAdhocCallMode(activeCall.callMode)) {
@@ -1277,7 +1274,7 @@ function removeClient(
 
 function blockClient(
   payload: RemoveClientType
-): ThunkAction<void, RootStateType, unknown, BlockClientActionType> {
+): SyncStateThunk<BlockClientActionType> {
   return (dispatch, getState) => {
     const activeCall = getActiveCall(getState().calling);
     if (!activeCall || !isGroupOrAdhocCallMode(activeCall.callMode)) {
@@ -1292,9 +1289,7 @@ function blockClient(
   };
 }
 
-function sendRemoteMute(
-  demuxId: number
-): ThunkAction<void, RootStateType, unknown, NoopActionType> {
+function sendRemoteMute(demuxId: number): SyncStateThunk<NoopActionType> {
   return (dispatch, getState) => {
     const state = getState();
     const activeCall = getActiveCall(state.calling);
@@ -1312,12 +1307,7 @@ function sendRemoteMute(
 
 function callStateChange(
   payload: CallStateChangeType
-): ThunkAction<
-  void,
-  RootStateType,
-  unknown,
-  CallStateChangeFulfilledActionType
-> {
+): AsyncStateThunk<CallStateChangeFulfilledActionType> {
   return async dispatch => {
     const { callState, acceptedTime, callEndedReason } = payload;
 
@@ -1354,20 +1344,15 @@ function directCallAudioLevelsChange(
 
 function changeIODevice(
   payload: ChangeIODevicePayloadType
-): ThunkAction<
-  void,
-  RootStateType,
-  unknown,
-  ChangeIODeviceFulfilledActionType
-> {
+): AsyncStateThunk<ChangeIODeviceFulfilledActionType> {
   return async dispatch => {
-    // Only `setPreferredCamera` returns a Promise.
+    // Only `setSelectedCamera` returns a Promise.
     if (payload.type === CallingDeviceType.CAMERA) {
-      await calling.setPreferredCamera(payload.selectedDevice);
+      await calling.setSelectedCamera(payload.selectedDevice);
     } else if (payload.type === CallingDeviceType.MICROPHONE) {
       calling.setPreferredMicrophone(payload.selectedDevice);
     } else if (payload.type === CallingDeviceType.SPEAKER) {
-      calling.setPreferredSpeaker(payload.selectedDevice);
+      calling.setSelectedSpeaker(payload.selectedDevice);
     }
     dispatch({
       type: CHANGE_IO_DEVICE_FULFILLED,
@@ -1402,10 +1387,7 @@ function cancelIncomingGroupCallRing(
 
 function declineCall(
   payload: DeclineCallType
-): ThunkAction<
-  void,
-  RootStateType,
-  unknown,
+): SyncStateThunk<
   CancelIncomingGroupCallRingActionType | DeclineCallActionType
 > {
   return (dispatch, getState) => {
@@ -1451,10 +1433,7 @@ function declineCall(
 
 const globalCapturers = new WeakMap<DesktopCapturerBaton, DesktopCapturer>();
 
-function getPresentingSources(): ThunkAction<
-  void,
-  RootStateType,
-  unknown,
+function getPresentingSources(): AsyncStateThunk<
   | SetCapturerBatonActionType
   | SetPresentingSourcesActionType
   | ToggleNeedsScreenRecordingPermissionsActionType
@@ -1492,7 +1471,7 @@ function getPresentingSources(): ThunkAction<
         });
       },
       onMediaStream(mediaStream) {
-        dispatch(
+        void dispatch(
           _setPresenting(
             getPresentingSource(getState()) || {
               id: 'media-stream',
@@ -1514,9 +1493,7 @@ function getPresentingSources(): ThunkAction<
     });
 
     if (needsPermission) {
-      dispatch({
-        type: TOGGLE_NEEDS_SCREEN_RECORDING_PERMISSIONS,
-      });
+      dispatch(toggleScreenRecordingPermissionsDialog(true));
     }
   };
 }
@@ -1529,12 +1506,7 @@ function groupCallAudioLevelsChange(
 
 function groupCallEnded(
   payload: GroupCallEndedActionPayloadType
-): ThunkAction<
-  void,
-  RootStateType,
-  unknown,
-  GroupCallEndedActionType | ShowErrorModalActionType
-> {
+): SyncStateThunk<GroupCallEndedActionType | ShowErrorModalActionType> {
   return (dispatch, getState) => {
     const { endedReason } = payload;
     if (endedReason === CallEndReason.DeniedRequestToJoinCall) {
@@ -1580,10 +1552,7 @@ function groupCallEnded(
 
 function receiveGroupCallReactions(
   payload: GroupCallReactionsReceivedArgumentType
-): ThunkAction<
-  void,
-  RootStateType,
-  unknown,
+): AsyncStateThunk<
   GroupCallReactionsReceivedActionType | GroupCallReactionsExpiredActionType
 > {
   return async dispatch => {
@@ -1612,12 +1581,7 @@ function receiveGroupCallReactions(
 
 function groupCallRaisedHandsChange(
   payload: GroupCallRaisedHandsChangeActionPayloadType
-): ThunkAction<
-  void,
-  RootStateType,
-  unknown,
-  GroupCallRaisedHandsChangeActionType
-> {
+): AsyncStateThunk<GroupCallRaisedHandsChangeActionType> {
   return async (dispatch, getState) => {
     const { callMode, conversationId, raisedHands } = payload;
 
@@ -1640,7 +1604,7 @@ function groupCallRaisedHandsChange(
 
 function groupCallStateChange(
   payload: GroupCallStateChangeArgumentType
-): ThunkAction<void, RootStateType, unknown, GroupCallStateChangeActionType> {
+): AsyncStateThunk<GroupCallStateChangeActionType> {
   return async (dispatch, getState) => {
     let didSomeoneStartPresenting: boolean;
     const activeCall = getActiveCall(getState().calling);
@@ -1676,12 +1640,7 @@ function groupCallStateChange(
 // From sync messages, to notify us that another device joined or changed a call link.
 function handleCallLinkUpdate(
   payload: HandleCallLinkUpdateType
-): ThunkAction<
-  void,
-  RootStateType,
-  unknown,
-  HandleCallLinkUpdateActionType | CallHistoryAdd
-> {
+): AsyncStateThunk<HandleCallLinkUpdateActionType | CallHistoryAdd> {
   return async dispatch => {
     const { rootKey, adminKey } = payload;
     const callLinkRootKey = CallLinkRootKey.parse(rootKey);
@@ -1734,7 +1693,7 @@ function handleCallLinkUpdate(
 
 function handleCallLinkUpdateLocal(
   callLink: CallLinkType
-): ThunkAction<void, RootStateType, unknown, HandleCallLinkUpdateActionType> {
+): SyncStateThunk<HandleCallLinkUpdateActionType> {
   return dispatch => {
     dispatch({
       type: HANDLE_CALL_LINK_UPDATE,
@@ -1745,20 +1704,18 @@ function handleCallLinkUpdateLocal(
 
 function handleCallLinkDelete(
   payload: HandleCallLinkDeleteType
-): ThunkAction<void, RootStateType, unknown, HandleCallLinkDeleteActionType> {
+): AsyncStateThunk<HandleCallLinkDeleteActionType> {
   return async dispatch => {
     dispatch({
       type: HANDLE_CALL_LINK_DELETE,
       payload,
     });
 
-    dispatch(reloadCallHistory());
+    void dispatch(reloadCallHistory());
   };
 }
 
-function hangUpActiveCall(
-  reason: string
-): ThunkAction<void, RootStateType, unknown, HangUpActionType> {
+function hangUpActiveCall(reason: string): AsyncStateThunk<HangUpActionType> {
   return async (dispatch, getState) => {
     const state = getState();
 
@@ -1802,7 +1759,7 @@ function setSuggestLowerHand(
 
 function sendGroupCallRaiseHand(
   payload: SendGroupCallRaiseHandType
-): ThunkAction<void, RootStateType, unknown, SendGroupCallRaiseHandActionType> {
+): SyncStateThunk<SendGroupCallRaiseHandActionType> {
   return dispatch => {
     calling.sendGroupCallRaiseHand(payload.conversationId, payload.raise);
 
@@ -1815,10 +1772,7 @@ function sendGroupCallRaiseHand(
 
 function sendGroupCallReaction(
   payload: SendGroupCallReactionType
-): ThunkAction<
-  void,
-  RootStateType,
-  unknown,
+): AsyncStateThunk<
   SendGroupCallReactionActionType | GroupCallReactionsExpiredActionType
 > {
   return async dispatch => {
@@ -1841,7 +1795,7 @@ function sendGroupCallReaction(
 
 function receiveIncomingDirectCall(
   payload: IncomingDirectCallType
-): ThunkAction<void, RootStateType, unknown, IncomingDirectCallActionType> {
+): SyncStateThunk<IncomingDirectCallActionType> {
   return (dispatch, getState) => {
     const callState = getState().calling;
 
@@ -1868,12 +1822,7 @@ function receiveIncomingGroupCall(
   };
 }
 
-function openSystemPreferencesAction(): ThunkAction<
-  void,
-  RootStateType,
-  unknown,
-  never
-> {
+function openSystemPreferencesAction(): SyncStateThunk {
   return () => {
     drop(window.IPC.openSystemMediaPermissions('screenCapture'));
   };
@@ -1886,9 +1835,7 @@ function outgoingCall(payload: StartDirectCallType): OutgoingCallActionType {
   };
 }
 
-function joinedAdhocCall(
-  roomId: string
-): ThunkAction<void, RootStateType, unknown, never> {
+function joinedAdhocCall(roomId: string): AsyncStateThunk {
   return async (_dispatch, getState) => {
     const state = getState();
     const callLink = getOwn(state.calling.callLinks, roomId);
@@ -1903,7 +1850,7 @@ function joinedAdhocCall(
 
 function maybePeekGroupCall(
   conversationId: string
-): ThunkAction<void, RootStateType, unknown, PeekGroupCallFulfilledActionType> {
+): SyncStateThunk<PeekGroupCallFulfilledActionType> {
   return (dispatch, getState) => {
     const call = getOwn(getState().calling.callsByConversation, conversationId);
 
@@ -1940,7 +1887,7 @@ function maybePeekGroupCall(
 
 function peekNotConnectedGroupCall(
   payload: PeekNotConnectedGroupCallType
-): ThunkAction<void, RootStateType, unknown, PeekGroupCallFulfilledActionType> {
+): SyncStateThunk<PeekGroupCallFulfilledActionType> {
   return (dispatch, getState) => {
     const { callMode, conversationId } = payload;
     doGroupCallPeek({
@@ -2000,17 +1947,13 @@ function selectPresentingSource(id: string): SelectPresentingSourceActionType {
   };
 }
 
-function setIsCallActive(
-  isCallActive: boolean
-): ThunkAction<void, RootStateType, unknown, never> {
+function setIsCallActive(isCallActive: boolean): SyncStateThunk {
   return () => {
     window.SignalContext.setIsCallActive(isCallActive);
   };
 }
 
-function setRendererCanvas(
-  payload: SetRendererCanvasType
-): ThunkAction<void, RootStateType, unknown, never> {
+function setRendererCanvas(payload: SetRendererCanvasType): SyncStateThunk {
   return () => {
     calling.videoRenderer.setCanvas(payload.element);
     calling.videoRenderer.setSizer(payload.sizeCallback);
@@ -2019,7 +1962,7 @@ function setRendererCanvas(
 
 function setLocalAudio(
   payload?: Parameters<SetLocalAudioType>[0]
-): ThunkAction<void, RootStateType, unknown, SetLocalAudioActionType> {
+): SyncStateThunk<SetLocalAudioActionType> {
   return (dispatch, getState) => {
     const { activeCallState } = getState().calling;
     if (!activeCallState || activeCallState.state !== 'Active') {
@@ -2042,7 +1985,7 @@ function setLocalAudio(
 
 function setLocalVideo(
   payload: Parameters<SetLocalVideoType>[0]
-): ThunkAction<void, RootStateType, unknown, SetLocalVideoFulfilledActionType> {
+): AsyncStateThunk<SetLocalVideoFulfilledActionType> {
   return async (dispatch, getState) => {
     const activeCall = getActiveCall(getState().calling);
     if (!activeCall) {
@@ -2080,7 +2023,7 @@ function setLocalVideo(
 
 function setMutedBy(
   payload: Parameters<SetMutedByType>[0]
-): ThunkAction<void, RootStateType, unknown, SetMutedByActionType> {
+): SyncStateThunk<SetMutedByActionType> {
   return (dispatch, getState) => {
     const state = getState();
     const activeCall = getActiveCall(state.calling);
@@ -2111,7 +2054,7 @@ function setMutedBy(
 
 function onObservedRemoteMute(
   payload: ObservedRemoteMuteDucksType
-): ThunkAction<void, RootStateType, unknown, ObservedRemoteMuteActionType> {
+): SyncStateThunk<ObservedRemoteMuteActionType> {
   return (dispatch, getState) => {
     const activeCall = getActiveCall(getState().calling);
     if (!activeCall) {
@@ -2128,7 +2071,7 @@ function onObservedRemoteMute(
 
 function setGroupCallVideoRequest(
   payload: SetGroupCallVideoRequestType
-): ThunkAction<void, RootStateType, unknown, never> {
+): SyncStateThunk {
   return () => {
     calling.setGroupCallVideoRequest(
       payload.conversationId,
@@ -2146,7 +2089,7 @@ function setGroupCallVideoRequest(
 function _setPresenting(
   sourceToPresent?: PresentedSource,
   mediaStream?: MediaStream
-): ThunkAction<void, RootStateType, unknown, SetPresentingFulfilledActionType> {
+): AsyncStateThunk<SetPresentingFulfilledActionType> {
   return async (dispatch, getState) => {
     const state = getState();
     const callingState = state.calling;
@@ -2189,12 +2132,7 @@ function _setPresenting(
   };
 }
 
-function cancelPresenting(): ThunkAction<
-  void,
-  RootStateType,
-  unknown,
-  SetPresentingFulfilledActionType
-> {
+function cancelPresenting(): AsyncStateThunk<SetPresentingFulfilledActionType> {
   return _setPresenting(undefined, undefined);
 }
 
@@ -2207,12 +2145,7 @@ function setOutgoingRing(payload: boolean): SetOutgoingRingActionType {
 
 function onOutgoingVideoCallInConversation(
   conversationId: string
-): ThunkAction<
-  void,
-  RootStateType,
-  unknown,
-  StartCallingLobbyActionType | ShowToastActionType
-> {
+): AsyncStateThunk<StartCallingLobbyActionType | ShowToastActionType> {
   return async (dispatch, getState) => {
     const conversation = window.ConversationController.get(conversationId);
     if (!conversation) {
@@ -2266,7 +2199,7 @@ function onOutgoingVideoCallInConversation(
       log.info(
         'onOutgoingVideoCallInConversation: call is deemed "safe". Starting lobby'
       );
-      dispatch(
+      void dispatch(
         startCallingLobby({
           conversationId,
           isVideoCall: true,
@@ -2282,8 +2215,8 @@ function onOutgoingVideoCallInConversation(
 
 function onOutgoingAudioCallInConversation(
   conversationId: string
-): ThunkAction<void, RootStateType, unknown, StartCallingLobbyActionType> {
-  return async (dispatch, getState) => {
+): AsyncStateThunk<StartCallingLobbyActionType> {
+  return async dispatch => {
     const conversation = window.ConversationController.get(conversationId);
     if (!conversation) {
       throw new Error(
@@ -2306,10 +2239,12 @@ function onOutgoingAudioCallInConversation(
       log.info(
         'onOutgoingAudioCallInConversation: call is deemed "safe". Starting lobby'
       );
-      startCallingLobby({
-        conversationId,
-        isVideoCall: false,
-      })(dispatch, getState, undefined);
+      void dispatch(
+        startCallingLobby({
+          conversationId,
+          isVideoCall: false,
+        })
+      );
     } else {
       log.info(
         'onOutgoingAudioCallInConversation: call is deemed "unsafe". Stopping'
@@ -2320,12 +2255,7 @@ function onOutgoingAudioCallInConversation(
 
 function createCallLink(
   onCreated: (roomId: string) => void
-): ThunkAction<
-  void,
-  RootStateType,
-  unknown,
-  CallHistoryAdd | HandleCallLinkUpdateActionType
-> {
+): AsyncStateThunk<CallHistoryAdd | HandleCallLinkUpdateActionType> {
   return async dispatch => {
     const callLink = await calling.createCallLink();
     const callHistory = toCallHistoryFromUnusedCallLink(callLink);
@@ -2348,12 +2278,7 @@ function createCallLink(
 
 function deleteCallLink(
   roomId: string
-): ThunkAction<
-  void,
-  RootStateType,
-  unknown,
-  HandleCallLinkDeleteActionType | ShowErrorModalActionType
-> {
+): AsyncStateThunk<HandleCallLinkDeleteActionType | ShowErrorModalActionType> {
   return async (dispatch, getState) => {
     const callLink = await DataReader.getCallLinkByRoomId(roomId);
     if (!callLink) {
@@ -2375,7 +2300,7 @@ function deleteCallLink(
       }
 
       await DataWriter.deleteCallHistoryByRoomId(callLink.roomId);
-      dispatch(handleCallLinkDelete({ roomId }));
+      void dispatch(handleCallLinkDelete({ roomId }));
     } catch (error) {
       log.warn('clearCallHistory: Failed to delete call link', error);
       const i18n = getIntl(getState());
@@ -2392,7 +2317,7 @@ function deleteCallLink(
 function updateCallLinkName(
   roomId: string,
   name: string
-): ThunkAction<void, RootStateType, unknown, HandleCallLinkUpdateActionType> {
+): AsyncStateThunk<HandleCallLinkUpdateActionType> {
   return async dispatch => {
     const prevCallLink = await DataReader.getCallLinkByRoomId(roomId);
     strictAssert(
@@ -2414,7 +2339,7 @@ function updateCallLinkName(
 function updateCallLinkRestrictions(
   roomId: string,
   restrictions: CallLinkRestrictions
-): ThunkAction<void, RootStateType, unknown, HandleCallLinkUpdateActionType> {
+): AsyncStateThunk<HandleCallLinkUpdateActionType> {
   return async dispatch => {
     const prevCallLink = await DataReader.getCallLinkByRoomId(roomId);
     strictAssert(
@@ -2438,7 +2363,9 @@ function updateCallLinkRestrictions(
 
 function startCallLinkLobbyByRoomId({
   roomId,
-}: StartCallLinkLobbyByRoomIdType): StartCallLinkLobbyThunkActionType {
+}: StartCallLinkLobbyByRoomIdType): AsyncStateThunk<
+  StartCallLinkLobbyActionType | ShowErrorModalActionType
+> {
   return async (dispatch, getState) => {
     const state = getState();
     const callLink = getOwn(state.calling.callLinks, roomId);
@@ -2454,7 +2381,9 @@ function startCallLinkLobbyByRoomId({
 
 function startCallLinkLobby({
   rootKey,
-}: StartCallLinkLobbyType): StartCallLinkLobbyThunkActionType {
+}: StartCallLinkLobbyType): AsyncStateThunk<
+  StartCallLinkLobbyActionType | ShowErrorModalActionType
+> {
   return async (dispatch, getState) => {
     await _startCallLinkLobby({ rootKey, dispatch, getState });
   };
@@ -2466,9 +2395,7 @@ const _startCallLinkLobby = async ({
   getState,
 }: {
   rootKey: string;
-  dispatch: ThunkDispatch<
-    RootStateType,
-    unknown,
+  dispatch: StateDispatch<
     | CallLobbyFailedActionType
     | StartCallLinkLobbyActionType
     | ShowErrorModalActionType
@@ -2626,26 +2553,24 @@ const _startCallLinkLobby = async ({
 
 function leaveCurrentCallAndStartCallingLobby(
   data: StartCallData
-): ThunkAction<void, RootStateType, unknown, HangUpActionType> {
-  return async (dispatch, getState) => {
-    hangUpActiveCall(
-      'Leave call button pressed in ConfirmLeaveCurrentCallModal'
-    )(dispatch, getState, undefined);
+): AsyncStateThunk<HangUpActionType> {
+  return async dispatch => {
+    void dispatch(
+      hangUpActiveCall(
+        'Leave call button pressed in ConfirmLeaveCurrentCallModal'
+      )
+    );
 
     const { type } = data;
     if (type === 'conversation') {
       const { conversationId, isVideoCall } = data;
-      startCallingLobby({ conversationId, isVideoCall })(
-        dispatch,
-        getState,
-        undefined
-      );
+      void dispatch(startCallingLobby({ conversationId, isVideoCall }));
     } else if (type === 'adhoc-roomId') {
       const { roomId } = data;
-      startCallLinkLobbyByRoomId({ roomId })(dispatch, getState, undefined);
+      void dispatch(startCallLinkLobbyByRoomId({ roomId }));
     } else if (type === 'adhoc-rootKey') {
       const { rootKey } = data;
-      startCallLinkLobby({ rootKey })(dispatch, getState, undefined);
+      void dispatch(startCallLinkLobby({ rootKey }));
     } else {
       throw missingCaseError(type);
     }
@@ -2655,10 +2580,7 @@ function leaveCurrentCallAndStartCallingLobby(
 function startCallingLobby({
   conversationId,
   isVideoCall,
-}: StartCallingLobbyType): ThunkAction<
-  void,
-  RootStateType,
-  unknown,
+}: StartCallingLobbyType): AsyncStateThunk<
   | CallLobbyFailedActionType
   | StartCallingLobbyActionType
   | ToggleConfirmLeaveCallModalActionType
@@ -2768,7 +2690,7 @@ function startCallingLobby({
 
 function startCall(
   payload: StartCallType
-): ThunkAction<void, RootStateType, unknown, StartDirectCallActionType> {
+): AsyncStateThunk<StartDirectCallActionType> {
   return async (dispatch, getState) => {
     const { callMode, conversationId, hasLocalAudio, hasLocalVideo } = payload;
 
@@ -2869,15 +2791,19 @@ function toggleSelfViewExpanded(): ToggleSelfViewExpandedActionType {
   };
 }
 
-function toggleScreenRecordingPermissionsDialog(): ToggleNeedsScreenRecordingPermissionsActionType {
+function toggleScreenRecordingPermissionsDialog(
+  open: boolean
+): ToggleNeedsScreenRecordingPermissionsActionType {
   return {
     type: TOGGLE_NEEDS_SCREEN_RECORDING_PERMISSIONS,
+    payload: open,
   };
 }
 
-function toggleSettings(): ToggleSettingsActionType {
+function toggleSettings(open: boolean): ToggleSettingsActionType {
   return {
     type: TOGGLE_SETTINGS,
+    payload: open,
   };
 }
 
@@ -2919,10 +2845,7 @@ type CQSSubmissionActionType =
 
 function showCallQualitySurvey(
   payload: CallQualitySurveyPropsType
-): ThunkAction<
-  void,
-  RootStateType,
-  unknown,
+): SyncStateThunk<
   ResetCQSSubmissionStateActionType | ShowCallQualitySurveyActionType
 > {
   return dispatch => {
@@ -2936,12 +2859,7 @@ function showCallQualitySurvey(
 
 function submitCallQualitySurvey(
   options: SubmitCallQualitySurveyOptionsType
-): ThunkAction<
-  void,
-  RootStateType,
-  unknown,
-  CQSSubmissionActionType | ShowToastActionType
-> {
+): AsyncStateThunk<CQSSubmissionActionType | ShowToastActionType> {
   return async (dispatch, getState) => {
     const {
       userSatisfied,
@@ -3040,12 +2958,7 @@ function submitCallQualitySurvey(
   };
 }
 
-function retryCallQualitySurvey(): ThunkAction<
-  void,
-  RootStateType,
-  unknown,
-  CQSSubmissionActionType
-> {
+function retryCallQualitySurvey(): SyncStateThunk<CQSSubmissionActionType> {
   return (dispatch, getState) => {
     const { state: submissionState } =
       getState().calling.callQualitySurveySubmission;
@@ -3055,7 +2968,7 @@ function retryCallQualitySurvey(): ThunkAction<
       return;
     }
 
-    dispatch(submitCallQualitySurvey(submissionState.lastSubmissionData));
+    void dispatch(submitCallQualitySurvey(submissionState.lastSubmissionData));
   };
 }
 
@@ -3147,11 +3060,11 @@ export type ActionsType = ReadonlyDeep<typeof actions>;
 export function getEmptyState(): CallingStateType {
   return {
     availableCameras: [],
-    availableMicrophones: [],
-    availableSpeakers: [],
-    selectedCamera: undefined,
-    selectedMicrophone: undefined,
-    selectedSpeaker: undefined,
+    availableMicrophones: getEmptyAudioDeviceList(OS.isWindows()),
+    availableSpeakers: getEmptyAudioDeviceList(OS.isWindows()),
+    selectedCamera: null,
+    selectedMicrophone: getDefaultAudioPreference(OS.isWindows()),
+    selectedSpeaker: getDefaultAudioPreference(OS.isWindows()),
 
     callsByConversation: {},
     adhocCalls: {},
@@ -4444,7 +4357,7 @@ export function reducer(
       ...state,
       activeCallState: {
         ...activeCallState,
-        settingsDialogOpen: !activeCallState.settingsDialogOpen,
+        settingsDialogOpen: action.payload,
       },
     };
   }
@@ -4592,8 +4505,7 @@ export function reducer(
       ...state,
       activeCallState: {
         ...activeCallState,
-        showNeedsScreenRecordingPermissionsWarning:
-          !activeCallState.showNeedsScreenRecordingPermissionsWarning,
+        showNeedsScreenRecordingPermissionsWarning: action.payload,
       },
     };
   }

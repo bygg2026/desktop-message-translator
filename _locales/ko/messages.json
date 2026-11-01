@@ -2,8 +2,20 @@
   "icu:AxoAlertDialog.Cancel": {
     "messageformat": "취소"
   },
+  "icu:AxoAlertDialog.Ok": {
+    "messageformat": "확인"
+  },
   "icu:AxoButton.Pending": {
     "messageformat": "대기 중"
+  },
+  "icu:AxoColorSlider.Hue": {
+    "messageformat": "Hue"
+  },
+  "icu:AxoColorSlider.Saturation": {
+    "messageformat": "Saturation"
+  },
+  "icu:AxoColorSlider.Lightness": {
+    "messageformat": "Lightness"
   },
   "icu:AxoDialog.Back": {
     "messageformat": "뒤로"
@@ -36,7 +48,7 @@
     "messageformat": "검색"
   },
   "icu:AddUserToAnotherGroupModal__toast--user-added-to-group": {
-    "messageformat": "{contact} 님을 {group} 그룹에 추가함"
+    "messageformat": "{contact} 님을 {group} 그룹에 추가했습니다"
   },
   "icu:AddUserToAnotherGroupModal__toast--adding-user-to-group": {
     "messageformat": "{contact} 님을 추가하는 중…"
@@ -74,12 +86,6 @@
   "icu:LinkedDevicesOnboardingDialog__bullet--2": {
     "messageformat": "연동 기기는 기본 기기에서 관리하며, 최대 5대까지 연동할 수 있습니다."
   },
-  "icu:LinkedDevicesOnboardingDialog__bullet--3": {
-    "messageformat": "계정 설정 및 백업을 포함한 계정 설정은 기본 기기에서만 관리할 수 있습니다."
-  },
-  "icu:LinkedDevicesOnboardingDialog__bullet--3--1": {
-    "messageformat": "계정 설정과 백업은 기본 기기에서만 관리할 수 있습니다."
-  },
   "icu:LinkedDevicesOnboardingDialog__bullet--3--2": {
     "messageformat": "계정 설정 및 Signal 안전 백업은 기본 기기에서만 관리할 수 있습니다."
   },
@@ -90,10 +96,10 @@
     "messageformat": "높음"
   },
   "icu:softwareAcknowledgments": {
-    "messageformat": "소프트웨어 승인"
+    "messageformat": "소프트웨어 승인 정보"
   },
   "icu:privacyPolicy": {
-    "messageformat": "이용약관 및 개인정보 처리방침"
+    "messageformat": "이용약관 및 개인정보처리방침"
   },
   "icu:About__AppEnvironment": {
     "messageformat": "{appEnv}"
@@ -174,7 +180,7 @@
     "messageformat": "도움말 (&H)"
   },
   "icu:mainMenuSettings": {
-    "messageformat": "설정…"
+    "messageformat": "설정"
   },
   "icu:appMenuServices": {
     "messageformat": "서비스"
@@ -186,7 +192,7 @@
     "messageformat": "다른 창 숨기기"
   },
   "icu:appMenuUnhide": {
-    "messageformat": "모두 보이기"
+    "messageformat": "모두 표시"
   },
   "icu:appMenuQuit": {
     "messageformat": "Signal 종료"
@@ -201,13 +207,13 @@
     "messageformat": "자르기"
   },
   "icu:editMenuCopy": {
-    "messageformat": "복사하기"
+    "messageformat": "복사"
   },
   "icu:editMenuPaste": {
     "messageformat": "붙여넣기"
   },
   "icu:editMenuPasteAndMatchStyle": {
-    "messageformat": "텍스트만 복사"
+    "messageformat": "일반 텍스트로 붙여넣기"
   },
   "icu:editMenuDelete": {
     "messageformat": "삭제"
@@ -219,7 +225,7 @@
     "messageformat": "말하기 시작"
   },
   "icu:editMenuStopSpeaking": {
-    "messageformat": "말하기 종료"
+    "messageformat": "말하기 중지"
   },
   "icu:windowMenuClose": {
     "messageformat": "창 닫기"
@@ -231,7 +237,7 @@
     "messageformat": "확대"
   },
   "icu:windowMenuBringAllToFront": {
-    "messageformat": "모두 앞으로"
+    "messageformat": "모두 맨 앞으로 가져오기"
   },
   "icu:viewMenuResetZoom": {
     "messageformat": "실제 크기"
@@ -252,13 +258,13 @@
     "messageformat": "새 기기로 설정"
   },
   "icu:menuSetupAsStandalone": {
-    "messageformat": "독립 실행형 기기로 설정"
+    "messageformat": "단독 기기로 설정"
   },
   "icu:menuStageLocalBackupForImport": {
     "messageformat": "Stage Local Backup for Import…"
   },
   "icu:messageContextMenuButton": {
-    "messageformat": "더 많은 작업"
+    "messageformat": "옵션 더 보기"
   },
   "icu:contextMenuCopyLink": {
     "messageformat": "링크 복사"
@@ -273,13 +279,16 @@
     "messageformat": "보관함 보기"
   },
   "icu:loading": {
-    "messageformat": "불러오는 중"
+    "messageformat": "불러오는 중..."
   },
   "icu:optimizingApplication": {
-    "messageformat": "어플리케이션 최적화 중…"
+    "messageformat": "애플리케이션 최적화 중..."
   },
   "icu:archivedConversations": {
     "messageformat": "보관된 대화"
+  },
+  "icu:LeftPane__MoreActionsLabel": {
+    "messageformat": "More actions"
   },
   "icu:LeftPane__MoreActionsMenu__AddChatFolder": {
     "messageformat": "대화 폴더 추가"
@@ -383,9 +392,6 @@
   "icu:NavTabs__ItemIconLabel--UnreadCount": {
     "messageformat": "읽지 않은 메시지 {count,number}개"
   },
-  "icu:NavTabs__ItemIconLabel--MarkedUnread": {
-    "messageformat": "읽지 않음으로 표시"
-  },
   "icu:NavTabs__ItemLabel--Chats": {
     "messageformat": "대화"
   },
@@ -456,7 +462,7 @@
     "messageformat": "{title} 님을 삭제할까요?"
   },
   "icu:ContactListItem__remove--body": {
-    "messageformat": "검색 시 이 사용자가 표시되지 않습니다. 향후 해당 사용자가 메시지를 보내는 경우 메시지 요청이 수신됩니다."
+    "messageformat": "검색 시 이 사용자가 표시되지 않습니다. 상대방이 나중에 메시지를 보내면 메시지 요청으로 받게 됩니다."
   },
   "icu:ContactListItem__remove--confirm": {
     "messageformat": "삭제"
@@ -465,7 +471,7 @@
     "messageformat": "{title} 님을 삭제할 수 없습니다"
   },
   "icu:ContactListItem__remove-system--body": {
-    "messageformat": "이 사용자가 내 기기 연락처에 저장되어 있습니다. 모바일 기기 연락처에서 삭제한 다음 다시 시도하세요."
+    "messageformat": "휴대폰 연락처에 저장된 사용자입니다.모바일 기기 연락처에서 삭제한 다음 다시 시도하세요."
   },
   "icu:moveConversationToInbox": {
     "messageformat": "보관 해제"
@@ -492,7 +498,7 @@
     "messageformat": "대화의 맨 아래로 스크롤하기"
   },
   "icu:messagesBelow": {
-    "messageformat": "새 메시지"
+    "messageformat": "하단의 새 메시지"
   },
   "icu:mentionsBelow": {
     "messageformat": "새 멘션 확인"
@@ -501,7 +507,7 @@
     "messageformat": "{count, plural, other {읽지 않은 메시지 {count,number}개}}"
   },
   "icu:youMarkedAsVerified": {
-    "messageformat": "{name} 님과의 안전 번호를 인증 상태로 표시했습니다."
+    "messageformat": "{name} 님과의 안전 번호를 인증 완료로 표시했습니다."
   },
   "icu:youMarkedAsNotVerified": {
     "messageformat": "{name} 님과의 안전 번호를 미인증 상태로 표시했습니다."
@@ -513,10 +519,10 @@
     "messageformat": "{name} 님과의 안전 번호를 다른 기기에서 미인증 상태로 표시했습니다."
   },
   "icu:changedRightAfterVerify": {
-    "messageformat": "확인하려고 하시는 안전 번호가 변경되었습니다. {name1} 님으로 새 안전 번호를 검토하세요. 이 변경 사항은 누군가가 내 통신 내용을 가로채려고 했을 수도, {name2} 님이 단순히 Signal을 다시 설치했을 수도 있습니다."
+    "messageformat": "확인하려는 안전 번호가 변경되었습니다. {name1} 님과의 새 안전 번호를 다시 확인하세요. 누군가 대화를 가로채려 시도 중이거나, {name2} 님이 Signal을 단순히 다시 설치했을 수 있습니다."
   },
   "icu:safetyNumberChangeDialog__message": {
-    "messageformat": "다음 사용자는 Signal을 다시 설치했거나 장치를 변경했을 수 있습니다. 받는 사람을 클릭하여 새로운 안전 번호를 확인하세요. 이 작업은 선택 사항입니다."
+    "messageformat": "다음 사용자는 Signal을 다시 설치했거나 기기를 변경했을 수 있습니다. 대화 상대를 클릭하여 새로운 안전 번호를 확인하세요. 이 작업은 선택 사항입니다."
   },
   "icu:safetyNumberChangeDialog__pending-messages": {
     "messageformat": "보류 중인 메시지 보내기"
@@ -549,7 +555,7 @@
     "messageformat": "{story} 스토리에 대한 조치"
   },
   "icu:sendAnyway": {
-    "messageformat": "그냥 보내기"
+    "messageformat": "그래도 전송하기"
   },
   "icu:safetyNumberChangeDialog_send": {
     "messageformat": "전송"
@@ -573,7 +579,7 @@
     "messageformat": "업로드 중 문제가 발생했습니다. 로그를 텍스트 파일로 첨부하여 support@signal.org에 이메일을 보내주세요."
   },
   "icu:debugLogSuccess": {
-    "messageformat": "디버그 로그 제출함"
+    "messageformat": "디버그 로그 전송 완료"
   },
   "icu:debugLogSuccessNextSteps": {
     "messageformat": "디버그 로그 업로드가 완료되었습니다. 고객 지원으로 문의하실 경우, 아래 URL을 복사해 문제에 대한 설명과 해당 문제를 재현하기 위한 단계별 절차를 함께 보내주세요."
@@ -653,20 +659,11 @@
   "icu:SafetyNumberNotReady__learn-more": {
     "messageformat": "더 알아보기"
   },
-  "icu:KeyTransparencyErrorDialog__Title": {
-    "messageformat": "현재 기기에서 자동 키 인증을 사용할 수 없습니다. 디버그 로그를 제출하시겠어요?"
-  },
   "icu:KeyTransparencyErrorDialog__Title-v2": {
     "messageformat": "현재 기기에서 자동 키 인증을 사용할 수 없습니다. 앱 서비스 개선을 위해 리포트를 제출하시겠어요?"
   },
-  "icu:KeyTransparencyErrorDialog__Description": {
-    "messageformat": "디버그 로그를 제출하면 문제를 진단하고 수정하는 데 도움이 됩니다. 디버그 로그에는 식별 정보가 포함되지 않습니다."
-  },
   "icu:KeyTransparencyErrorDialog__Description-v2": {
     "messageformat": "디버그 로그를 포함하면 문제를 진단하고 해결하는 데 도움이 되며, 개인을 식별할 수 있는 정보는 포함되지 않습니다. 제출 여부는 선택 사항입니다."
-  },
-  "icu:KeyTransparencyErrorDialog__ShareDebugLog__Label": {
-    "messageformat": "디버그 로그 공유"
   },
   "icu:KeyTransparencyErrorDialog__ShareDebugLog__Label-v2": {
     "messageformat": "디버그 로그 포함"
@@ -686,6 +683,9 @@
   "icu:KeyTransparencyOnboardingDialog__Description": {
     "messageformat": "전화번호를 통해 연결된 연락처의 경우, Signal은 키 투명성이라는 프로세스를 사용하여 연결이 안전한지 자동으로 확인할 수 있습니다. 하지만 더 강력한 보안을 원한다면, QR 코드를 사용하거나 안전 번호를 대조하여 수동으로 연결을 인증하는 것도 가능합니다."
   },
+  "icu:KeyTransparencyOnboardingDialog__Description-v2": {
+    "messageformat": "<paragraph>전화번호를 통해 연결된 연락처의 경우, Signal은 키 투명성이라는 프로세스를 사용하여 연결이 안전한지 자동으로 확인합니다.</paragraph> <paragraph>더 강력한 보안을 원한다면, QR 코드를 사용하거나 안전 번호를 대조하여 수동으로 연결을 인증하는 것도 가능합니다.</paragraph>"
+  },
   "icu:KeyTransparencyOnboardingDialog__Continue": {
     "messageformat": "계속"
   },
@@ -693,7 +693,7 @@
     "messageformat": "더 알아보기"
   },
   "icu:verified": {
-    "messageformat": "검증됨"
+    "messageformat": "인증 완료"
   },
   "icu:newIdentity": {
     "messageformat": "새 안전 번호"
@@ -711,10 +711,10 @@
     "messageformat": "어제"
   },
   "icu:thisWeek": {
-    "messageformat": "이번주"
+    "messageformat": "이번 주"
   },
   "icu:thisMonth": {
-    "messageformat": "이번달"
+    "messageformat": "이번 달"
   },
   "icu:unsupportedAttachment": {
     "messageformat": "지원되지 않는 첨부파일 유형입니다. 저장하려면 클릭하세요."
@@ -723,7 +723,7 @@
     "messageformat": "음성 메시지"
   },
   "icu:dangerousFileType": {
-    "messageformat": "보안상 이유로 첨부 파일 유형이 허용되지 않음"
+    "messageformat": "보안상의 이유로 이 형식의 파일은 첨부할 수 없습니다."
   },
   "icu:loadingPreview": {
     "messageformat": "미리보기 불러오는 중…"
@@ -732,13 +732,13 @@
     "messageformat": "{domain}의 링크 미리보기 임시 썸네일"
   },
   "icu:previewThumbnail": {
-    "messageformat": "{domain}의 섬네일 링크 미리보기"
+    "messageformat": "{domain}의 썸네일 링크 미리보기"
   },
   "icu:stagedImageAttachment": {
     "messageformat": "임시 첨부 이미지: {path}"
   },
   "icu:decryptionErrorToast": {
-    "messageformat": "{deviceId} 기기, {name}에서 데스크톱에 암호 해독 문제가 발생했습니다."
+    "messageformat": "데스크톱 앱에서 {name}의 기기 {deviceId}에서 보낸 메시지를 복호화하는 중 오류가 발생했습니다"
   },
   "icu:Toast__ActionLabel--SubmitLog": {
     "messageformat": "로그 제출"
@@ -786,7 +786,7 @@
     "messageformat": "선택된 첨부 파일을 불러올 수 없습니다."
   },
   "icu:disconnected": {
-    "messageformat": "연결 끊김"
+    "messageformat": "연결 해제됨"
   },
   "icu:connecting": {
     "messageformat": "연결 중…"
@@ -795,7 +795,7 @@
     "messageformat": "다시 연결하려면 클릭하세요."
   },
   "icu:connectingHangOn": {
-    "messageformat": "오래 걸리지 않을 거예요"
+    "messageformat": "곧 연결됩니다"
   },
   "icu:offline": {
     "messageformat": "오프라인"
@@ -822,10 +822,10 @@
     "messageformat": "문의하기"
   },
   "icu:goToReleaseNotes": {
-    "messageformat": "릴리스 노트로"
+    "messageformat": "릴리스 노트로 이동"
   },
   "icu:goToForums": {
-    "messageformat": "포럼으로"
+    "messageformat": "포럼으로 이동"
   },
   "icu:goToSupportPage": {
     "messageformat": "고객 지원 페이지로 이동"
@@ -840,13 +840,13 @@
     "messageformat": "Signal Desktop 정보"
   },
   "icu:screenShareWindow": {
-    "messageformat": "화면 공유하기"
+    "messageformat": "화면 공유 중"
   },
   "icu:speech": {
     "messageformat": "말하기"
   },
   "icu:show": {
-    "messageformat": "보이기"
+    "messageformat": "표시"
   },
   "icu:hide": {
     "messageformat": "숨기기"
@@ -924,10 +924,10 @@
     "messageformat": "이 대화의 입력 애니메이션"
   },
   "icu:contactInAddressBook": {
-    "messageformat": "이 사용자는 내 연락처에 없습니다."
+    "messageformat": "내 연락처에 있는 사용자입니다."
   },
   "icu:contactAvatarAlt": {
-    "messageformat": "{name} 연락처의 아바타"
+    "messageformat": "{name} 님의 아바타"
   },
   "icu:sendMessageToContact": {
     "messageformat": "메시지 보내기"
@@ -975,13 +975,13 @@
     "messageformat": "음성 메시지 녹음 시작"
   },
   "icu:voiceRecordingInterruptedMax": {
-    "messageformat": "음성 통화 녹음 시간이 다 되어서 녹음을 종료했습니다."
+    "messageformat": "최대 녹음 시간이 초과되어 녹음이 종료되었습니다."
   },
   "icu:voiceNoteLimit": {
     "messageformat": "음성 메시지는 1시간으로 제한됩니다. 다른 앱으로 전환하면 녹음이 중단됩니다."
   },
   "icu:voiceNoteMustBeOnlyAttachment": {
-    "messageformat": "음성 메시지에는 첨부 파일이 하나만 있어야 합니다."
+    "messageformat": "음성 메시지에는 파일을 하나만 첨부할 수 있습니다."
   },
   "icu:voiceNoteError": {
     "messageformat": "음성 녹음기에 오류가 발생했습니다."
@@ -1005,7 +1005,7 @@
     "messageformat": "통화하려면 Signal Desktop이 마이크에 액세스하도록 허용해야 합니다."
   },
   "icu:videoCallingPermissionNeeded": {
-    "messageformat": "영상 통화의 경우 Signal Desktop이 카메라에 액세스하도록 허용해야 합니다."
+    "messageformat": "영상 통화를 사용하려면 Signal Desktop의 카메라 접근을 허용해야 합니다."
   },
   "icu:allowAccess": {
     "messageformat": "권한 허용"
@@ -1038,7 +1038,7 @@
     "messageformat": "Signal을 업데이트하지 못했습니다. {url} 링크를 방문하여 수동으로 설치하세요. 그런 다음 <contactSupportLink>지원팀</contactSupportLink>에 이 문제에 관해 문의해 주세요."
   },
   "icu:readOnlyVolume": {
-    "messageformat": "Signal Desktop이 macOS 검역에 걸렸을 가능성이 크며 자동 업데이트할 수 없습니다. 탐색기를 사용하여 {app} 앱을 {folder} 폴더로 이동하세요."
+    "messageformat": "Signal Desktop이 macOS 격리 상태에 있어 자동으로 업데이트할 수 없습니다. Finder를 사용하여 {app} 앱을 {folder} 폴더로 이동해 보세요."
   },
   "icu:ok": {
     "messageformat": "확인"
@@ -1065,7 +1065,7 @@
     "messageformat": "전달"
   },
   "icu:done": {
-    "messageformat": "확인"
+    "messageformat": "완료"
   },
   "icu:update": {
     "messageformat": "업데이트"
@@ -1080,13 +1080,13 @@
     "messageformat": "꺼짐"
   },
   "icu:deleteWarning": {
-    "messageformat": "이 기기에서 대화가 삭제됩니다."
+    "messageformat": "기기에서 이 메시지가 삭제됩니다."
   },
   "icu:deleteForEveryoneWarning": {
-    "messageformat": "이 메시지는 최신 Signal을 설치한 모두에게서 삭제됩니다. 멤버는 내가 메시지를 삭제했다는 것을 확인할 수 있습니다."
+    "messageformat": "이 메시지는 최신 Signal을 설치한 모든 멤버에게서 삭제됩니다. 멤버는 내가 메시지를 삭제했다는 것을 확인할 수 있습니다."
   },
   "icu:from": {
-    "messageformat": "보낸이:"
+    "messageformat": "보낸 사람:"
   },
   "icu:searchResultHeader--sender-to-group": {
     "messageformat": "보낸 사람: {sender} 님, 받는 사람: {receiverGroup}"
@@ -1443,10 +1443,10 @@
     "messageformat": "고정 해제"
   },
   "icu:sessionEnded": {
-    "messageformat": "보안 세션 초기화"
+    "messageformat": "보안 세션이 초기화되었습니다"
   },
   "icu:ChatRefresh--notification": {
-    "messageformat": "대화 세션 새로고침됨"
+    "messageformat": "대화 세션이 새로고침되었습니다"
   },
   "icu:ChatRefresh--learnMore": {
     "messageformat": "자세히 알아보기"
@@ -1461,7 +1461,7 @@
     "messageformat": "전송 문제"
   },
   "icu:DeliveryIssue--notification": {
-    "messageformat": "{sender}로부터 온 메시지가 전달되지 않았습니다."
+    "messageformat": "{sender} 님이 보낸 메시지가 전달되지 않았습니다"
   },
   "icu:DeliveryIssue--learnMore": {
     "messageformat": "자세히 알아보기"
@@ -1493,6 +1493,9 @@
   "icu:ConversationMerge--learn-more": {
     "messageformat": "자세히 알아보기"
   },
+  "icu:ConversationMerge--explainer-dialog--label": {
+    "messageformat": "메시지 기록이 통합되었습니다"
+  },
   "icu:ConversationMerge--explainer-dialog--line-1": {
     "messageformat": "{obsoleteConversationTitle} 님과 메시지를 주고받은 후 이 번호가 {conversationTitle} 님의 전화번호라는 걸 알게 됐습니다. 해당 전화번호는 비공개 상태입니다."
   },
@@ -1512,7 +1515,7 @@
     "messageformat": "메시지에 첨부된 이미지"
   },
   "icu:videoAttachmentAlt": {
-    "messageformat": "메시지에 첨부된 비디오의 스크린샷"
+    "messageformat": "메시지에 첨부된 동영상 스크린샷"
   },
   "icu:lightboxImageAlt": {
     "messageformat": "대화에 첨부된 이미지"
@@ -1521,7 +1524,7 @@
     "messageformat": "{downloaded}/{total} 다운로드 중"
   },
   "icu:imageCaptionIconAlt": {
-    "messageformat": "이 이미지가 자막이 있다는 아이콘"
+    "messageformat": "이미지 캡션 표시 아이콘"
   },
   "icu:imageOpenAlt": {
     "messageformat": "이 첨부 파일 더 크게 보기"
@@ -1545,7 +1548,7 @@
     "messageformat": "파일을 사용할 수 없음"
   },
   "icu:attachmentNotAvailable__longMessage": {
-    "messageformat": "메시지가 불완전함"
+    "messageformat": "만료된 메시지입니다"
   },
   "icu:attachmentNotAvailable__sticker": {
     "messageformat": "스티커를 사용할 수 없음"
@@ -1605,7 +1608,7 @@
     "messageformat": "{linkNewDevice}을 탭하세요."
   },
   "icu:Install__qr-failed-load__error--timeout": {
-    "messageformat": "QR 코드를 로드할 수 없습니다. 연결을 확인하고 다시 시도하세요."
+    "messageformat": "QR 코드를 불러올 수 없습니다. 연결을 확인하고 다시 시도해 주세요."
   },
   "icu:Install__qr-failed-load__error--unknown": {
     "messageformat": "<paragraph>예기치 못한 오류가 발생했어요.</paragraph><paragraph>다시 시도해 주세요.</paragraph>"
@@ -1617,7 +1620,7 @@
     "messageformat": "재시도"
   },
   "icu:Install__qr-max-rotations__retry": {
-    "messageformat": "코드 새로 고침"
+    "messageformat": "코드 새로고침"
   },
   "icu:Install__qr-failed-load__get-help": {
     "messageformat": "도움 받기"
@@ -1754,6 +1757,9 @@
   "icu:Preferences__EditChatFolderPage__SelectChatsDialog__Search__Placeholder": {
     "messageformat": "검색"
   },
+  "icu:Preferences__EditChatFolderPage__SelectChatsDialog__NoChats": {
+    "messageformat": "대화 없음"
+  },
   "icu:Preferences__EditChatFolderPage__SelectChatsDialog__ChatTypesSection__Title": {
     "messageformat": "대화 유형"
   },
@@ -1836,7 +1842,7 @@
     "messageformat": "연락처와 그룹 동기화 중"
   },
   "icu:initialSync__subtitle": {
-    "messageformat": "참고: 대화 기록이 이 장치와 동기화되지 않습니다."
+    "messageformat": "참고: 대화 기록이 이 기기와 동기화되지 않습니다."
   },
   "icu:installConnectionFailed": {
     "messageformat": "서버에 연결할 수 없습니다."
@@ -1848,13 +1854,13 @@
     "messageformat": "휴대전화를 연동하려면 기기에서 Signal을 업데이트하세요."
   },
   "icu:installErrorHeader": {
-    "messageformat": "오류가 발생했습니다!"
+    "messageformat": "오류가 발생했습니다"
   },
   "icu:installUnknownError": {
     "messageformat": "예기치 못한 오류가 발생했어요. 다시 시도해 주세요."
   },
   "icu:installTryAgain": {
-    "messageformat": "다시 시도해 주세요."
+    "messageformat": "다시 시도하기"
   },
   "icu:Preferences--theme": {
     "messageformat": "테마"
@@ -1941,7 +1947,7 @@
     "messageformat": "참여 요청"
   },
   "icu:calling__button--video-disabled": {
-    "messageformat": "카메라 비활성화"
+    "messageformat": "카메라 비활성화됨"
   },
   "icu:calling__button--video-off": {
     "messageformat": "카메라 끄기"
@@ -1950,7 +1956,7 @@
     "messageformat": "카메라 켜기"
   },
   "icu:calling__button--audio-disabled": {
-    "messageformat": "마이크 비활성화"
+    "messageformat": "마이크 비활성화됨"
   },
   "icu:calling__button--audio-off": {
     "messageformat": "마이크 음소거"
@@ -1974,10 +1980,10 @@
     "messageformat": "그룹 인원이 너무 많아 전화를 걸 수 없습니다."
   },
   "icu:CallingButton__ring-off": {
-    "messageformat": "통화 끄기"
+    "messageformat": "벨소리 끄기"
   },
   "icu:CallingButton--ring-on": {
-    "messageformat": "통화 켜기"
+    "messageformat": "벨소리 켜기"
   },
   "icu:CallingButton--more-options": {
     "messageformat": "옵션 더 보기"
@@ -2046,16 +2052,16 @@
     "messageformat": "나"
   },
   "icu:calling__your-video-is-off": {
-    "messageformat": "카메라가 꺼졌습니다."
+    "messageformat": "카메라가 꺼져 있습니다"
   },
   "icu:calling__pre-call-info--empty-group": {
     "messageformat": "참가한 사람이 없어요"
   },
   "icu:calling__pre-call-info--1-person-in-call": {
-    "messageformat": "{first} 님이 통화 중입니다."
+    "messageformat": "{first} 님이 통화에 참여 중입니다"
   },
   "icu:calling__pre-call-info--another-device-in-call": {
-    "messageformat": "다른 기기 중 하나에서 통화 중입니다."
+    "messageformat": "다른 연동 기기에서 통화에 참여 중입니다"
   },
   "icu:calling__pre-call-info--2-people-in-call": {
     "messageformat": "{first} 님과 {second} 님이 이 통화에 참여 중입니다."
@@ -2136,7 +2142,7 @@
     "messageformat": "연결이 끊어졌습니다. Signal이 다시 연결합니다."
   },
   "icu:calling__presenting--info": {
-    "messageformat": "Signal이 {window} 창을 공유하고 있습니다."
+    "messageformat": "Signal에서 {window} 창을 공유 중입니다."
   },
   "icu:calling__presenting--info--unknown": {
     "messageformat": "Signal 화면 공유를 사용 중입니다."
@@ -2145,7 +2151,7 @@
     "messageformat": "다시 연결 중…"
   },
   "icu:calling__presenting--stop": {
-    "messageformat": "공유 그만하기"
+    "messageformat": "공유 중단하기"
   },
   "icu:calling__presenting--you-stopped": {
     "messageformat": "화면 공유를 중단했습니다"
@@ -2169,13 +2175,13 @@
     "messageformat": "왼쪽 하단의 자물쇠 아이콘을 클릭하고 컴퓨터의 비밀번호를 입력하세요."
   },
   "icu:calling__presenting--permission-instruction-step3": {
-    "messageformat": "오른쪽에서 Signal 옆의 체크 박스를 선택하세요. 목록에 Signal이 표시되지 않으면 +를 클릭하여 추가하세요."
+    "messageformat": "오른쪽에서 Signal 옆의 체크박스를 선택하세요. 목록에 Signal이 표시되지 않으면 +를 클릭하여 추가하세요."
   },
   "icu:calling__presenting--permission-open": {
     "messageformat": "시스템 환경 설정 열기"
   },
   "icu:calling__presenting--permission-cancel": {
-    "messageformat": "취소"
+    "messageformat": "닫기"
   },
   "icu:alwaysRelayCallsDescription": {
     "messageformat": "통화 시 항상 서버 경유"
@@ -2208,7 +2214,7 @@
     "messageformat": "시스템 트레이로 최소화"
   },
   "icu:SystemTraySetting__minimize-to-and-start-in-system-tray": {
-    "messageformat": "트레이로 최소화 시작"
+    "messageformat": "시스템 트레이로 최소화하여 시작"
   },
   "icu:autoLaunchDescription": {
     "messageformat": "컴퓨터 로그인 시 열기"
@@ -2246,8 +2252,26 @@
   "icu:deleteAccountDialogBody": {
     "messageformat": "계정 정보와 프로필, 모든 메시지가 삭제되고, 모든 Signal 그룹에서 내보내기 처리됩니다. 이 절차가 완료되면 자동으로 앱이 종료됩니다."
   },
+  "icu:DeleteAccountConfirmDialog--Title": {
+    "messageformat": "Delete account"
+  },
+  "icu:DeleteAccountConfirmDialog--Description": {
+    "messageformat": "This will delete your account info, profile, and all of your messages. You will also be removed from all Signal groups."
+  },
+  "icu:DeleteAccountConfirmDialog--ConfirmNumber": {
+    "messageformat": "Confirm your phone number"
+  },
+  "icu:DeleteAccountConfirmDialog--CountryCodePlaceholder": {
+    "messageformat": "Country code"
+  },
+  "icu:DeleteAccountConfirmDialog--NumberPlaceholder": {
+    "messageformat": "Phone number"
+  },
+  "icu:DeleteAccountConfirmDialog--DeleteButton": {
+    "messageformat": "Delete"
+  },
   "icu:deleteOldIndexedDBData": {
-    "messageformat": "Signal Desktop의 이전 설치 버전에서 사용하지 않는 데이터가 있습니다. 계속하면 해당 데이터가 삭제되고 앱을 처음부터 시작합니다."
+    "messageformat": "이전 Signal Desktop 설치 버전의 오래된 데이터가 남아 있습니다. 계속 진행하면 해당 데이터가 삭제되고 처음부터 다시 시작합니다."
   },
   "icu:deleteOldData": {
     "messageformat": "오래된 데이터 삭제"
@@ -2265,7 +2289,7 @@
     "messageformat": "새 메시지"
   },
   "icu:notificationSenderInGroup": {
-    "messageformat": "{group} 내 {sender} 님"
+    "messageformat": "{group}의 {sender} 님"
   },
   "icu:notificationReactionMessage": {
     "messageformat": "{sender} 님이 \"{message}\" 메시지에 {emoji} 이모지로 공감했어요"
@@ -2280,7 +2304,7 @@
     "messageformat": "삭제 실패"
   },
   "icu:deleteFailedClickForDetails": {
-    "messageformat": "삭제 실패, 클릭하여 자세히 알아보기"
+    "messageformat": "삭제하지 못했습니다. 자세한 내용을 보려면 클릭하세요."
   },
   "icu:retryDeleteForEveryone--title": {
     "messageformat": "다시 삭제를 시도할까요?"
@@ -2298,16 +2322,16 @@
     "messageformat": "전송 일시 정지됨"
   },
   "icu:partiallySent": {
-    "messageformat": "부분적으로 전송되었습니다. 자세한 내용을 보려면 클릭하세요."
+    "messageformat": "일부만 전송됐습니다. 클릭하여 자세히 확인하세요."
   },
   "icu:partiallyDeleted--clickForDetails": {
-    "messageformat": "부분 삭제됨, 클릭하여 자세히 알아보기"
+    "messageformat": "일부만 삭제됐습니다. 클릭하여 자세히 확인하세요."
   },
   "icu:expiredWarning": {
     "messageformat": "이 버전의 Signal Desktop이 만료되었습니다. 계속 메시지를 보내려면 최신 버전으로 업데이트하세요."
   },
   "icu:upgrade": {
-    "messageformat": "클릭하여 signal.org/download로 이동"
+    "messageformat": "클릭하여 signal.org/download 링크로 이동"
   },
   "icu:mediaMessage": {
     "messageformat": "미디어 메시지"
@@ -2325,7 +2349,7 @@
     "messageformat": "가져오기에 실패했습니다. 컴퓨터와 휴대전화가 인터넷에 연결되어 있는지 확인하세요."
   },
   "icu:timestamp_s": {
-    "messageformat": "지금"
+    "messageformat": "방금"
   },
   "icu:timestamp_m": {
     "messageformat": "1분"
@@ -2334,13 +2358,13 @@
     "messageformat": "1시간"
   },
   "icu:hoursAgo": {
-    "messageformat": "{hours,number}h"
+    "messageformat": "{hours,number}시간"
   },
   "icu:minutesAgo": {
-    "messageformat": "{minutes,number}m"
+    "messageformat": "{minutes,number}분"
   },
   "icu:justNow": {
-    "messageformat": "지금"
+    "messageformat": "방금"
   },
   "icu:timestampFormat__long--today": {
     "messageformat": "오늘 {time}"
@@ -2379,7 +2403,7 @@
     "messageformat": "자동 삭제 메시지"
   },
   "icu:disappearingMessagesDisabled": {
-    "messageformat": "자동 삭제 메시지 기능 꺼짐"
+    "messageformat": "자동 삭제 메시지 기능이 비활성화됨"
   },
   "icu:disappearingMessagesDisabledByMember": {
     "messageformat": "멤버가 자동 삭제 메시지를 비활성화했습니다."
@@ -2397,10 +2421,7 @@
     "messageformat": "푸시 알림 사운드"
   },
   "icu:callRingtoneNotificationDescription": {
-    "messageformat": "전화 발신음 켜기"
-  },
-  "icu:callSystemNotificationDescription": {
-    "messageformat": "통화 알림 표시"
+    "messageformat": "통화 연결음 켜기"
   },
   "icu:incomingCallNotificationDescription": {
     "messageformat": "수신 전화 활성화"
@@ -2412,7 +2433,7 @@
     "messageformat": "{oldProfile} 님이 프로필 이름을 {newProfile}(으)로 변경했습니다."
   },
   "icu:SafetyNumberModal__title": {
-    "messageformat": "안전 번호 검증"
+    "messageformat": "안전 번호 인증"
   },
   "icu:safetyNumberChanges": {
     "messageformat": "안전 번호 변경됨"
@@ -2472,7 +2493,7 @@
     "messageformat": "이름, 사용자 이름 또는 전화번호"
   },
   "icu:noContactsFound": {
-    "messageformat": "연락처가 없음"
+    "messageformat": "연락처 검색 결과 없음"
   },
   "icu:noGroupsFound": {
     "messageformat": "그룹 검색 결과 없음"
@@ -2520,10 +2541,10 @@
     "messageformat": "해당 이름({atUsername})은 올바른 사용자 이름이 아닙니다. 사용자 이름과 일련번호를 차례로 입력했는지 확인하세요."
   },
   "icu:startConversation--phone-number-not-found": {
-    "messageformat": "사용자를 찾을 수 없습니다. ''{phoneNumber}'은(는) Signal 사용자가 아닙니다."
+    "messageformat": "사용자를 찾을 수 없습니다. ''{phoneNumber}' 번호는 Signal 사용자가 아닙니다."
   },
   "icu:startConversation--phone-number-not-valid": {
-    "messageformat": "사용자를 찾을 수 없습니다. ''{phoneNumber}'은(는) 올바른 전화번호가 아닙니다."
+    "messageformat": "사용자를 찾을 수 없습니다. ''{phoneNumber}' 번호는 올바른 전화번호가 아닙니다."
   },
   "icu:chooseGroupMembers__title": {
     "messageformat": "멤버 선택"
@@ -2541,22 +2562,22 @@
     "messageformat": "그룹 정원 한도에 도달했어요"
   },
   "icu:chooseGroupMembers__maximum-group-size__body": {
-    "messageformat": "Signal 그룹에는 최대 {max,number}명의 구성원이 있을 수 있습니다."
+    "messageformat": "Signal 그룹은 최대 {max,number}명까지 참여할 수 있습니다."
   },
   "icu:chooseGroupMembers__maximum-recommended-group-size__title": {
     "messageformat": "권장 멤버 수 한도에 도달했어요"
   },
   "icu:chooseGroupMembers__maximum-recommended-group-size__body": {
-    "messageformat": "Signal 그룹은 {max,number}명 이하의 구성원이 있을 때 최고의 성능을 보여줍니다. 구성원을 더 많이 추가하면 메시지 송수신이 지연됩니다."
+    "messageformat": "Signal 그룹은 멤버가 {max,number}명 이하일 때 가장 원활하게 작동합니다. 멤버를 더 추가하면 메시지 송수신이 지연될 수 있습니다."
   },
   "icu:setGroupMetadata__title": {
-    "messageformat": "그룹 이름 입력"
+    "messageformat": "그룹 이름을 지정하세요"
   },
   "icu:setGroupMetadata__back-button": {
     "messageformat": "멤버 선택으로 돌아가기"
   },
   "icu:setGroupMetadata__group-name-placeholder": {
-    "messageformat": "그룹 이름 (필수)"
+    "messageformat": "그룹 이름(필수)"
   },
   "icu:setGroupMetadata__group-description-placeholder": {
     "messageformat": "설명"
@@ -2568,10 +2589,10 @@
     "messageformat": "멤버"
   },
   "icu:setGroupMetadata__error-message": {
-    "messageformat": "그룹을 생성할 수 없습니다. 연결 상태를 확인하고 다시 시도하세요."
+    "messageformat": "그룹을 생성할 수 없습니다. 연결 상태를 확인하고 다시 시도해 주세요."
   },
   "icu:updateGroupAttributes__title": {
-    "messageformat": "그룹 편집"
+    "messageformat": "그룹 수정"
   },
   "icu:updateGroupAttributes__error-message": {
     "messageformat": "그룹을 업데이트하지 못했습니다. 연결 상태를 확인하고 다시 시도하세요."
@@ -2616,10 +2637,10 @@
     "messageformat": "{name} 님이 그룹을 나갔습니다."
   },
   "icu:updatedTheGroup": {
-    "messageformat": "{name}님이 그룹을 업데이트 하였습니다."
+    "messageformat": "{name} 님이 그룹을 업데이트했습니다."
   },
   "icu:youUpdatedTheGroup": {
-    "messageformat": "그룹을 업데이트했습니다."
+    "messageformat": "내가 그룹을 업데이트했습니다."
   },
   "icu:collapsedGroupUpdates": {
     "messageformat": "{count, plural, other {그룹 업데이트 {count,number}개}}"
@@ -2643,10 +2664,10 @@
     "messageformat": "{count, plural, other {통화 내역 {count,number}개}}"
   },
   "icu:updatedGroupAvatar": {
-    "messageformat": "그룹 아바타가 업데이트 되었습니다."
+    "messageformat": "그룹 아바타가 업데이트되었습니다."
   },
   "icu:titleIsNow": {
-    "messageformat": "이제 그룹 이름은 {name}입니다."
+    "messageformat": "그룹 이름이 ''{name}'(으)로 변경되었습니다."
   },
   "icu:youJoinedTheGroup": {
     "messageformat": "그룹에 참가했습니다."
@@ -2802,7 +2823,7 @@
     "messageformat": "{author} 님이 보낸 메시지"
   },
   "icu:modal--donation--title": {
-    "messageformat": "지지와 성원에 감사드립니다!"
+    "messageformat": "따뜻한 후원에 감사드립니다!"
   },
   "icu:modal--donation--description": {
     "messageformat": "{name} 님을 대신해 Signal에 후원금을 보냈어요. 해당 사용자는 Signal 후원 사실을 프로필 배지로 표시할 수 있어요."
@@ -2820,7 +2841,7 @@
     "messageformat": "Signal 아티스트 시리즈"
   },
   "icu:stickers--StickerManager--BlessedPacks--Empty": {
-    "messageformat": "이용 가능한 Signal 아티스트 스티커가 없음"
+    "messageformat": "이용 가능한 Signal 아티스트 스티커가 없어요"
   },
   "icu:stickers--StickerManager--ReceivedPacks2": {
     "messageformat": "공유받은 스티커"
@@ -2838,7 +2859,7 @@
     "messageformat": "제거"
   },
   "icu:stickers--StickerManager--UninstallWarning": {
-    "messageformat": "원본 메시지가 없을 경우 이 스티커 팩을 다시 설치할 수 없게 됩니다."
+    "messageformat": "원본 메시지가 없으면 이 스티커 팩을 다시 설치하지 못할 수 있습니다."
   },
   "icu:stickers--StickerManagerHeader--All": {
     "messageformat": "전체"
@@ -2868,7 +2889,7 @@
     "messageformat": "스티커 팩"
   },
   "icu:stickers--StickerPreview--Error": {
-    "messageformat": "스티커 팩을 열 수 없습니다. 인터넷 연결을 확인 후 다시 시도하세요."
+    "messageformat": "스티커 팩을 열 수 없습니다. 인터넷 연결을 확인하고 다시 시도해 주세요."
   },
   "icu:stickers--StickerPreview--Install": {
     "messageformat": "스티커 추가"
@@ -2916,7 +2937,7 @@
     "messageformat": "최근 사용"
   },
   "icu:FunPanelEmojis__SubNavCategoryLabel--SmileysAndPeople": {
-    "messageformat": "웃는 얼굴과 사람"
+    "messageformat": "얼굴 표정 & 사람"
   },
   "icu:FunPanelEmojis__SubNavCategoryLabel--AnimalsAndNature": {
     "messageformat": "동물과 자연"
@@ -2928,7 +2949,7 @@
     "messageformat": "활동"
   },
   "icu:FunPanelEmojis__SubNavCategoryLabel--TravelAndPlaces": {
-    "messageformat": "여행과 장소"
+    "messageformat": "여행 & 장소"
   },
   "icu:FunPanelEmojis__SubNavCategoryLabel--Objects": {
     "messageformat": "사물"
@@ -2964,7 +2985,7 @@
     "messageformat": "최근 사용"
   },
   "icu:FunPanelEmojis__SectionTitle--SmileysAndPeople": {
-    "messageformat": "웃는 얼굴과 사람"
+    "messageformat": "얼굴 표정 & 사람"
   },
   "icu:FunPanelEmojis__SectionTitle--AnimalsAndNature": {
     "messageformat": "동물과 자연"
@@ -2973,7 +2994,7 @@
     "messageformat": "음식과 음료"
   },
   "icu:FunPanelEmojis__SectionTitle--TravelAndPlaces": {
-    "messageformat": "여행과 장소"
+    "messageformat": "여행 & 장소"
   },
   "icu:FunPanelEmojis__SectionTitle--Activities": {
     "messageformat": "활동"
@@ -2999,6 +3020,9 @@
   "icu:FunPanelSticker__SubNavLabel": {
     "messageformat": "스티커 팩"
   },
+  "icu:FunPanelStickers__SubNavCategoryLabel--Favorites": {
+    "messageformat": "Favorites"
+  },
   "icu:FunPanelStickers__SubNavCategoryLabel--Recents": {
     "messageformat": "최근 사용"
   },
@@ -3011,6 +3035,9 @@
   "icu:FunPanelStickers__SectionTitle--Recents": {
     "messageformat": "최근 사용"
   },
+  "icu:FunPanelStickers__SectionTitle--Favorites": {
+    "messageformat": "Favorites"
+  },
   "icu:FunPanelStickers__SectionTitle--Featured": {
     "messageformat": "추천"
   },
@@ -3018,7 +3045,7 @@
     "messageformat": "스티커 없음"
   },
   "icu:FunPanelStickers__LightboxDialog__Label": {
-    "messageformat": "스티커 미리 보기"
+    "messageformat": "스티커 미리보기"
   },
   "icu:FunPanelGifs__SearchLabel": {
     "messageformat": "GIF 검색"
@@ -3057,10 +3084,10 @@
     "messageformat": "화남"
   },
   "icu:FunPanelGifs__SearchResults__LoadingLabel": {
-    "messageformat": "GIF를 로드하는 중"
+    "messageformat": "GIF를 불러오는 중"
   },
   "icu:FunPanelGifs__SearchResults__ErrorHeading": {
-    "messageformat": "GIF를 로드할 수 없습니다. 연결을 확인하고 다시 시도하세요."
+    "messageformat": "GIF를 불러올 수 없습니다. 연결을 확인하고 다시 시도해 주세요."
   },
   "icu:FunPanelGifs__SearchResults__ErrorRetryButton": {
     "messageformat": "재시도"
@@ -3069,7 +3096,7 @@
     "messageformat": "GIF를 찾지 못함"
   },
   "icu:FunPanelGifs__LightboxDialog__Label": {
-    "messageformat": "GIF 미리 보기"
+    "messageformat": "GIF 미리보기"
   },
   "icu:FunPanelGifs__GiphyAttribution__AccessibilityLabel": {
     "messageformat": "GIPHY 제공"
@@ -3141,19 +3168,19 @@
     "messageformat": "메시지가 너무 길어 더 표시할 수 없습니다."
   },
   "icu:Message--unsupported-message": {
-    "messageformat": "{contact} 님이 처리하거나 표시할 수 없는 메시지를 보냈습니다. 이는 메시지에서 새로운 Signal 기능을 사용하기 때문입니다."
+    "messageformat": "{contact} 님이 전송한 메시지에 새로운 Signal 기능이 적용되어 있어 현재 버전에서 표시할 수 없습니다."
   },
   "icu:Message--unsupported-message-ask-to-resend": {
     "messageformat": "이제 최신 버전의 Signal을 이용하고 계시네요. {contact} 님에게 다시 메시지를 보내달라고 요청해보세요."
   },
   "icu:Message--from-me-unsupported-message": {
-    "messageformat": "기기 중 하나에서 처리하거나 표시할 수 없는 메시지를 보냈습니다. 이는 메시지에서 새로운 Signal 기능을 사용하기 때문입니다."
+    "messageformat": "연동된 다른 기기에서 메시지를 보냈으나, Signal의 새 기능을 사용하고 있어 이 기기에서는 표시할 수 없습니다."
   },
   "icu:Message--from-me-unsupported-message-ask-to-resend": {
     "messageformat": "최신 버전의 Signal을 사용 중이므로 앞으로는 이와 같은 메시지도 정상적으로 동기화됩니다."
   },
   "icu:Message--update-signal": {
-    "messageformat": "시그널 최신 버전으로 업데이트"
+    "messageformat": "Signal 업데이트"
   },
   "icu:Message--tap-to-view--viewed": {
     "messageformat": "조회함"
@@ -3180,7 +3207,7 @@
     "messageformat": "(첨부 파일)"
   },
   "icu:Conversation--getDraftPreview--quote": {
-    "messageformat": "(인용문)"
+    "messageformat": "(인용)"
   },
   "icu:Conversation--getDraftPreview--draft": {
     "messageformat": "(임시 저장)"
@@ -3225,7 +3252,7 @@
     "messageformat": "대화에서 검색"
   },
   "icu:Keyboard--focus-composer": {
-    "messageformat": "작곡가에 집중"
+    "messageformat": "메시지 입력란으로 이동"
   },
   "icu:Keyboard--open-all-media-view": {
     "messageformat": "모든 미디어 보기"
@@ -3240,13 +3267,13 @@
     "messageformat": "GIF 선택기 열기"
   },
   "icu:Keyboard--begin-recording-voice-note": {
-    "messageformat": "음성 녹음 시작하기"
+    "messageformat": "음성 메모 녹음 시작하기"
   },
   "icu:Keyboard--default-message-action": {
     "messageformat": "선택한 메시지에 대한 기본 작업"
   },
   "icu:Keyboard--view-details-for-selected-message": {
-    "messageformat": "선택된 메시지 자세히 보기"
+    "messageformat": "선택한 메시지 자세히 보기"
   },
   "icu:Keyboard--toggle-reply": {
     "messageformat": "선택한 메시지에 대한 답장 전환"
@@ -3255,7 +3282,7 @@
     "messageformat": "선택한 메시지에 대한 이모지 반응 선택기 토글"
   },
   "icu:Keyboard--save-attachment": {
-    "messageformat": "선택된 메시지에서 첨부 파일 저장하기"
+    "messageformat": "선택한 메시지에서 첨부 파일 저장하기"
   },
   "icu:Keyboard--delete-messages": {
     "messageformat": "선택한 메시지 삭제"
@@ -3264,13 +3291,13 @@
     "messageformat": "선택한 메시지 전달"
   },
   "icu:Keyboard--add-newline": {
-    "messageformat": "메시지에 줄 바꿈 추가"
+    "messageformat": "메시지에 줄바꿈 추가"
   },
   "icu:Keyboard--expand-composer": {
-    "messageformat": "작곡가 확장"
+    "messageformat": "메시지 입력란 확장"
   },
   "icu:Keyboard--send-in-expanded-composer": {
-    "messageformat": "전송(확장된 작곡가에서)"
+    "messageformat": "확장된 메시지 입력란에서 전송"
   },
   "icu:Keyboard--attach-file": {
     "messageformat": "파일 첨부"
@@ -3318,7 +3345,7 @@
     "messageformat": "메시지"
   },
   "icu:Keyboard--composer-header": {
-    "messageformat": "작곡가"
+    "messageformat": "메시지 입력란"
   },
   "icu:Keyboard--composer--bold": {
     "messageformat": "선택한 텍스트 굵게 표시"
@@ -3357,7 +3384,7 @@
     "messageformat": "맨 위로 스크롤하기"
   },
   "icu:Keyboard--scroll-to-bottom": {
-    "messageformat": "매 아래로 스크롤하기"
+    "messageformat": "맨 아래로 스크롤하기"
   },
   "icu:Keyboard--close-curent-conversation": {
     "messageformat": "현재 대화창 닫기"
@@ -3369,7 +3396,7 @@
     "messageformat": "음소거 켜기 및 끄기 전환"
   },
   "icu:Keyboard--toggle-video": {
-    "messageformat": "토글 비디오 끄거나 켜기"
+    "messageformat": "비디오 켜기/끄기 전환"
   },
   "icu:Keyboard--toggle-preview": {
     "messageformat": "미리 보기 펼치기 사용/사용 안 함 전환"
@@ -3519,10 +3546,13 @@
     "messageformat": "{name} 님을 차단 해제할까요?"
   },
   "icu:MessageRequests--unblock-direct-confirm-body": {
-    "messageformat": "메시지와 전화를 주고받을 수 있게 됩니다."
+    "messageformat": "차단을 해제하면 메시지와 전화를 주고받을 수 있게 됩니다."
   },
   "icu:MessageRequests--unblock-group-confirm-body": {
     "messageformat": "그룹 멤버가 나를 다시 그룹에 추가할 수 있게 됩니다."
+  },
+  "icu:MessageRequests--unblock-signal-confirm-body": {
+    "messageformat": "Signal의 업데이트와 새로운 소식을 받아보실 수 있습니다."
   },
   "icu:MessageRequests--block-and-report-spam-success-toast": {
     "messageformat": "스팸으로 신고하고 차단했습니다."
@@ -3538,6 +3568,9 @@
   },
   "icu:MessageRequests--block-group-confirm-body": {
     "messageformat": "이제 이 그룹에서 메시지나 업데이트를 받을 수 없으며, 다른 멤버가 다시 나를 그룹에 추가할 수 없습니다."
+  },
+  "icu:MessageRequests--block-signal-confirm-body": {
+    "messageformat": "더 이상 Signal의 업데이트와 새로운 소식을 받아보실 수 없습니다."
   },
   "icu:MessageRequests--reportAndMaybeBlock": {
     "messageformat": "신고..."
@@ -3585,7 +3618,7 @@
     "messageformat": "삭제하고 나가기"
   },
   "icu:MessageRequests--delete-group-confirm-body": {
-    "messageformat": "이 그룹에서 나가게 되며 모든 기기에서 삭제될 것입니다."
+    "messageformat": "이 그룹에서 나가게 되며, 연결된 모든 기기에서 해당 그룹이 삭제됩니다."
   },
   "icu:MessageRequests--accept": {
     "messageformat": "수락"
@@ -3681,7 +3714,7 @@
     "messageformat": "공통 그룹 없음"
   },
   "icu:no-groups-in-common-warning": {
-    "messageformat": "공통된 그룹이 없습니다. 요청을 주의 깊게 검토하세요."
+    "messageformat": "함께 속한 그룹이 없는 사용자입니다. 요청을 신중하게 확인하세요."
   },
   "icu:acceptCall": {
     "messageformat": "전화 수락"
@@ -3720,16 +3753,16 @@
     "messageformat": "미응답 음성 통화"
   },
   "icu:missedOrDeclinedOutgoingVideoCall": {
-    "messageformat": "응답하지 않은 영상 통화"
+    "messageformat": "미응답 영상 통화"
   },
   "icu:minimizeToTrayNotification--title": {
-    "messageformat": "Signal이 계속 실행 중입니다."
+    "messageformat": "Signal이 아직 실행 중입니다."
   },
   "icu:minimizeToTrayNotification--body": {
-    "messageformat": "Signal이 알림 영역에서 계속 실행됩니다. Signal 설정에서 이 설정을 변경할 수 있습니다."
+    "messageformat": "Signal이 알림 영역에서 계속 실행됩니다. 이 설정은 Signal 설정에서 변경할 수 있습니다."
   },
   "icu:incomingAudioCall": {
-    "messageformat": "수신 음성 통화"
+    "messageformat": "음성 통화 수신 중"
   },
   "icu:incomingVideoCall": {
     "messageformat": "영상 통화 수신 중"
@@ -3759,13 +3792,13 @@
     "messageformat": "연결 중…"
   },
   "icu:outgoingCallRinging": {
-    "messageformat": "전화를 거는 중…"
+    "messageformat": "통화 연결 중..."
   },
   "icu:makeOutgoingCall": {
-    "messageformat": "전화 시작하기"
+    "messageformat": "통화 시작"
   },
   "icu:makeOutgoingVideoCall": {
-    "messageformat": "영상 통화 시작하기"
+    "messageformat": "영상 통화 시작"
   },
   "icu:joinOngoingCall": {
     "messageformat": "참가"
@@ -3828,10 +3861,10 @@
     "messageformat": "손 내리기"
   },
   "icu:CallControls__RingingToast--ringing-on": {
-    "messageformat": "통화 켜짐"
+    "messageformat": "벨소리 켜짐"
   },
   "icu:CallControls__RingingToast--ringing-off": {
-    "messageformat": "통화 꺼짐"
+    "messageformat": "벨소리 꺼짐"
   },
   "icu:CallControls__RaiseHandsToast--you": {
     "messageformat": "손을 들었습니다."
@@ -3865,6 +3898,9 @@
   },
   "icu:callingDeviceSelection__settings": {
     "messageformat": "설정"
+  },
+  "icu:callingDeviceSelection__settings-v2": {
+    "messageformat": "Call Settings"
   },
   "icu:calling__participants--pluralized": {
     "messageformat": "{people, plural, other {{people,number}명이 통화 중}}"
@@ -3971,6 +4007,15 @@
   "icu:callingDeviceSelection__select--default": {
     "messageformat": "기본값"
   },
+  "icu:callingDeviceSelection__select--default-nonwin": {
+    "messageformat": "Default: {deviceName}"
+  },
+  "icu:callingDeviceSelection__select--default_console": {
+    "messageformat": "Default: {deviceName}"
+  },
+  "icu:callingDeviceSelection__select--default_communications": {
+    "messageformat": "Default Communications: {deviceName}"
+  },
   "icu:muteNotificationsTitle": {
     "messageformat": "알림 끄기"
   },
@@ -4026,7 +4071,7 @@
     "messageformat": "{duration}까지 알림 끔"
   },
   "icu:ErrorModal--title": {
-    "messageformat": "오류가 발생했습니다!"
+    "messageformat": "오류가 발생했어요"
   },
   "icu:ErrorModal--description": {
     "messageformat": "다시 시도하거나 지원팀에 문의하세요."
@@ -4050,7 +4095,7 @@
     "messageformat": "{max, plural, other {이 메시지는 오직 {max,number} 님만 수정할 수 있습니다.}}"
   },
   "icu:unknown-sgnl-link": {
-    "messageformat": "죄송해요. 이 sgnl:// 링크가 잘못되었어요!"
+    "messageformat": "해당 sgnl:// 링크를 인식할 수 없어요"
   },
   "icu:GroupV2--cannot-send": {
     "messageformat": "해당 그룹에 메시지를 전송할 수 없습니다."
@@ -4068,10 +4113,10 @@
     "messageformat": "그룹에 참가하고 내 이름과 사진을 멤버들과 공유하시겠어요?"
   },
   "icu:GroupV2--join--already-in-group": {
-    "messageformat": "이미 이 그룹에 있습니다."
+    "messageformat": "이미 그룹 멤버입니다."
   },
   "icu:GroupV2--join--already-awaiting-approval": {
-    "messageformat": "이미 이 그룹에 대한 참가 승인을 요청하셨습니다."
+    "messageformat": "이미 이 그룹에 참가 승인을 요청했습니다."
   },
   "icu:GroupV2--join--unknown-link-version--title": {
     "messageformat": "알 수 없는 링크 버전"
@@ -4122,7 +4167,7 @@
     "messageformat": "이 그룹에 참여할 수 없습니다."
   },
   "icu:GroupV2--join--general-join-failure--title": {
-    "messageformat": "링크 에러"
+    "messageformat": "링크 오류"
   },
   "icu:GroupV2--join--general-join-failure": {
     "messageformat": "그룹에 참가할 수 없습니다. 나중에 다시 시도해 주세요."
@@ -4152,10 +4197,10 @@
     "messageformat": "내가 그룹을 생성했습니다."
   },
   "icu:GroupV2--create--other": {
-    "messageformat": "{memberName} 님이 그룹을 만들었습니다."
+    "messageformat": "{memberName} 님이 그룹을 생성했습니다."
   },
   "icu:GroupV2--create--unknown": {
-    "messageformat": "그룹이 만들어졌습니다."
+    "messageformat": "그룹이 생성되었습니다."
   },
   "icu:GroupV2--title--change--other": {
     "messageformat": "{memberName} 님이 그룹 이름을 ''{newTitle}'(으)로 변경했습니다."
@@ -4179,7 +4224,7 @@
     "messageformat": "{memberName} 님이 그룹 아바타를 변경했습니다."
   },
   "icu:GroupV2--avatar--change--you": {
-    "messageformat": "그룹 아바타를 변경하였습니다."
+    "messageformat": "내가 그룹 아바타를 변경했습니다."
   },
   "icu:GroupV2--avatar--change--unknown": {
     "messageformat": "멤버가 그룹 아바타를 변경했습니다."
@@ -4311,7 +4356,7 @@
     "messageformat": "내가 그룹 링크로 그룹에 참가했습니다."
   },
   "icu:GroupV2--member-add-from-link--other": {
-    "messageformat": "{memberName}가 그룹 링크를 통해 그룹에 참입장했습니다."
+    "messageformat": "{memberName} 님이 그룹 링크를 통해 그룹에 참가했습니다."
   },
   "icu:GroupV2--member-add-from-admin-approval--you--other": {
     "messageformat": "{adminName} 님이 그룹 참가 요청을 승인했습니다."
@@ -4320,13 +4365,13 @@
     "messageformat": "그룹 참가 요청이 승인되었습니다."
   },
   "icu:GroupV2--member-add-from-admin-approval--other--you": {
-    "messageformat": "{joinerName}의 그룹 참가 요청을 승인하셨습니다."
+    "messageformat": "{joinerName} 님의 그룹 참가 요청을 승인했습니다."
   },
   "icu:GroupV2--member-add-from-admin-approval--other--other": {
-    "messageformat": "{adminName}가 {joinerName}의 그룹 참가 요청을 승인했습니다."
+    "messageformat": "{adminName} 님이 {joinerName} 님의 그룹 참가 요청을 승인했습니다."
   },
   "icu:GroupV2--member-add-from-admin-approval--other--unknown": {
-    "messageformat": "{joinerName}의 그룹 참가 요청이 승인됐습니다."
+    "messageformat": "{joinerName} 님의 그룹 참가 요청이 승인됐습니다."
   },
   "icu:GroupV2--member-remove--other--other": {
     "messageformat": "{adminName} 님이 {memberName} 님을 내보냈습니다."
@@ -4368,7 +4413,7 @@
     "messageformat": "{adminName} 님이 {memberName} 님의 관리자 권한을 취소했습니다."
   },
   "icu:GroupV2--member-privilege--demote--other--you": {
-    "messageformat": "{memberName} 님의 관리자 권한을 취소했습니다."
+    "messageformat": "내가 {memberName} 님의 관리자 권한을 취소했습니다."
   },
   "icu:GroupV2--member-privilege--demote--other--unknown": {
     "messageformat": "관리자가 {memberName} 님의 관리자 권한을 취소했습니다."
@@ -4377,13 +4422,13 @@
     "messageformat": "{adminName} 님이 관리자 권한을 취소했습니다."
   },
   "icu:GroupV2--member-privilege--demote--you--unknown": {
-    "messageformat": "관리자가 관리자 권한을 취소했습니다."
+    "messageformat": "관리자가 내 관리자 권한을 취소했습니다."
   },
   "icu:GroupV2--pending-add--one--other--other": {
     "messageformat": "{memberName} 님이 그룹에 1명을 초대했습니다."
   },
   "icu:GroupV2--pending-add--one--other--you": {
-    "messageformat": "{inviteeName} 님을 그룹에 초대했습니다."
+    "messageformat": "내가 {inviteeName} 님을 그룹에 초대했습니다."
   },
   "icu:GroupV2--pending-add--one--other--unknown": {
     "messageformat": "1명이 그룹에 초대되었습니다."
@@ -4404,13 +4449,13 @@
     "messageformat": "{count, plural, other {{count,number}명을 그룹에 초대했습니다.}}"
   },
   "icu:GroupV2--pending-remove--decline--other": {
-    "messageformat": "{memberName} 님이 초대한 1명이 그룹 초대를 거부했습니다."
+    "messageformat": "{memberName} 님이 초대한 1명이 그룹 초대를 거절했습니다."
   },
   "icu:GroupV2--pending-remove--decline--you": {
-    "messageformat": "{inviteeName} 님이 그룹 초대를 거부했습니다."
+    "messageformat": "{inviteeName} 님이 그룹 초대를 거절했습니다."
   },
   "icu:GroupV2--pending-remove--decline--from-you": {
-    "messageformat": "그룹에 초대를 거부했습니다."
+    "messageformat": "내가 그룹 초대를 거절했습니다."
   },
   "icu:GroupV2--pending-remove--decline--unknown": {
     "messageformat": "1명이 그룹 초대를 거부했습니다."
@@ -4428,7 +4473,7 @@
     "messageformat": "{inviterName} 님이 1명에 대한 초대를 취소했습니다."
   },
   "icu:GroupV2--pending-remove--revoke--one--unknown": {
-    "messageformat": "관리자가 1명의 그룹 초대를 취소했습니다."
+    "messageformat": "관리자가 1명에 대한 그룹 초대를 취소했습니다."
   },
   "icu:GroupV2--pending-remove--revoke--many--other": {
     "messageformat": "{count, plural, other {{memberName} 님이 {count,number}명에 대한 그룹 초대를 취소했습니다.}}"
@@ -4440,22 +4485,22 @@
     "messageformat": "{count, plural, other {관리자가 {count,number}명에 대한 그룹 초대를 취소했습니다.}}"
   },
   "icu:GroupV2--pending-remove--revoke-invite-from--one--other": {
-    "messageformat": "{adminName} 님이 {memberName} 님이 초대한 1명의 그룹 초대를 취소했습니다."
+    "messageformat": "{adminName} 님이 {memberName} 님이 초대한 멤버 1명의 그룹 초대를 취소했습니다."
   },
   "icu:GroupV2--pending-remove--revoke-invite-from--one--you": {
-    "messageformat": "{memberName} 님이 초대한 1명의 그룹 초대를 취소했습니다."
+    "messageformat": "{memberName} 님이 초대한 멤버 1명의 그룹 초대를 내가 취소했습니다."
   },
   "icu:GroupV2--pending-remove--revoke-invite-from--one--unknown": {
     "messageformat": "관리자가{memberName} 님이 초대한 1명의 그룹 초대를 취소했습니다."
   },
   "icu:GroupV2--pending-remove--revoke-invite-from-you--one--other": {
-    "messageformat": "{adminName} 님이 {inviteeName} 님에 보낸 그룹에 대한 초대를 취소했습니다."
+    "messageformat": "내가 {inviteeName} 님에게 보낸 그룹 초대를 {adminName} 님이 취소했습니다."
   },
   "icu:GroupV2--pending-remove--revoke-invite-from-you--one--you": {
-    "messageformat": "{inviteeName} 님에 대한 초대를 취소했습니다."
+    "messageformat": "{inviteeName} 님에게 보낸 초대를 취소했습니다."
   },
   "icu:GroupV2--pending-remove--revoke-invite-from-you--one--unknown": {
-    "messageformat": "관리자가 {inviteeName} 님에 보낸 그룹에 대한 초대를 취소했습니다."
+    "messageformat": "내가 {inviteeName} 님에게 보낸 그룹 초대를 관리자가 취소했습니다."
   },
   "icu:GroupV2--pending-remove--revoke-invite-from--many--other": {
     "messageformat": "{count, plural, other {{adminName} 님이 {memberName} 님이 초대한 {count,number}명의 그룹에 대한 초대를 취소했습니다.}}"
@@ -4479,7 +4524,7 @@
     "messageformat": "그룹 참가 요청을 보냈습니다."
   },
   "icu:GroupV2--admin-approval-add-one--other": {
-    "messageformat": "{joinerName}가 그룹 링크를 통해 그룹 참가를 요청했습니다."
+    "messageformat": "{joinerName} 님이 그룹 링크를 통해 그룹 참가를 요청했습니다."
   },
   "icu:GroupV2--admin-approval-remove-one--you--you": {
     "messageformat": "내 그룹 참가 요청을 취소했습니다."
@@ -4491,10 +4536,10 @@
     "messageformat": "{joinerName} 님의 그룹 참가 요청을 거절했습니다."
   },
   "icu:GroupV2--admin-approval-remove-one--other--own": {
-    "messageformat": "{joinerName}가 그룹 참가 요청을 취소했습니다."
+    "messageformat": "{joinerName} 님이 그룹 참가 요청을 취소했습니다."
   },
   "icu:GroupV2--admin-approval-remove-one--other--other": {
-    "messageformat": "{adminName}가 {joinerName} 님의 그룹 참가 요청을 거절했습니다."
+    "messageformat": "{adminName} 님이 {joinerName} 님의 그룹 참가 요청을 거절했습니다."
   },
   "icu:GroupV2--admin-approval-remove-one--other--unknown": {
     "messageformat": "{joinerName} 님의 그룹 참가 요청이 거절되었습니다."
@@ -4524,7 +4569,7 @@
     "messageformat": "내가 그룹 링크를 껐습니다."
   },
   "icu:GroupV2--group-link-remove--other": {
-    "messageformat": "{adminName}가 그룹 링크를 비활성화했습니다."
+    "messageformat": "{adminName} 님이 그룹 링크를 비활성화했습니다."
   },
   "icu:GroupV2--group-link-remove--unknown": {
     "messageformat": "그룹 링크가 해제되었습니다."
@@ -4533,7 +4578,7 @@
     "messageformat": "내가 그룹 링크를 초기화했습니다."
   },
   "icu:GroupV2--group-link-reset--other": {
-    "messageformat": "{adminName}가 그룹 링크를 초기화했습니다."
+    "messageformat": "{adminName} 님이 그룹 링크를 초기화했습니다."
   },
   "icu:GroupV2--group-link-reset--unknown": {
     "messageformat": "그룹 링크가 초기화되었습니다."
@@ -4542,7 +4587,7 @@
     "messageformat": "그룹 설명을 삭제했습니다."
   },
   "icu:GroupV2--description--remove--other": {
-    "messageformat": "{memberName}님이 그룹 설명을 삭제했습니다."
+    "messageformat": "{memberName} 님이 그룹 설명을 삭제했습니다."
   },
   "icu:GroupV2--description--remove--unknown": {
     "messageformat": "그룹 설명이 삭제되었습니다."
@@ -4551,7 +4596,7 @@
     "messageformat": "그룹 설명을 변경했습니다."
   },
   "icu:GroupV2--description--change--other": {
-    "messageformat": "{memberName}님이 그룹 설명을 변경했습니다."
+    "messageformat": "{memberName} 님이 그룹 설명을 변경했습니다."
   },
   "icu:GroupV2--description--change--unknown": {
     "messageformat": "그룹 설명이 변경되었습니다."
@@ -4566,13 +4611,13 @@
     "messageformat": "관리자만 메시지를 전송할 수 있도록 그룹이 변경되었습니다."
   },
   "icu:GroupV2--announcements--member--you": {
-    "messageformat": "모든 구성원이 메시지를 전송할 수 있도록 그룹 설정을 변경했습니다."
+    "messageformat": "모든 멤버가 메시지를 전송할 수 있도록 그룹 설정을 변경했습니다."
   },
   "icu:GroupV2--announcements--member--other": {
-    "messageformat": "{memberName} 님이 모든 구성원이 메시지를 전송할 수 있도록 그룹 설정을 변경했습니다."
+    "messageformat": "{memberName} 님이 모든 멤버가 메시지를 전송할 수 있도록 그룹 설정을 변경했습니다."
   },
   "icu:GroupV2--announcements--member--unknown": {
-    "messageformat": "모든 회원이 메시지를 전송할 수 있도록 그룹이 변경되었습니다."
+    "messageformat": "모든 멤버가 메시지를 전송할 수 있도록 그룹 설정이 변경되었습니다."
   },
   "icu:GroupV2--summary": {
     "messageformat": "이 그룹의 멤버 또는 설정이 바뀌었습니다."
@@ -4647,7 +4692,7 @@
     "messageformat": "새 그룹에 바로 추가될 수 없어 초대를 받았습니다."
   },
   "icu:GroupV1--Migration--invited--one": {
-    "messageformat": "{contact} 님을 새 그룹에 추가할 수 없었으며 가입하도록 초대되었습니다."
+    "messageformat": "{contact} 님을 새 그룹에 추가할 수 없어 그룹 참가 초대를 보냈습니다."
   },
   "icu:GroupV1--Migration--invited--many": {
     "messageformat": "{count, plural, other {{count,number}명의 멤버를 새 그룹에 바로 추가할 수 없어 초대를 보냈습니다.}}"
@@ -4812,7 +4857,7 @@
     "messageformat": "기기에 여유 공간이 부족합니다. 미디어를 복원하려면 {diskSpaceAmount}의 여유 공간을 확보하세요."
   },
   "icu:CompositionArea--expand": {
-    "messageformat": "확장"
+    "messageformat": "펼치기"
   },
   "icu:CompositionArea__AttachMenu__PhotosAndVideos": {
     "messageformat": "사진 및 동영상"
@@ -4822,6 +4867,69 @@
   },
   "icu:CompositionArea__AttachMenu__Poll": {
     "messageformat": "투표"
+  },
+  "icu:CompositionArea__AttachMenu__Contact": {
+    "messageformat": "Contact"
+  },
+  "icu:ShareContactDialog__SelectContact__Title": {
+    "messageformat": "Select contact"
+  },
+  "icu:ShareContactDialog__SelectContact__SearchPlaceholder": {
+    "messageformat": "Search"
+  },
+  "icu:ShareContactDialog__SelectContact__EmptyState": {
+    "messageformat": "No contacts"
+  },
+  "icu:ShareContactDialog__SelectContact__NoResults": {
+    "messageformat": "No results for “{searchQuery}”"
+  },
+  "icu:ShareContactDialog__ShareContact__Title": {
+    "messageformat": "Share contact"
+  },
+  "icu:ShareContactDialog__ShareContact__Description": {
+    "messageformat": "Anyone you share this profile with will be able to message {name}."
+  },
+  "icu:ShareContactDialog__ShareContact__Send": {
+    "messageformat": "Send contact"
+  },
+  "icu:ShareContactDialog__ShareContact__EditName": {
+    "messageformat": "Edit name"
+  },
+  "icu:ShareContactDialog__EditName__Title": {
+    "messageformat": "Edit name"
+  },
+  "icu:ShareContactDialog__EditName__Prefix": {
+    "messageformat": "Prefix"
+  },
+  "icu:ShareContactDialog__EditName__GivenName": {
+    "messageformat": "First name"
+  },
+  "icu:ShareContactDialog__EditName__MiddleName": {
+    "messageformat": "Middle name"
+  },
+  "icu:ShareContactDialog__EditName__FamilyName": {
+    "messageformat": "Last name"
+  },
+  "icu:ShareContactDialog__EditName__Suffix": {
+    "messageformat": "Suffix"
+  },
+  "icu:ShareContactDialog__EditName__Organization": {
+    "messageformat": "Organization"
+  },
+  "icu:ShareContactDialog__ShareContact__EditPhoto": {
+    "messageformat": "Edit photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__Title": {
+    "messageformat": "Select a photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__ContactPhoto": {
+    "messageformat": "Contact photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__ProfilePhoto": {
+    "messageformat": "Profile photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__DefaultAvatar": {
+    "messageformat": "Default avatar"
   },
   "icu:CompositionArea--attach-plus": {
     "messageformat": "첨부 파일 또는 투표 추가"
@@ -4861,9 +4969,6 @@
   },
   "icu:CompositionInput__editing-message": {
     "messageformat": "메시지 수정"
-  },
-  "icu:countMutedConversationsDescription": {
-    "messageformat": "알림 배지 숫자에 알림을 끈 대화 포함"
   },
   "icu:ContactModal--nickname": {
     "messageformat": "별칭"
@@ -5264,18 +5369,6 @@
   "icu:UnreadReminders__notification__replySummary--many": {
     "messageformat": "{replyCount, plural, other {{person1} 님 외 여러 명이 보낸 답장 {replyCount,number}개}}"
   },
-  "icu:ConversationNotificationsSettings__mentions__label": {
-    "messageformat": "멘션"
-  },
-  "icu:ConversationNotificationsSettings__mentions__info": {
-    "messageformat": "알림을 끈 대화에서 내가 멘션되는 경우 알림을 받습니다."
-  },
-  "icu:ConversationNotificationsSettings__mentions__select__always-notify": {
-    "messageformat": "항상 알림"
-  },
-  "icu:ConversationNotificationsSettings__mentions__select__dont-notify-for-mentions-if-muted": {
-    "messageformat": "알림을 끈 경우 받지 않습니다."
-  },
   "icu:GroupLinkManagement--clipboard": {
     "messageformat": "그룹 링크가 복사되었습니다."
   },
@@ -5340,10 +5433,10 @@
     "messageformat": "그룹 링크를 통해 초대하기"
   },
   "icu:PendingInvites--tab-requests": {
-    "messageformat": "요청 ({count,number})"
+    "messageformat": "요청({count,number})"
   },
   "icu:PendingInvites--tab-invites": {
-    "messageformat": "초대 ({count,number})"
+    "messageformat": "초대({count,number})"
   },
   "icu:PendingRequests--approve-for": {
     "messageformat": "''{name}' 님의 요청을 승인할까요?"
@@ -5358,10 +5451,10 @@
     "messageformat": "내가 초대한 멤버"
   },
   "icu:PendingInvites--invited-by-others": {
-    "messageformat": "다른 사람에 의해 초대됨"
+    "messageformat": "다른 멤버가 보낸 초대"
   },
   "icu:PendingInvites--invited-count": {
-    "messageformat": "{number,number}명을 초대했습니다"
+    "messageformat": "{number,number}명 초대"
   },
   "icu:PendingInvites--revoke-for-label": {
     "messageformat": "그룹 초대 취소"
@@ -5373,10 +5466,10 @@
     "messageformat": "{number, plural, other {''{name}' 님이 보낸 초대 {number,number}개를 취소할까요?}}"
   },
   "icu:PendingInvites--revoke": {
-    "messageformat": "철회하기"
+    "messageformat": "초대 취소"
   },
   "icu:PendingRequests--approve": {
-    "messageformat": "요청을 승인하기"
+    "messageformat": "요청 승인"
   },
   "icu:PendingRequests--deny": {
     "messageformat": "요청 거절"
@@ -5391,10 +5484,10 @@
     "messageformat": "요청 차단"
   },
   "icu:PendingRequests--block--title": {
-    "messageformat": "요청을 차단하시겠어요?"
+    "messageformat": "요청을 차단할까요?"
   },
   "icu:PendingRequests--block--contents": {
-    "messageformat": "{name} 님이 그룹 링크를 통해 이 그룹에 참가하거나 참가하도록 요청할 수 없게 됩니다. 하지만 수동으로 그룹에 추가될 수는 있습니다."
+    "messageformat": "{name} 님은 그룹 링크를 통해 이 그룹에 참여하거나 참여를 요청할 수 없게 됩니다. 단, 관리자가 직접 그룹에 추가하는 것은 가능합니다."
   },
   "icu:PendingRequests--block--confirm": {
     "messageformat": "요청 차단"
@@ -5503,13 +5596,13 @@
     "messageformat": "새 그룹"
   },
   "icu:selectContact": {
-    "messageformat": "{name} 님 연락처 선택"
+    "messageformat": "{name} 님 선택"
   },
   "icu:deselectContact": {
-    "messageformat": "{name} 님 연락처 선택 취소"
+    "messageformat": "{name} 님 선택 취소"
   },
   "icu:cannotSelectContact": {
-    "messageformat": "{name} 님 연락처를 선택할 수 없습니다."
+    "messageformat": "{name} 님을 선택할 수 없습니다."
   },
   "icu:alreadyAMember": {
     "messageformat": "이미 멤버입니다"
@@ -5572,31 +5665,31 @@
     "messageformat": "신중하게 요청을 검토하세요. Signal에서 같은 이름을 가진 다른 연락처를 찾았습니다. <reviewRequestLink>요청 검토</reviewRequestLink>"
   },
   "icu:ContactSpoofing__same-name-in-group--link": {
-    "messageformat": "{count, plural, other {그룹 멤버 {count,number}명의 이름이 같습니다. <reviewRequestLink>멤버 검토</reviewRequestLink>}}"
+    "messageformat": "{count, plural, other {그룹 멤버 {count,number}명의 이름이 같습니다. <reviewRequestLink>멤버 목록 다시 살펴보기</reviewRequestLink>}}"
   },
   "icu:ContactSpoofing__same-names-in-group--link": {
-    "messageformat": "{count, plural, other {이 그룹에서 서로 충돌하는 이름 {count,number}개를 찾았습니다. <reviewRequestLink>멤버 검토</reviewRequestLink>}}"
+    "messageformat": "{count, plural, other {이 그룹에서 중복 이름 {count,number}개를 찾았습니다. <reviewRequestLink>멤버 목록 다시 살펴보기</reviewRequestLink>}}"
   },
   "icu:ContactSpoofingReviewDialog__title": {
     "messageformat": "검토 요청"
   },
   "icu:ContactSpoofingReviewDialog__description": {
-    "messageformat": "요청의 출처가 확실하지 않은 경우 아래 연락처를 검토하고 조치를 취하세요."
+    "messageformat": "요청을 보낸 사람이 누구인지 확실하지 않다면, 아래에서 연락처를 확인하고 필요한 조치를 취하세요."
   },
   "icu:ContactSpoofingReviewDialog__possibly-unsafe-title": {
     "messageformat": "요청"
   },
   "icu:ContactSpoofingReviewDialog__safe-title": {
-    "messageformat": "연락처"
+    "messageformat": "내 연락처"
   },
   "icu:ContactSpoofingReviewDialog__group__title": {
-    "messageformat": "구성원 검토"
+    "messageformat": "멤버 검토하기"
   },
   "icu:ContactSpoofingReviewDialog__group__description": {
     "messageformat": "{count, plural, other {그룹 멤버 {count,number}명의 이름이 같습니다. 아래 멤버를 검토하거나 원하는 조치를 선택하세요.}}"
   },
   "icu:ContactSpoofingReviewDialog__group__multiple-conflicts__description": {
-    "messageformat": "{count, plural, other {이 그룹에서 서로 충돌하는 이름 {count,number}개를 찾았습니다. 아래에서 멤버를 검토하거나 선택하여 조치를 취하세요.}}"
+    "messageformat": "{count, plural, other {이 그룹에서 중복되는 이름 {count,number}개를 찾았습니다. 아래에서 멤버 목록을 검토하거나 필요한 조치를 취해 주세요.}}"
   },
   "icu:ContactSpoofingReviewDialog__group__members__no-shared-groups": {
     "messageformat": "공통된 다른 그룹이 없습니다."
@@ -5638,7 +5731,7 @@
     "messageformat": "인증 건너뛰기"
   },
   "icu:verificationComplete": {
-    "messageformat": "검증이 완료되었습니다."
+    "messageformat": "인증 완료"
   },
   "icu:verificationFailed": {
     "messageformat": "인증에 실패했습니다. 나중에 다시 시도하세요."
@@ -5647,7 +5740,7 @@
     "messageformat": "모든 사람의 메시지를 삭제하지 못했습니다. 나중에 다시 시도하세요."
   },
   "icu:ChatColorPicker__delete--title": {
-    "messageformat": "색상 삭제하기"
+    "messageformat": "색상 삭제"
   },
   "icu:ChatColorPicker__delete--message": {
     "messageformat": "{num, plural, other {{num,number}개 대화에서 이 색상을 사용 중입니다. 모든 대화에서 삭제할까요?}}"
@@ -5689,7 +5782,7 @@
     "messageformat": "색상 편집"
   },
   "icu:ChatColorPicker__context--duplicate": {
-    "messageformat": "복사하기"
+    "messageformat": "복사"
   },
   "icu:ChatColorPicker__context--delete": {
     "messageformat": "삭제"
@@ -5755,7 +5848,7 @@
     "messageformat": "주"
   },
   "icu:settings__DisappearingMessages__footer": {
-    "messageformat": "내가 시작한 모든 새 대화에 대해 자동삭제 메시지 타이머를 기본으로 설정하세요."
+    "messageformat": "내가 시작한 모든 새 대화에 대해 자동 삭제 메시지 타이머를 기본으로 설정하세요."
   },
   "icu:settings__DisappearingMessages__timer__label": {
     "messageformat": "새 대화를 위한 기본 타이머"
@@ -5875,22 +5968,22 @@
     "messageformat": "데이터를 더 쓰며 느리게"
   },
   "icu:MessageDetailsHeader--Failed": {
-    "messageformat": "보내지지 않음"
+    "messageformat": "전송 실패"
   },
   "icu:MessageDetailsHeader--Pending": {
     "messageformat": "대기 중"
   },
   "icu:MessageDetailsHeader--Sent": {
-    "messageformat": "보냄"
+    "messageformat": "전송됨"
   },
   "icu:MessageDetailsHeader--Delivered": {
-    "messageformat": "전달됨"
+    "messageformat": "전달 완료"
   },
   "icu:MessageDetailsHeader--Read": {
     "messageformat": "읽음"
   },
   "icu:MessageDetailsHeader--Viewed": {
-    "messageformat": "조회자"
+    "messageformat": "조회함"
   },
   "icu:MessageDetail--disappears-in": {
     "messageformat": "자동 삭제까지 남은 시간"
@@ -5995,7 +6088,7 @@
     "messageformat": "삭제"
   },
   "icu:ProfileEditor--about-placeholder": {
-    "messageformat": "자기소개를 적어주세요…"
+    "messageformat": "나를 표현하는 한마디를 적어보세요."
   },
   "icu:ProfileEditor--first-name": {
     "messageformat": "이름(필수)"
@@ -6049,13 +6142,13 @@
     "messageformat": "정보"
   },
   "icu:ProfileEditorModal--avatar": {
-    "messageformat": "내 아이콘"
+    "messageformat": "내 아바타"
   },
   "icu:ProfileEditorModal--username": {
     "messageformat": "사용자 이름"
   },
   "icu:ProfileEditorModal--error": {
-    "messageformat": "프로필을 업데이트할 수 없습니다. 다시 시도하세요."
+    "messageformat": "프로필을 업데이트할 수 없습니다. 다시 시도해 주세요."
   },
   "icu:ProfileEditorModal--sharing": {
     "messageformat": "공유"
@@ -6077,7 +6170,7 @@
     "messageformat": "아바타 선택"
   },
   "icu:AvatarColorPicker--choose": {
-    "messageformat": "색 선택"
+    "messageformat": "색상 선택"
   },
   "icu:AttachmentDetailPill__retryDownload": {
     "messageformat": "다운로드 재시도"
@@ -6086,13 +6179,13 @@
     "messageformat": "재시도"
   },
   "icu:LeftPaneSetGroupMetadataHelper__avatar-modal-title": {
-    "messageformat": "그룹 아이콘"
+    "messageformat": "그룹 아바타"
   },
   "icu:Preferences__message-audio-title": {
     "messageformat": "대화 내 메시지 사운드"
   },
   "icu:Preferences__message-audio-description": {
-    "messageformat": "대화 중에 보내거나 받는 메시지에 알림 사운드를 사용합니다."
+    "messageformat": "대화방을 열어둔 상태에서 메시지를 주고받을 때 알림 사운드를 사용합니다."
   },
   "icu:Preferences__reaction-notifications-title": {
     "messageformat": "반응 알림"
@@ -6104,13 +6197,13 @@
     "messageformat": "계정"
   },
   "icu:Preferences__button--general": {
-    "messageformat": "일반 설정"
+    "messageformat": "일반"
   },
   "icu:Preferences__button--donate": {
     "messageformat": "Signal 후원하기"
   },
   "icu:Preferences__button--appearance": {
-    "messageformat": "모양"
+    "messageformat": "디자인"
   },
   "icu:Preferences__button--chats": {
     "messageformat": "대화"
@@ -6122,7 +6215,7 @@
     "messageformat": "알림"
   },
   "icu:Preferences__button--privacy": {
-    "messageformat": "개인정보"
+    "messageformat": "개인정보 보호"
   },
   "icu:Preferences__button--data-usage": {
     "messageformat": "데이터 사용량"
@@ -6193,9 +6286,6 @@
   "icu:Preferences__SignalAccountKeys__Description": {
     "messageformat": "로그인 정보를 안전하게 보관해 두세요. 계정과 데이터를 복구하려면 로그인 정보가 필요하며, 절대 다른 사람과 공유해서는 안 됩니다."
   },
-  "icu:Preferences__SignalAccountKeys__AccountKey": {
-    "messageformat": "계정 키"
-  },
   "icu:Preferences__SignalAccountKeys__AccountID": {
     "messageformat": "계정 ID"
   },
@@ -6257,7 +6347,7 @@
     "messageformat": "Signal PIN"
   },
   "icu:Preferences--signal-pin__footer": {
-    "messageformat": "PINs keep information stored with Signal encrypted so only you can access it. Your PIN cannot be recovered. Your profile, settings, and contacts will restore when you reinstall Signal. <learnMoreLink>Learn more</learnMoreLink>"
+    "messageformat": "PIN은 Signal에 저장된 정보를 암호화하여 본인만 확인할 수 있도록 안전하게 보호합니다. PIN은 분실 시 복구할 수 없습니다. 앱을 다시 설치해도 PIN을 입력하면 프로필, 설정, 연락처가 그대로 복원됩니다. <learnMoreLink>자세히 알아보기</learnMoreLink>"
   },
   "icu:Preferences--signal-pin-advanced-settings": {
     "messageformat": "PIN 고급 설정"
@@ -6272,7 +6362,7 @@
     "messageformat": "PIN을 비활성화하면 수동으로 백업 및 복원하지 않는 한, Signal 재가입 시 모든 데이터가 삭제됩니다. PIN이 비활성화된 상태에서는 등록 잠금 기능을 사용할 수 없습니다."
   },
   "icu:DisableSignalPinErrorDialog--reg-lock--title": {
-    "messageformat": "Disable PIN failed due to registration lock"
+    "messageformat": "등록 잠금으로 인해 PIN 비활성화 실패"
   },
   "icu:DisableSignalPinErrorDialog--reg-lock--body": {
     "messageformat": "PIN을 비활성화하려면 먼저 등록 잠금을 비활성화해야 합니다."
@@ -6281,7 +6371,7 @@
     "messageformat": "확인"
   },
   "icu:DisableSignalPinErrorDialog--backups--title": {
-    "messageformat": "Disable PIN failed due to backups"
+    "messageformat": "백업 활성화로 인해 PIN 비활성화 실패"
   },
   "icu:DisableSignalPinErrorDialog--backups--body": {
     "messageformat": "PIN을 비활성화하려면 먼저 백업을 비활성화해야 합니다."
@@ -6304,9 +6394,6 @@
   "icu:Preferences--registration-lock__footer": {
     "messageformat": "Signal에 전화번호를 다시 등록할 때 Signal PIN을 입력하도록 설정합니다."
   },
-  "icu:Preferences--notification-content": {
-    "messageformat": "알림 내용"
-  },
   "icu:Preferences__Chats__TextInputSection__Title": {
     "messageformat": "텍스트 입력"
   },
@@ -6318,9 +6405,6 @@
   },
   "icu:Preferences__Notifications__SoundsSection__Title": {
     "messageformat": "소리"
-  },
-  "icu:Preferences__Notifications__AppBadgeSection__Title": {
-    "messageformat": "앱 배지"
   },
   "icu:Preferences__Notifications__AppBadgeSection__Title-v2": {
     "messageformat": "읽지 않은 배지"
@@ -6700,6 +6784,9 @@
   "icu:Preferences--blocked-users--description": {
     "messageformat": "차단한 사용자는 나에게 전화를 걸거나 메시지를 보낼 수 없습니다."
   },
+  "icu:Preferences--add-blocked": {
+    "messageformat": "차단할 사용자 또는 그룹 추가하기"
+  },
   "icu:Preferences--blocked-users": {
     "messageformat": "차단한 사용자"
   },
@@ -6708,6 +6795,12 @@
   },
   "icu:Preferences--blocked--blocked-on": {
     "messageformat": "{blockedAt}에 차단함"
+  },
+  "icu:Preferences--BlockChooser--Done": {
+    "messageformat": "완료"
+  },
+  "icu:Preferences--BlockChooser--Search--Placeholder": {
+    "messageformat": "검색"
   },
   "icu:Preferences--signal-backups": {
     "messageformat": "Signal 안전 백업"
@@ -6959,7 +7052,7 @@
     "messageformat": "''{settingTitle}'을 ''{nobodyLabel}'로 변경하면 다른 사람이 Signal에서 나를 찾기가 어려워집니다."
   },
   "icu:Preferences--messaging": {
-    "messageformat": "메시징"
+    "messageformat": "메시지"
   },
   "icu:Preferences--read-receipts": {
     "messageformat": "읽음 표시"
@@ -6992,7 +7085,7 @@
     "messageformat": "끄기"
   },
   "icu:Preferences__turn-stories-off--body": {
-    "messageformat": "더 이상 스토리를 공유하거나 볼 수 없습니다. 최근 공유한 스토리 업데이트도 삭제합니다."
+    "messageformat": "더 이상 스토리를 공유하거나 볼 수 없게 됩니다. 최근에 공유한 스토리도 모두 삭제됩니다."
   },
   "icu:Preferences__Language__Label": {
     "messageformat": "언어"
@@ -7040,7 +7133,7 @@
     "messageformat": "비활성화하기"
   },
   "icu:DialogUpdate--version-available": {
-    "messageformat": "{version} 버전으로 업데이트할 수 있습니다."
+    "messageformat": "{version} 버전 업데이트 가능"
   },
   "icu:DialogUpdate__downloading": {
     "messageformat": "업데이트 다운로드 중..."
@@ -7067,7 +7160,7 @@
     "messageformat": "더 알아보기"
   },
   "icu:DialogNetworkStatus__outage": {
-    "messageformat": "Signal에 기술적 문제가 발생했습니다. 문제를 최대한 신속하게 처리하겠습니다."
+    "messageformat": "현재 Signal 서비스에 일시적인 장애가 발생했습니다. 빠르게 복구 작업을 진행하고 있으니 잠시만 기다려 주세요."
   },
   "icu:InstallScreenUpdateDialog--update-required__title": {
     "messageformat": "업데이트 필요"
@@ -7105,6 +7198,36 @@
   "icu:InstallScreenUpdateDialog--cannot-update__body": {
     "messageformat": "Signal 데스크톱을 업데이트하지 못했습니다. 하지만 새 버전을 이용할 수 있습니다. {downloadUrl}(으)로 이동하여 새 버전을 수동으로 설치한 다음 지원 팀에 연락하거나 이 문제에 관한 버그를 신고하세요."
   },
+  "icu:EntryPoint--signal-logo": {
+    "messageformat": "Signal Logo"
+  },
+  "icu:EntryPoint--Title--Line1": {
+    "messageformat": "Take privacy with you."
+  },
+  "icu:EntryPoint--Title--Line2": {
+    "messageformat": "Be yourself in every message."
+  },
+  "icu:EntryPoint--link-button": {
+    "messageformat": "Link your account"
+  },
+  "icu:EntryPoint--more-options-button": {
+    "messageformat": "More options"
+  },
+  "icu:EntryPoint--nonprofit": {
+    "messageformat": "Signal is a 501c3 nonprofit"
+  },
+  "icu:EntryPoint--terms": {
+    "messageformat": "Terms & privacy policy"
+  },
+  "icu:EntryPoint--MoreOptions--Title": {
+    "messageformat": "More options"
+  },
+  "icu:EntryPoint--MoreOptions--RegistrationButton--Title": {
+    "messageformat": "Create a new account"
+  },
+  "icu:EntryPoint--MoreOptions--RegistrationButton--Description": {
+    "messageformat": "Create a new Signal account using your phone number."
+  },
   "icu:StandaloneRegistration--signal-logo": {
     "messageformat": "Signal 로고"
   },
@@ -7124,7 +7247,7 @@
     "messageformat": "{duration} 후에 다시 시도해 주세요."
   },
   "icu:StandaloneRegistration--PhoneNumber--RegionCodeSelector--Label": {
-    "messageformat": "Select region code"
+    "messageformat": "국가 코드 선택"
   },
   "icu:StandaloneRegistration--PhoneNumber--placeholder": {
     "messageformat": "전화번호"
@@ -7300,11 +7423,26 @@
   "icu:StandaloneRegistration--VerificationCode--CannotSendCodeTemporary--ok-button": {
     "messageformat": "확인"
   },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Title": {
+    "messageformat": "Having trouble registering?"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet1": {
+    "messageformat": "Make sure your phone has a cellular signal to receive your SMS or call"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet2": {
+    "messageformat": "Confirm you can receive a phone call to the number"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet3": {
+    "messageformat": "Check that you have entered your phone number correctly"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Footer": {
+    "messageformat": "If you still can’t register, follow these <troubleshootingLink>troubleshooting steps</troubleshootingLink> or <contactSupportLink>Contact Support</contactSupportLink>."
+  },
   "icu:StandaloneRegistration--ProfileEntry--header": {
     "messageformat": "프로필을 설정하세요"
   },
   "icu:StandaloneRegistration--ProfileEntry--description": {
-    "messageformat": "내 프로필은 내가 메시지를 보낸 사람, 내 연락처, 참여 중인 그룹에 노출됩니다."
+    "messageformat": "프로필은 메시지를 주고받는 상대와 연락처, 그룹에 표시됩니다."
   },
   "icu:StandaloneRegistration--ProfileEntry--learn-more": {
     "messageformat": "더 알아보기"
@@ -7334,13 +7472,13 @@
     "messageformat": "내 아이콘"
   },
   "icu:StandaloneRegistration--VerifyPIN--header": {
-    "messageformat": "PIN 입력"
+    "messageformat": "PIN을 입력하세요"
   },
   "icu:StandaloneRegistration--VerifyPIN--description": {
     "messageformat": "계정에 설정한 PIN을 입력하세요. 이 코드는 SMS 인증 코드와 다릅니다. <needHelp>도움이 필요하신가요?</needHelp>"
   },
   "icu:StandaloneRegistration--VerifyPIN--placeholder": {
-    "messageformat": "PIN 입력"
+    "messageformat": "PIN을 입력하세요"
   },
   "icu:StandaloneRegistration--VerifyPIN--incorrect-pin": {
     "messageformat": "PIN이 일치하지 않습니다"
@@ -7451,7 +7589,7 @@
     "messageformat": "Signal PIN 정보"
   },
   "icu:StandaloneRegistration--CreatePIN--AboutPINs--description": {
-    "messageformat": "PIN은 사용자만 액세스할 수 있도록 사용자 정보를 Singal에 암호화하여 저장합니다. 다시 설치하면 프로필, 설정, 연락처가 복원됩니다."
+    "messageformat": "PIN은 Signal에 저장된 정보를 암호화하여 본인만 확인할 수 있도록 안전하게 보호합니다. 다시 설치하면 프로필, 설정, 연락처가 복원됩니다."
   },
   "icu:StandaloneRegistration--CreatePIN--AboutPINs--learn-more-button": {
     "messageformat": "더 알아보기"
@@ -7460,13 +7598,13 @@
     "messageformat": "확인"
   },
   "icu:StandaloneRegistration--CreatePIN--confirming--header": {
-    "messageformat": "PIN 확인"
+    "messageformat": "PIN을 확인해 주세요"
   },
   "icu:StandaloneRegistration--CreatePIN--confirming--description": {
     "messageformat": "방금 생성한 PIN을 다시 입력하세요."
   },
   "icu:StandaloneRegistration--CreatePIN--confirming--placeholder": {
-    "messageformat": "PIN 입력"
+    "messageformat": "PIN을 입력하세요"
   },
   "icu:StandaloneRegistration--AccountLocked--header": {
     "messageformat": "계정 잠김"
@@ -7518,7 +7656,7 @@
     "ignoreUnused": true
   },
   "icu:NSIS__retry-dialog--second-line": {
-    "messageformat": "수동으로 종료하고 다시 시도를 클릭하여 계속하세요.",
+    "messageformat": "직접 앱을 종료한 뒤 '다시 시도'를 클릭하여 계속 진행하세요.",
     "ignoreUnused": true
   },
   "icu:NSIS__appRunning": {
@@ -7556,7 +7694,7 @@
     "messageformat": "클릭하여 이모지 바꾸기"
   },
   "icu:CustomizingPreferredReactions__had-save-error": {
-    "messageformat": "설정 저장 중 문제가 발생했습니다. 다시 시도하세요."
+    "messageformat": "설정 저장 중 문제가 발생했습니다. 다시 시도해 주세요."
   },
   "icu:MediaEditor__input-placeholder": {
     "messageformat": "메시지"
@@ -7595,7 +7733,7 @@
     "messageformat": "하이라이터"
   },
   "icu:MediaEditor__draw--thin": {
-    "messageformat": "얇은"
+    "messageformat": "얇게"
   },
   "icu:MediaEditor__draw--regular": {
     "messageformat": "보통"
@@ -7604,7 +7742,7 @@
     "messageformat": "중간"
   },
   "icu:MediaEditor__draw--heavy": {
-    "messageformat": "두꺼운"
+    "messageformat": "두껍게"
   },
   "icu:MediaEditor__crop--reset": {
     "messageformat": "초기화"
@@ -7649,10 +7787,10 @@
     "messageformat": "'Signal'을 켜세요"
   },
   "icu:MediaPermissionsModal__step-2--windows--microphone": {
-    "messageformat": "Enable microphone access for Signal"
+    "messageformat": "Signal의 마이크 접근 권한을 허용하세요"
   },
   "icu:MediaPermissionsModal__step-2--windows--camera": {
-    "messageformat": "Enable camera access for Signal"
+    "messageformat": "Signal의 카메라 접근 권한을 허용하세요"
   },
   "icu:MediaPermissionsModal__open": {
     "messageformat": "설정으로 이동"
@@ -7676,7 +7814,7 @@
     "messageformat": "{views, plural, other {조회수 {views,number}}}"
   },
   "icu:MyStories__views--strong": {
-    "messageformat": "{views, plural, other {답장 <strong>{views,number}</strong>개}}"
+    "messageformat": "{views, plural, other {조회 <strong>{views,number}</strong>회}}"
   },
   "icu:MyStories__views-off": {
     "messageformat": "열람 확인 꺼짐"
@@ -7751,13 +7889,13 @@
     "messageformat": "Signal 친구"
   },
   "icu:SignalConnectionsModal__header": {
-    "messageformat": "{connections}은(는) 다음과 같은 방법을 통해 신뢰하는 사용자로 선택한 사람들입니다."
+    "messageformat": "{connections}는 다음과 같은 방법을 통해 신뢰하는 사용자로 지정된 사람들입니다."
   },
   "icu:SignalConnectionsModal__bullet--1": {
     "messageformat": "대화 시작"
   },
   "icu:SignalConnectionsModal__bullet--2": {
-    "messageformat": "메시지 요청 수락 중"
+    "messageformat": "메시지 요청 수락"
   },
   "icu:SignalConnectionsModal__bullet--3": {
     "messageformat": "기기 연락처에 포함"
@@ -7802,7 +7940,7 @@
     "messageformat": "일부만 전송됐습니다."
   },
   "icu:Stories__list--retry-send": {
-    "messageformat": "클릭하여 다시 시도하세요."
+    "messageformat": "클릭하여 다시 시도하기"
   },
   "icu:Stories__placeholder--text": {
     "messageformat": "클릭하여 스토리 보기"
@@ -7811,7 +7949,7 @@
     "messageformat": "업데이트를 추가하려면 <newStoryButtonIcon></newStoryButtonIcon> 기호를 클릭하세요."
   },
   "icu:Stories__from-to-group": {
-    "messageformat": "보낸 사람: {name} 님, 받는 사람: {group}"
+    "messageformat": "{name} 님이 {group}에 전송"
   },
   "icu:Stories__toast--sending-reply": {
     "messageformat": "답장 전송 중…"
@@ -7901,7 +8039,7 @@
     "messageformat": "스토리를 볼 수 있는 사람을 선택하세요. 이미 전송한 스토리에는 변경 내용이 적용되지 않습니다. <learnMoreLink>자세히 알아보기</learnMoreLink>"
   },
   "icu:StoriesSettings__context-menu": {
-    "messageformat": "스토리 개인정보보호"
+    "messageformat": "스토리 개인정보 보호"
   },
   "icu:StoriesSettings__view-receipts--label": {
     "messageformat": "열람 확인"
@@ -7925,7 +8063,7 @@
     "messageformat": "스토리를 볼 수 있는 사람을 선택하세요."
   },
   "icu:SendStoryModal__title": {
-    "messageformat": "다음으로 보내기"
+    "messageformat": "받는 사람"
   },
   "icu:SendStoryModal__send": {
     "messageformat": "스토리 보내기"
@@ -7964,7 +8102,7 @@
     "messageformat": "그룹 선택"
   },
   "icu:SendStoryModal__my-stories-privacy": {
-    "messageformat": "내 스토리 개인정보보호"
+    "messageformat": "내 스토리 개인정보 보호"
   },
   "icu:SendStoryModal__privacy-disclaimer--link": {
     "messageformat": "내 스토리를 볼 수 있는 Signal 친구를 선택하세요. 개인정보 보호 설정에서 언제든 이 설정을 변경할 수 있습니다. <learnMoreLink>자세히 알아보기.</learnMoreLink>"
@@ -8117,7 +8255,7 @@
     "messageformat": "텍스트에 선택한 색을 배경 색으로 사용"
   },
   "icu:StoryCreator__text-bg--none": {
-    "messageformat": "텍스트에 배경 색이 없음"
+    "messageformat": "텍스트에 배경 색 없음"
   },
   "icu:StoryCreator__story-bg": {
     "messageformat": "스토리 배경 색 변경"
@@ -8135,7 +8273,7 @@
     "messageformat": "두껍게"
   },
   "icu:StoryCreator__text--serif": {
-    "messageformat": "Serif"
+    "messageformat": "세리프"
   },
   "icu:StoryCreator__text--script": {
     "messageformat": "필기체"
@@ -8204,7 +8342,7 @@
     "messageformat": "모든 사용자 이름에는 고유 번호가 부여됩니다."
   },
   "icu:EditUsernameModalBody__discriminator-label": {
-    "messageformat": "Username digits"
+    "messageformat": "사용자 이름 구분 번호"
   },
   "icu:EditUsernameModalBody__learn-more": {
     "messageformat": "자세히 알아보기"
@@ -8265,7 +8403,7 @@
     "messageformat": "QR 코드와 링크를 초기화하고 새 QR 코드와 링크를 만들었습니다."
   },
   "icu:UsernameOnboardingModalBody__title": {
-    "messageformat": "새로운 연락 방법"
+    "messageformat": "연결 방식이 업그레이드됐어요"
   },
   "icu:UsernameOnboardingModalBody__row__number__title": {
     "messageformat": "전화번호 보호"
@@ -8292,7 +8430,7 @@
     "messageformat": "나중에"
   },
   "icu:UsernameMegaphone__title": {
-    "messageformat": "새로운 연락 방법"
+    "messageformat": "연결 방식이 업그레이드됐어요"
   },
   "icu:UsernameMegaphone__body": {
     "messageformat": "전화번호 보호와 사용자 이름, 그리고 링크 기능이 추가됐어요."
@@ -8322,7 +8460,7 @@
     "messageformat": "PIN을 잊어버리지 않도록 주기적으로 확인을 요청드릴게요. 시간이 지날수록 확인 횟수는 점점 줄어들어요."
   },
   "icu:PinReminderModal__pin-input-placeholder": {
-    "messageformat": "PIN 입력"
+    "messageformat": "PIN을 입력하세요"
   },
   "icu:PinReminderModal__pin-input-error": {
     "messageformat": "PIN이 일치하지 않습니다. 다시 시도해 주세요."
@@ -8340,13 +8478,13 @@
     "messageformat": "Signal PIN 변경하기"
   },
   "icu:PinChangeModal__title--create--without-pin": {
-    "messageformat": "Create your Signal PIN"
+    "messageformat": "Signal PIN을 생성하세요"
   },
   "icu:PinChangeModal__body--create": {
     "messageformat": "이 기기가 등록되어 있는 동안 언제든지 PIN을 변경할 수 있습니다. <learnMoreLink>자세히 알아보기</learnMoreLink>"
   },
   "icu:PinChangeModal__body--create--without-pin": {
-    "messageformat": "PINs keep information stored with Signal encrypted so only you can access it. Your profile, settings, and contacts will restore when you reinstall. You won't need your PIN to open the app. <learnMoreLink>Learn more</learnMoreLink>"
+    "messageformat": "PIN은 Signal에 저장된 정보를 암호화하여 본인만 확인할 수 있도록 안전하게 보호합니다. 앱을 다시 설치해도 PIN을 입력하면 프로필, 설정, 연락처가 그대로 복원되며, 평소 앱을 열 때는 PIN을 입력하지 않아도 됩니다. <learnMoreLink>자세히 알아보기</learnMoreLink>"
   },
   "icu:PinChangeModal__title--confirm": {
     "messageformat": "Signal PIN을 확인해 주세요"
@@ -8588,12 +8726,6 @@
   "icu:CallLinkPendingParticipantModal__DenyButtonLabel": {
     "messageformat": "입장 거부"
   },
-  "icu:CallLinkRestrictionsSelect__Option--Off": {
-    "messageformat": "꺼짐"
-  },
-  "icu:CallLinkRestrictionsSelect__Option--On": {
-    "messageformat": "켜짐"
-  },
   "icu:CallLinkAddNameModal__Title": {
     "messageformat": "통화 이름 추가"
   },
@@ -8625,22 +8757,55 @@
     "messageformat": "사칭 계정에 유의하세요"
   },
   "icu:ProfileNameWarningModal__warning--dont-share-info": {
-    "messageformat": "모르는 사람과 개인 정보를 공유하지 마세요"
+    "messageformat": "모르는 사람과 개인 정보를 공유하지 마세요."
   },
   "icu:ProfileNameWarningModal__description--group": {
     "messageformat": "그룹 이름은 해당 그룹의 구성원이 선택합니다."
   },
   "icu:ProfileNameWarningModal__list--item1--group": {
-    "messageformat": "다른 조직이나 비즈니스를 사칭하는 그룹에 유의하세요"
+    "messageformat": "다른 조직이나 비즈니스를 사칭하는 그룹에 유의하세요."
   },
   "icu:ProfileNameWarningModal__list--item2--group": {
     "messageformat": "그룹 멤버의 프로필 이름은 별도의 인증을 거치지 않습니다."
   },
   "icu:ProfileNameWarningModal__list--item3--group": {
-    "messageformat": "모르는 사람과 개인 정보를 공유하지 마세요"
+    "messageformat": "모르는 사람과 개인 정보를 공유하지 마세요."
   },
   "icu:SaveMultiDialog__title": {
     "messageformat": "첨부 파일 저장"
+  },
+  "icu:EmbeddedContact__message": {
+    "messageformat": "메시지"
+  },
+  "icu:ContactDetail__message": {
+    "messageformat": "메시지"
+  },
+  "icu:ContactDetail__add-to-group": {
+    "messageformat": "그룹에 추가"
+  },
+  "icu:ContactDetail__nickname": {
+    "messageformat": "별칭"
+  },
+  "icu:ContactDetail__note": {
+    "messageformat": "메모"
+  },
+  "icu:email-v2": {
+    "messageformat": "이메일"
+  },
+  "icu:home-v2": {
+    "messageformat": "집"
+  },
+  "icu:mobile-v2": {
+    "messageformat": "휴대전화"
+  },
+  "icu:work-v2": {
+    "messageformat": "업무 중"
+  },
+  "icu:phone-v2": {
+    "messageformat": "휴대전화"
+  },
+  "icu:address-v2": {
+    "messageformat": "주소"
   },
   "icu:WhatsNew__modal-title": {
     "messageformat": "업데이트 내용"
@@ -8649,13 +8814,13 @@
     "messageformat": "비영리의 원칙을 지킵니다"
   },
   "icu:PreferencesDonations__description-v2": {
-    "messageformat": "후원을 통해 Signal의 개인정보 보호 메시지 서비스를 지지하고, 독립적인 운영과 광고 없는 환경을 유지할 수 있도록 힘을 보태주세요. <readMoreLink>자세히 알아보기</readMoreLink>"
+    "messageformat": "Signal을 후원해 주시면 개인정보가 보호되는 메시지 서비스와 광고 없는 환경, 독립적인 운영을 지켜나갈 수 있습니다. <readMoreLink>자세히 알아보기</readMoreLink>"
   },
   "icu:PreferencesDonations__donate-button": {
     "messageformat": "후원하기"
   },
   "icu:PreferencesDonations__my-support": {
-    "messageformat": "내 지원"
+    "messageformat": "후원 표시"
   },
   "icu:PreferencesDonations__badge-label-one-time": {
     "messageformat": "{formattedCurrencyAmount} 일회성 후원"
@@ -8664,16 +8829,16 @@
     "messageformat": "후원을 처리하고 있어요"
   },
   "icu:PreferencesDonations__donate-button-with-amount": {
-    "messageformat": "{formattedCurrencyAmount} 후원"
+    "messageformat": "{formattedCurrencyAmount} 후원하기"
   },
   "icu:PreferencesDonations__mobile-info": {
     "messageformat": "후원 배지 및 월 정기후원은 모바일 기기에서 관리할 수 있습니다."
   },
   "icu:PreferencesDonations__privacy-modal-title": {
-    "messageformat": "개인 정보는 비공개로 유지됩니다."
+    "messageformat": "개인정보는 비공개로 유지됩니다."
   },
   "icu:PreferencesDonations__privacy-modal-intro": {
-    "messageformat": "Signal은 독립적인 비영리단체로, 메시지와 통화의 프라이버시 보호를 핵심 가치로 삼고 있습니다. 광고도, 추적도, 감시도 없습니다. Signal의 사명을 지지하신다면 지금 후원해 주세요."
+    "messageformat": "Signal은 독립적인 비영리단체로, 메시지와 통화의 프라이버시 보호를 핵심 가치로 삼고 있습니다. 광고도, 추적도, 감시도 없습니다. Signal의 사명을 지지하신다면 지금 후원해 보세요."
   },
   "icu:PreferencesDonations__privacy-modal-list-1": {
     "messageformat": "후원하면 프로필에 표시되는 배지를 받을 수 있어요."
@@ -8806,6 +8971,9 @@
   },
   "icu:DonationReceipt__footer-text-v2": {
     "messageformat": "Signal을 후원해 주셔서 감사합니다. 회원님의 후원금은 오픈소스 프라이버시 기술을 통해 표현의 자유를 보호하고, 안전한 글로벌 커뮤니케이션을 제공하려는 Signal의 사명을 실현하는 데 사용됩니다. 미국 거주자의 경우 세금 신고에 사용할 수 있도록 본 영수증을 보관해 주세요. Signal은 미국 내국세법 501c3조에 의거하여 세금 공제를 받을 수 있는 비영리 기관입니다. Signal 연방세 ID는 82-4506840입니다. Signal은 본 후원금에 대한 대가로 어떠한 물품이나 서비스도 제공하지 않습니다."
+  },
+  "icu:MessageCta__Donate": {
+    "messageformat": "지금 후원하기"
   },
   "icu:Donations__OfflineTooltip": {
     "messageformat": "오프라인 상태입니다. 후원을 완료하려면 인터넷에 연결하세요."
@@ -8940,7 +9108,7 @@
     "messageformat": "후원 취소"
   },
   "icu:Donations__badge-modal--title": {
-    "messageformat": "지지와 성원에 감사드립니다!"
+    "messageformat": "따뜻한 후원에 감사드립니다!"
   },
   "icu:Donations__badge-modal--description": {
     "messageformat": "Signal에서 후원자 배지를 받았어요! 프로필에 표시하여 Signal을 응원하는 마음을 표현해 보세요."
@@ -9004,6 +9172,9 @@
   },
   "icu:CallQualitySurvey__WhatIssuesDidYouHave__SomethingElse__TextArea__AccessibilityLabel": {
     "messageformat": "문제 설명"
+  },
+  "icu:CallQualitySurvey__WhatIssuesDidYouHave__SomethingElse__TextArea__Placeholder": {
+    "messageformat": "어떤 문제가 있었는지 알려주세요"
   },
   "icu:CallQualitySurvey__WhatIssuesDidYouHave__SomethingElse__TextArea__HelpText": {
     "messageformat": "문제와 관련된 모든 세부 정보를 포함해 주세요. 여기에서 공유하는 모든 내용은 비공개로 유지되며 Signal의 통화를 개선하는 데에만 사용됩니다."
@@ -9103,27 +9274,36 @@
     "ignoreUnused": true
   },
   "icu:WhatsNew__bugfixes--4": {
-    "messageformat": "앱의 원활한 실행을 위한 버그 수정과 성능 개선에 최선을 다하고 있습니다. ",
+    "messageformat": "더 원활하고 안정적인 서비스 이용을 위해 버그를 수정하고 앱 성능을 개선했습니다. ",
     "ignoreUnused": true
   },
   "icu:WhatsNew__bugfixes--5": {
-    "messageformat": "사소한 추가 변경 사항과 버그 수정, 다양한 미래 계획.",
+    "messageformat": "기타 세부 사항 개선 및 버그 수정, 향후 기능 업데이트 준비",
     "ignoreUnused": true
   },
   "icu:WhatsNew__bugfixes--6": {
     "messageformat": "기능을 개선하고 버그를 수정해 성능을 최적화했습니다. Signal을 이용해 주셔서 감사합니다!",
     "ignoreUnused": true
   },
-  "icu:WhatsNew__8.26--0": {
-    "messageformat": "그룹 멤버 검색 기능이 개선되었습니다."
-  },
-  "icu:WhatsNew__8.27--0": {
-    "messageformat": "알림을 받는 방식과 시점을 더 자유롭게 설정할 수 있도록 알림 설정 기능을 개선했습니다."
-  },
   "icu:WhatsNew__8.30--0": {
-    "messageformat": "Thanks to a few performance improvements, your CPU will be slightly happier during video calls (even if you're not smiling)."
+    "messageformat": "영상 통화 성능이 개선되었습니다."
   },
   "icu:WhatsNew__8.30--1": {
-    "messageformat": "We also added a convenient shortcut to open your system settings on Windows if you try to join a video call and Signal doesn't have permission to access the camera. Now it's easier to see what you need to do so that people can see you."
+    "messageformat": "또한, 카메라 접근 권한이 없는 상태에서 영상 통화에 참여하려고 할 때 Windows 시스템 설정을 바로 열 수 있는 편리한 단축키가 추가되었습니다."
+  },
+  "icu:WhatsNew__8.32--0": {
+    "messageformat": "이제 메시지 폴더와 검색 화면에서도 '읽지 않음' 필터를 지원합니다."
+  },
+  "icu:WhatsNew__8.32--1": {
+    "messageformat": "네트워크가 불안정한 환경에서의 업로드 안정성을 개선했습니다. 감사합니다, <GH3mmmbulus></GH3mmmbulus> 님!"
+  },
+  "icu:WhatsNew__8.32--2": {
+    "messageformat": "&quot;(N)&quot; 단축키 입력 시 '싫어요' 이모지가 정상적으로 표시됩니다. 버그를 해결해 주신 <lnicola></lnicola> 님께 감사드립니다!"
+  },
+  "icu:WhatsNew__8.34--0": {
+    "messageformat": "Signal Desktop now supports contact sharing too, so you can maintain eye contact with your computer screen without having to make physical contact with your smartphone."
+  },
+  "icu:WhatsNew__8.34--1": {
+    "messageformat": "Improved handling and performance for connected audio devices."
   }
 }

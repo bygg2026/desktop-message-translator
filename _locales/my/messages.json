@@ -2,8 +2,20 @@
   "icu:AxoAlertDialog.Cancel": {
     "messageformat": "မလုပ်တော့ပါ"
   },
+  "icu:AxoAlertDialog.Ok": {
+    "messageformat": "အိုကေ"
+  },
   "icu:AxoButton.Pending": {
     "messageformat": "ဆိုင်းငံ့နေသည်"
+  },
+  "icu:AxoColorSlider.Hue": {
+    "messageformat": "Hue"
+  },
+  "icu:AxoColorSlider.Saturation": {
+    "messageformat": "Saturation"
+  },
+  "icu:AxoColorSlider.Lightness": {
+    "messageformat": "Lightness"
   },
   "icu:AxoDialog.Back": {
     "messageformat": "နောက်သို့"
@@ -73,12 +85,6 @@
   },
   "icu:LinkedDevicesOnboardingDialog__bullet--2": {
     "messageformat": "သင့် ပင်မစက်မှ ချိတ်ဆက်ထားသော စက်များကို စီမံခန့်ခွဲနိုင်ပြီး စက်အများဆုံး ၅ ခုအထိ ချိတ်ဆက်နိုင်ပါသည်။"
-  },
-  "icu:LinkedDevicesOnboardingDialog__bullet--3": {
-    "messageformat": "အကောင့်ဆက်တင်နှင့် ဘက်ခ်အပ် အပါအဝင် အချို့သော ဆက်တင်များကို သင့်ပင်မစက်တွင်သာ စီမံခန့်ခွဲနိုင်ပါသည်။"
-  },
-  "icu:LinkedDevicesOnboardingDialog__bullet--3--1": {
-    "messageformat": "အကောင့် ဆက်တင်များနှင့် ဘက်ခ်အပ်များကို အဓိကစက်တွင်သာ စီမံခန့်ခွဲနိုင်ပါသည်။"
   },
   "icu:LinkedDevicesOnboardingDialog__bullet--3--2": {
     "messageformat": "အကောင့်ဆက်တင်နှင့် Signal လုံခြုံရေးဘက်ခ်အပ်ကို သင့်ပင်မစက်တွင်သာ စီမံခန့်ခွဲနိုင်သည်။"
@@ -281,6 +287,9 @@
   "icu:archivedConversations": {
     "messageformat": "မှတ်တမ်းတင်ထားသော ချက်(တ်)များ"
   },
+  "icu:LeftPane__MoreActionsLabel": {
+    "messageformat": "More actions"
+  },
   "icu:LeftPane__MoreActionsMenu__AddChatFolder": {
     "messageformat": "ချက်(တ်)ဖိုင်တွဲ ထည့်သွင်းရန်"
   },
@@ -382,9 +391,6 @@
   },
   "icu:NavTabs__ItemIconLabel--UnreadCount": {
     "messageformat": "{count,number} ခု မဖတ်ရသေး"
-  },
-  "icu:NavTabs__ItemIconLabel--MarkedUnread": {
-    "messageformat": "မဖတ်ရသေးဟု မှတ်ပြီး"
   },
   "icu:NavTabs__ItemLabel--Chats": {
     "messageformat": "ချက်(တ်)များ"
@@ -653,20 +659,11 @@
   "icu:SafetyNumberNotReady__learn-more": {
     "messageformat": "ထပ်မံလေ့လာရန်"
   },
-  "icu:KeyTransparencyErrorDialog__Title": {
-    "messageformat": "အလိုအလျောက် ကီးအတည်ပြုခြင်းကို သင့်စက်အတွက် လောလောဆယ်တွင် မရရှိနိုင်ပါ။ ပြစ်ချက်မှတ်တမ်း ပေးပို့မည်လား။"
-  },
   "icu:KeyTransparencyErrorDialog__Title-v2": {
     "messageformat": "အလိုအလျောက် ကီးအတည်ပြုခြင်းကို သင့်စက်အတွက် လောလောဆယ်တွင် မရရှိနိုင်ပါ။ အစီရင်ခံစာတစ်စောင် တင်ပြပြီး ကျွန်ုပ်တို့၏ဝန်ဆောင်မှုကို ပိုမိုကောင်းမွန်အောင် ကူညီမလား။"
   },
-  "icu:KeyTransparencyErrorDialog__Description": {
-    "messageformat": "ပြစ်ချက်မှတ်တမ်းများသည် ပြဿနာကို စစ်ဆေးရှာဖွေရန်နှင့် ဖြေရှင်းရန် ကျွန်ုပ်တို့ကို အကူအညီပေးပြီး မည်သူဖြစ်ကြောင်း ခွဲခြားနိုင်သည့် အချက်အလက်များ မပါရှိပါ။"
-  },
   "icu:KeyTransparencyErrorDialog__Description-v2": {
     "messageformat": "သင့် ပြစ်ချက်မှတ်တမ်းကို ထည့်ပေးခြင်းဖြင့် ပြဿနာကို ရှာဖွေဖော်ထုတ်ပြီး ဖြေရှင်းနိုင်ရန် ကျွန်ုပ်တို့ကို အကူအညီပေးပြီး မည်သူဖြစ်ကြောင်း ခွဲခြားနိုင်သည့် အချက်အလက်များ မပါရှိပါ။ မျှဝေခြင်းသည် ဆန္ဒအလျောက်သာ ဖြစ်ပါသည်။"
-  },
-  "icu:KeyTransparencyErrorDialog__ShareDebugLog__Label": {
-    "messageformat": "ပြစ်ချက်မှတ်တမ်း မျှဝေရန်"
   },
   "icu:KeyTransparencyErrorDialog__ShareDebugLog__Label-v2": {
     "messageformat": "ပြစ်ချက်မှတ်တမ်း ပါဝင်ပါသည်"
@@ -685,6 +682,9 @@
   },
   "icu:KeyTransparencyOnboardingDialog__Description": {
     "messageformat": "ဖုန်းနံပါတ်ဖြင့် ချိတ်ဆက်ထားသော အဆက်အသွယ်များအတွက် Signal သည် ကီး ပွင့်လင်းမြင်သာမှုဟုခေါ်သော လုပ်ငန်းစဉ်ကို အသုံးပြု၍ ချိတ်ဆက်မှု လုံခြုံခြင်းရှိမရှိကို အလိုအလျောက် အတည်ပြုနိုင်သည်။ လုံခြုံရေးပိုမိုရရှိစေရန်အတွက် QR ကုဒ်ကို အသုံးပြု၍ သို့မဟုတ် လုံခြုံရေးနံပါတ်များကို နှိုင်းယှဉ်ခြင်းဖြင့် ချိတ်ဆက်မှုများကို ကိုယ်တိုင်အတည်ပြုနိုင်ပါသည်။"
+  },
+  "icu:KeyTransparencyOnboardingDialog__Description-v2": {
+    "messageformat": "<paragraph>ဖုန်းနံပါတ်ဖြင့် ချိတ်ဆက်ထားသော အဆက်အသွယ်များအတွက် Signal သည် ကီး ပွင့်လင်းမြင်သာမှုဟုခေါ်သော လုပ်ငန်းစဉ်ကို အသုံးပြု၍ ချိတ်ဆက်မှု လုံခြုံခြင်းရှိမရှိကို အလိုအလျောက် အတည်ပြုနိုင်သည်။</paragraph><paragraph>လုံခြုံရေးပိုမိုရရှိစေရန်အတွက် QR ကုဒ်ကို အသုံးပြု၍သော်လည်းကောင်း၊ လုံခြုံရေးနံပါတ်များကို နှိုင်းယှဉ်ခြင်းဖြင့်သော်လည်းကောင်း ချိတ်ဆက်မှုများကို ကိုယ်တိုင်အတည်ပြုနိုင်ပါသည်။</paragraph>"
   },
   "icu:KeyTransparencyOnboardingDialog__Continue": {
     "messageformat": "ဆက်လုပ်ရန်"
@@ -1493,6 +1493,9 @@
   "icu:ConversationMerge--learn-more": {
     "messageformat": "ပိုလေ့လာရန်"
   },
+  "icu:ConversationMerge--explainer-dialog--label": {
+    "messageformat": "မက်ဆေ့ချ်မှတ်တမ်းကို ပေါင်းစည်းပြီးပါပြီ"
+  },
   "icu:ConversationMerge--explainer-dialog--line-1": {
     "messageformat": "{obsoleteConversationTitle} နှင့် မက်ဆေ့ချ်ပေးပို့ပြီးနောက် ဤနံပါတ်ကို{conversationTitle} က ပိုင်ဆိုင်ကြောင်း သိရှိရပါသည်။ ၎င်းတို့ဖုန်းနံပါတ်ကို ကိုယ်ပိုင်သီးသန့်အဖြစ် ထားရှိ ထားပါသည်။"
   },
@@ -1753,6 +1756,9 @@
   },
   "icu:Preferences__EditChatFolderPage__SelectChatsDialog__Search__Placeholder": {
     "messageformat": "ရှာရန်"
+  },
+  "icu:Preferences__EditChatFolderPage__SelectChatsDialog__NoChats": {
+    "messageformat": "ချက်(တ်)များမရှိပါ"
   },
   "icu:Preferences__EditChatFolderPage__SelectChatsDialog__ChatTypesSection__Title": {
     "messageformat": "ချက်(တ်)အမျိုးအစားများ"
@@ -2246,6 +2252,24 @@
   "icu:deleteAccountDialogBody": {
     "messageformat": "ဤသည်က သင့်အကောင့် အချက်အလက်၊ ပရိုဖိုင်နှင့် မက်ဆေ့ချ်အားလုံးကို ဖျက်ပစ်ပါလိမ့်မည်။ Signal အဖွဲ့အားလုံးမှလည်း သင့်အား ဖယ်ရှားပါမည်။ ဤလုပ်ငန်းစဉ် ပြီးသွားသောအခါ အက်ပ် ပိတ်သွားပါမည်။"
   },
+  "icu:DeleteAccountConfirmDialog--Title": {
+    "messageformat": "Delete account"
+  },
+  "icu:DeleteAccountConfirmDialog--Description": {
+    "messageformat": "This will delete your account info, profile, and all of your messages. You will also be removed from all Signal groups."
+  },
+  "icu:DeleteAccountConfirmDialog--ConfirmNumber": {
+    "messageformat": "Confirm your phone number"
+  },
+  "icu:DeleteAccountConfirmDialog--CountryCodePlaceholder": {
+    "messageformat": "Country code"
+  },
+  "icu:DeleteAccountConfirmDialog--NumberPlaceholder": {
+    "messageformat": "Phone number"
+  },
+  "icu:DeleteAccountConfirmDialog--DeleteButton": {
+    "messageformat": "Delete"
+  },
   "icu:deleteOldIndexedDBData": {
     "messageformat": "သင့်တွင် ယခင် Signal Desktop ထည့်သွင်းမှုမှ ဒေတာအဟောင်းများ ရှိပါသည်။ ဆက်လုပ်ရန်ကို ရွေးချယ်ပါက ၎င်းကို ဖျက်မည်ဖြစ်ပြီး အစမှ စတင်ပါလိမ့်မည်။"
   },
@@ -2398,9 +2422,6 @@
   },
   "icu:callRingtoneNotificationDescription": {
     "messageformat": "ခေါ်ဆိုမှု အသံများကို ဖွင့်ရန်"
-  },
-  "icu:callSystemNotificationDescription": {
-    "messageformat": "ကောလ်များအတွက် အသိပေးချက်များကို ပြရန်"
   },
   "icu:incomingCallNotificationDescription": {
     "messageformat": "အဝင်ကောလ်များကို ဖွင့်ရန်"
@@ -2999,6 +3020,9 @@
   "icu:FunPanelSticker__SubNavLabel": {
     "messageformat": "စတစ်ကာတွဲ"
   },
+  "icu:FunPanelStickers__SubNavCategoryLabel--Favorites": {
+    "messageformat": "Favorites"
+  },
   "icu:FunPanelStickers__SubNavCategoryLabel--Recents": {
     "messageformat": "နောက်ဆုံးသုံးခဲ့သော"
   },
@@ -3010,6 +3034,9 @@
   },
   "icu:FunPanelStickers__SectionTitle--Recents": {
     "messageformat": "နောက်ဆုံးသုံးခဲ့သော"
+  },
+  "icu:FunPanelStickers__SectionTitle--Favorites": {
+    "messageformat": "Favorites"
   },
   "icu:FunPanelStickers__SectionTitle--Featured": {
     "messageformat": "အသားပေးထားသည်များ"
@@ -3524,6 +3551,9 @@
   "icu:MessageRequests--unblock-group-confirm-body": {
     "messageformat": "အဖွဲ့ဝင်များသည် သင့်ကို အဖွဲ့ထဲသို့ ပြန်ထည့်နိုင်ပါမည်။"
   },
+  "icu:MessageRequests--unblock-signal-confirm-body": {
+    "messageformat": "Signal မှ အပ်ဒိတ်များနှင့် သတင်းများကို သင် လက်ခံရရှိပါမည်။"
+  },
   "icu:MessageRequests--block-and-report-spam-success-toast": {
     "messageformat": "စပမ်းအဖြစ် ရီပို့(တ်)လုပ်ပြီး ဘလော့ခ်ပြီးပါပြီ။"
   },
@@ -3538,6 +3568,9 @@
   },
   "icu:MessageRequests--block-group-confirm-body": {
     "messageformat": "သင်သည် ဤအဖွဲ့မှ မက်ဆေ့ချ်များ သို့မဟုတ် အပ်ဒိတ်များကို ရရှိတော့မည် မဟုတ်ပါ၊ မန်ဘာများက ဤအဖွဲ့တွင် သင့်အား ထပ်မံပေါင်းထည့်၍ ရနိုင်မည် မဟုတ်ပါ။"
+  },
+  "icu:MessageRequests--block-signal-confirm-body": {
+    "messageformat": "Signal မှ အပ်ဒိတ်များနှင့် သတင်းများကို သင် လက်ခံရရှိတော့မည် မဟုတ်ပါ။"
   },
   "icu:MessageRequests--reportAndMaybeBlock": {
     "messageformat": "ရီပို့(တ်)လုပ်ရန်…"
@@ -3866,6 +3899,9 @@
   "icu:callingDeviceSelection__settings": {
     "messageformat": "အပြင်အဆင်များ"
   },
+  "icu:callingDeviceSelection__settings-v2": {
+    "messageformat": "Call Settings"
+  },
   "icu:calling__participants--pluralized": {
     "messageformat": "{people, plural, other {ကောလ်တွင် {people,number} ဦးပါဝင်}}"
   },
@@ -3970,6 +4006,15 @@
   },
   "icu:callingDeviceSelection__select--default": {
     "messageformat": "မူလ"
+  },
+  "icu:callingDeviceSelection__select--default-nonwin": {
+    "messageformat": "Default: {deviceName}"
+  },
+  "icu:callingDeviceSelection__select--default_console": {
+    "messageformat": "Default: {deviceName}"
+  },
+  "icu:callingDeviceSelection__select--default_communications": {
+    "messageformat": "Default Communications: {deviceName}"
   },
   "icu:muteNotificationsTitle": {
     "messageformat": "အသိပေးချက် အသံပိတ်ရန်"
@@ -4823,6 +4868,69 @@
   "icu:CompositionArea__AttachMenu__Poll": {
     "messageformat": "စစ်တမ်း"
   },
+  "icu:CompositionArea__AttachMenu__Contact": {
+    "messageformat": "Contact"
+  },
+  "icu:ShareContactDialog__SelectContact__Title": {
+    "messageformat": "Select contact"
+  },
+  "icu:ShareContactDialog__SelectContact__SearchPlaceholder": {
+    "messageformat": "Search"
+  },
+  "icu:ShareContactDialog__SelectContact__EmptyState": {
+    "messageformat": "No contacts"
+  },
+  "icu:ShareContactDialog__SelectContact__NoResults": {
+    "messageformat": "No results for “{searchQuery}”"
+  },
+  "icu:ShareContactDialog__ShareContact__Title": {
+    "messageformat": "Share contact"
+  },
+  "icu:ShareContactDialog__ShareContact__Description": {
+    "messageformat": "Anyone you share this profile with will be able to message {name}."
+  },
+  "icu:ShareContactDialog__ShareContact__Send": {
+    "messageformat": "Send contact"
+  },
+  "icu:ShareContactDialog__ShareContact__EditName": {
+    "messageformat": "Edit name"
+  },
+  "icu:ShareContactDialog__EditName__Title": {
+    "messageformat": "Edit name"
+  },
+  "icu:ShareContactDialog__EditName__Prefix": {
+    "messageformat": "Prefix"
+  },
+  "icu:ShareContactDialog__EditName__GivenName": {
+    "messageformat": "First name"
+  },
+  "icu:ShareContactDialog__EditName__MiddleName": {
+    "messageformat": "Middle name"
+  },
+  "icu:ShareContactDialog__EditName__FamilyName": {
+    "messageformat": "Last name"
+  },
+  "icu:ShareContactDialog__EditName__Suffix": {
+    "messageformat": "Suffix"
+  },
+  "icu:ShareContactDialog__EditName__Organization": {
+    "messageformat": "Organization"
+  },
+  "icu:ShareContactDialog__ShareContact__EditPhoto": {
+    "messageformat": "Edit photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__Title": {
+    "messageformat": "Select a photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__ContactPhoto": {
+    "messageformat": "Contact photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__ProfilePhoto": {
+    "messageformat": "Profile photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__DefaultAvatar": {
+    "messageformat": "Default avatar"
+  },
   "icu:CompositionArea--attach-plus": {
     "messageformat": "ပူးတွဲပါဖိုင် သို့မဟုတ် စစ်တမ်းကို ထည့်ပါ"
   },
@@ -4861,9 +4969,6 @@
   },
   "icu:CompositionInput__editing-message": {
     "messageformat": "မက်ဆေ့ချ် တည်းဖြတ်ရန်"
-  },
-  "icu:countMutedConversationsDescription": {
-    "messageformat": "ဘဲ့ဂျ်ရေတွက်မှုတွင် အသံပိတ်ထားသော ချက်(တ်)များ ထည့်ရန်"
   },
   "icu:ContactModal--nickname": {
     "messageformat": "အမည်ပြောင်"
@@ -5263,18 +5368,6 @@
   },
   "icu:UnreadReminders__notification__replySummary--many": {
     "messageformat": "{replyCount, plural, other {{person1} နှင့် အခြားသူများထံမှ အကြောင်းပြန်စာ {replyCount,number} စောင်}}"
-  },
-  "icu:ConversationNotificationsSettings__mentions__label": {
-    "messageformat": "မန်းရှင်းများ"
-  },
-  "icu:ConversationNotificationsSettings__mentions__info": {
-    "messageformat": "အသံပိတ်ထားသော ချက်(တ်)များတွင် သင့်ကို မန်းရှင်းခေါ်လျှင် အသိပေးချက်များ လက်ခံရန်"
-  },
-  "icu:ConversationNotificationsSettings__mentions__select__always-notify": {
-    "messageformat": "အမြဲ အသိပေးရန်"
-  },
-  "icu:ConversationNotificationsSettings__mentions__select__dont-notify-for-mentions-if-muted": {
-    "messageformat": "အသံပိတ်ထားပါက အသိမပေးပါနှင့်"
   },
   "icu:GroupLinkManagement--clipboard": {
     "messageformat": "အဖွဲ့လင့်ခ် ကူးယူပြီး။"
@@ -6193,9 +6286,6 @@
   "icu:Preferences__SignalAccountKeys__Description": {
     "messageformat": "ဤအချက်အလက်ကို လုံခြုံသောနေရာတွင် သိမ်းဆည်းထားပါ။ သင့်အကောင့်နှင့် ဒေတာများကို ပြန်လည်ရယူရန် သင့် လော့ဂ်အင်အချက်အလက် လိုအပ်ပါသည်။ မည်သူ့ကိုမျှ မျှဝေခြင်းမပြုပါနှင့်။"
   },
-  "icu:Preferences__SignalAccountKeys__AccountKey": {
-    "messageformat": "အကောင့်ကီး"
-  },
   "icu:Preferences__SignalAccountKeys__AccountID": {
     "messageformat": "အကောင့် ID"
   },
@@ -6251,13 +6341,13 @@
     "messageformat": "PIN တစ်ခု ဖန်တီးမည်"
   },
   "icu:Preferences--create-signal-pin-button": {
-    "messageformat": "ဖန်တီးပ"
+    "messageformat": "ဖန်တီးရန်"
   },
   "icu:Preferences--signal-pin": {
     "messageformat": "Signal PIN"
   },
   "icu:Preferences--signal-pin__footer": {
-    "messageformat": "PINs keep information stored with Signal encrypted so only you can access it. Your PIN cannot be recovered. Your profile, settings, and contacts will restore when you reinstall Signal. <learnMoreLink>Learn more</learnMoreLink>"
+    "messageformat": "PIN များသည် Signal တွင် သိမ်းဆည်းထားသော သင့်အချက်အလက်များကို ကုဒ်ပြောင်းဝှက်ပေးပြီး သင်တစ်ဦးတည်းသာ ဝင်ရောက်အသုံးပြုနိုင်စေပါသည်။ သင့် PIN ကို ပြန်လည်ရယူ၍ မရနိုင်ပါ။ Signal ကို ပြန်လည်ထည့်သွင်းသောအခါ သင့်ပရိုဖိုင်၊ ဆက်တင်နှင့် အဆက်အသွယ်များကို ပြန်လည်ရရှိပါမည်။ <learnMoreLink>ပိုမိုလေ့လာရန်</learnMoreLink>"
   },
   "icu:Preferences--signal-pin-advanced-settings": {
     "messageformat": "အဆင့်မြင့် PIN ဆက်တင်များ"
@@ -6266,31 +6356,31 @@
     "messageformat": "PIN ပိတ်ပါ"
   },
   "icu:Preferences--disable-signal-pin--button": {
-    "messageformat": "ပိတ်ထားပါ"
+    "messageformat": "ပိတ်ထားရန်"
   },
   "icu:Preferences--disable-signal-pin--footer": {
-    "messageformat": "ပင်နံပါတ်ကို ပိတ်ထားလျှင် သင်မှ​ ကိုယ်တိုင် အရန်ပြုပြင်ထားခြင်းမရှိခဲ့လျှင် Signal ပေါ်ပြန်စာရင်းသွင်းသောအခါ ဒေတာအားလုံးကို ဆုံးရှူံးပါလိမ့်မည်။ ပင်နံပါတ်ကို ပိတ်ထားစဉ် မှတ်ပုံတင်ခြင်းသော့ကို သင်ဖွင့်၍ မရပါ။"
+    "messageformat": "PIN ကို ပိတ်ထားလျှင် ကိုယ်တိုင် ဘက်ခ်အပ်လုပ်ပြီး ပြန်လည်ရယူခြင်းမပြုပါက Signal ကို ပြန်လည်၍ မှတ်ပုံတင်သောအခါ ဒေတာအားလုံးကို ဆုံးရှုံးပါလိမ့်မည်။ PIN ကို ပိတ်ထားစဉ် မှတ်ပုံတင်ခြင်း လော့ခ်ကို ဖွင့်၍မရပါ။"
   },
   "icu:DisableSignalPinErrorDialog--reg-lock--title": {
-    "messageformat": "Disable PIN failed due to registration lock"
+    "messageformat": "မှတ်ပုံတင်ခြင်း လော့ခ်ကြောင့် PIN ကို ပိတ်၍ မရပါ"
   },
   "icu:DisableSignalPinErrorDialog--reg-lock--body": {
-    "messageformat": "You must disable Registration Lock before disabling your PIN."
+    "messageformat": "သင့် PIN ကို ပိတ်ခြင်းမပြုမီ မှတ်ပုံတင်ခြင်း လော့ခ်ကို ပိတ်ရပါမည်။"
   },
   "icu:DisableSignalPinErrorDialog--reg-lock--ok": {
     "messageformat": "အိုကေ"
   },
   "icu:DisableSignalPinErrorDialog--backups--title": {
-    "messageformat": "Disable PIN failed due to backups"
+    "messageformat": "ဘက်ခ်အပ်ကြောင့် PIN ကို ပိတ်၍ မရပါ"
   },
   "icu:DisableSignalPinErrorDialog--backups--body": {
-    "messageformat": "You must disable backups before disabling your PIN."
+    "messageformat": "သင့် PIN ကို ပိတ်ခြင်းမပြုမီ ဘက်ခ်အပ်များကို ပိတ်ရပါမည်။"
   },
   "icu:Preferences--enable-signal-pin": {
-    "messageformat": "ပင်နံပါတ်ဖွင့်ပါ"
+    "messageformat": "PIN ကို ဖွင့်ပါ"
   },
   "icu:Preferences--enable-signal-pin--button": {
-    "messageformat": "ဖွင့်မည်"
+    "messageformat": "ဖွင့်ရန်"
   },
   "icu:Preferences--pin-reminders--header": {
     "messageformat": "PIN သတိပေးချက်များ"
@@ -6302,10 +6392,7 @@
     "messageformat": "မှတ်ပုံတင်ခြင်း လော့ခ်"
   },
   "icu:Preferences--registration-lock__footer": {
-    "messageformat": "Require your Signal PIN to register your phone number again with Signal."
-  },
-  "icu:Preferences--notification-content": {
-    "messageformat": "အသိပေးချက် အကြောင်းအရာ"
+    "messageformat": "သင့်ဖုန်းနံပါတ်ကို Signal တွင် ပြန်လည်မှတ်ပုံတင်ရန် သင့် Signal PIN ကို ထည့်သွင်းရန် လိုအပ်ပါမည်။"
   },
   "icu:Preferences__Chats__TextInputSection__Title": {
     "messageformat": "စာရိုက်ထည့်ရန်"
@@ -6318,9 +6405,6 @@
   },
   "icu:Preferences__Notifications__SoundsSection__Title": {
     "messageformat": "အသံ"
-  },
-  "icu:Preferences__Notifications__AppBadgeSection__Title": {
-    "messageformat": "အက်ပ် ဘဲ့ဂျ်"
   },
   "icu:Preferences__Notifications__AppBadgeSection__Title-v2": {
     "messageformat": "မဖတ်ရသေးသော ဘဲ့ဂျ်များ"
@@ -6700,6 +6784,9 @@
   "icu:Preferences--blocked-users--description": {
     "messageformat": "ဘလော့ခ်ထားသော သုံးစွဲသူများသည် သင့်ထံ ဖုန်းခေါ်ခြင်း သို့မဟုတ် မက်ဆေ့ချ်ပို့ခြင်းများ မလုပ်နိုင်တော့ပါ"
   },
+  "icu:Preferences--add-blocked": {
+    "messageformat": "ဘလော့ခ်ထားသော သုံးစွဲသူ သို့မဟုတ် အဖွဲ့ကို ထည့်ရန်"
+  },
   "icu:Preferences--blocked-users": {
     "messageformat": "ဘလော့ခ်ထားသော သုံးစွဲသူများ"
   },
@@ -6708,6 +6795,12 @@
   },
   "icu:Preferences--blocked--blocked-on": {
     "messageformat": "{blockedAt} တွင် ပိတ်ထားသည်"
+  },
+  "icu:Preferences--BlockChooser--Done": {
+    "messageformat": "ပြီးပါပြီ"
+  },
+  "icu:Preferences--BlockChooser--Search--Placeholder": {
+    "messageformat": "ရှာရန်"
   },
   "icu:Preferences--signal-backups": {
     "messageformat": "Signal လုံခြုံရေးဘက်ခ်အပ်"
@@ -7105,6 +7198,36 @@
   "icu:InstallScreenUpdateDialog--cannot-update__body": {
     "messageformat": "Signal Desktop ကို အပ်ဒိတ်လုပ်ခြင်း မအောင်မြင်သော်လည်း ဗားရှင်းအသစ်တစ်ခု ရရှိနိုင်ပါသည်။ {downloadUrl} သို့ သွားပြီး ဗားရှင်းအသစ်ကို ကိုယ်တိုင်ထည့်သွင်းပါ၊ ထို့နောက် ပံ့ပိုးကူညီရေးသို့ ဆက်သွယ်ပါ သို့မဟုတ် ဤပြဿနာနှင့်ပတ်သက်၍ ချို့ယွင်းချက်တစ်ခု တင်သွင်းပါ။"
   },
+  "icu:EntryPoint--signal-logo": {
+    "messageformat": "Signal Logo"
+  },
+  "icu:EntryPoint--Title--Line1": {
+    "messageformat": "Take privacy with you."
+  },
+  "icu:EntryPoint--Title--Line2": {
+    "messageformat": "Be yourself in every message."
+  },
+  "icu:EntryPoint--link-button": {
+    "messageformat": "Link your account"
+  },
+  "icu:EntryPoint--more-options-button": {
+    "messageformat": "More options"
+  },
+  "icu:EntryPoint--nonprofit": {
+    "messageformat": "Signal is a 501c3 nonprofit"
+  },
+  "icu:EntryPoint--terms": {
+    "messageformat": "Terms & privacy policy"
+  },
+  "icu:EntryPoint--MoreOptions--Title": {
+    "messageformat": "More options"
+  },
+  "icu:EntryPoint--MoreOptions--RegistrationButton--Title": {
+    "messageformat": "Create a new account"
+  },
+  "icu:EntryPoint--MoreOptions--RegistrationButton--Description": {
+    "messageformat": "Create a new Signal account using your phone number."
+  },
   "icu:StandaloneRegistration--signal-logo": {
     "messageformat": "Signal လိုဂို"
   },
@@ -7124,7 +7247,7 @@
     "messageformat": "{duration} အကြာတွင် ထပ်မံကြိုးစားပါ"
   },
   "icu:StandaloneRegistration--PhoneNumber--RegionCodeSelector--Label": {
-    "messageformat": "Select region code"
+    "messageformat": "နိုင်ငံကုဒ်ကို ရွေးချယ်ပါ"
   },
   "icu:StandaloneRegistration--PhoneNumber--placeholder": {
     "messageformat": "ဖုန်းနံပါတ်"
@@ -7299,6 +7422,21 @@
   },
   "icu:StandaloneRegistration--VerificationCode--CannotSendCodeTemporary--ok-button": {
     "messageformat": "အိုကေ"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Title": {
+    "messageformat": "Having trouble registering?"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet1": {
+    "messageformat": "Make sure your phone has a cellular signal to receive your SMS or call"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet2": {
+    "messageformat": "Confirm you can receive a phone call to the number"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet3": {
+    "messageformat": "Check that you have entered your phone number correctly"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Footer": {
+    "messageformat": "If you still can’t register, follow these <troubleshootingLink>troubleshooting steps</troubleshootingLink> or <contactSupportLink>Contact Support</contactSupportLink>."
   },
   "icu:StandaloneRegistration--ProfileEntry--header": {
     "messageformat": "သင့် ပရိုဖိုင်ကိုပြင်ဆင်ပါ"
@@ -7649,10 +7787,10 @@
     "messageformat": "\"Signal\" ကိုဖွင့်ပါ"
   },
   "icu:MediaPermissionsModal__step-2--windows--microphone": {
-    "messageformat": "Enable microphone access for Signal"
+    "messageformat": "Signal အတွက် မိုက်ခရိုဖုန်း အသုံးပြုခွင့်ကို ဖွင့်ပါ"
   },
   "icu:MediaPermissionsModal__step-2--windows--camera": {
-    "messageformat": "Enable camera access for Signal"
+    "messageformat": "Signal အတွက် ကင်မရာ အသုံးပြုခွင့်ကို ဖွင့်ပါ"
   },
   "icu:MediaPermissionsModal__open": {
     "messageformat": "ဆက်တင်သို့ သွားရန်"
@@ -8204,7 +8342,7 @@
     "messageformat": "သုံးစွဲသူအမည်များကို ကိန်းဂဏန်းတွဲတစ်ခုနှင့် အမြဲတွဲဖက်ထားပါသည်။"
   },
   "icu:EditUsernameModalBody__discriminator-label": {
-    "messageformat": "Username digits"
+    "messageformat": "သုံးစွဲသူအမည်ရှိ ဂဏန်းများ"
   },
   "icu:EditUsernameModalBody__learn-more": {
     "messageformat": "ပိုမိုလေ့လာရန်"
@@ -8340,13 +8478,13 @@
     "messageformat": "သင့် Signal PIN ကို ပြောင်းလဲပါ"
   },
   "icu:PinChangeModal__title--create--without-pin": {
-    "messageformat": "Create your Signal PIN"
+    "messageformat": "သင့် Signal PIN ကို ဖန်တီးပါ"
   },
   "icu:PinChangeModal__body--create": {
     "messageformat": "၎င်းစက်အား စာရင်းသွင်းထားသ၍ သင့် PIN ကို ပြောင်းလဲနိုင်ပါသည်။ <learnMoreLink>ပိုမိုလေ့လာရန်</learnMoreLink>"
   },
   "icu:PinChangeModal__body--create--without-pin": {
-    "messageformat": "PINs keep information stored with Signal encrypted so only you can access it. Your profile, settings, and contacts will restore when you reinstall. You won't need your PIN to open the app. <learnMoreLink>Learn more</learnMoreLink>"
+    "messageformat": "PIN များသည် Signal တွင် သိမ်းဆည်းထားသော သင့်အချက်အလက်များကို ကုဒ်ပြောင်းဝှက်ပေးပြီး သင်တစ်ဦးတည်းသာ ဝင်ရောက်အသုံးပြုနိုင်စေပါသည်။ ပြန်လည်ထည့်သွင်းသည့်အခါ သင့်ပရိုဖိုင်၊ ဆက်တင်နှင့် အဆက်အသွယ်များကို ပြန်လည်ရယူပါမည်။ အက်ပ်ကို ဖွင့်ရန် သင့် PIN မလိုအပ်ပါ။ <learnMoreLink>ပိုမိုလေ့လာရန်</learnMoreLink>"
   },
   "icu:PinChangeModal__title--confirm": {
     "messageformat": "သင်၏ Signal PIN ကို အတည်ပြုပါ"
@@ -8588,12 +8726,6 @@
   "icu:CallLinkPendingParticipantModal__DenyButtonLabel": {
     "messageformat": "ဝင်ရောက်မှုကို ငြင်းပယ်မည်"
   },
-  "icu:CallLinkRestrictionsSelect__Option--Off": {
-    "messageformat": "ပိတ်မည်"
-  },
-  "icu:CallLinkRestrictionsSelect__Option--On": {
-    "messageformat": "ဖွင့်မည်"
-  },
   "icu:CallLinkAddNameModal__Title": {
     "messageformat": "ကောလ်အမည် ပေါင်းထည့်ရန်"
   },
@@ -8641,6 +8773,39 @@
   },
   "icu:SaveMultiDialog__title": {
     "messageformat": "ပူးတွဲဖိုင်များကို သိမ်းဆည်းပါ"
+  },
+  "icu:EmbeddedContact__message": {
+    "messageformat": "မက်ဆေ့ချ်"
+  },
+  "icu:ContactDetail__message": {
+    "messageformat": "မက်ဆေ့ချ်"
+  },
+  "icu:ContactDetail__add-to-group": {
+    "messageformat": "အဖွဲ့တစ်ဖွဲ့ထဲသို့ ထည့်သွင်းရန်"
+  },
+  "icu:ContactDetail__nickname": {
+    "messageformat": "အမည်ပြောင်"
+  },
+  "icu:ContactDetail__note": {
+    "messageformat": "မှတ်စုများ"
+  },
+  "icu:email-v2": {
+    "messageformat": "အီးမေးလ်"
+  },
+  "icu:home-v2": {
+    "messageformat": "ပင်မစာမျက်နှာ"
+  },
+  "icu:mobile-v2": {
+    "messageformat": "မိုဘိုင်းဖုန်း"
+  },
+  "icu:work-v2": {
+    "messageformat": "အလုပ်"
+  },
+  "icu:phone-v2": {
+    "messageformat": "ဖုန်း"
+  },
+  "icu:address-v2": {
+    "messageformat": "လိပ်စာ"
   },
   "icu:WhatsNew__modal-title": {
     "messageformat": "အသစ်များ"
@@ -8806,6 +8971,9 @@
   },
   "icu:DonationReceipt__footer-text-v2": {
     "messageformat": "Signal ကို ပံ့ပိုးကူညီသည့်အတွက် ကျေးဇူးတင်ပါသည်။ သင်၏ ကူညီထောက်ပံ့မှုသည် လွတ်လပ်စွာ ထုတ်ဖော်ပြောဆိုခွင့်ကို ကာကွယ်ပေးခြင်းနှင့် သုံးစွဲသူသန်းပေါင်းများစွာ၏ ကမ္ဘာတစ်ဝန်း ဆက်သွယ်မှုများကို လုံခြုံစိတ်ချရစေခြင်း စသည့် မစ်ရှင်ကို Open Source ကိုယ်ပိုင်အချက်အလက် လုံခြုံရေး နည်းပညာမှတစ်ဆင့် ကူညီအားဖြည့်ပေးပါသည်။ သင်သည် အမေရိကန်ပြည်ထောင်စုတွင် နေထိုင်သူဖြစ်ပါက သင်၏အခွန်မှတ်တမ်းများအတွက် ဤပြေစာကိုထိန်းသိမ်းထားပေးပါ။ Signal Technology Foundation သည် ပြည်တွင်းအခွန်ဥပဒေ၏ ပုဒ်မ 501c3 အရ အမေရိကန်ပြည်ထောင်စုရှိ အခွန်ကင်းလွတ်ခွင့်ရသော အကျိုးအမြတ်မယူသည့် အဖွဲ့အစည်း ဖြစ်ပါသည်။ ကျွန်ုပ်တို့၏ ဖက်ဒရယ် အခွန် ID မှာ 82-4506840 ဖြစ်ပါသည်။ ဤပံ့ပိုးမှုအတွက် Signal သည် အပြန်အလှန်အဖြစ် မည်သည့် ကုန်ပစ္စည်း သို့မဟုတ် ဝန်ဆောင်မှုကိုမျှ ပေးအပ်ထားခြင်း မရှိပါ။"
+  },
+  "icu:MessageCta__Donate": {
+    "messageformat": "ယခု လှူဒါန်းရန်"
   },
   "icu:Donations__OfflineTooltip": {
     "messageformat": "သင် အော့ဖ်လိုင်းဖြစ်နေသည်။ လှူဒါန်းမှုပြီးမြောက်ရန် အင်တာနက်ချိတ်ဆက်ပါ။"
@@ -9005,6 +9173,9 @@
   "icu:CallQualitySurvey__WhatIssuesDidYouHave__SomethingElse__TextArea__AccessibilityLabel": {
     "messageformat": "ပြဿနာ ဖော်ပြချက်"
   },
+  "icu:CallQualitySurvey__WhatIssuesDidYouHave__SomethingElse__TextArea__Placeholder": {
+    "messageformat": "သင့်ပြဿနာကို ဖော်ပြပါ"
+  },
   "icu:CallQualitySurvey__WhatIssuesDidYouHave__SomethingElse__TextArea__HelpText": {
     "messageformat": "ကျေးဇူးပြု၍ ပြဿနာနှင့်သက်ဆိုင်သည့် အသေးစိတ်အချက်အလက်များကို ထည့်သွင်းပါ။ သင်မျှဝေထားသမျှကို လျှို့ဝှက်ထားမည်ဖြစ်ပြီး Signal တွင် ခေါ်ဆိုမှုများကို ပိုမိုကောင်းမွန်စေရန်အတွက်သာ အသုံးပြုမည်ဖြစ်သည်။"
   },
@@ -9114,16 +9285,25 @@
     "messageformat": "အနေအထား ပြုပြင်မှုလေးများ၊ ချို့ယွင်းချက် ပြင်ဆင်မှုများနှင့် စွမ်းဆောင်ရည် မြှင့်တင်မှုများ။ Signal ကို သုံးသည့်အတွက် ကျေးဇူးတင်ပါသည်။",
     "ignoreUnused": true
   },
-  "icu:WhatsNew__8.26--0": {
-    "messageformat": "အဖွဲ့ဝင်ရှာဖွေမှုကို ကောင်းမွန်အောင် မွမ်းမံထားခြင်း။"
-  },
-  "icu:WhatsNew__8.27--0": {
-    "messageformat": "အသိပေးချက်များ မည်သည့်အချိန်တွင် မည်သို့ ပေါ်လာမည်ကို ရွေးချယ်နိုင်မည့် တိုးချဲ့ထားသော ရွေးချယ်စရာများနှင့်အတူ အသိပေးချက်ဆက်တင်များကိုလည်း ပိုမိုကောင်းမွန်အောင် ပြုလုပ်ထားပါသည်။"
-  },
   "icu:WhatsNew__8.30--0": {
-    "messageformat": "Thanks to a few performance improvements, your CPU will be slightly happier during video calls (even if you're not smiling)."
+    "messageformat": "ဗီဒီယိုကောလ်များအတွက် စွမ်းဆောင်ရည် ပိုမိုကောင်းမွန်စေမည့် ပြုပြင်မွမ်းမံမှုများ။"
   },
   "icu:WhatsNew__8.30--1": {
-    "messageformat": "We also added a convenient shortcut to open your system settings on Windows if you try to join a video call and Signal doesn't have permission to access the camera. Now it's easier to see what you need to do so that people can see you."
+    "messageformat": "ဗီဒီယိုကောလ်တွင် ပါဝင်ရန် ကြိုးစားသည့်အခါ Signal တွင် ကင်မရာအသုံးပြုခွင့် မရှိပါက Windows စနစ်ဆက်တင်ကို ဖွင့်နိုင်ရန် အဆင်ပြေသော ရှော့တ်ကတ်တစ်ခုကိုလည်း ထည့်သွင်းထားပါသည်။"
+  },
+  "icu:WhatsNew__8.32--0": {
+    "messageformat": "မဖတ်ရသေးသော မက်ဆေ့ချ်များအား စစ်ထုတ်သည့် လုပ်ဆောင်ချက်ကို မက်ဆေ့ချ်ဖိုင်တွဲများနှင့် ရှာဖွေမှုမျက်နှာပြင်တို့တွင်လည်း ယခု အသုံးပြုနိုင်ပြီဖြစ်သည်။"
+  },
+  "icu:WhatsNew__8.32--1": {
+    "messageformat": "ကွန်ရက်အခြေအနေ မကောင်းသည့်အခါ အပ်လုဒ်လုပ်ခြင်းကို စိတ်ချရစေရန် မွမ်းမံထားသည်။ ကျေးဇူးပါ <GH3mmmbulus></GH3mmmbulus>"
+  },
+  "icu:WhatsNew__8.32--2": {
+    "messageformat": "“(N)” ရှော့တ်ကတ်သည် လက်မအောက်ဆိုက်သည့် အီမိုဂျီကို မှန်ကန်စွာ ညွှန်ပြသည်။ ချို့ယွင်းချက်ကို ပြင်ဆင်ပေးသည့်အတွက် <lnicola></lnicola> ကို ကျေးဇူးတင်ပါသည်။"
+  },
+  "icu:WhatsNew__8.34--0": {
+    "messageformat": "Signal Desktop now supports contact sharing too, so you can maintain eye contact with your computer screen without having to make physical contact with your smartphone."
+  },
+  "icu:WhatsNew__8.34--1": {
+    "messageformat": "Improved handling and performance for connected audio devices."
   }
 }

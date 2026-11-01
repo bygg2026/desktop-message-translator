@@ -3,7 +3,6 @@
 
 import { combineReducers } from 'redux';
 
-import { reducer as accounts } from './ducks/accounts.preload.ts';
 import { reducer as app } from './ducks/app.preload.ts';
 import { reducer as audioPlayer } from './ducks/audioPlayer.preload.ts';
 import { reducer as audioRecorder } from './ducks/audioRecorder.preload.ts';
@@ -11,6 +10,8 @@ import { reducer as backups } from './ducks/backups.preload.ts';
 import { reducer as badges } from './ducks/badges.preload.ts';
 import { reducer as calling } from './ducks/calling.preload.ts';
 import { reducer as callHistory } from './ducks/callHistory.preload.ts';
+import { reducer as account } from './ducks/account.preload.ts';
+import { reducer as chatColors } from './ducks/chatColors.preload.ts';
 import { reducer as chatFolders } from './ducks/chatFolders.preload.ts';
 import { reducer as composer } from './ducks/composer.preload.ts';
 import { reducer as conversations } from './ducks/conversations.preload.ts';
@@ -43,7 +44,7 @@ import { reducer as user } from './ducks/user.preload.ts';
 import { reducer as username } from './ducks/username.preload.ts';
 
 export const reducer = combineReducers({
-  accounts,
+  account,
   app,
   audioPlayer,
   audioRecorder,
@@ -51,6 +52,7 @@ export const reducer = combineReducers({
   badges,
   calling,
   callHistory,
+  chatColors,
   chatFolders,
   composer,
   conversations,

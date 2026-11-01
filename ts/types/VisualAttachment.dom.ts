@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import loadImage from 'blueimp-load-image';
+import { Input, UrlSource, ALL_FORMATS, CanvasSink } from 'mediabunny';
 import { blobToArrayBuffer } from 'blob-util';
 import { toLogFormat } from './errors.std.ts';
 import type { MIMEType } from './MIME.std.ts';
@@ -10,8 +11,6 @@ import type { LoggerType } from './Logging.std.ts';
 import { strictAssert } from '../util/assert.std.ts';
 import { canvasToBlob } from '../util/canvasToBlob.std.ts';
 import { KIBIBYTE } from './AttachmentSize.std.ts';
-import { explodePromise } from '../util/explodePromise.std.ts';
-import { SECOND } from '../util/durations/index.std.ts';
 import { createLogger } from '../logging/log.std.ts';
 
 const logging = createLogger('VisualAttachment');
@@ -214,90 +213,52 @@ export type MakeVideoScreenshotOptionsType = Readonly<{
   contentType?: MIMEType;
 }>;
 
-const MAKE_VIDEO_SCREENSHOT_TIMEOUT = 30 * SECOND;
-
-function captureScreenshot(
-  video: HTMLVideoElement,
-  contentType: MIMEType
-): Promise<Blob> {
-  const canvas = document.createElement('canvas');
-  canvas.width = video.videoWidth;
-  canvas.height = video.videoHeight;
-  const context = canvas.getContext('2d');
-  strictAssert(context, 'Failed to get canvas context');
-  context.drawImage(video, 0, 0, canvas.width, canvas.height);
-  return canvasToBlob(canvas, contentType);
-}
-
 export type MakeVideoScreenshotResultType = Readonly<{
   blob: Blob;
-  duration: number | undefined;
+  duration: number;
+  width: number;
+  height: number;
 }>;
 
 export async function makeVideoScreenshot({
   objectUrl,
   contentType = IMAGE_PNG,
 }: MakeVideoScreenshotOptionsType): Promise<MakeVideoScreenshotResultType> {
-  const signal = AbortSignal.timeout(MAKE_VIDEO_SCREENSHOT_TIMEOUT);
-  const video = document.createElement('video');
+  const source = new UrlSource(objectUrl);
 
-  const { promise: videoLoadedAndSeeked, resolve, reject } = explodePromise();
-
-  function onLoaded() {
-    if (signal.aborted) {
-      return;
-    }
-    video.addEventListener('seeked', resolve);
-    video.currentTime = 1.0;
-  }
-
-  function onAborted() {
-    reject(signal.reason);
-  }
-
-  video.addEventListener('loadeddata', onLoaded);
-  video.addEventListener('error', reject);
-  signal.addEventListener('abort', onAborted);
-
-  try {
-    video.crossOrigin = 'anonymous';
-    video.src = objectUrl;
-    await videoLoadedAndSeeked;
-    const blob = await captureScreenshot(video, contentType);
-
-    return {
-      blob,
-      duration:
-        video.duration == null || Number.isNaN(video.duration)
-          ? undefined
-          : video.duration,
-    };
-  } catch (error) {
-    logging.error('makeVideoScreenshot error:', toLogFormat(error));
-    throw error;
-  } finally {
-    // hard reset the video element so it doesn't keep loading
-    video.src = '';
-    video.load();
-
-    video.removeEventListener('loadeddata', onLoaded);
-    video.removeEventListener('error', reject);
-    video.removeEventListener('seeked', resolve);
-    signal.removeEventListener('abort', onAborted);
-  }
-}
-
-export function makeObjectUrl(
-  data: Uint8Array<ArrayBuffer> | ArrayBuffer,
-  contentType: MIMEType
-): string {
-  const blob = new Blob([data], {
-    type: contentType,
+  const input = new Input({
+    formats: ALL_FORMATS,
+    source,
   });
 
-  return URL.createObjectURL(blob);
-}
+  const duration = await input.computeDuration();
 
-export function revokeObjectUrl(objectUrl: string): void {
-  URL.revokeObjectURL(objectUrl);
+  const track = await input.getPrimaryVideoTrack();
+  if (track == null) {
+    throw new Error('No video track');
+  }
+
+  const sink = new CanvasSink(track);
+
+  const wrappedCanvas = await sink.getCanvas(0);
+  if (wrappedCanvas == null) {
+    throw new Error('No video frame');
+  }
+
+  const { canvas } = wrappedCanvas;
+  strictAssert(canvas instanceof HTMLCanvasElement, 'Expected html canvas');
+
+  const blob = await canvasToBlob(canvas, contentType);
+
+  const [width, height] = await Promise.all([
+    track.getDisplayWidth(),
+    track.getDisplayHeight(),
+  ]);
+
+  return {
+    blob,
+    duration,
+    width,
+    height,
+  };
 }

@@ -2,8 +2,20 @@
   "icu:AxoAlertDialog.Cancel": {
     "messageformat": "لغو"
   },
+  "icu:AxoAlertDialog.Ok": {
+    "messageformat": "باشه"
+  },
   "icu:AxoButton.Pending": {
     "messageformat": "در انتظار…"
+  },
+  "icu:AxoColorSlider.Hue": {
+    "messageformat": "Hue"
+  },
+  "icu:AxoColorSlider.Saturation": {
+    "messageformat": "Saturation"
+  },
+  "icu:AxoColorSlider.Lightness": {
+    "messageformat": "Lightness"
   },
   "icu:AxoDialog.Back": {
     "messageformat": "بازگشت"
@@ -73,12 +85,6 @@
   },
   "icu:LinkedDevicesOnboardingDialog__bullet--2": {
     "messageformat": "دستگاه اصلی‌تان موارد متصل را مدیریت می‌کند، می‌توانید حداکثر ۵ دستگاه را متصل کنید."
-  },
-  "icu:LinkedDevicesOnboardingDialog__bullet--3": {
-    "messageformat": "تنظیمات حساب، از‌جمله تنظیمات حساب و پشتیبان‌گیری، فقط در دستگاه اصلی مدیریت می‌شوند."
-  },
-  "icu:LinkedDevicesOnboardingDialog__bullet--3--1": {
-    "messageformat": "تنظیمات حساب و پشتیبان‌گیری فقط در دستگاه اصلی‌تان قابل مدیریت هستند."
   },
   "icu:LinkedDevicesOnboardingDialog__bullet--3--2": {
     "messageformat": "تنظیمات حساب و «پشتیبان‌گیری امن سیگنال» فقط در دستگاه اصلی‌تان قابل مدیریت هستند."
@@ -281,6 +287,9 @@
   "icu:archivedConversations": {
     "messageformat": "گفتگوهای بایگانی‌شده"
   },
+  "icu:LeftPane__MoreActionsLabel": {
+    "messageformat": "More actions"
+  },
   "icu:LeftPane__MoreActionsMenu__AddChatFolder": {
     "messageformat": "افزودن پوشه گفتگو"
   },
@@ -382,9 +391,6 @@
   },
   "icu:NavTabs__ItemIconLabel--UnreadCount": {
     "messageformat": "{count,number} خوانده‌نشده"
-  },
-  "icu:NavTabs__ItemIconLabel--MarkedUnread": {
-    "messageformat": "علامت‌گذاری به‌عنوان خوانده‌نشده"
   },
   "icu:NavTabs__ItemLabel--Chats": {
     "messageformat": "گفتگوها"
@@ -653,20 +659,11 @@
   "icu:SafetyNumberNotReady__learn-more": {
     "messageformat": "بیشتر یاد بگیرید"
   },
-  "icu:KeyTransparencyErrorDialog__Title": {
-    "messageformat": "تأیید خودکار رمز در حال حاضر برای دستگاه شما در دسترس نیست. گزارش اشکال‌زدایی ارسال شود؟"
-  },
   "icu:KeyTransparencyErrorDialog__Title-v2": {
     "messageformat": "تأیید خودکار رمز در حال حاضر برای دستگاه شما در دسترس نیست. برای کمک به بهبود ما، گزارش ارسال می‌کنید؟"
   },
-  "icu:KeyTransparencyErrorDialog__Description": {
-    "messageformat": "گزارش‌های اشکال‌زدایی به ما کمک می‌کنند که مشکل را شناسایی و رفع کنیم و حاوی اطلاعاتی که منجر به شناسایی افراد شود نیست."
-  },
   "icu:KeyTransparencyErrorDialog__Description-v2": {
     "messageformat": "درج گزارش‌های اشکال‌زدایی به ما در تشخیص و رفع مشکل کمک می‌کند و این گزارش‌ها حاوی اطلاعاتی نیستند که منجر به شناسایی افراد شود. اشتراک‌گذاری اختیاری است."
-  },
-  "icu:KeyTransparencyErrorDialog__ShareDebugLog__Label": {
-    "messageformat": "هم‌رسانی گزارش اشکال‌زدایی"
   },
   "icu:KeyTransparencyErrorDialog__ShareDebugLog__Label-v2": {
     "messageformat": "شامل گزارش عیب‌یابی"
@@ -685,6 +682,9 @@
   },
   "icu:KeyTransparencyOnboardingDialog__Description": {
     "messageformat": "برای مخاطبانی که از طریق شماره تلفن به آن‌ها متصل هستید، سیگنال می‌تواند با استفاده از فرایندی به نام «شفافیت کلید» به‌طور خودکار تأیید کند که اتصال امن است. برای امنیت بیشتر، همچنان می‌توانید مخاطبان را به‌صورت دستی و با استفاده از کد QR یا مقایسه شماره ایمنی تأیید کنید."
+  },
+  "icu:KeyTransparencyOnboardingDialog__Description-v2": {
+    "messageformat": "<paragraph>برای مخاطبانی که از طریق شماره تلفن به آن‌ها متصل هستید، سیگنال می‌تواند با استفاده از فرایندی به نام «شفافیت کلید» به‌طور خودکار تأیید کند که اتصال امن است.</paragraph><paragraph>برای امنیت بیشتر، همچنان می‌توانید اتصال‌ها را به‌صورت دستی و با استفاده از کد QR یا مقایسه شماره‌های ایمنی تأیید کنید.</paragraph>"
   },
   "icu:KeyTransparencyOnboardingDialog__Continue": {
     "messageformat": "ادامه"
@@ -1493,6 +1493,9 @@
   "icu:ConversationMerge--learn-more": {
     "messageformat": "اطلاعات بیشتر"
   },
+  "icu:ConversationMerge--explainer-dialog--label": {
+    "messageformat": "تاریخچه پیام ادغام شد"
+  },
   "icu:ConversationMerge--explainer-dialog--line-1": {
     "messageformat": "پس از ارسال پیام با {obsoleteConversationTitle} متوجه شدید که این شماره متعلق به {conversationTitle} است. شماره تلفن او خصوصی است."
   },
@@ -1753,6 +1756,9 @@
   },
   "icu:Preferences__EditChatFolderPage__SelectChatsDialog__Search__Placeholder": {
     "messageformat": "جستجو"
+  },
+  "icu:Preferences__EditChatFolderPage__SelectChatsDialog__NoChats": {
+    "messageformat": "گفتگویی وجود ندارد"
   },
   "icu:Preferences__EditChatFolderPage__SelectChatsDialog__ChatTypesSection__Title": {
     "messageformat": "انواع گفتگوها"
@@ -2246,6 +2252,24 @@
   "icu:deleteAccountDialogBody": {
     "messageformat": "این گزینه اطلاعات حساب کاربری، نمایه، و تمامی پیام‌های شما را حذف می‌کند. از همه گروه‌های سیگنال نیز حذف خواهید شد. پس از تکمیل این فرایند، برنامه بسته خواهد شد."
   },
+  "icu:DeleteAccountConfirmDialog--Title": {
+    "messageformat": "Delete account"
+  },
+  "icu:DeleteAccountConfirmDialog--Description": {
+    "messageformat": "This will delete your account info, profile, and all of your messages. You will also be removed from all Signal groups."
+  },
+  "icu:DeleteAccountConfirmDialog--ConfirmNumber": {
+    "messageformat": "Confirm your phone number"
+  },
+  "icu:DeleteAccountConfirmDialog--CountryCodePlaceholder": {
+    "messageformat": "Country code"
+  },
+  "icu:DeleteAccountConfirmDialog--NumberPlaceholder": {
+    "messageformat": "Phone number"
+  },
+  "icu:DeleteAccountConfirmDialog--DeleteButton": {
+    "messageformat": "Delete"
+  },
   "icu:deleteOldIndexedDBData": {
     "messageformat": "از نصب گذشته سیگنال دسکتاپ اطلاعات منسوخی برجا مانده است. اگر ادامه دهید این اطلاعات پاک خواهد شد و از نو آغاز خواهید کرد."
   },
@@ -2398,9 +2422,6 @@
   },
   "icu:callRingtoneNotificationDescription": {
     "messageformat": "اجرای آهنگ های تماس"
-  },
-  "icu:callSystemNotificationDescription": {
-    "messageformat": "نمایش اعلان برای تماس‌ها"
   },
   "icu:incomingCallNotificationDescription": {
     "messageformat": "فعال‌سازی تماس‌های دریافتی"
@@ -2999,6 +3020,9 @@
   "icu:FunPanelSticker__SubNavLabel": {
     "messageformat": "بسته‌های استیکر"
   },
+  "icu:FunPanelStickers__SubNavCategoryLabel--Favorites": {
+    "messageformat": "Favorites"
+  },
   "icu:FunPanelStickers__SubNavCategoryLabel--Recents": {
     "messageformat": "به‌تازگی استفاده شده"
   },
@@ -3010,6 +3034,9 @@
   },
   "icu:FunPanelStickers__SectionTitle--Recents": {
     "messageformat": "به‌تازگی استفاده شده"
+  },
+  "icu:FunPanelStickers__SectionTitle--Favorites": {
+    "messageformat": "Favorites"
   },
   "icu:FunPanelStickers__SectionTitle--Featured": {
     "messageformat": "ویژه"
@@ -3524,6 +3551,9 @@
   "icu:MessageRequests--unblock-group-confirm-body": {
     "messageformat": "اعضای گروه می‌توانند دوباره شما را به این گروه اضافه کنند."
   },
+  "icu:MessageRequests--unblock-signal-confirm-body": {
+    "messageformat": "به‌روزرسانی‌ها و اخبار سیگنال را دریافت خواهید کرد."
+  },
   "icu:MessageRequests--block-and-report-spam-success-toast": {
     "messageformat": "به‌عنوان هرزنامه گزارش و مسدود شد."
   },
@@ -3538,6 +3568,9 @@
   },
   "icu:MessageRequests--block-group-confirm-body": {
     "messageformat": "شما دیگر از این گروه پیام و به‌روزرسانی دریافت نخواهید کرد و اعضا قادر نخواهند بود دوباره شما را به این گروه اضافه کنند."
+  },
+  "icu:MessageRequests--block-signal-confirm-body": {
+    "messageformat": "دیگر به‌روزرسانی‌ها و اخبار سیگنال را دریافت نخواهید کرد."
   },
   "icu:MessageRequests--reportAndMaybeBlock": {
     "messageformat": "گزارش کردن..."
@@ -3866,6 +3899,9 @@
   "icu:callingDeviceSelection__settings": {
     "messageformat": "تنظیمات"
   },
+  "icu:callingDeviceSelection__settings-v2": {
+    "messageformat": "Call Settings"
+  },
   "icu:calling__participants--pluralized": {
     "messageformat": "{people, plural, one {‏{people,number} در تماس} other {‏{people,number} در تماس}}"
   },
@@ -3970,6 +4006,15 @@
   },
   "icu:callingDeviceSelection__select--default": {
     "messageformat": "پیش‌فرض"
+  },
+  "icu:callingDeviceSelection__select--default-nonwin": {
+    "messageformat": "Default: {deviceName}"
+  },
+  "icu:callingDeviceSelection__select--default_console": {
+    "messageformat": "Default: {deviceName}"
+  },
+  "icu:callingDeviceSelection__select--default_communications": {
+    "messageformat": "Default Communications: {deviceName}"
   },
   "icu:muteNotificationsTitle": {
     "messageformat": "بی‌صدا کردن اعلان‌ها"
@@ -4823,6 +4868,69 @@
   "icu:CompositionArea__AttachMenu__Poll": {
     "messageformat": "نظرسنجی"
   },
+  "icu:CompositionArea__AttachMenu__Contact": {
+    "messageformat": "Contact"
+  },
+  "icu:ShareContactDialog__SelectContact__Title": {
+    "messageformat": "Select contact"
+  },
+  "icu:ShareContactDialog__SelectContact__SearchPlaceholder": {
+    "messageformat": "Search"
+  },
+  "icu:ShareContactDialog__SelectContact__EmptyState": {
+    "messageformat": "No contacts"
+  },
+  "icu:ShareContactDialog__SelectContact__NoResults": {
+    "messageformat": "No results for “{searchQuery}”"
+  },
+  "icu:ShareContactDialog__ShareContact__Title": {
+    "messageformat": "Share contact"
+  },
+  "icu:ShareContactDialog__ShareContact__Description": {
+    "messageformat": "Anyone you share this profile with will be able to message {name}."
+  },
+  "icu:ShareContactDialog__ShareContact__Send": {
+    "messageformat": "Send contact"
+  },
+  "icu:ShareContactDialog__ShareContact__EditName": {
+    "messageformat": "Edit name"
+  },
+  "icu:ShareContactDialog__EditName__Title": {
+    "messageformat": "Edit name"
+  },
+  "icu:ShareContactDialog__EditName__Prefix": {
+    "messageformat": "Prefix"
+  },
+  "icu:ShareContactDialog__EditName__GivenName": {
+    "messageformat": "First name"
+  },
+  "icu:ShareContactDialog__EditName__MiddleName": {
+    "messageformat": "Middle name"
+  },
+  "icu:ShareContactDialog__EditName__FamilyName": {
+    "messageformat": "Last name"
+  },
+  "icu:ShareContactDialog__EditName__Suffix": {
+    "messageformat": "Suffix"
+  },
+  "icu:ShareContactDialog__EditName__Organization": {
+    "messageformat": "Organization"
+  },
+  "icu:ShareContactDialog__ShareContact__EditPhoto": {
+    "messageformat": "Edit photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__Title": {
+    "messageformat": "Select a photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__ContactPhoto": {
+    "messageformat": "Contact photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__ProfilePhoto": {
+    "messageformat": "Profile photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__DefaultAvatar": {
+    "messageformat": "Default avatar"
+  },
   "icu:CompositionArea--attach-plus": {
     "messageformat": "افزودن پیوست یا نظرسنجی"
   },
@@ -4861,9 +4969,6 @@
   },
   "icu:CompositionInput__editing-message": {
     "messageformat": "ویرایش پیام"
-  },
-  "icu:countMutedConversationsDescription": {
-    "messageformat": "گفتگوهای بی‌صدا در تعداد نشان‌ها لحاظ شوند"
   },
   "icu:ContactModal--nickname": {
     "messageformat": "نام مستعار"
@@ -5263,18 +5368,6 @@
   },
   "icu:UnreadReminders__notification__replySummary--many": {
     "messageformat": "{replyCount, plural, one {{replyCount,number} پاسخ از طرف {person1} و دیگران} other {{replyCount,number} پاسخ از طرف {person1} و دیگران}}"
-  },
-  "icu:ConversationNotificationsSettings__mentions__label": {
-    "messageformat": "اشاره‌ها"
-  },
-  "icu:ConversationNotificationsSettings__mentions__info": {
-    "messageformat": "وقتی در گفتگوهای بی‌صدا به شما اشاره می‌شود، اعلان دریافت کنید"
-  },
-  "icu:ConversationNotificationsSettings__mentions__select__always-notify": {
-    "messageformat": "همیشه آگاه کن"
-  },
-  "icu:ConversationNotificationsSettings__mentions__select__dont-notify-for-mentions-if-muted": {
-    "messageformat": "در صورت بی‌صدا بودن اطلاع داده نشود"
   },
   "icu:GroupLinkManagement--clipboard": {
     "messageformat": "پیوند گروه کپی شد."
@@ -6193,9 +6286,6 @@
   "icu:Preferences__SignalAccountKeys__Description": {
     "messageformat": "این را در جای امنی ذخیره کنید، اطلاعات ورود شما برای بازیابی حساب و داده‌هایتان ضروری است. هرگز آن را با کسی به اشتراک نگذارید."
   },
-  "icu:Preferences__SignalAccountKeys__AccountKey": {
-    "messageformat": "رمز حساب"
-  },
   "icu:Preferences__SignalAccountKeys__AccountID": {
     "messageformat": "شناسه حساب"
   },
@@ -6257,7 +6347,7 @@
     "messageformat": "پین سیگنال"
   },
   "icu:Preferences--signal-pin__footer": {
-    "messageformat": "PINs keep information stored with Signal encrypted so only you can access it. Your PIN cannot be recovered. Your profile, settings, and contacts will restore when you reinstall Signal. <learnMoreLink>Learn more</learnMoreLink>"
+    "messageformat": "پین‌ها اطلاعات ذخیره‌شده در سیگنال را رمزگذاری می‌کنند تا فقط خودتان به آن‌ها دسترسی داشته باشید. پین شما قابل بازیابی نیست. با نصب مجدد سیگنال، نمایه، تنظیمات و مخاطبان شما بازیابی می‌شوند. <learnMoreLink>اطلاعات بیشتر</learnMoreLink>"
   },
   "icu:Preferences--signal-pin-advanced-settings": {
     "messageformat": "تنظیمات پیشرفتهٔ پین"
@@ -6272,7 +6362,7 @@
     "messageformat": "اگر پین را غیرفعال کنید، هنگامی که دوباره در سیگنال ثبت‌نام می‌کنید، تمامی داده‌ها را از دست خواهید داد، مگر اینکه به صورت دستی پشتیبان‌گیری و بازیابی کنید. هنگامی که پین غیرفعال است نمی‌توانید قفل ثبت‌نام را روشن کنید."
   },
   "icu:DisableSignalPinErrorDialog--reg-lock--title": {
-    "messageformat": "Disable PIN failed due to registration lock"
+    "messageformat": "به‌دلیل قفل ثبت‌نام، پین غیرفعال نشد"
   },
   "icu:DisableSignalPinErrorDialog--reg-lock--body": {
     "messageformat": "قبل از غیرفعال کردن پین خود، باید قفل ثبت‌نام را غیرفعال کنید."
@@ -6281,7 +6371,7 @@
     "messageformat": "باشه"
   },
   "icu:DisableSignalPinErrorDialog--backups--title": {
-    "messageformat": "Disable PIN failed due to backups"
+    "messageformat": "به‌دلیل وجود نسخه‌های پشتیبان، پین غیرفعال نشد"
   },
   "icu:DisableSignalPinErrorDialog--backups--body": {
     "messageformat": "قبل از غیرفعال کردن پین خود، باید «نسخه‌های پشتیبان» را غیرفعال کنید."
@@ -6304,9 +6394,6 @@
   "icu:Preferences--registration-lock__footer": {
     "messageformat": "درخواست پین سیگنال شما برای ثبت‌نام دوباره با شماره تلفن شما در سیگنال."
   },
-  "icu:Preferences--notification-content": {
-    "messageformat": "محتوای اعلان"
-  },
   "icu:Preferences__Chats__TextInputSection__Title": {
     "messageformat": "ورودی متن"
   },
@@ -6318,9 +6405,6 @@
   },
   "icu:Preferences__Notifications__SoundsSection__Title": {
     "messageformat": "صداها"
-  },
-  "icu:Preferences__Notifications__AppBadgeSection__Title": {
-    "messageformat": "نشان برنامه"
   },
   "icu:Preferences__Notifications__AppBadgeSection__Title-v2": {
     "messageformat": "نشان‌های خوانده‌نشده"
@@ -6700,6 +6784,9 @@
   "icu:Preferences--blocked-users--description": {
     "messageformat": "کاربران مسدودشده، امکان تماس با شما یا ارسال پیام به شما را نخواهند داشت"
   },
+  "icu:Preferences--add-blocked": {
+    "messageformat": "افزودن کاربر یا گروه مسدودشده"
+  },
   "icu:Preferences--blocked-users": {
     "messageformat": "کاربران مسدودشده"
   },
@@ -6708,6 +6795,12 @@
   },
   "icu:Preferences--blocked--blocked-on": {
     "messageformat": "مسدودشده در {blockedAt}"
+  },
+  "icu:Preferences--BlockChooser--Done": {
+    "messageformat": "تمام"
+  },
+  "icu:Preferences--BlockChooser--Search--Placeholder": {
+    "messageformat": "جستجو"
   },
   "icu:Preferences--signal-backups": {
     "messageformat": "پشتیبان‌های امن سیگنال"
@@ -7105,6 +7198,36 @@
   "icu:InstallScreenUpdateDialog--cannot-update__body": {
     "messageformat": "سیگنال دسکتاپ به‌روزرسانی نشد، اما نسخه جدیدی در دسترس است. به {downloadUrl} بروید و نسخه جدید را به‌طور دستی نصب کنید، سپس یا با پشتیبانی تماس بگیرید یا درباره این مشکل، اشکالی را گزارش کنید."
   },
+  "icu:EntryPoint--signal-logo": {
+    "messageformat": "Signal Logo"
+  },
+  "icu:EntryPoint--Title--Line1": {
+    "messageformat": "Take privacy with you."
+  },
+  "icu:EntryPoint--Title--Line2": {
+    "messageformat": "Be yourself in every message."
+  },
+  "icu:EntryPoint--link-button": {
+    "messageformat": "Link your account"
+  },
+  "icu:EntryPoint--more-options-button": {
+    "messageformat": "More options"
+  },
+  "icu:EntryPoint--nonprofit": {
+    "messageformat": "Signal is a 501c3 nonprofit"
+  },
+  "icu:EntryPoint--terms": {
+    "messageformat": "Terms & privacy policy"
+  },
+  "icu:EntryPoint--MoreOptions--Title": {
+    "messageformat": "More options"
+  },
+  "icu:EntryPoint--MoreOptions--RegistrationButton--Title": {
+    "messageformat": "Create a new account"
+  },
+  "icu:EntryPoint--MoreOptions--RegistrationButton--Description": {
+    "messageformat": "Create a new Signal account using your phone number."
+  },
   "icu:StandaloneRegistration--signal-logo": {
     "messageformat": "لوگوی سیگنال"
   },
@@ -7124,7 +7247,7 @@
     "messageformat": "لطفاً بعد از {duration} دوباره تلاش کنید"
   },
   "icu:StandaloneRegistration--PhoneNumber--RegionCodeSelector--Label": {
-    "messageformat": "Select region code"
+    "messageformat": "پیش‌شماره کشور را انتخاب کنید"
   },
   "icu:StandaloneRegistration--PhoneNumber--placeholder": {
     "messageformat": "شماره تلفن"
@@ -7299,6 +7422,21 @@
   },
   "icu:StandaloneRegistration--VerificationCode--CannotSendCodeTemporary--ok-button": {
     "messageformat": "باشه"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Title": {
+    "messageformat": "Having trouble registering?"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet1": {
+    "messageformat": "Make sure your phone has a cellular signal to receive your SMS or call"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet2": {
+    "messageformat": "Confirm you can receive a phone call to the number"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet3": {
+    "messageformat": "Check that you have entered your phone number correctly"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Footer": {
+    "messageformat": "If you still can’t register, follow these <troubleshootingLink>troubleshooting steps</troubleshootingLink> or <contactSupportLink>Contact Support</contactSupportLink>."
   },
   "icu:StandaloneRegistration--ProfileEntry--header": {
     "messageformat": "پروفایل خود را برپا کنید"
@@ -7649,10 +7787,10 @@
     "messageformat": "«سیگنال» را روشن کنید"
   },
   "icu:MediaPermissionsModal__step-2--windows--microphone": {
-    "messageformat": "Enable microphone access for Signal"
+    "messageformat": "دسترسی میکروفون را برای سیگنال فعال کنید"
   },
   "icu:MediaPermissionsModal__step-2--windows--camera": {
-    "messageformat": "Enable camera access for Signal"
+    "messageformat": "دسترسی دوربین را برای سیگنال فعال کنید"
   },
   "icu:MediaPermissionsModal__open": {
     "messageformat": "رفتن به تنظیمات"
@@ -8204,7 +8342,7 @@
     "messageformat": "نام کاربری همیشه با مجموعه‌ای از اعداد همراه است."
   },
   "icu:EditUsernameModalBody__discriminator-label": {
-    "messageformat": "Username digits"
+    "messageformat": "ارقام نام کاربری"
   },
   "icu:EditUsernameModalBody__learn-more": {
     "messageformat": "بیشتر بدانید"
@@ -8340,13 +8478,13 @@
     "messageformat": "پین سیگنال خود را تغییر دهید"
   },
   "icu:PinChangeModal__title--create--without-pin": {
-    "messageformat": "Create your Signal PIN"
+    "messageformat": "پین سیگنال خود را ایجاد کنید"
   },
   "icu:PinChangeModal__body--create": {
     "messageformat": "تا زمانی که این دستگاه ثبت شده باشد شما می‌توانید پین خود را تغییر دهید. <learnMoreLink>اطلاعات بیشتر</learnMoreLink>"
   },
   "icu:PinChangeModal__body--create--without-pin": {
-    "messageformat": "PINs keep information stored with Signal encrypted so only you can access it. Your profile, settings, and contacts will restore when you reinstall. You won't need your PIN to open the app. <learnMoreLink>Learn more</learnMoreLink>"
+    "messageformat": "پین‌ها اطلاعات ذخیره‌شده در سیگنال را رمزگذاری می‌کنند تا فقط خودتان به آن‌ها دسترسی داشته باشید. با نصب مجدد، نمایه، تنظیمات و مخاطبان شما بازیابی می‌شوند. برای باز کردن برنامه، نیازی به پین نخواهید داشت. <learnMoreLink>اطلاعات بیشتر</learnMoreLink>"
   },
   "icu:PinChangeModal__title--confirm": {
     "messageformat": "پین سیگنال خود را تأیید کنید"
@@ -8588,12 +8726,6 @@
   "icu:CallLinkPendingParticipantModal__DenyButtonLabel": {
     "messageformat": "رد ورود"
   },
-  "icu:CallLinkRestrictionsSelect__Option--Off": {
-    "messageformat": "خاموش"
-  },
-  "icu:CallLinkRestrictionsSelect__Option--On": {
-    "messageformat": "روشن"
-  },
   "icu:CallLinkAddNameModal__Title": {
     "messageformat": "افزودن نام تماس"
   },
@@ -8641,6 +8773,39 @@
   },
   "icu:SaveMultiDialog__title": {
     "messageformat": "ذخیره پیوست‌ها"
+  },
+  "icu:EmbeddedContact__message": {
+    "messageformat": "پیام"
+  },
+  "icu:ContactDetail__message": {
+    "messageformat": "پیام"
+  },
+  "icu:ContactDetail__add-to-group": {
+    "messageformat": "افزودن به گروه"
+  },
+  "icu:ContactDetail__nickname": {
+    "messageformat": "نام مستعار"
+  },
+  "icu:ContactDetail__note": {
+    "messageformat": "یادداشت‌ها"
+  },
+  "icu:email-v2": {
+    "messageformat": "ایمیل"
+  },
+  "icu:home-v2": {
+    "messageformat": "خانه"
+  },
+  "icu:mobile-v2": {
+    "messageformat": "موبایل"
+  },
+  "icu:work-v2": {
+    "messageformat": "محل کار"
+  },
+  "icu:phone-v2": {
+    "messageformat": "تلفن"
+  },
+  "icu:address-v2": {
+    "messageformat": "آدرس"
   },
   "icu:WhatsNew__modal-title": {
     "messageformat": "تازه‌ها"
@@ -8806,6 +8971,9 @@
   },
   "icu:DonationReceipt__footer-text-v2": {
     "messageformat": "قدردان حمایتتان از سیگنال هستیم. مشارکت شما به پیشبرد ماموریت حفاظت از آزادی بیان و ایجاد امکان ارتباط جهانی امن برای میلیون‌ها نفر در سراسر جهان، از طریق فناوری متن‌باز حفظ حریم خصوصی، کمک می‌کند. اگر ساکن ایالات متحده هستید، لطفاً این رسید را در سوابق مالیاتی خود نگه دارید. بنیاد فناوری سیگنال یک سازمان غیرانتفاعی معاف از مالیات در ایالات متحده است که طبق بخش ۵۰۱c۳ قانون درآمد داخلی فعالیت می‌کند. شناسه مالیاتی ما ۴۵۰۶۸۴۰-۸۲ است. سیگنال در ازای این مشارکت، هیچ کالا یا خدماتی ارائه نداد."
+  },
+  "icu:MessageCta__Donate": {
+    "messageformat": "اکنون اهدا کنید"
   },
   "icu:Donations__OfflineTooltip": {
     "messageformat": "شما آفلاین هستید. لطفاً برای تکمیل اهدای مالی، به اینترنت متصل شوید."
@@ -9005,6 +9173,9 @@
   "icu:CallQualitySurvey__WhatIssuesDidYouHave__SomethingElse__TextArea__AccessibilityLabel": {
     "messageformat": "شرح مشکلات"
   },
+  "icu:CallQualitySurvey__WhatIssuesDidYouHave__SomethingElse__TextArea__Placeholder": {
+    "messageformat": "مشکلتان را شرح دهید"
+  },
   "icu:CallQualitySurvey__WhatIssuesDidYouHave__SomethingElse__TextArea__HelpText": {
     "messageformat": "لطفاً هرگونه جزئیات مرتبط با مشکل را ارائه دهید. هرچه که با ما به اشتراک می‌گذارید خصوصی خواهد ماند و فقط برای کمک به بهبود تماس‌ها در سیگنال استفاده خواهد شد."
   },
@@ -9114,16 +9285,25 @@
     "messageformat": "تغییرات کوچک، رفع اشکالات و بهبود عملکرد. بابت استفاده از سیگنال سپاسگزاریم!",
     "ignoreUnused": true
   },
-  "icu:WhatsNew__8.26--0": {
-    "messageformat": "بهبودهایی در جستجوی اعضای گروه اعمال کرده‌ایم."
-  },
-  "icu:WhatsNew__8.27--0": {
-    "messageformat": "تنظیمات اعلان‌ها بهبود یافته و گزینه‌های بیشتری برای نحوه و زمان نمایش اعلان‌ها ارائه شده است."
-  },
   "icu:WhatsNew__8.30--0": {
-    "messageformat": "Thanks to a few performance improvements, your CPU will be slightly happier during video calls (even if you're not smiling)."
+    "messageformat": "بهبود عملکرد تماس‌های تصویری."
   },
   "icu:WhatsNew__8.30--1": {
-    "messageformat": "We also added a convenient shortcut to open your system settings on Windows if you try to join a video call and Signal doesn't have permission to access the camera. Now it's easier to see what you need to do so that people can see you."
+    "messageformat": "همچنین میان‌بر مناسبی اضافه کردیم تا اگر هنگام تلاش برای پیوستن به تماس تصویری، سیگنال اجازه دسترسی به دوربین را نداد، بتوانید تنظیمات سیستم خود را در ویندوز باز کنید."
+  },
+  "icu:WhatsNew__8.32--0": {
+    "messageformat": "اکنون فیلتر «خوانده‌نشده» در پوشه‌های پیام و همچنین در رابط کاربری جستجو نیز پشتیبانی می‌شود."
+  },
+  "icu:WhatsNew__8.32--1": {
+    "messageformat": "بهبود قابلیت اطمینان بارگذاری در شرایط نامناسب شبکه. ممنون، <GH3mmmbulus></GH3mmmbulus>!"
+  },
+  "icu:WhatsNew__8.32--2": {
+    "messageformat": "میان‌بر «(N)» به‌درستی به ایموجی «دیسلایک» اشاره دارد. لایک به <lnicola></lnicola> بابت رفع این اشکال."
+  },
+  "icu:WhatsNew__8.34--0": {
+    "messageformat": "Signal Desktop now supports contact sharing too, so you can maintain eye contact with your computer screen without having to make physical contact with your smartphone."
+  },
+  "icu:WhatsNew__8.34--1": {
+    "messageformat": "Improved handling and performance for connected audio devices."
   }
 }

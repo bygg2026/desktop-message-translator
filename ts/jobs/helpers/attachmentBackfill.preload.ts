@@ -4,7 +4,7 @@
 import type { AttachmentBackfillResponseSyncEvent } from '../../textsecure/messageReceiverEvents.std.ts';
 import { MessageSender } from '../../textsecure/SendMessage.preload.ts';
 import { createLogger } from '../../logging/log.std.ts';
-import type { ReadonlyMessageAttributesType } from '../../model-types.d.ts';
+import type { ReadonlyMessageAttributesType } from '../../model-types.std.ts';
 import type { AttachmentType } from '../../types/Attachment.std.ts';
 import {
   isDownloading,
@@ -43,6 +43,7 @@ import * as RemoteConfig from '../../RemoteConfig.dom.ts';
 import { isTestOrMockEnvironment } from '../../environment.std.ts';
 import { BackfillFailureModalKind } from '../../components/BackfillFailureModal.dom.tsx';
 import { markAttachmentAsErrored } from '../../util/attachments/markAttachmentAsErrored.std.ts';
+import { isSignalConversation } from '../../util/isSignalConversation.dom.ts';
 
 const log = createLogger('attachmentBackfill');
 
@@ -82,6 +83,16 @@ export class AttachmentBackfill {
       return;
     }
 
+    const convo = window.ConversationController.get(message.conversationId);
+    strictAssert(convo != null, 'Missing message conversation');
+
+    if (isSignalConversation(convo.attributes)) {
+      log.info(
+        'attachmentBackfill: Signal conversation; not sending sync request'
+      );
+      return;
+    }
+
     const existingTimer = this.#pendingRequests.get(message.id);
     if (existingTimer != null) {
       return;
@@ -91,9 +102,6 @@ export class AttachmentBackfill {
     if (addr == null) {
       throw new Error('No address for message');
     }
-
-    const convo = window.ConversationController.get(message.conversationId);
-    strictAssert(convo != null, 'Missing message conversation');
 
     this.#pendingRequests.set(
       message.id,
@@ -296,6 +304,7 @@ export class AttachmentBackfill {
 
           changeCount += 1;
           updatedAttachments[index] = markAttachmentAsErrored(
+            // @ts-expect-error - broken after renaming model-types
             existing,
             'backfill-terminal-error'
           );

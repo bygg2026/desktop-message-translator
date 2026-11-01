@@ -9,6 +9,7 @@ import type {
   JSX,
   KeyboardEvent,
   MouseEvent,
+  CSSProperties,
 } from 'react';
 import { forwardRef, useRef, PureComponent, createRef } from 'react';
 import { createPortal } from 'react-dom';
@@ -41,6 +42,7 @@ import { I18n } from '../I18n.dom.tsx';
 import type { QuotedAttachmentForUIType } from './Quote.dom.tsx';
 import { Quote } from './Quote.dom.tsx';
 import { EmbeddedContact } from './EmbeddedContact.dom.tsx';
+import { canMessageSharedContact } from '../../util/sharedContact.std.ts';
 import type {
   OwnProps as ReactionViewerProps,
   Reaction,
@@ -82,14 +84,10 @@ import type { HydratedBodyRangesType } from '../../types/BodyRange.std.ts';
 import type { LocalizerType, ThemeType } from '../../types/Util.std.ts';
 
 import type { PreferredBadgeSelectorType } from '../../state/selectors/badges.preload.ts';
-import type {
-  ContactNameColorType,
-  ConversationColorType,
-  CustomColorType,
-} from '../../types/Colors.std.ts';
+import type { ContactNameColorType } from '../../types/ContactNameColor.std.ts';
+import type { BubbleColorRenderData } from '../../types/ChatStyle.std.ts';
 import { createRefMerger } from '../../util/refMerger.std.ts';
-import { getCustomColorStyle } from '../../util/getCustomColorStyle.dom.ts';
-import type { ServiceIdString } from '../../types/ServiceId.std.ts';
+import { getBubbleColorRenderDataBackground } from '../../util/getCustomColorStyle.std.ts';
 import { DAY, HOUR, MINUTE, SECOND } from '../../util/durations/index.std.ts';
 import { BadgeImageTheme } from '../../badges/BadgeImageTheme.std.ts';
 import { getBadgeImageFileLocalPath } from '../../badges/getBadgeImageFileLocalPath.std.ts';
@@ -123,6 +121,7 @@ import { tw } from '../../axo/tw.dom.tsx';
 import { Emoji } from '../../axo/emoji.std.ts';
 import { AxoButton } from '../../axo/AxoButton.dom.tsx';
 import { TargetedMessageSource } from '../../state/ducks/conversationsEnums.std.ts';
+import { isReleaseNoteCtaId } from '../../types/releaseNotes.std.ts';
 
 const { drop, take, unescape } = lodash;
 
@@ -211,9 +210,8 @@ export type PropsData = {
   renderingContext: RenderingContextType;
   contactNameColor?: ContactNameColorType;
   contactLabel?: MemberLabelType;
-  conversationColor: ConversationColorType;
+  bubbleColor: BubbleColorRenderData;
   conversationTitle: string;
-  customColor?: CustomColorType;
   conversationId: string;
   displayLimit?: number;
   activeCallConversationId?: string;
@@ -238,6 +236,8 @@ export type PropsData = {
   receivedAtMS?: number;
   status?: MessageStatusType;
   contact?: ReadonlyDeep<EmbeddedContactForUIType>;
+  callToActionId?: string;
+  callToActionText?: string;
   author: Pick<
     ConversationType,
     | 'avatarPlaceholderGradient'
@@ -259,9 +259,8 @@ export type PropsData = {
   payment?: AnyPaymentEvent;
   poll?: PollWithResolvedVotersType;
   quote?: {
-    conversationColor: ConversationColorType;
+    bubbleColor: BubbleColorRenderData;
     conversationTitle: string;
-    customColor?: CustomColorType;
     text: string;
     rawAttachment?: QuotedAttachmentForUIType;
     payment?: AnyPaymentEvent;
@@ -280,8 +279,7 @@ export type PropsData = {
   };
   storyReplyContext?: {
     authorTitle: string;
-    conversationColor: ConversationColorType;
-    customColor?: CustomColorType;
+    bubbleColor: BubbleColorRenderData;
     emoji?: Emoji.Variant;
     isFromMe: boolean;
     rawAttachment?: QuotedAttachmentForUIType;
@@ -349,9 +347,10 @@ export type PropsActions = {
   clearTargetedMessage: () => unknown;
   doubleCheckMissingQuoteReference: (messageId: string) => unknown;
   messageExpanded: (id: string, displayLimit: number) => unknown;
-  checkForAccount: (phoneNumber: string) => unknown;
 
-  startConversation: (e164: string, serviceId: ServiceIdString) => void;
+  startConversationWithSharedContact: (
+    contact: ReadonlyDeep<EmbeddedContactForUIType>
+  ) => void;
   showConversation: ShowConversationType;
   openGiftBadge: (messageId: string) => void;
   pushPanelForConversation: PushPanelForConversationActionType;
@@ -364,6 +363,7 @@ export type PropsActions = {
   endPoll: (messageId: string) => void;
   showContactModal: (payload: ContactModalStateType) => void;
   showSpoiler: (messageId: string, data: Record<number, boolean>) => void;
+  handleClickCtaButton: (ctaId: string) => void;
 
   cancelAttachmentDownload: (options: { messageId: string }) => void;
   kickOffAttachmentDownload: (options: { messageId: string }) => void;
@@ -529,9 +529,6 @@ const MessageReactions = forwardRef(function MessageReactions(
                     re.count > 1
                       ? 'module-message__reactions__reaction--with-count'
                       : null,
-                    outgoing
-                      ? 'module-message__reactions__reaction--outgoing'
-                      : 'module-message__reactions__reaction--incoming',
                     isMoreWithMe || (re.isMe && !isMoreWithMe)
                       ? 'module-message__reactions__reaction--is-me'
                       : null
@@ -732,11 +729,6 @@ export class Message extends PureComponent<Props, State> {
       this.#expirationCheckInterval = setInterval(() => {
         this.#checkExpired();
       }, checkFrequency);
-    }
-
-    const { contact, checkForAccount } = this.props;
-    if (contact && contact.firstNumber && !contact.serviceId) {
-      checkForAccount(contact.firstNumber);
     }
 
     document.addEventListener('selectionchange', this.#handleSelectionChange);
@@ -1095,13 +1087,14 @@ export class Message extends PureComponent<Props, State> {
       return null;
     }
 
-    const stickerSuffix = isSticker ? '_with_sticker' : '';
-    const moduleName = `module-message__author${stickerSuffix}`;
+    const className = isSticker
+      ? 'module-message__author_with_sticker'
+      : 'module-message__author';
 
     return (
       <div
         className={classNames(
-          moduleName,
+          className,
           quote ? 'module-message__author--with-quote' : undefined
         )}
       >
@@ -1109,7 +1102,6 @@ export class Message extends PureComponent<Props, State> {
           contactNameColor={contactNameColor}
           contactLabel={contactLabel}
           title={author.isMe ? i18n('icu:you') : author.title}
-          module={moduleName}
         />
       </div>
     );
@@ -1171,18 +1163,23 @@ export class Message extends PureComponent<Props, State> {
       !attachmentDroppedDueToSize;
 
     if (!(isSticker && isAttachmentNotAvailable)) {
-      const prefix = isSticker ? 'sticker' : 'attachment';
+      const baseClassName = isSticker
+        ? 'module-message__sticker-container'
+        : 'module-message__attachment-container';
+
+      const contentAboveClassName = isSticker
+        ? 'module-message__sticker-container--with-content-above'
+        : 'module-message__attachment-container--with-content-above';
+
+      const contentBelowClassName = isSticker
+        ? 'module-message__sticker-container--with-content-below'
+        : 'module-message__attachment-container--with-content-below';
+
       const containerClassName = classNames(
-        `module-message__${prefix}-container`,
-        withContentAbove
-          ? `module-message__${prefix}-container--with-content-above`
-          : null,
-        withContentBelow
-          ? 'module-message__attachment-container--with-content-below'
-          : null,
-        isSticker && !collapseMetadata
-          ? 'module-message__sticker-container--with-content-below'
-          : null
+        baseClassName,
+        withContentAbove ? contentAboveClassName : null,
+        withContentBelow ? contentBelowClassName : null,
+        isSticker && !collapseMetadata ? contentBelowClassName : null
       );
 
       if (isGIF(firstAttachment)) {
@@ -1348,7 +1345,8 @@ export class Message extends PureComponent<Props, State> {
           <div
             className={classNames(
               'module-message__simple-attachment__file-name',
-              `module-message__simple-attachment__file-name--${direction}`,
+              direction === 'incoming' &&
+                'module-message__simple-attachment__file-name--incoming',
               isAttachmentNotAvailable
                 ? 'module-message__simple-attachment__file-name--undownloadable'
                 : null
@@ -1370,7 +1368,8 @@ export class Message extends PureComponent<Props, State> {
               <div
                 className={classNames(
                   'module-message__simple-attachment__file-size',
-                  `module-message__simple-attachment__file-size--${direction}`
+                  direction === 'incoming' &&
+                    'module-message__simple-attachment__file-size--incoming'
                 )}
               >
                 {formatFileSize(size)}
@@ -1433,21 +1432,25 @@ export class Message extends PureComponent<Props, State> {
     const withContentAbove = Boolean(quote) || this.#shouldRenderAuthor();
     const isViewed = readStatus === ReadStatus.Viewed;
 
-    let attachmentType: string;
+    let attachmentClassName: string;
     let info: string;
     let tapToViewModalType: TapToViewNotAvailableType | undefined;
     if (isAttachmentAudio) {
-      attachmentType = 'audio';
+      attachmentClassName =
+        'module-message__undownloadable-attachment__icon--audio';
       info = i18n('icu:attachmentNotAvailable__voice');
     } else if (isSticker) {
-      attachmentType = 'sticker';
+      attachmentClassName =
+        'module-message__undownloadable-attachment__icon--sticker';
       info = i18n('icu:attachmentNotAvailable__sticker');
     } else if (isTapToView && !isViewed && isTapToViewExpired) {
-      attachmentType = 'tap-to-view';
+      attachmentClassName =
+        'module-message__undownloadable-attachment__icon--tap-to-view';
       info = i18n('icu:attachmentNotAvailable__tapToView');
       tapToViewModalType = TapToViewNotAvailableType.Expired;
     } else if (isTapToView && !isViewed && isTapToViewError) {
-      attachmentType = 'tap-to-view';
+      attachmentClassName =
+        'module-message__undownloadable-attachment__icon--tap-to-view';
       info = i18n('icu:attachmentNotAvailable__tapToViewCannotDownload');
       tapToViewModalType = TapToViewNotAvailableType.Error;
     } else {
@@ -1464,12 +1467,11 @@ export class Message extends PureComponent<Props, State> {
         : null,
       withContentBelow
         ? 'module-message__undownloadable-attachment--with-content-below'
-        : null,
-      text ? null : 'module-message__undownloadable-attachment--no-text'
+        : null
     );
     const iconClassName = classNames(
       'module-message__undownloadable-attachment__icon',
-      `module-message__undownloadable-attachment__icon--${attachmentType}`
+      attachmentClassName
     );
 
     return (
@@ -1478,11 +1480,9 @@ export class Message extends PureComponent<Props, State> {
           <div className={iconClassName} />
         </div>
         <div>
-          <div className="module-message__undownloadable-attachment-info">
-            {info}
-          </div>
+          <div>{info}</div>
           {tapToViewModalType ? (
-            <div className="module-message__undownloadable-attachment-learn-more-container">
+            <div>
               <button
                 className="module-message__undownloadable-attachment-learn-more"
                 onClick={e => {
@@ -1517,9 +1517,7 @@ export class Message extends PureComponent<Props, State> {
           <div className="module-message__undownloadable-attachment__icon module-message__undownloadable-attachment__icon--file" />
         </div>
         <div>
-          <div className="module-message__undownloadable-attachment-info">
-            {i18n('icu:attachmentNotAvailable__longMessage')}
-          </div>
+          <div>{i18n('icu:attachmentNotAvailable__longMessage')}</div>
         </div>
       </div>
     );
@@ -1578,14 +1576,10 @@ export class Message extends PureComponent<Props, State> {
 
     const isClickable = this.#areLinksEnabled();
 
-    const className = classNames(
-      'module-message__link-preview',
-      `module-message__link-preview--${direction}`,
-      {
-        'module-message__link-preview--with-content-above': withContentAbove,
-        'module-message__link-preview--nonclickable': !isClickable,
-      }
-    );
+    const className = classNames('module-message__link-preview', {
+      'module-message__link-preview--with-content-above': withContentAbove,
+      'module-message__link-preview--nonclickable': !isClickable,
+    });
     const contents = (
       <>
         {first.image && previewHasImage && isFullSizeImage ? (
@@ -1702,10 +1696,7 @@ export class Message extends PureComponent<Props, State> {
                 <div className="module-message__link-preview__location">
                   {first.domain}
                 </div>
-                <LinkPreviewDate
-                  date={linkPreviewDate}
-                  className="module-message__link-preview__date"
-                />
+                <LinkPreviewDate date={linkPreviewDate} />
               </div>
             </div>
           )}
@@ -1772,6 +1763,16 @@ export class Message extends PureComponent<Props, State> {
           <MessageTextMetadataSpacer metadataWidth={metadataWidth} />
         );
 
+    const collapseAboveClassName =
+      direction === 'incoming'
+        ? 'module-message__attachment-too-big--collapse-above--incoming'
+        : 'module-message__attachment-too-big--collapse-above--outgoing';
+
+    const collapseBelowClassName =
+      direction === 'incoming'
+        ? 'module-message__attachment-too-big--collapse-below--incoming'
+        : 'module-message__attachment-too-big--collapse-below--outgoing';
+
     return (
       <div
         className={classNames(
@@ -1782,12 +1783,8 @@ export class Message extends PureComponent<Props, State> {
           isContentBelow
             ? 'module-message__attachment-too-big--content-below'
             : null,
-          willCollapseAbove
-            ? `module-message__attachment-too-big--collapse-above--${direction}`
-            : null,
-          willCollapseBelow
-            ? `module-message__attachment-too-big--collapse-below--${direction}`
-            : null
+          willCollapseAbove ? collapseAboveClassName : null,
+          willCollapseBelow ? collapseBelowClassName : null
         )}
       >
         {labelText}
@@ -1819,7 +1816,8 @@ export class Message extends PureComponent<Props, State> {
           <div
             className={classNames(
               'module-message__unopened-gift-badge',
-              `module-message__unopened-gift-badge--${direction}`
+              direction === 'outgoing' &&
+                'module-message__unopened-gift-badge--outgoing'
             )}
             aria-label={i18n('icu:message--donation--unopened--label', {
               sender: conversationTitle,
@@ -1843,13 +1841,15 @@ export class Message extends PureComponent<Props, State> {
           <div
             className={classNames(
               'module-message__unopened-gift-badge__text',
-              `module-message__unopened-gift-badge__text--${direction}`
+              direction === 'incoming' &&
+                'module-message__unopened-gift-badge__text--incoming'
             )}
           >
             <div
               className={classNames(
                 'module-message__text',
-                `module-message__text--${direction}`
+                direction === 'incoming' && 'module-message__text--incoming',
+                direction === 'outgoing' && 'module-message__text--outgoing'
               )}
             >
               {description}
@@ -1908,7 +1908,7 @@ export class Message extends PureComponent<Props, State> {
           <span
             className={classNames(
               'module-message__redeemed-gift-badge__icon-check',
-              `module-message__redeemed-gift-badge__icon-check--${direction}`
+              'module-message__redeemed-gift-badge__icon-check--incoming' // cannot be outgoing
             )}
           />{' '}
           {i18n('icu:message--donation--redeemed')}
@@ -1925,14 +1925,17 @@ export class Message extends PureComponent<Props, State> {
         <div
           className={classNames(
             'module-message__redeemed-gift-badge__badge',
-            `module-message__redeemed-gift-badge__badge--missing-${direction}`
+            direction === 'incoming' &&
+              'module-message__redeemed-gift-badge__badge--missing-incoming',
+            direction === 'outgoing' &&
+              'module-message__redeemed-gift-badge__badge--missing-outgoing'
           )}
           aria-label={i18n('icu:donation--missing')}
         />
       );
 
       return (
-        <div className="module-message__redeemed-gift-badge__container">
+        <div>
           <div className="module-message__redeemed-gift-badge">
             {badgeElement}
             <div className="module-message__redeemed-gift-badge__text">
@@ -1942,7 +1945,10 @@ export class Message extends PureComponent<Props, State> {
               <div
                 className={classNames(
                   'module-message__redeemed-gift-badge__remaining',
-                  `module-message__redeemed-gift-badge__remaining--${direction}`
+                  direction === 'incoming' &&
+                    'module-message__redeemed-gift-badge__remaining--incoming',
+                  direction === 'outgoing' &&
+                    'module-message__redeemed-gift-badge__remaining--outgoing'
                 )}
               >
                 {remaining}
@@ -1952,7 +1958,10 @@ export class Message extends PureComponent<Props, State> {
           <button
             className={classNames(
               'module-message__redeemed-gift-badge__button',
-              `module-message__redeemed-gift-badge__button--${direction}`
+              direction === 'incoming' &&
+                'module-message__redeemed-gift-badge__button--incoming',
+              direction === 'outgoing' &&
+                'module-message__redeemed-gift-badge__button--outgoing'
             )}
             disabled={!wasSent}
             onClick={
@@ -1973,7 +1982,7 @@ export class Message extends PureComponent<Props, State> {
               recipientTitle={conversationTitle}
               badgeId={badgeId}
               getPreferredBadge={getPreferredBadge}
-              hideOutgoingGiftBadgeModal={() =>
+              onClose={() =>
                 this.setState({ showOutgoingGiftBadgeModal: false })
               }
             />
@@ -1986,25 +1995,17 @@ export class Message extends PureComponent<Props, State> {
   }
 
   #renderPayment(): ReactNode {
-    const {
-      payment,
-      direction,
-      author,
-      conversationTitle,
-      conversationColor,
-      i18n,
-    } = this.props;
+    const { payment, direction, author, conversationTitle, i18n } = this.props;
     if (payment == null || !isPaymentNotificationEvent(payment)) {
       return null;
     }
 
     return (
       <div
-        className={`module-payment-notification__container ${
-          direction === 'outgoing'
-            ? `module-payment-notification--outgoing module-payment-notification--outgoing-${conversationColor}`
-            : ''
-        }`}
+        className={classNames(
+          'module-payment-notification__container',
+          direction === 'outgoing' && 'module-payment-notification--outgoing'
+        )}
       >
         <p className="module-payment-notification__label">
           {getPaymentEventDescription(
@@ -2053,10 +2054,9 @@ export class Message extends PureComponent<Props, State> {
 
   #renderQuote(): ReactNode {
     const {
-      conversationColor,
+      bubbleColor,
       conversationId,
       conversationTitle,
-      customColor,
       direction,
       disableScroll,
       i18n,
@@ -2093,9 +2093,8 @@ export class Message extends PureComponent<Props, State> {
         authorTitle={quote.authorTitle}
         authorLabel={quote.authorLabel}
         bodyRanges={quote.bodyRanges}
-        conversationColor={conversationColor}
+        bubbleColor={bubbleColor}
         conversationTitle={conversationTitle}
-        customColor={customColor}
         isViewOnce={isViewOnce}
         isGiftBadge={isGiftBadge}
         referencedMessageNotFound={referencedMessageNotFound}
@@ -2110,8 +2109,7 @@ export class Message extends PureComponent<Props, State> {
   #renderStoryReplyContext(): ReactNode {
     const {
       conversationTitle,
-      conversationColor,
-      customColor,
+      bubbleColor,
       direction,
       i18n,
       storyReplyContext,
@@ -2137,16 +2135,15 @@ export class Message extends PureComponent<Props, State> {
         )}
         <Quote
           authorTitle={storyReplyContext.authorTitle}
-          conversationColor={conversationColor}
+          bubbleColor={bubbleColor}
           conversationTitle={conversationTitle}
-          customColor={customColor}
           i18n={i18n}
           isFromMe={storyReplyContext.isFromMe}
           isGiftBadge={false}
           isIncoming={isIncoming}
           isStoryReply
           isViewOnce={false}
-          moduleClassName="StoryReplyQuote"
+          className="StoryReplyQuote"
           onClick={() => {
             if (!storyReplyContext.storyId) {
               return;
@@ -2169,34 +2166,22 @@ export class Message extends PureComponent<Props, State> {
     const {
       cancelAttachmentDownload,
       contact,
-      conversationType,
       direction,
       i18n,
       id,
       kickOffAttachmentDownload,
       pushPanelForConversation,
-      text,
+      startConversationWithSharedContact,
     } = this.props;
     if (!contact) {
       return null;
     }
-
-    const withCaption = Boolean(text);
-    const withContentAbove =
-      conversationType === 'group' && direction === 'incoming';
-    const withContentBelow =
-      withCaption ||
-      this.#getMetadataPlacement() !== MetadataPlacement.NotRendered;
-
-    const otherContent =
-      (contact && contact.firstNumber && contact.serviceId) || withCaption;
 
     const attachment = contact.avatar?.avatar;
     const avatarNeedsAction =
       attachment &&
       !isDownloaded(attachment) &&
       !attachment.isPermanentlyUndownloadable;
-    const tabIndex = otherContent || avatarNeedsAction ? 0 : -1;
 
     return (
       <EmbeddedContact
@@ -2221,45 +2206,12 @@ export class Message extends PureComponent<Props, State> {
             },
           });
         }}
-        withContentAbove={withContentAbove}
-        withContentBelow={withContentBelow}
-        tabIndex={tabIndex}
+        onSendMessage={
+          canMessageSharedContact(contact)
+            ? () => startConversationWithSharedContact(contact)
+            : undefined
+        }
       />
-    );
-  }
-
-  #renderSendMessageButton(): ReactNode {
-    const { contact, direction, shouldCollapseBelow, startConversation, i18n } =
-      this.props;
-    const noBottomLeftCurve = direction === 'incoming' && shouldCollapseBelow;
-    const noBottomRightCurve = direction === 'outgoing' && shouldCollapseBelow;
-
-    if (!contact) {
-      return null;
-    }
-    const { firstNumber, serviceId } = contact;
-    if (!firstNumber || !serviceId) {
-      return null;
-    }
-
-    return (
-      <button
-        type="button"
-        onClick={e => {
-          e.preventDefault();
-          e.stopPropagation();
-          startConversation(firstNumber, serviceId);
-        }}
-        className={classNames(
-          'module-message__send-message-button',
-          noBottomLeftCurve &&
-            'module-message__send-message-button--no-bottom-left-curve',
-          noBottomRightCurve &&
-            'module-message__send-message-button--no-bottom-right-curve'
-        )}
-      >
-        {i18n('icu:sendMessageToContact')}
-      </button>
     );
   }
 
@@ -2424,7 +2376,8 @@ export class Message extends PureComponent<Props, State> {
       <div // oxlint-disable-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
         className={classNames(
           'module-message__text',
-          `module-message__text--${direction}`,
+          direction === 'incoming' && 'module-message__text--incoming',
+          direction === 'outgoing' && 'module-message__text--outgoing',
           status === 'error' && direction === 'incoming' && !deletedForEveryone
             ? 'module-message__text--error'
             : null,
@@ -2487,7 +2440,11 @@ export class Message extends PureComponent<Props, State> {
   }
 
   #shouldShowActionButton(): boolean {
-    const { previews } = this.props;
+    const { callToActionId, isSignalConversation, previews } = this.props;
+
+    if (isReleaseNoteCtaId(callToActionId) && isSignalConversation) {
+      return true;
+    }
 
     if (previews?.length !== 1) {
       return false;
@@ -2501,10 +2458,34 @@ export class Message extends PureComponent<Props, State> {
   }
 
   #renderAction(): ReactNode {
-    const { direction, activeCallConversationId, i18n, previews } = this.props;
+    const {
+      direction,
+      activeCallConversationId,
+      i18n,
+      previews,
+      callToActionId,
+      callToActionText,
+      isSignalConversation,
+      handleClickCtaButton,
+    } = this.props;
 
     if (!this.#shouldShowActionButton()) {
       return null;
+    }
+
+    if (isReleaseNoteCtaId(callToActionId) && isSignalConversation) {
+      return (
+        <div className={tw('mt-2 mb-1.5')}>
+          <AxoButton.Root
+            variant="message-outgoing-primary"
+            size="lg"
+            width="full"
+            onClick={() => handleClickCtaButton(callToActionId)}
+          >
+            {callToActionText ?? i18n('icu:MessageCta__Donate')}
+          </AxoButton.Root>
+        </div>
+      );
     }
 
     const firstPreview = previews[0];
@@ -2571,7 +2552,7 @@ export class Message extends PureComponent<Props, State> {
       status !== 'error' &&
       status !== 'partial-sent'
     ) {
-      return null;
+      return;
     }
 
     return (
@@ -2579,8 +2560,9 @@ export class Message extends PureComponent<Props, State> {
         <div
           className={classNames(
             'module-message__error',
-            `module-message__error--${direction}`,
-            `module-message__error--${status}`
+            direction === 'incoming' && 'module-message__error--incoming',
+            direction === 'outgoing' && 'module-message__error--outgoing',
+            status === 'paused' && 'module-message__error--paused'
           )}
         />
       </div>
@@ -2588,8 +2570,14 @@ export class Message extends PureComponent<Props, State> {
   }
 
   #getWidth(): number | undefined {
-    const { attachments, giftBadge, isSticker, isTapToView, previews } =
-      this.props;
+    const {
+      attachments,
+      contact,
+      giftBadge,
+      isSticker,
+      isTapToView,
+      previews,
+    } = this.props;
 
     if (isTapToView) {
       return undefined;
@@ -2597,6 +2585,10 @@ export class Message extends PureComponent<Props, State> {
 
     if (giftBadge) {
       return 240;
+    }
+
+    if (contact) {
+      return 280;
     }
 
     if (attachments && attachments.length) {
@@ -2820,7 +2812,8 @@ export class Message extends PureComponent<Props, State> {
           <div
             className={classNames(
               'module-message__simple-attachment__file-name',
-              `module-message__simple-attachment__file-name--${direction}`
+              direction === 'incoming' &&
+                'module-message__simple-attachment__file-name--incoming'
             )}
           >
             {text.title}
@@ -2829,7 +2822,8 @@ export class Message extends PureComponent<Props, State> {
             <div
               className={classNames(
                 'module-message__simple-attachment__file-size',
-                `module-message__simple-attachment__file-size--${direction}`
+                direction === 'incoming' &&
+                  'module-message__simple-attachment__file-size--incoming'
               )}
             >
               {text.detail}
@@ -2873,7 +2867,8 @@ export class Message extends PureComponent<Props, State> {
           <div
             className={classNames(
               'module-message__simple-attachment__file-name',
-              `module-message__simple-attachment__file-name--${direction}`
+              direction === 'incoming' &&
+                'module-message__simple-attachment__file-name--incoming'
             )}
           >
             {text.title}
@@ -3059,7 +3054,6 @@ export class Message extends PureComponent<Props, State> {
         {this.#renderUndownloadableTextAttachment()}
         {this.#renderAction()}
         {this.#renderMetadata()}
-        {this.#renderSendMessageButton()}
       </>
     );
   }
@@ -3083,7 +3077,6 @@ export class Message extends PureComponent<Props, State> {
       showExpiredOutgoingTapToViewToast,
       showLightbox,
       showLightboxForViewOnceMedia,
-      startConversation,
     } = this.props;
 
     const isAttachmentPending = this.#isAttachmentPending();
@@ -3129,13 +3122,6 @@ export class Message extends PureComponent<Props, State> {
       return;
     }
 
-    if (contact && contact.firstNumber && contact.serviceId) {
-      startConversation(contact.firstNumber, contact.serviceId);
-
-      event.preventDefault();
-      event.stopPropagation();
-      return;
-    }
     if (contact) {
       pushPanelForConversation({
         type: PanelType.ContactDetails,
@@ -3274,8 +3260,7 @@ export class Message extends PureComponent<Props, State> {
       attachments,
       attachmentDroppedDueToSize,
       contact,
-      conversationColor,
-      customColor,
+      bubbleColor,
       deletedForEveryone,
       direction,
       id,
@@ -3314,17 +3299,16 @@ export class Message extends PureComponent<Props, State> {
 
     const containerClassnames = classNames(
       'module-message__container',
-      isGIF(attachments?.[0]) && !isTapToView
-        ? 'module-message__container--gif'
-        : null,
       isTargeted ? 'module-message__container--targeted' : null,
       lighterSelect ? 'module-message__container--targeted-lighter' : null,
       isStickerLike ? 'module-message__container--sticker-like' : null,
-      !isStickerLike ? `module-message__container--${direction}` : null,
-      isEmojiOnly ? 'module-message__container--emoji' : null,
       !isStickerLike && direction === 'outgoing'
-        ? `module-message__container--outgoing-${conversationColor}`
+        ? 'module-message__container--outgoing'
         : null,
+      !isStickerLike && direction === 'incoming'
+        ? 'module-message__container--incoming'
+        : null,
+      isEmojiOnly ? 'module-message__container--emoji' : null,
       isClickable ? 'module-message__container--is-clickable' : null,
       this.#hasReactions() ? 'module-message__container--with-reactions' : null,
       deletedForEveryone
@@ -3337,16 +3321,20 @@ export class Message extends PureComponent<Props, State> {
           )
         : null
     );
-    const containerStyles = {
+    const containerStyles: CSSProperties = {
       width,
     };
+
     if (
       !isStickerLike &&
       !deletedForEveryone &&
       !(attachmentDroppedDueToSize && !text) &&
       direction === 'outgoing'
     ) {
-      Object.assign(containerStyles, getCustomColorStyle(customColor));
+      Object.assign(containerStyles, {
+        '--module-message__container-bg':
+          getBubbleColorRenderDataBackground(bubbleColor),
+      });
     }
 
     function maybeWrapWithContextMenu(children: ReactNode): ReactNode {
@@ -3532,7 +3520,8 @@ export class Message extends PureComponent<Props, State> {
         <div
           className={classNames(
             'module-message',
-            `module-message--${direction}`,
+            direction === 'incoming' && 'module-message--incoming',
+            direction === 'outgoing' && 'module-message--outgoing',
             isSignalConversation ? tw('justify-center') : null,
             shouldCollapseAbove && 'module-message--collapsed-above',
             shouldCollapseBelow && 'module-message--collapsed-below',

@@ -1,12 +1,12 @@
 {
   "$schema": "./package.schema.json",
   "private": true,
-  "name": "signal-desktop",
-  "productName": "Signal",
-  "description": "Private messaging from your desktop",
-  "desktopName": "signal.desktop",
-  "repository": "https://github.com/signalapp/Signal-Desktop.git",
-  "version": "8.32.0-alpha.1",
+  "name": "desktop-message-translator",
+  "productName": "Desktop Message Translator",
+  "description": "Unofficial Signal Desktop client with Google and custom API translation",
+  "desktopName": "desktop-message-translator.desktop",
+  "repository": "https://github.com/bygg2026/desktop-message-translator.git",
+  "version": "8.36.0-alpha.1",
   "license": "AGPL-3.0-only",
   "author": {
     "name": "Signal Messenger, LLC",
@@ -111,6 +111,8 @@
     "electron:install-app-deps": "electron-builder install-app-deps",
     "check-upgradeable-deps": "node scripts/check-upgradeable-deps.mjs",
     "check:unused-icons": "node scripts/check-unused-icons.mjs",
+    "check:unused-styles": "pnpm run build:styles:sass && pnpm run check:unused-styles:check",
+    "check:unused-styles:check": "node scripts/check-unused-styles.mjs",
     "update-signal-symbols": "node scripts/update-signal-symbols.mjs",
     "changeset:version": "changeset version && pnpm install --lockfile-only",
     "changeset:publish": "changeset publish"
@@ -121,16 +123,16 @@
   "dependencies": {
     "@indutny/mac-screen-share": "1.2.5",
     "@indutny/simple-windows-notifications": "2.0.21",
-    "@signalapp/libsignal-client": "0.103.0",
+    "@signalapp/libsignal-client": "0.106.0",
     "@signalapp/mute-state-change": "workspace:*",
-    "@signalapp/ringrtc": "2.72.0",
+    "@signalapp/ringrtc": "2.73.0",
     "@signalapp/sqlcipher": "4.1.0",
     "@signalapp/types": "workspace:*",
     "@signalapp/windows-ucv": "workspace:*",
     "google-libphonenumber": "3.2.44"
   },
   "devDependencies": {
-    "@babel/core": "7.29.0",
+    "@babel/core": "7.29.7",
     "@babel/helper-plugin-utils": "7.28.6",
     "@babel/plugin-transform-runtime": "7.29.0",
     "@babel/plugin-transform-typescript": "7.28.6",
@@ -179,6 +181,7 @@
     "@tailwindcss/cli": "4.3.0",
     "@tailwindcss/postcss": "4.3.0",
     "@tanstack/react-virtual": "3.13.23",
+    "@types/audioworklet": "0.0.100",
     "@types/babel__core": "7.20.5",
     "@types/babel__helper-plugin-utils": "7.10.3",
     "@types/blueimp-load-image": "5.16.6",
@@ -233,13 +236,13 @@
     "credit-card-type": "10.1.2",
     "cross-env": "10.1.0",
     "css-loader": "7.1.4",
-    "csv-parse": "6.2.1",
+    "csv-parse": "7.0.3",
     "danger": "13.0.10",
     "dashdash": "2.0.0",
     "debug": "4.4.3",
     "direction": "2.0.1",
     "dom-accessibility-api": "0.7.1",
-    "electron": "44.4.5",
+    "electron": "45.0.0",
     "electron-builder": "26.11.1",
     "electron-mocha": "13.1.0",
     "emoji-regex-xs": "2.0.1",
@@ -269,18 +272,19 @@
     "lodash": "4.18.1",
     "log-symbols": "7.0.1",
     "lru-cache": "11.2.7",
+    "mediabunny": "1.61.3",
     "memoizee": "0.4.17",
     "micromatch": "4.0.8",
     "mocha": "11.7.5",
-    "moment": "2.30.1",
+    "moment": "2.31.0",
     "motion": "12.38.0",
     "mp4box": "0.5.3",
     "node-fetch": "3.3.2",
     "normalize-path": "3.0.0",
     "npm-run-all2": "8.0.4",
     "oxc-transform": "0.131.0",
-    "oxlint": "1.80.0",
-    "oxlint-tsgolint": "7.0.2001",
+    "oxlint": "1.88.0",
+    "oxlint-tsgolint": "7.0.2004",
     "p-limit": "7.3.0",
     "p-map": "7.0.4",
     "p-queue": "9.1.0",
@@ -292,9 +296,12 @@
     "playwright": "1.60.0",
     "plist": "5.0.0",
     "pngjs": "7.0.0",
+    "postcss": "8.5.28",
     "postcss-loader": "8.2.1",
+    "postcss-selector-parser": "7.1.6",
     "prettier": "3.8.3",
     "prettier-plugin-tailwindcss": "0.8.0",
+    "purgecss": "8.0.0",
     "qrcode-generator": "2.0.4",
     "radix-ui": "1.5.0",
     "react": "19.3.0",
@@ -304,14 +311,14 @@
     "react-dom": "19.3.0",
     "react-intl": "10.1.0",
     "react-popper": "2.3.0",
-    "react-redux": "9.2.0",
+    "react-redux": "9.3.0",
     "react-virtualized": "9.22.6",
     "read-last-lines": "1.8.0",
     "redux": "5.0.1",
-    "redux-logger": "3.0.6",
+    "redux-logger": "4.0.0",
     "redux-promise-middleware": "6.2.0",
     "redux-thunk": "3.1.0",
-    "reselect": "5.1.1",
+    "reselect": "5.3.0",
     "rolldown": "1.0.1",
     "sass": "1.99.0",
     "sass-loader": "16.0.8",
@@ -320,7 +327,7 @@
     "socks-proxy-agent": "8.0.5",
     "split2": "4.2.0",
     "sql-formatter": "15.7.4",
-    "storybook": "8.6.18",
+    "storybook": "8.6.19",
     "style-loader": "4.0.0",
     "stylelint": "17.11.1",
     "stylelint-config-css-modules": "4.6.0",
@@ -335,19 +342,19 @@
     "typescript": "npm:@typescript/typescript6@6.0.2",
     "unicode-number": "1.1.0",
     "url": "0.11.4",
-    "uuid": "13.0.0",
+    "uuid": "13.0.2",
     "wait-on": "9.0.5",
-    "webpack": "5.96.1",
+    "webpack": "5.111.1",
     "write-file-atomic": "7.0.1",
-    "zod": "4.3.6"
+    "zod": "4.6.6"
   },
   "engines": {
-    "node": "24.21.0"
+    "node": "24.22.0"
   },
   "devEngines": {
     "runtime": {
       "name": "node",
-      "version": "24.21.0"
+      "version": "24.22.0"
     },
     "packageManager": {
       "name": "pnpm",
@@ -355,7 +362,7 @@
     }
   },
   "build": {
-    "appId": "org.whispersystems.signal-desktop",
+    "appId": "io.github.bygg2026.desktop-message-translator",
     "nativeRebuilder": "parallel",
     "mac": {
       "artifactName": "${name}-mac-${arch}-${version}.${ext}",
@@ -365,12 +372,7 @@
       "entitlements": "./build/entitlements.mac.plist",
       "entitlementsInherit": "./build/entitlements.mac.inherit.plist",
       "icon": "build/icons/mac/AppIcon.icon",
-      "publish": [
-        {
-          "provider": "generic",
-          "url": "https://updates.signal.org/desktop"
-        }
-      ],
+      "publish": [],
       "mergeASARs": true,
       "sign": "scripts/sign-macos.mjs",
       "signInstaller": "scripts/sign-mas-installer.mjs",
@@ -447,22 +449,11 @@
     },
     "win": {
       "signtoolOptions": {
-        "certificateSubjectName": "Signal Messenger, LLC",
-        "certificateSha1": "8D5E3CD800736C5E1FE459A1F5AA48287D4F6EC6",
-        "publisherName": "Signal Messenger, LLC",
-        "sign": "scripts/sign-windows.mjs",
-        "signingHashAlgorithms": [
-          "sha256"
-        ]
+        "signingHashAlgorithms": ["sha256"]
       },
       "artifactName": "${name}-win-${arch}-${version}.${ext}",
-      "icon": "build/icons/win/icon.ico",
-      "publish": [
-        {
-          "provider": "generic",
-          "url": "https://updates.signal.org/desktop"
-        }
-      ],
+      "icon": "build/icons/translator/icon.ico",
+      "publish": [],
       "releaseInfo": {
         "vendor": {
           "minOSVersion": "10.0.10240"
@@ -480,7 +471,7 @@
       ]
     },
     "nsis": {
-      "deleteAppDataOnUninstall": true,
+      "deleteAppDataOnUninstall": false,
       "differentialPackage": true,
       "customNsisBinary": {
         "url": "https://updates.signal.org/desktop/nsis/nsis-3.0.4.1.7z",
@@ -638,6 +629,6 @@
     ]
   },
   "volta": {
-    "node": "24.21.0"
+    "node": "24.22.0"
   }
 }

@@ -69,7 +69,7 @@ import type { SmartCompositionRecordingDraftProps } from '../state/smart/Composi
 import { useEscapeHandling } from '../hooks/useEscapeHandling.dom.ts';
 import SelectModeActions from './conversation/SelectModeActions.dom.tsx';
 import type { ShowToastAction } from '../state/ducks/toast.preload.ts';
-import type { DraftEditMessageType } from '../model-types.d.ts';
+import type { DraftEditMessageType } from '../model-types.std.ts';
 import type { ForwardMessagesPayload } from '../state/ducks/globalModals.preload.ts';
 import { ForwardMessagesModalType } from './ForwardMessagesModal.dom.tsx';
 import { FunPicker } from './fun/FunPicker.dom.tsx';
@@ -85,7 +85,7 @@ import { tw } from '../axo/tw.dom.tsx';
 import type { PollCreateType } from '../types/Polls.dom.ts';
 import { PollCreateModal } from './PollCreateModal.dom.tsx';
 import { hasDraft } from '../util/hasDraft.std.ts';
-import type { ContactNameColorType } from '../types/Colors.std.ts';
+import type { ContactNameColorType } from '../types/ContactNameColor.std.ts';
 import type { Emoji } from '../axo/emoji.std.ts';
 import { AxoConfirmDialog } from '../axo/AxoConfirmDialog.dom.tsx';
 
@@ -131,6 +131,7 @@ export type OwnProps = Readonly<{
   isGroupV1AndDisabled: boolean | null;
   isMissingMandatoryProfileSharing: boolean | null;
   isPollSend1to1Enabled: boolean;
+  isShareContactEnabled: boolean;
   isSignalConversation: boolean;
   isActive: boolean;
   lastEditableMessageId: string | null;
@@ -215,6 +216,10 @@ export type OwnProps = Readonly<{
   renderSmartCompositionRecordingDraft: (
     props: SmartCompositionRecordingDraftProps
   ) => JSX.Element | null;
+  renderShareContactDialog: (props: {
+    conversationId: string;
+    onClose: () => void;
+  }) => JSX.Element;
   selectedMessageIds: ReadonlyArray<string> | undefined;
   areSelectedMessagesForwardable: boolean | undefined;
   toggleSelectMode: (on: boolean) => void;
@@ -260,6 +265,7 @@ export const CompositionArea = memo(function CompositionArea({
   imageToBlurHash,
   isDisabled,
   isPollSend1to1Enabled,
+  isShareContactEnabled,
   isSignalConversation,
   isActive,
   lastEditableMessageId,
@@ -351,6 +357,7 @@ export const CompositionArea = memo(function CompositionArea({
   isFetchingUUID,
   renderSmartCompositionRecording,
   renderSmartCompositionRecordingDraft,
+  renderShareContactDialog,
   // Selected messages
   selectedMessageIds,
   areSelectedMessagesForwardable,
@@ -365,6 +372,8 @@ export const CompositionArea = memo(function CompositionArea({
     AttachmentDraftType | undefined
   >();
   const [isPollModalOpen, setIsPollModalOpen] = useState(false);
+  const [isShareContactDialogOpen, setIsShareContactDialogOpen] =
+    useState(false);
   const inputApiRef = useRef<InputApi | null>(null);
   const fileInputRef = useRef<null | HTMLInputElement>(null);
   const photoVideoInputRef = useRef<null | HTMLInputElement>(null);
@@ -397,15 +406,29 @@ export const CompositionArea = memo(function CompositionArea({
     canSend = false;
   }
 
-  const outgoingTranslationReadyRef = useRef<string | null>(null);
-
-  const outgoingTranslationPendingRef = useRef(false);
-
+  const translationEpoch = useRef(0);
+  const translationPending = useRef(false);
+  const translationReady = useRef<string | null>(null);
+  const [translationStatus, setTranslationStatus] = useState('');
   useEffect(() => {
-    outgoingTranslationReadyRef.current = null;
-
-    outgoingTranslationPendingRef.current = false;
+    translationEpoch.current += 1;
+    translationPending.current = false;
+    translationReady.current = null;
+    setTranslationStatus('');
+    return () => {
+      translationEpoch.current += 1;
+    };
   }, [conversationId, sendCounter]);
+  useEffect(
+    () =>
+      window.SignalContext.onTranslationConfigChanged(() => {
+        translationEpoch.current += 1;
+        translationPending.current = false;
+        translationReady.current = null;
+        setTranslationStatus('');
+      }),
+    []
+  );
 
   const handleSubmit = useCallback(
     (
@@ -413,151 +436,93 @@ export const CompositionArea = memo(function CompositionArea({
       bodyRanges: DraftBodyRanges,
       timestamp: number
     ): boolean => {
-      if (!canSend || outgoingTranslationPendingRef.current) {
+      if (!canSend || translationPending.current) {
         return false;
       }
 
-      const sendFinalMessage = (
-        finalMessage: string,
-        finalBodyRanges: DraftBodyRanges
-      ): void => {
+      const sendFinal = (message: string, bodyRanges: DraftBodyRanges) => {
         if (editedMessageId) {
           sendEditedMessage(conversationId, {
-            bodyRanges: finalBodyRanges,
-            message: finalMessage,
-
+            bodyRanges,
+            message,
+            // sent timestamp for the quote
             quoteSentAt: quotedMessageSentAt ?? undefined,
-
             quoteAuthorAci: quotedMessageAuthorAci ?? undefined,
-
             targetMessageId: editedMessageId,
           });
         } else {
           sendMultiMediaMessage(conversationId, {
             draftAttachments,
-
-            bodyRanges: finalBodyRanges,
-
-            message: finalMessage,
-
+            bodyRanges,
+            message,
             timestamp,
-
             isViewOnce,
           });
         }
-
         setLarge(false);
       };
-
-      /*
-       * 没有文字，只有附件时，
-       * 不需要翻译。
-       */
-      if (!message.trim()) {
-        sendFinalMessage(message, bodyRanges);
-
+      if (!message.trim() || translationReady.current === message) {
+        translationReady.current = null;
+        setTranslationStatus('');
+        sendFinal(message, bodyRanges);
         return true;
       }
-
-      /*
-       * 这是已经翻译完成并展示在输入框里的文本。
-       * 第二次 Enter 才真正发送。
-       */
-      if (outgoingTranslationReadyRef.current === message) {
-        outgoingTranslationReadyRef.current = null;
-
-        sendFinalMessage(message, bodyRanges);
-
-        return true;
-      }
-
-      outgoingTranslationPendingRef.current = true;
-
+      const epoch = ++translationEpoch.current;
+      translationPending.current = true;
+      setTranslationStatus('正在翻译 / Translating…');
       void (async () => {
         try {
           const config = await window.SignalContext.getTranslationConfig();
-
-          /*
-           * 用户关闭自动翻译时，
-           * 恢复 Signal 原本的一次 Enter 发送。
-           */
-          if (!config.enabled) {
-            outgoingTranslationReadyRef.current = null;
-
-            sendFinalMessage(message, bodyRanges);
-
+          if (epoch !== translationEpoch.current) {
             return;
           }
-
-          console.log('[TRANSLATE SEND] source:', message);
-
-          console.log('[TRANSLATE SEND] target:', config.sendLanguage);
-
+          if (!config.enabled) {
+            if (inputApiRef.current?.getCurrentText?.() !== message) {
+              setTranslationStatus(
+                '输入已修改，请重新发送 / Draft changed; submit again'
+              );
+              return;
+            }
+            sendFinal(message, bodyRanges);
+            setTranslationStatus('');
+            return;
+          }
           const translated = await window.SignalContext.translateText(
             message,
-            'send'
+            'send',
+            config.revision
           );
-
-          if (!translated || !translated.trim()) {
-            throw new Error('Outgoing translation returned empty text');
+          if (epoch !== translationEpoch.current) {
+            return;
           }
-
-          const finalMessage = translated.trim();
-
-          /*
-           * 当发送目标是英语时，
-           * 禁止中文、缅甸语、日语、韩语、
-           * 泰语、俄语、阿拉伯语等主要非拉丁文字
-           * 直接通过。
-           *
-           * API 如果根本没翻译，
-           * 就留在输入框，不允许误发。
-           */
-          if (config.sendLanguage === 'en') {
-            const blockedScript =
-              /[\u3400-\u9fff\u3040-\u30ff\uac00-\ud7af\u0e00-\u0e7f\u1000-\u109f\ua9e0-\ua9ff\uaa60-\uaa7f\u0400-\u04ff\u0600-\u06ff]/u;
-
-            if (blockedScript.test(finalMessage)) {
-              throw new Error(
-                'Translation output still contains a blocked non-English script'
-              );
-            }
+          if (inputApiRef.current?.getCurrentText?.() !== message) {
+            setTranslationStatus(
+              '输入已修改，请重新翻译 / Draft changed; submit again'
+            );
+            return;
           }
-
-          /*
-           * 翻译后字符长度已经改变。
-           * 原来的粗体/mention 等 bodyRange
-           * 坐标不能安全继续使用。
-           */
-          outgoingTranslationReadyRef.current = finalMessage;
-
-          inputApiRef.current?.setContents(finalMessage, [], true);
-
-          outgoingTranslationPendingRef.current = false;
-
-          console.log('[TRANSLATE SEND] preview ready:', finalMessage);
-
-          /*
-           * 故意不发送。
-           * 现在用户可以先看到译文。
-           * 第二次 Enter 才发送。
-           */
-        } catch (error) {
-          outgoingTranslationPendingRef.current = false;
-
-          outgoingTranslationReadyRef.current = null;
-
-          console.error('[TRANSLATE SEND] failed:', error);
-
-          inputApiRef.current?.focus();
+          if (!translated?.trim()) {
+            throw new Error('Empty translation');
+          }
+          translationPending.current = false;
+          inputApiRef.current?.setContents(translated, [], true);
+          translationReady.current = translated;
+          setTranslationStatus(
+            '译文已就绪，再次发送以确认 / Translation ready — submit again to send'
+          );
+        } catch {
+          if (epoch === translationEpoch.current) {
+            translationReady.current = null;
+            setTranslationStatus(
+              '翻译失败，原文未发送。再次发送以重试 / Translation failed; submit again to retry'
+            );
+          }
+        } finally {
+          if (epoch === translationEpoch.current) {
+            translationPending.current = false;
+          }
         }
       })();
-
-      /*
-       * 返回 false：
-       * Signal 不会清空输入框，
-       * 也不会把原文直接发出去。
-       */
       return false;
     },
     [
@@ -573,6 +538,7 @@ export const CompositionArea = memo(function CompositionArea({
       setLarge,
     ]
   );
+
   const launchAttachmentPicker = useCallback((type?: 'media' | 'file') => {
     const inputRef = type === 'media' ? photoVideoInputRef : fileInputRef;
     const fileInput = inputRef.current;
@@ -609,6 +575,26 @@ export const CompositionArea = memo(function CompositionArea({
     },
     [conversationId, sendPoll, handleClosePollModal]
   );
+
+  // Wait for the menu to finish closing before opening the dialog, so the
+  // menu's focus handling doesn't steal focus from the dialog
+  const isShareContactDialogPending = useRef(false);
+
+  const handleAddMenuCloseAutoFocus = useCallback((event: Event) => {
+    if (isShareContactDialogPending.current) {
+      isShareContactDialogPending.current = false;
+      event.preventDefault();
+      setIsShareContactDialogOpen(true);
+    }
+  }, []);
+
+  const handleOpenShareContactDialog = useCallback(() => {
+    isShareContactDialogPending.current = true;
+  }, []);
+
+  const handleCloseShareContactDialog = useCallback(() => {
+    setIsShareContactDialogOpen(false);
+  }, []);
 
   function maybeEditAttachment(attachment: AttachmentDraftType) {
     if (!isImageTypeSupported(attachment.contentType)) {
@@ -916,7 +902,6 @@ export const CompositionArea = memo(function CompositionArea({
         )}
       >
         <FunPicker
-          isReply={Boolean(quotedMessageId)}
           placement="top start"
           open={funPickerOpen}
           onOpenChange={handleFunPickerOpenChange}
@@ -986,7 +971,9 @@ export const CompositionArea = memo(function CompositionArea({
               />
             </AxoDropdownMenu.Trigger>
           </div>
-          <AxoDropdownMenu.Content>
+          <AxoDropdownMenu.Content
+            onCloseAutoFocus={handleAddMenuCloseAutoFocus}
+          >
             <AxoDropdownMenu.Item symbol="photo" onSelect={launchMediaPicker}>
               {i18n('icu:CompositionArea__AttachMenu__PhotosAndVideos')}
             </AxoDropdownMenu.Item>
@@ -999,6 +986,14 @@ export const CompositionArea = memo(function CompositionArea({
                 onSelect={handleOpenPollModal}
               >
                 {i18n('icu:CompositionArea__AttachMenu__Poll')}
+              </AxoDropdownMenu.Item>
+            )}
+            {isShareContactEnabled && (
+              <AxoDropdownMenu.Item
+                symbol="person-circle"
+                onSelect={handleOpenShareContactDialog}
+              >
+                {i18n('icu:CompositionArea__AttachMenu__Contact')}
               </AxoDropdownMenu.Item>
             )}
           </AxoDropdownMenu.Content>
@@ -1176,6 +1171,7 @@ export const CompositionArea = memo(function CompositionArea({
         isBlocked={isBlocked}
         isHidden={isHidden}
         isReported={isReported}
+        isSignalConversation={isSignalConversation}
         acceptConversation={acceptConversation}
         reportSpam={reportSpam}
         blockAndReportSpam={blockAndReportSpam}
@@ -1188,17 +1184,12 @@ export const CompositionArea = memo(function CompositionArea({
   if (conversationType === 'direct' && isSmsOnlyOrUnregistered) {
     return (
       <div
-        className={classNames([
-          'CompositionArea',
-          'CompositionArea--sms-only',
-          isFetchingUUID ? 'CompositionArea--pending' : null,
-        ])}
+        className={classNames(['CompositionArea', 'CompositionArea--sms-only'])}
       >
         {isFetchingUUID ? (
           <Spinner
             ariaLabel={i18n('icu:CompositionArea--sms-only__spinner-label')}
             role="presentation"
-            moduleClassName="module-image-spinner"
             svgSize="small"
           />
         ) : (
@@ -1231,6 +1222,7 @@ export const CompositionArea = memo(function CompositionArea({
         i18n={i18n}
         isBlocked={isBlocked}
         isReported={isReported}
+        isSignalConversation={isSignalConversation}
         acceptConversation={acceptConversation}
         reportSpam={reportSpam}
         blockAndReportSpam={blockAndReportSpam}
@@ -1292,6 +1284,11 @@ export const CompositionArea = memo(function CompositionArea({
 
   return (
     <div className="CompositionArea">
+      {translationStatus && (
+        <div role="status" style={{ padding: 8 }}>
+          {translationStatus}
+        </div>
+      )}
       {attachmentToEdit &&
         'url' in attachmentToEdit &&
         attachmentToEdit.url && (
@@ -1433,11 +1430,7 @@ export const CompositionArea = memo(function CompositionArea({
         })}
       >
         {!large ? leftHandSideButtonsFragment : null}
-        <div
-          className={classNames('CompositionArea__input', {
-            'CompositionArea__input--padded': !isViewOnceActive && large,
-          })}
-        >
+        <div className="CompositionArea__input">
           <CompositionInput
             conversationId={conversationId}
             disabled={isDisabled}
@@ -1456,7 +1449,16 @@ export const CompositionArea = memo(function CompositionArea({
             showRecoveryKeyPasteWarning={textIncludesRecoveryKey}
             onCloseLinkPreview={onCloseLinkPreview}
             onDirtyChange={setDirty}
-            onEditorStateChange={onEditorStateChange}
+            onEditorStateChange={options => {
+              if (translationPending.current) {
+                translationEpoch.current += 1;
+                translationPending.current = false;
+                setTranslationStatus(
+                  '输入已修改，请重新翻译 / Draft changed; submit to translate again'
+                );
+              }
+              onEditorStateChange(options);
+            }}
             onSelectEmoji={onSelectEmoji}
             onSubmit={handleSubmit}
             onTextTooLong={onTextTooLong}
@@ -1530,6 +1532,11 @@ export const CompositionArea = memo(function CompositionArea({
           onSendPoll={handleSendPoll}
         />
       )}
+      {isShareContactDialogOpen &&
+        renderShareContactDialog({
+          conversationId,
+          onClose: handleCloseShareContactDialog,
+        })}
     </div>
   );
 });

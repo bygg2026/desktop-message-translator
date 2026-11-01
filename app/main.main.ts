@@ -78,6 +78,7 @@ import * as attachmentChannel from './attachment_channel.main.ts';
 import * as bounce from '../ts/services/bounce.main.ts';
 import * as updater from '../ts/updater/index.main.ts';
 import { updateDefaultSession } from './updateDefaultSession.main.ts';
+import { sanitize as sanitizeWebp } from '@signalapp/libsignal-client/dist/WebpSanitizer.js';
 import { PreventDisplaySleepService } from './PreventDisplaySleepService.std.ts';
 import {
   SystemTrayService,
@@ -131,6 +132,9 @@ import type { ParsedSignalRoute } from '../ts/util/signalRoutes.std.ts';
 import { parseSignalRoute } from '../ts/util/signalRoutes.std.ts';
 import * as dns from '../ts/util/dns.node.ts';
 import { ZoomFactorService } from '../ts/services/ZoomFactorService.main.ts';
+import { installTranslationIpc } from '../ts/services/translation/TranslationIpc.main.ts';
+import { showAccountManager } from './account_manager.main.ts';
+import { listAccounts } from './account_profiles.node.ts';
 import { SafeStorageBackendChangeError } from '../ts/types/SafeStorageBackendChangeError.std.ts';
 import { SafeStorageDecryptionError } from '../ts/types/SafeStorageDecryptionError.std.ts';
 import { LINUX_PASSWORD_STORE_FLAGS } from '../ts/util/linuxPasswordStoreFlags.std.ts';
@@ -406,6 +410,8 @@ function getLocaleOverrideSetting(): string | null {
 
   return null;
 }
+
+installTranslationIpc(getMainWindow);
 
 const zoomFactorService = new ZoomFactorService({
   async getZoomFactorSetting() {
@@ -1100,6 +1106,14 @@ ipc.handle(
   }
 );
 
+ipc.handle(
+  'art-creator:sanitizeWebp',
+  (_event: Electron.Event, data: Uint8Array<ArrayBuffer>) => {
+    // Throws if the image is invalid
+    sanitizeWebp(data);
+  }
+);
+
 ipc.on('art-creator:onUploadProgress', () => {
   stickerCreatorWindow?.webContents.send('art-creator:onUploadProgress');
 });
@@ -1246,8 +1260,14 @@ async function readyForUpdates() {
       'SettingsChannel must be initialized'
     );
     await updater.start({
-      canRunSilently: () => {
+      canRunSilently: async () => {
+        const canRestartInTray = OS.isLinux()
+          ? (await systemTraySettingCache.get()) ===
+            SystemTraySetting.MinimizeToAndStartInSystemTray
+          : true;
+
         return (
+          canRestartInTray &&
           systemTrayService?.isVisible() === true &&
           mainWindow?.isVisible() !== true &&
           !preventDisplaySleepService.isEnabled()
@@ -2541,6 +2561,7 @@ function setupMenu(options?: Partial<CreateTemplateOptionsType>) {
     menuOptions,
     getResolvedMessagesLocale().i18n
   );
+  template.push({ label: '账号 / Accounts', submenu: [{ label: '管理账号 / Manage accounts', click: showAccountManager }] });
   const menu = Menu.buildFromTemplate(template);
   Menu.setApplicationMenu(menu);
 
@@ -2934,8 +2955,7 @@ ipc.on('get-config', async event => {
   const theme = await getResolvedThemeSetting();
 
   const parsed = safeParseLoose(rendererConfigSchema, {
-    name: packageJson.productName,
-    availableLocales: getResolvedMessagesLocale().availableLocales,
+    name: `${packageJson.productName} · ${listAccounts(app.getPath('appData')).find(account => account.id === userConfig.activeAccountId)?.name ?? userConfig.activeAccountId}`, 
     resolvedTranslationsLocale: getResolvedMessagesLocale().name,
     resolvedTranslationsLocaleDirection: getResolvedMessagesLocale().direction,
     hourCyclePreference: getResolvedMessagesLocale().hourCyclePreference,
@@ -3013,12 +3033,6 @@ ipc.on('get-config', async event => {
 ipc.on('locale-data', event => {
   // oxlint-disable-next-line no-param-reassign
   event.returnValue = getResolvedMessagesLocale().messages;
-});
-
-// Ingested in preload.js via a sendSync call
-ipc.on('locale-display-names', event => {
-  // oxlint-disable-next-line no-param-reassign
-  event.returnValue = getResolvedMessagesLocale().localeDisplayNames;
 });
 
 // Ingested in preload.js via a sendSync call

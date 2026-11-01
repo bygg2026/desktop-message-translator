@@ -3,17 +3,25 @@
 
 import { AlertDialog } from 'radix-ui';
 import type { FC, MouseEvent, ReactElement, ReactNode } from 'react';
-import { memo } from 'react';
+import { memo, useCallback, useMemo, useRef, useState } from 'react';
 import { AxoButton } from './AxoButton.dom.tsx';
 import { tw } from './tw.dom.tsx';
 import { AxoBaseDialog } from './_internal/AxoBaseDialog.dom.tsx';
+import { AxoBaseLayer } from './_internal/AxoBaseLayer.dom.tsx';
 import { AxoScrollArea } from './AxoScrollArea.dom.tsx';
 import type { AxoSymbol } from './AxoSymbol.dom.tsx';
 import { FlexWrapDetector } from './_internal/FlexWrapDetector.dom.tsx';
-import { AxoTheme } from './AxoTheme.dom.tsx';
 import { useAxoIntl } from './_internal/AxoIntl.dom.tsx';
+import {
+  createStrictContext,
+  useStrictContext,
+} from './_internal/StrictContext.dom.tsx';
 
-const { useContentEscapeBehavior } = AxoBaseDialog;
+const {
+  useContentEscapeBehavior,
+  useContentRestoreFocusBehavior,
+  useTriggerPresenceRef,
+} = AxoBaseDialog;
 
 /**
  * A modal dialog that interrupts the user with important content and expects a
@@ -47,7 +55,29 @@ export namespace AxoAlertDialog {
    * --------------------------------------------------------------------------
    */
 
-  export type RootProps = AxoBaseDialog.RootProps;
+  export type RootProps = AxoBaseDialog.RootProps &
+    Readonly<{
+      /**
+       * Called along with `onOpenChange(false)` when the dialog is dismissed
+       * without taking an action: via `Cancel`, `Ok`, pressing `Escape`, or
+       * clicking outside.
+       *
+       * Unlike `onOpenChange`, this is not called when an `Action` closes the
+       * dialog. Use this for side effects that should only happen when the
+       * user backs out of the dialog.
+       */
+      onCancel?: () => void;
+    }>;
+
+  type RootContextType = Readonly<{
+    setActionTriggered: () => void;
+    hasTrigger: boolean;
+    setHasTrigger: (hasTrigger: boolean) => void;
+  }>;
+
+  const RootContext = createStrictContext<RootContextType>(
+    'AxoAlertDialog.Root'
+  );
 
   /**
    * Contains all the parts of an alert dialog.
@@ -64,7 +94,7 @@ export namespace AxoAlertDialog {
    *     </AxoAlertDialog.Body>
    *     <AxoAlertDialog.Footer>
    *       <AxoAlertDialog.Cancel/>
-   *       <AxoAlertDialog.Action variant="destructive" onClick={onDiscard}>
+   *       <AxoAlertDialog.Action variant="strong-destructive" onClick={onDiscard}>
    *         Discard
    *       </AxoAlertDialog.Action>
    *     </AxoAlertDialog.Footer>
@@ -73,10 +103,38 @@ export namespace AxoAlertDialog {
    * ```
    */
   export const Root: FC<RootProps> = memo(props => {
+    const { onOpenChange, onCancel } = props;
+    const actionTriggeredRef = useRef(false);
+    const [hasTrigger, setHasTrigger] = useState(false);
+
+    const handleOpenChange = useCallback(
+      (open: boolean) => {
+        if (!open) {
+          const actionTriggered = actionTriggeredRef.current;
+          actionTriggeredRef.current = false;
+          if (!actionTriggered) {
+            onCancel?.();
+          }
+        }
+        onOpenChange?.(open);
+      },
+      [onOpenChange, onCancel]
+    );
+
+    const setActionTriggered = useCallback(() => {
+      actionTriggeredRef.current = true;
+    }, []);
+
+    const context = useMemo((): RootContextType => {
+      return { setActionTriggered, hasTrigger, setHasTrigger };
+    }, [setActionTriggered, hasTrigger, setHasTrigger]);
+
     return (
-      <AlertDialog.Root open={props.open} onOpenChange={props.onOpenChange}>
-        {props.children}
-      </AlertDialog.Root>
+      <RootContext.Provider value={context}>
+        <AlertDialog.Root open={props.open} onOpenChange={handleOpenChange}>
+          {props.children}
+        </AlertDialog.Root>
+      </RootContext.Provider>
     );
   });
 
@@ -93,7 +151,14 @@ export namespace AxoAlertDialog {
    * A button that opens the dialog.
    */
   export const Trigger: FC<TriggerProps> = memo(props => {
-    return <AlertDialog.Trigger asChild>{props.children}</AlertDialog.Trigger>;
+    const { setHasTrigger } = useStrictContext(RootContext);
+    const ref = useTriggerPresenceRef(setHasTrigger);
+
+    return (
+      <AlertDialog.Trigger ref={ref} asChild>
+        {props.children}
+      </AlertDialog.Trigger>
+    );
   });
 
   Trigger.displayName = 'AxoAlertDialog.Trigger';
@@ -126,19 +191,24 @@ export namespace AxoAlertDialog {
    */
   export const Content: FC<ContentProps> = memo(props => {
     const handleContentEscapeEvent = useContentEscapeBehavior(props.escape);
+    const { hasTrigger } = useStrictContext(RootContext);
+    const { dialogContentProps } = useContentRestoreFocusBehavior(hasTrigger);
+
     return (
       <AlertDialog.Portal>
-        <AxoTheme.Inherit>
+        <AxoBaseLayer>
           <AxoBaseDialog.Host>
-            <AlertDialog.Overlay className={AxoBaseDialog.overlayStyles} />
+            <AlertDialog.Overlay className={AxoBaseDialog.overlayClassName} />
             <AlertDialog.Content
               onEscapeKeyDown={handleContentEscapeEvent}
-              className={tw(AxoBaseDialog.contentStyles, 'w-72 min-w-72')}
+              aria-modal="true"
+              className={tw(AxoBaseDialog.contentClassName, 'w-72 min-w-72')}
+              {...dialogContentProps}
             >
               {props.children}
             </AlertDialog.Content>
           </AxoBaseDialog.Host>
-        </AxoTheme.Inherit>
+        </AxoBaseLayer>
       </AlertDialog.Portal>
     );
   });
@@ -215,7 +285,7 @@ export namespace AxoAlertDialog {
     const children = (
       <div
         className={tw(
-          'flex flex-wrap-reverse gap-2 px-6 py-4',
+          'flex flex-wrap-reverse gap-2 p-4',
           props.forceAlwaysBreakToSeparateLines
             ? footerWrapForcedBreakStyles
             : footerWrapDetectorStyles
@@ -229,7 +299,7 @@ export namespace AxoAlertDialog {
       return children;
     }
 
-    return <FlexWrapDetector>{children}</FlexWrapDetector>;
+    return <FlexWrapDetector.Root>{children}</FlexWrapDetector.Root>;
   });
 
   Footer.displayName = 'AxoAlertDialog.Footer';
@@ -258,7 +328,8 @@ export namespace AxoAlertDialog {
     return (
       <AlertDialog.Title
         className={tw(
-          'text-center type-title-small text-primary',
+          'text-pretty',
+          'type-title-small text-primary',
           props.screenReaderOnly && 'sr-only'
         )}
       >
@@ -287,9 +358,7 @@ export namespace AxoAlertDialog {
   export const Description: FC<DescriptionProps> = memo(props => {
     return (
       <AlertDialog.Description asChild>
-        <div className={tw('text-center type-body-large text-secondary')}>
-          {props.children}
-        </div>
+        <div>{props.children}</div>
       </AlertDialog.Description>
     );
   });
@@ -313,15 +382,15 @@ export namespace AxoAlertDialog {
   }>;
 
   /**
-   * A button that dismisses the dialog without taking the primary action.
-   * Automatically closes the dialog — no `onClick` needed.
+   * A secondary button that dismisses the dialog without taking any action.
+   * Auto-focused if it's the last cancel/ok action.
    */
   export const Cancel: FC<CancelProps> = memo(props => {
     const intl = useAxoIntl();
     return (
       <AlertDialog.Cancel asChild>
         <AxoButton.Root
-          variant="strong-secondary"
+          variant="subtle-secondary"
           size="md"
           width="grow"
           disabled={props.disabled}
@@ -335,6 +404,44 @@ export namespace AxoAlertDialog {
   Cancel.displayName = 'AxoAlertDialog.Cancel';
 
   /**
+   * <AxoAlertDialog.Ok>
+   * --------------------------------------------------------------------------
+   */
+
+  export type OkProps = Readonly<{
+    /**
+     * The button label.
+     */
+    children?: string | ReactElement | null;
+    /**
+     * When `true`, prevents the user from dismissing via this button.
+     */
+    disabled?: boolean;
+  }>;
+
+  /**
+   * A primary button that dismisses the dialog without taking any action.
+   * Auto-focused if it's the last cancel/ok action.
+   */
+  export const Ok: FC<OkProps> = memo(props => {
+    const intl = useAxoIntl();
+    return (
+      <AlertDialog.Cancel asChild>
+        <AxoButton.Root
+          variant="strong-primary"
+          size="md"
+          width="grow"
+          disabled={props.disabled}
+        >
+          {props.children ?? intl.get('AxoAlertDialog.Ok')}
+        </AxoButton.Root>
+      </AlertDialog.Cancel>
+    );
+  });
+
+  Ok.displayName = 'AxoAlertDialog.Ok';
+
+  /**
    * <AxoAlertDialog.Action>
    * --------------------------------------------------------------------------
    */
@@ -344,7 +451,7 @@ export namespace AxoAlertDialog {
    */
   export type ActionVariant =
     | 'strong-primary'
-    | 'strong-secondary'
+    | 'subtle-secondary'
     | 'strong-destructive'
     | 'subtle-destructive';
 
@@ -366,7 +473,7 @@ export namespace AxoAlertDialog {
     /**
      * Called when the button is clicked.
      */
-    onClick: (event: MouseEvent<HTMLButtonElement>) => void;
+    onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
     /**
      * When `true`, prevents interaction.
      */
@@ -386,10 +493,23 @@ export namespace AxoAlertDialog {
   }>;
 
   /**
-   * A button that confirms or takes a named action. Requires an explicit
-   * `onClick` — unlike `Cancel`, it does not auto-close the dialog.
+   * A button that dismisses the dialog and optionally takes an action.
+   * Not auto-focused by default.
    */
   export const Action: FC<ActionProps> = memo(props => {
+    const { onClick } = props;
+    const { setActionTriggered } = useStrictContext(RootContext);
+
+    const handleClick = useCallback(
+      (event: MouseEvent<HTMLButtonElement>) => {
+        onClick?.(event);
+        if (!event.defaultPrevented) {
+          setActionTriggered();
+        }
+      },
+      [onClick, setActionTriggered]
+    );
+
     return (
       <AlertDialog.Action asChild>
         <AxoButton.Root
@@ -398,7 +518,7 @@ export namespace AxoAlertDialog {
           arrow={props.arrow}
           size="md"
           width="grow"
-          onClick={props.onClick}
+          onClick={handleClick}
           disabled={props.disabled}
           pending={props.pending}
           autoFocus={props.autoFocus}

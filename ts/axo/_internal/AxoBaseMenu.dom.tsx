@@ -1,9 +1,10 @@
 // Copyright 2025 Signal Messenger, LLC
 // SPDX-License-Identifier: AGPL-3.0-only
-import type { ReactNode, JSX } from 'react';
+import type { ReactNode, JSX, SyntheticEvent } from 'react';
 import { tw } from '../tw.dom.tsx';
 import { AxoSymbol } from '../AxoSymbol.dom.tsx';
 import { isTestOrMockEnvironment } from '../../environment.std.ts';
+import { assert } from './assert.std.tsx';
 
 // In the future we should be relying more on insert order of
 // dialogs/popovers/menus into portals
@@ -24,7 +25,7 @@ export namespace AxoBaseMenu {
   export type Side = 'top' | 'right' | 'bottom' | 'left';
 
   // <Content/SubContent>
-  const baseContentStyles = tw(
+  const baseContentClassName = tw(
     LEGACY_CONTEXT_MENU_Z_INDEX,
     'max-w-[300px] min-w-[200px]',
     'curved-xl bg-material-tertiary shadow-elevation-3 backdrop-blur-regular',
@@ -35,22 +36,22 @@ export namespace AxoBaseMenu {
     'forced-colors:text-[CanvasText]'
   );
 
-  const baseContentGridStyles = tw('grid grid-cols-[min-content_1fr] p-1.5');
+  const baseContentGridClassName = tw('grid grid-cols-[min-content_1fr] p-1.5');
 
   // <Group/RadioGroup>
-  const baseGroupStyles = tw('col-span-full grid grid-cols-subgrid');
+  const baseGroupClassName = tw('col-span-full grid grid-cols-subgrid');
 
   // <Item/RadioItem/CheckboxItem/SubTrigger/Label/Separator>
-  const baseItemStyles = tw(
+  const baseItemClassName = tw(
     'col-span-full grid grid-cols-subgrid items-center'
   );
 
   // <Item/RadioItem/CheckboxItem/SubTrigger/Label> (not Separator)
-  const labeledItemStyles = tw(baseItemStyles, 'truncate p-1.5');
+  const labeledItemClassName = tw(baseItemClassName, 'truncate p-1.5');
 
   // <Item/RadioItem/CheckboxItem/SubTrigger> (not Label/Separator)
-  const navigableItemStyles = tw(
-    labeledItemStyles,
+  const navigableItemClassName = tw(
+    labeledItemClassName,
     'curved-md type-body-medium',
     'text-primary',
     'data-highlighted:bg-primary-pressed',
@@ -83,7 +84,7 @@ export namespace AxoBaseMenu {
   }>;
 
   // <Item/RadioItem/CheckboxItem> (not SubTrigger/Label/Separator)
-  const selectableItemStyles = tw(navigableItemStyles);
+  const selectableItemClassName = tw(navigableItemClassName);
 
   /**
    * Used for any selectable content node such as Item, CheckboxItem, or RadioItem,
@@ -151,7 +152,7 @@ export namespace AxoBaseMenu {
    * --------------------------------------------------------------------------
    */
 
-  export const itemTextStyles = tw(
+  export const itemTextClassName = tw(
     'flex-auto grow-0 truncate text-start',
     'forced-color-adjust-none forced-colors:text-inherit'
   );
@@ -164,7 +165,46 @@ export namespace AxoBaseMenu {
    * Truncated label text inside a menu item.
    */
   export function ItemText(props: ItemTextProps): JSX.Element {
-    return <span className={itemTextStyles}>{props.children}</span>;
+    return <span className={itemTextClassName}>{props.children}</span>;
+  }
+
+  /**
+   * <AxoBaseMenu.ItemTextWithDescription>
+   * --------------------------------------------------------------------------
+   */
+
+  const itemDescriptionClassName = tw(
+    'text-start type-body-small whitespace-normal text-secondary',
+    'forced-color-adjust-none forced-colors:text-inherit'
+  );
+
+  export type ItemTextWithDescriptionProps = Readonly<{
+    textId: string;
+    descriptionId: string;
+    description: ReactNode;
+    children: ReactNode;
+  }>;
+
+  /**
+   * Truncated label text with a wrapping description below it.
+   *
+   * The item should set `aria-labelledby={textId}` and
+   * `aria-describedby={descriptionId}`, otherwise the description gets merged
+   * into the item's accessible name.
+   */
+  export function ItemTextWithDescription(
+    props: ItemTextWithDescriptionProps
+  ): JSX.Element {
+    return (
+      <span className={tw('flex min-w-0 flex-auto flex-col')}>
+        <span id={props.textId} className={itemTextClassName}>
+          {props.children}
+        </span>
+        <span id={props.descriptionId} className={itemDescriptionClassName}>
+          {props.description}
+        </span>
+      </span>
+    );
   }
 
   /**
@@ -300,15 +340,25 @@ export namespace AxoBaseMenu {
     children: ReactNode;
   }>;
 
-  export const menuContentStyles = tw(
-    baseContentStyles,
-    baseContentGridStyles,
+  export function menuContentEventStopPropagation(
+    event: SyntheticEvent | Event
+  ): void {
+    assert(
+      event.type !== 'pointerdown',
+      'Radix needs pointerdown to reach the document to detect clicks outside of the menu'
+    );
+    event.stopPropagation();
+  }
+
+  export const menuContentClassName = tw(
+    baseContentClassName,
+    baseContentGridClassName,
     'max-h-(--radix-popper-available-height) scrollbar-width-none overflow-auto',
     'scrollbar-width-none overflow-auto'
   );
 
-  export const selectContentStyles = tw(baseContentStyles);
-  export const selectContentViewportStyles = tw(baseContentGridStyles);
+  export const selectContentClassName = tw(baseContentClassName);
+  export const selectContentViewportClassName = tw(baseContentGridClassName);
 
   /**
    * <AxoBaseMenu.Item>
@@ -323,11 +373,16 @@ export namespace AxoBaseMenu {
        * prevent the context menu from closing when selecting that item.
        */
       onSelect: (event: Event) => void;
+      /**
+       * Secondary text displayed below the label.
+       * Exposed as the item's accessible description rather than its name.
+       */
+      description?: ReactNode;
       children: ReactNode;
     }>;
 
-  export const menuItemStyles = tw(selectableItemStyles);
-  export const selectItemStyles = tw(selectableItemStyles);
+  export const menuItemClassName = tw(selectableItemClassName);
+  export const selectItemClassName = tw(selectableItemClassName);
 
   /**
    * <AxoBaseMenu.Group>
@@ -338,8 +393,8 @@ export namespace AxoBaseMenu {
     children: ReactNode;
   }>;
 
-  export const menuGroupStyles = tw(baseGroupStyles);
-  export const selectGroupStyles = tw(baseGroupStyles);
+  export const menuGroupClassName = tw(baseGroupClassName);
+  export const selectGroupClassName = tw(baseGroupClassName);
 
   /**
    * <AxoBaseMenu.Label>
@@ -350,24 +405,25 @@ export namespace AxoBaseMenu {
     children: ReactNode;
   }>;
 
-  const baseLabelStyles = tw(
-    labeledItemStyles,
-    'type-body-small text-secondary'
+  const baseLabelClassName = tw(
+    labeledItemClassName,
+    'type-body-small text-secondary',
+    'forced-colors:text-[CanvasText]'
   );
 
-  export const menuLabelStyles = tw(baseLabelStyles);
-  export const selectLabelStyles = tw(baseLabelStyles);
+  export const menuLabelClassName = tw(baseLabelClassName);
+  export const selectLabelClassName = tw(baseLabelClassName);
 
   /**
    * <AxoBaseMenu.Header>
    * --------------------------------------------------------------------------
    */
 
-  export const menuHeaderStyles = tw('col-span-full col-start-1 p-1.5');
-  export const menuHeaderLabelStyles = tw(
+  export const menuHeaderClassName = tw('col-span-full col-start-1 p-1.5');
+  export const menuHeaderLabelClassName = tw(
     'block truncate type-title-small text-primary'
   );
-  export const menuHeaderDescriptionStyles = tw(
+  export const menuHeaderDescriptionClassName = tw(
     'block truncate type-caption text-secondary'
   );
 
@@ -390,7 +446,7 @@ export namespace AxoBaseMenu {
       children: ReactNode;
     }>;
 
-  export const menuCheckboxItemStyles = tw(selectableItemStyles);
+  export const menuCheckboxItemClassName = tw(selectableItemClassName);
 
   /**
    * <AxoBaseMenu.RadioGroup>
@@ -409,7 +465,7 @@ export namespace AxoBaseMenu {
     children: ReactNode;
   }>;
 
-  export const menuRadioGroupStyles = tw(baseGroupStyles);
+  export const menuRadioGroupClassName = tw(baseGroupClassName);
 
   /**
    * <AxoBaseMenu.RadioItem>
@@ -425,24 +481,27 @@ export namespace AxoBaseMenu {
       children: ReactNode;
     }>;
 
-  export const menuRadioItemStyles = tw(selectableItemStyles);
+  export const menuRadioItemClassName = tw(selectableItemClassName);
 
   /**
    * <AxoBaseMenu.Separator>
    * --------------------------------------------------------------------------
    */
 
-  const baseSeparatorStyles = tw('my-1 border-t-[0.5px] border-primary');
+  const baseSeparatorClassName = tw('my-1 border-t-[0.5px] border-primary');
 
-  export const menuSeparatorStyles = tw(
+  export const menuSeparatorClassName = tw(
     'col-span-full col-start-1 mx-0.5',
-    baseSeparatorStyles
+    baseSeparatorClassName
   );
-  export const menuContentSeparatorStyles = tw(
+  export const menuContentSeparatorClassName = tw(
     'col-span-full col-start-2',
-    baseSeparatorStyles
+    baseSeparatorClassName
   );
-  export const selectSeperatorStyles = tw(baseItemStyles, baseSeparatorStyles);
+  export const selectSeperatorClassName = tw(
+    baseItemClassName,
+    baseSeparatorClassName
+  );
 
   /**
    * <AxoBaseMenu.Sub>
@@ -463,8 +522,8 @@ export namespace AxoBaseMenu {
       children: ReactNode;
     }>;
 
-  export const menuSubTriggerStyles = tw(
-    navigableItemStyles,
+  export const menuSubTriggerClassName = tw(
+    navigableItemClassName,
     'data-[state=open]:not-data-highlighted:bg-primary',
     'forced-colors:data-[state=open]:not-data-highlighted:bg-[Highlight]',
     'forced-colors:data-[state=open]:not-data-highlighted:text-[HighlightText]'
@@ -479,9 +538,9 @@ export namespace AxoBaseMenu {
     children: ReactNode;
   }>;
 
-  export const menuSubContentStyles = tw(
-    baseContentStyles,
+  export const menuSubContentClassName = tw(
+    baseContentClassName,
     'max-h-(--radix-popper-available-height) scrollbar-width-none overflow-auto',
-    baseContentGridStyles
+    baseContentGridClassName
   );
 }

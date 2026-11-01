@@ -2,8 +2,20 @@
   "icu:AxoAlertDialog.Cancel": {
     "messageformat": "Anulo"
   },
+  "icu:AxoAlertDialog.Ok": {
+    "messageformat": "OK"
+  },
   "icu:AxoButton.Pending": {
     "messageformat": "Pezull"
+  },
+  "icu:AxoColorSlider.Hue": {
+    "messageformat": "Hue"
+  },
+  "icu:AxoColorSlider.Saturation": {
+    "messageformat": "Saturation"
+  },
+  "icu:AxoColorSlider.Lightness": {
+    "messageformat": "Lightness"
   },
   "icu:AxoDialog.Back": {
     "messageformat": "Mbrapsht"
@@ -73,12 +85,6 @@
   },
   "icu:LinkedDevicesOnboardingDialog__bullet--2": {
     "messageformat": "Pajisja kryesore menaxhon pajisjet e lidhura. Mund të lidhësh deri në 5 pajisje."
-  },
-  "icu:LinkedDevicesOnboardingDialog__bullet--3": {
-    "messageformat": "Parametrat e llogarisë menaxhohen vetëm në pajisjen kryesore, duke përfshirë parametrat e llogarisë dhe kopjeruajtjet."
-  },
-  "icu:LinkedDevicesOnboardingDialog__bullet--3--1": {
-    "messageformat": "Parametrat e llogarisë dhe kopjeruajtjet mund të menaxhohen vetëm në pajisjen kryesore."
   },
   "icu:LinkedDevicesOnboardingDialog__bullet--3--2": {
     "messageformat": "Parametrat e llogarisë dhe kopjeruajtjet e sigurta të Signal mund të menaxhohen vetëm nga pajisja kryesore."
@@ -281,6 +287,9 @@
   "icu:archivedConversations": {
     "messageformat": "Bisedat e arkivuara"
   },
+  "icu:LeftPane__MoreActionsLabel": {
+    "messageformat": "More actions"
+  },
   "icu:LeftPane__MoreActionsMenu__AddChatFolder": {
     "messageformat": "Shto dosjen e bisedës"
   },
@@ -382,9 +391,6 @@
   },
   "icu:NavTabs__ItemIconLabel--UnreadCount": {
     "messageformat": "{count,number} të palexuara"
-  },
-  "icu:NavTabs__ItemIconLabel--MarkedUnread": {
-    "messageformat": "Të shënuara si të palexuara"
   },
   "icu:NavTabs__ItemLabel--Chats": {
     "messageformat": "Bisedat"
@@ -653,20 +659,11 @@
   "icu:SafetyNumberNotReady__learn-more": {
     "messageformat": "Mësoni më tepër"
   },
-  "icu:KeyTransparencyErrorDialog__Title": {
-    "messageformat": "Verifikimi automatik i kodit nuk është aktualisht i disponrueshëm për pajisjen tënde. Të dërgohet regjistri i diagnostikimeve?"
-  },
   "icu:KeyTransparencyErrorDialog__Title-v2": {
     "messageformat": "Verifikimi automatik i kodit nuk është aktualisht i disponueshëm për pajisjen. Dëshiron të dërgosh një raport për të na ndihmuar të përmirësohemi?"
   },
-  "icu:KeyTransparencyErrorDialog__Description": {
-    "messageformat": "Regjistrat e diagnostifikimeve na ndihmojnë të diagnostikojmë dhe rregullojmë problemin dhe nuk përmbajnë informacion identifikues."
-  },
   "icu:KeyTransparencyErrorDialog__Description-v2": {
     "messageformat": "Përfshirja e regjistrave të diagnostikimit na ndihmojnë të diagnostikojmë dhe të zgjidhim problemin dhe nuk përmban informacion identifikues. Shpërndarja është opsionale."
-  },
-  "icu:KeyTransparencyErrorDialog__ShareDebugLog__Label": {
-    "messageformat": "Ndaj regjistrin e diagnostikimit"
   },
   "icu:KeyTransparencyErrorDialog__ShareDebugLog__Label-v2": {
     "messageformat": "Përfshij regjistër diagnostikimi"
@@ -685,6 +682,9 @@
   },
   "icu:KeyTransparencyOnboardingDialog__Description": {
     "messageformat": "Për kontaktet me të cilët je lidhur me anë të numrit të telefonit, Signal mund të konfirmojë automatikisht nëse lidhja është e sigurt duke përdorur një proces të quajtur kod transparence. Për siguri të shtuar, mund t’i verifikosh lidhjet manualisht duke përdorur kod QR ose duke krahasuar numrat e sigurisë."
+  },
+  "icu:KeyTransparencyOnboardingDialog__Description-v2": {
+    "messageformat": "<paragraph>Për kontaktet me të cilët je lidhur me anë të numrit të telefonit, Signal mund të konfirmojë automatikisht nëse lidhja është e sigurt duke përdorur një proces të quajtur kod transparence.</paragraph><paragraph>Për siguri të shtuar, mund t’i verifikosh lidhjet manualisht duke përdorur kod QR ose duke krahasuar numrat e sigurisë.</paragraph>"
   },
   "icu:KeyTransparencyOnboardingDialog__Continue": {
     "messageformat": "Vazhdo"
@@ -1493,6 +1493,9 @@
   "icu:ConversationMerge--learn-more": {
     "messageformat": "Mësoni më tepër"
   },
+  "icu:ConversationMerge--explainer-dialog--label": {
+    "messageformat": "Historiku i mesazheve u bashkua"
+  },
   "icu:ConversationMerge--explainer-dialog--line-1": {
     "messageformat": "Pas mesazheve me {obsoleteConversationTitle} mësove se ky numër i përket {conversationTitle}. Numri i tyre i telefonit është privat."
   },
@@ -1753,6 +1756,9 @@
   },
   "icu:Preferences__EditChatFolderPage__SelectChatsDialog__Search__Placeholder": {
     "messageformat": "Kërko"
+  },
+  "icu:Preferences__EditChatFolderPage__SelectChatsDialog__NoChats": {
+    "messageformat": "Asnjë bisedë"
   },
   "icu:Preferences__EditChatFolderPage__SelectChatsDialog__ChatTypesSection__Title": {
     "messageformat": "Llojet e bisedave"
@@ -2246,6 +2252,24 @@
   "icu:deleteAccountDialogBody": {
     "messageformat": "Kjo do të fshijë informacionin e llogarisë, profilin dhe të gjitha mesazhet. Gjithashtu do të hiqesh nga të gjitha grupet në Signal. Aplikacioni do të mbyllet pasi të përfundojë ky proces."
   },
+  "icu:DeleteAccountConfirmDialog--Title": {
+    "messageformat": "Delete account"
+  },
+  "icu:DeleteAccountConfirmDialog--Description": {
+    "messageformat": "This will delete your account info, profile, and all of your messages. You will also be removed from all Signal groups."
+  },
+  "icu:DeleteAccountConfirmDialog--ConfirmNumber": {
+    "messageformat": "Confirm your phone number"
+  },
+  "icu:DeleteAccountConfirmDialog--CountryCodePlaceholder": {
+    "messageformat": "Country code"
+  },
+  "icu:DeleteAccountConfirmDialog--NumberPlaceholder": {
+    "messageformat": "Phone number"
+  },
+  "icu:DeleteAccountConfirmDialog--DeleteButton": {
+    "messageformat": "Delete"
+  },
   "icu:deleteOldIndexedDBData": {
     "messageformat": "Ke të dhëna të vjetra prej një instalimi të mëparshëm të Signal-it për Desktop. Nëse vendos të vazhdosh, do të fshihen dhe do t’ia filloni nga e para."
   },
@@ -2398,9 +2422,6 @@
   },
   "icu:callRingtoneNotificationDescription": {
     "messageformat": "Luani tinguj thirrjeje"
-  },
-  "icu:callSystemNotificationDescription": {
-    "messageformat": "Shfaq njoftime për thirrje"
   },
   "icu:incomingCallNotificationDescription": {
     "messageformat": "Aktivizo thirrje ardhëse"
@@ -2999,6 +3020,9 @@
   "icu:FunPanelSticker__SubNavLabel": {
     "messageformat": "Paketa ngjitësesh"
   },
+  "icu:FunPanelStickers__SubNavCategoryLabel--Favorites": {
+    "messageformat": "Favorites"
+  },
   "icu:FunPanelStickers__SubNavCategoryLabel--Recents": {
     "messageformat": "Përdorur Së Fundi"
   },
@@ -3010,6 +3034,9 @@
   },
   "icu:FunPanelStickers__SectionTitle--Recents": {
     "messageformat": "Përdorur Së Fundi"
+  },
+  "icu:FunPanelStickers__SectionTitle--Favorites": {
+    "messageformat": "Favorites"
   },
   "icu:FunPanelStickers__SectionTitle--Featured": {
     "messageformat": "Sugjeruar"
@@ -3524,6 +3551,9 @@
   "icu:MessageRequests--unblock-group-confirm-body": {
     "messageformat": "Anëtarë të grupit do të jenë në gjendje t’ju rishtojnë te ky grup."
   },
+  "icu:MessageRequests--unblock-signal-confirm-body": {
+    "messageformat": "Do të marrësh përditësime dhe lajme nga Signal."
+  },
   "icu:MessageRequests--block-and-report-spam-success-toast": {
     "messageformat": "I raportuar si mesazh i padëshiruar dhe është bllokuar."
   },
@@ -3538,6 +3568,9 @@
   },
   "icu:MessageRequests--block-group-confirm-body": {
     "messageformat": "S’do të merrni më mesazhe apo përditësime nga ky grup, dhe anëtarët e tij s’do të jenë në gjendje t’ju shtojnë sërish te ky grup."
+  },
+  "icu:MessageRequests--block-signal-confirm-body": {
+    "messageformat": "Nuk do të marrësh më përditësime dhe lajme nga Signal."
   },
   "icu:MessageRequests--reportAndMaybeBlock": {
     "messageformat": "Raporto..."
@@ -3866,6 +3899,9 @@
   "icu:callingDeviceSelection__settings": {
     "messageformat": "Parametrat"
   },
+  "icu:callingDeviceSelection__settings-v2": {
+    "messageformat": "Call Settings"
+  },
   "icu:calling__participants--pluralized": {
     "messageformat": "{people, plural, one {{people,number} në telefonatë} other {{people,number} në telefonatë}}"
   },
@@ -3970,6 +4006,15 @@
   },
   "icu:callingDeviceSelection__select--default": {
     "messageformat": "Parazgjedhje"
+  },
+  "icu:callingDeviceSelection__select--default-nonwin": {
+    "messageformat": "Default: {deviceName}"
+  },
+  "icu:callingDeviceSelection__select--default_console": {
+    "messageformat": "Default: {deviceName}"
+  },
+  "icu:callingDeviceSelection__select--default_communications": {
+    "messageformat": "Default Communications: {deviceName}"
   },
   "icu:muteNotificationsTitle": {
     "messageformat": "Hiqu zërin njoftimeve"
@@ -4823,6 +4868,69 @@
   "icu:CompositionArea__AttachMenu__Poll": {
     "messageformat": "Sondazh"
   },
+  "icu:CompositionArea__AttachMenu__Contact": {
+    "messageformat": "Contact"
+  },
+  "icu:ShareContactDialog__SelectContact__Title": {
+    "messageformat": "Select contact"
+  },
+  "icu:ShareContactDialog__SelectContact__SearchPlaceholder": {
+    "messageformat": "Search"
+  },
+  "icu:ShareContactDialog__SelectContact__EmptyState": {
+    "messageformat": "No contacts"
+  },
+  "icu:ShareContactDialog__SelectContact__NoResults": {
+    "messageformat": "No results for “{searchQuery}”"
+  },
+  "icu:ShareContactDialog__ShareContact__Title": {
+    "messageformat": "Share contact"
+  },
+  "icu:ShareContactDialog__ShareContact__Description": {
+    "messageformat": "Anyone you share this profile with will be able to message {name}."
+  },
+  "icu:ShareContactDialog__ShareContact__Send": {
+    "messageformat": "Send contact"
+  },
+  "icu:ShareContactDialog__ShareContact__EditName": {
+    "messageformat": "Edit name"
+  },
+  "icu:ShareContactDialog__EditName__Title": {
+    "messageformat": "Edit name"
+  },
+  "icu:ShareContactDialog__EditName__Prefix": {
+    "messageformat": "Prefix"
+  },
+  "icu:ShareContactDialog__EditName__GivenName": {
+    "messageformat": "First name"
+  },
+  "icu:ShareContactDialog__EditName__MiddleName": {
+    "messageformat": "Middle name"
+  },
+  "icu:ShareContactDialog__EditName__FamilyName": {
+    "messageformat": "Last name"
+  },
+  "icu:ShareContactDialog__EditName__Suffix": {
+    "messageformat": "Suffix"
+  },
+  "icu:ShareContactDialog__EditName__Organization": {
+    "messageformat": "Organization"
+  },
+  "icu:ShareContactDialog__ShareContact__EditPhoto": {
+    "messageformat": "Edit photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__Title": {
+    "messageformat": "Select a photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__ContactPhoto": {
+    "messageformat": "Contact photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__ProfilePhoto": {
+    "messageformat": "Profile photo"
+  },
+  "icu:ShareContactDialog__SelectPhoto__DefaultAvatar": {
+    "messageformat": "Default avatar"
+  },
   "icu:CompositionArea--attach-plus": {
     "messageformat": "Shto bashkëngjitje ose sondazh"
   },
@@ -4861,9 +4969,6 @@
   },
   "icu:CompositionInput__editing-message": {
     "messageformat": "Përpuno mesazhin"
-  },
-  "icu:countMutedConversationsDescription": {
-    "messageformat": "Përfshi bisedat pa zë në numërimin e distinktivit"
   },
   "icu:ContactModal--nickname": {
     "messageformat": "Pseudonimi"
@@ -5263,18 +5368,6 @@
   },
   "icu:UnreadReminders__notification__replySummary--many": {
     "messageformat": "{replyCount, plural, one {{replyCount,number} përgjigje nga {person1} dhe të tjerë} other {{replyCount,number} përgjigje nga {person1} dhe të tjerë}}"
-  },
-  "icu:ConversationNotificationsSettings__mentions__label": {
-    "messageformat": "Përmendje"
-  },
-  "icu:ConversationNotificationsSettings__mentions__info": {
-    "messageformat": "Njoftohu kur emri yt përmendet në bisedat pa zë"
-  },
-  "icu:ConversationNotificationsSettings__mentions__select__always-notify": {
-    "messageformat": "Njofto përherë"
-  },
-  "icu:ConversationNotificationsSettings__mentions__select__dont-notify-for-mentions-if-muted": {
-    "messageformat": "Mos njofto, nëse është pa zë"
   },
   "icu:GroupLinkManagement--clipboard": {
     "messageformat": "Lidhja e grupit u kopjua."
@@ -6193,9 +6286,6 @@
   "icu:Preferences__SignalAccountKeys__Description": {
     "messageformat": "Ruaje në një vend të sigurt; të dhënat e hyrjes nevojiten për të rikthyer llogarinë dhe të dhënat. Mos ia trego askujt."
   },
-  "icu:Preferences__SignalAccountKeys__AccountKey": {
-    "messageformat": "Kodi i llogarisë"
-  },
   "icu:Preferences__SignalAccountKeys__AccountID": {
     "messageformat": "ID-ja e llogarisë"
   },
@@ -6257,7 +6347,7 @@
     "messageformat": "PIN Signal-i"
   },
   "icu:Preferences--signal-pin__footer": {
-    "messageformat": "PINs keep information stored with Signal encrypted so only you can access it. Your PIN cannot be recovered. Your profile, settings, and contacts will restore when you reinstall Signal. <learnMoreLink>Learn more</learnMoreLink>"
+    "messageformat": "Kodet PIN e mbrojnë informacionin e ruajtur në Signal duke e koduar, në mënyrë që vetëm ti të kesh qasje në të. Kodi PIN nuk mund të rikthehet. Profili, parametrat dhe kontaktet do të rikthehen kur ta riinstalosh aplikacionin. <learnMoreLink>Mëso më shumë</learnMoreLink>"
   },
   "icu:Preferences--signal-pin-advanced-settings": {
     "messageformat": "Parametrat e mëtejshme të PIN"
@@ -6272,19 +6362,19 @@
     "messageformat": "Nëse çaktivizoni PIN-in, do të humbni krejt të dhënat, kur riregjistroni Signal-in, veç në i kopjeruajtshi dhe rikthefshi dorazi. S\\’mund të aktivizoni Kyçje Regjistrimi, teksa PIN-i është i çaktivizuar."
   },
   "icu:DisableSignalPinErrorDialog--reg-lock--title": {
-    "messageformat": "Disable PIN failed due to registration lock"
+    "messageformat": "Çaktivizimi i kodit PIN dështoi për shkak të veçorisë \"Kyçje e regjistrimit\""
   },
   "icu:DisableSignalPinErrorDialog--reg-lock--body": {
-    "messageformat": "You must disable Registration Lock before disabling your PIN."
+    "messageformat": "Duhet të çaktivizosh veçorinë \"Kyçje e regjistrimit\" përpara se të çaktivizosh kodin PIN."
   },
   "icu:DisableSignalPinErrorDialog--reg-lock--ok": {
     "messageformat": "OK"
   },
   "icu:DisableSignalPinErrorDialog--backups--title": {
-    "messageformat": "Disable PIN failed due to backups"
+    "messageformat": "Çaktivizimi i kodit PIN dështoi për shkak të kopjeruajtjeve"
   },
   "icu:DisableSignalPinErrorDialog--backups--body": {
-    "messageformat": "You must disable backups before disabling your PIN."
+    "messageformat": "Duhet të çaktivizosh kopjeruajtjet përpara se të çaktivizosh kodin PIN."
   },
   "icu:Preferences--enable-signal-pin": {
     "messageformat": "Aktivizoje PIN-in"
@@ -6302,10 +6392,7 @@
     "messageformat": "Kyçje Regjistrimi"
   },
   "icu:Preferences--registration-lock__footer": {
-    "messageformat": "Require your Signal PIN to register your phone number again with Signal."
-  },
-  "icu:Preferences--notification-content": {
-    "messageformat": "Lëndë njoftimi"
+    "messageformat": "Kërko kodin PIN të Signal për të regjistruar sërish numrin e telefonit në Signal."
   },
   "icu:Preferences__Chats__TextInputSection__Title": {
     "messageformat": "Fusha e tekstit"
@@ -6318,9 +6405,6 @@
   },
   "icu:Preferences__Notifications__SoundsSection__Title": {
     "messageformat": "Tingujt"
-  },
-  "icu:Preferences__Notifications__AppBadgeSection__Title": {
-    "messageformat": "Distinktivi i aplikacionit"
   },
   "icu:Preferences__Notifications__AppBadgeSection__Title-v2": {
     "messageformat": "Distinktivët e mesazheve të palexuara"
@@ -6700,6 +6784,9 @@
   "icu:Preferences--blocked-users--description": {
     "messageformat": "Përdoruesit e bllokuar nuk do të mund të telefonojnë apo të dërgojnë mesazhe"
   },
+  "icu:Preferences--add-blocked": {
+    "messageformat": "Shto përdoruesin ose grupin e bllokuar"
+  },
   "icu:Preferences--blocked-users": {
     "messageformat": "Përdoruesit e bllokuar"
   },
@@ -6708,6 +6795,12 @@
   },
   "icu:Preferences--blocked--blocked-on": {
     "messageformat": "Bllokuar më {blockedAt}"
+  },
+  "icu:Preferences--BlockChooser--Done": {
+    "messageformat": "U bë"
+  },
+  "icu:Preferences--BlockChooser--Search--Placeholder": {
+    "messageformat": "Kërko"
   },
   "icu:Preferences--signal-backups": {
     "messageformat": "Kopjeruajtjet e sigurta të Signal"
@@ -7105,6 +7198,36 @@
   "icu:InstallScreenUpdateDialog--cannot-update__body": {
     "messageformat": "Signal Desktop dështoi të përditësohej, por është i mundshëm një version i ri. Shko te {downloadUrl} dhe instalo manualisht versionin e ri, më pas ose kontakto me asistencën ose paraqit një ankesë në lidhje me këtë problem."
   },
+  "icu:EntryPoint--signal-logo": {
+    "messageformat": "Signal Logo"
+  },
+  "icu:EntryPoint--Title--Line1": {
+    "messageformat": "Take privacy with you."
+  },
+  "icu:EntryPoint--Title--Line2": {
+    "messageformat": "Be yourself in every message."
+  },
+  "icu:EntryPoint--link-button": {
+    "messageformat": "Link your account"
+  },
+  "icu:EntryPoint--more-options-button": {
+    "messageformat": "More options"
+  },
+  "icu:EntryPoint--nonprofit": {
+    "messageformat": "Signal is a 501c3 nonprofit"
+  },
+  "icu:EntryPoint--terms": {
+    "messageformat": "Terms & privacy policy"
+  },
+  "icu:EntryPoint--MoreOptions--Title": {
+    "messageformat": "More options"
+  },
+  "icu:EntryPoint--MoreOptions--RegistrationButton--Title": {
+    "messageformat": "Create a new account"
+  },
+  "icu:EntryPoint--MoreOptions--RegistrationButton--Description": {
+    "messageformat": "Create a new Signal account using your phone number."
+  },
   "icu:StandaloneRegistration--signal-logo": {
     "messageformat": "Logoja e Signal"
   },
@@ -7124,7 +7247,7 @@
     "messageformat": "Të lutem, provo përsëri për {duration}"
   },
   "icu:StandaloneRegistration--PhoneNumber--RegionCodeSelector--Label": {
-    "messageformat": "Select region code"
+    "messageformat": "Përzgjidhni Kod Vendi"
   },
   "icu:StandaloneRegistration--PhoneNumber--placeholder": {
     "messageformat": "Numër telefoni"
@@ -7299,6 +7422,21 @@
   },
   "icu:StandaloneRegistration--VerificationCode--CannotSendCodeTemporary--ok-button": {
     "messageformat": "OK"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Title": {
+    "messageformat": "Having trouble registering?"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet1": {
+    "messageformat": "Make sure your phone has a cellular signal to receive your SMS or call"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet2": {
+    "messageformat": "Confirm you can receive a phone call to the number"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Bullet3": {
+    "messageformat": "Check that you have entered your phone number correctly"
+  },
+  "icu:StandaloneRegistration--VerificationCode--HavingTrouble--Footer": {
+    "messageformat": "If you still can’t register, follow these <troubleshootingLink>troubleshooting steps</troubleshootingLink> or <contactSupportLink>Contact Support</contactSupportLink>."
   },
   "icu:StandaloneRegistration--ProfileEntry--header": {
     "messageformat": "Ujdisni profilin tuaj"
@@ -7649,10 +7787,10 @@
     "messageformat": "Aktivizo \"Signal\""
   },
   "icu:MediaPermissionsModal__step-2--windows--microphone": {
-    "messageformat": "Enable microphone access for Signal"
+    "messageformat": "Aktivizo qasjen në mikrofon për Signal"
   },
   "icu:MediaPermissionsModal__step-2--windows--camera": {
-    "messageformat": "Enable camera access for Signal"
+    "messageformat": "Aktivizo qasjen në kamerë për Signal"
   },
   "icu:MediaPermissionsModal__open": {
     "messageformat": "Shko te parametrat"
@@ -8204,7 +8342,7 @@
     "messageformat": "Emrat e përdoruesve bashkohen gjithmonë me një grup numrash."
   },
   "icu:EditUsernameModalBody__discriminator-label": {
-    "messageformat": "Username digits"
+    "messageformat": "Shifrat e emrit të përdoruesit"
   },
   "icu:EditUsernameModalBody__learn-more": {
     "messageformat": "Mëso më tepër"
@@ -8340,13 +8478,13 @@
     "messageformat": "Ndrysho kodin PIN të Signal"
   },
   "icu:PinChangeModal__title--create--without-pin": {
-    "messageformat": "Create your Signal PIN"
+    "messageformat": "Krijo kodin PIN për Signal"
   },
   "icu:PinChangeModal__body--create": {
     "messageformat": "Mundeni ta ndryshoni PIN-in tuaj, sa kohë që kjo pajisje është e regjistruar. <learnMoreLink>Mëso më shumë</learnMoreLink>"
   },
   "icu:PinChangeModal__body--create--without-pin": {
-    "messageformat": "PINs keep information stored with Signal encrypted so only you can access it. Your profile, settings, and contacts will restore when you reinstall. You won't need your PIN to open the app. <learnMoreLink>Learn more</learnMoreLink>"
+    "messageformat": "Kodet PIN e mbrojnë informacionin e ruajtur në Signal duke e koduar, në mënyrë që vetëm ti të kesh qasje në të. Profili, parametrat dhe kontaktet do të rikthehen kur ta riinstalosh aplikacionin. Nuk do të të duhet kodi PIN për të hapur aplikacionin. <learnMoreLink>Mëso më shumë</learnMoreLink>"
   },
   "icu:PinChangeModal__title--confirm": {
     "messageformat": "Ripohoni PIN-in tuaj për Signal"
@@ -8588,12 +8726,6 @@
   "icu:CallLinkPendingParticipantModal__DenyButtonLabel": {
     "messageformat": "Refuzo hyrjen"
   },
-  "icu:CallLinkRestrictionsSelect__Option--Off": {
-    "messageformat": "Joaktiv"
-  },
-  "icu:CallLinkRestrictionsSelect__Option--On": {
-    "messageformat": "Aktiv"
-  },
   "icu:CallLinkAddNameModal__Title": {
     "messageformat": "Shto emrin e thirrjes"
   },
@@ -8641,6 +8773,39 @@
   },
   "icu:SaveMultiDialog__title": {
     "messageformat": "Ruaj bashkëngjitjet"
+  },
+  "icu:EmbeddedContact__message": {
+    "messageformat": "Mesazh"
+  },
+  "icu:ContactDetail__message": {
+    "messageformat": "Mesazh"
+  },
+  "icu:ContactDetail__add-to-group": {
+    "messageformat": "Shtoje në grup"
+  },
+  "icu:ContactDetail__nickname": {
+    "messageformat": "Pseudonimi"
+  },
+  "icu:ContactDetail__note": {
+    "messageformat": "Shënime"
+  },
+  "icu:email-v2": {
+    "messageformat": "Email"
+  },
+  "icu:home-v2": {
+    "messageformat": "Kryefaqja"
+  },
+  "icu:mobile-v2": {
+    "messageformat": "Celular"
+  },
+  "icu:work-v2": {
+    "messageformat": "Pune"
+  },
+  "icu:phone-v2": {
+    "messageformat": "telefon"
+  },
+  "icu:address-v2": {
+    "messageformat": "Adresë"
   },
   "icu:WhatsNew__modal-title": {
     "messageformat": "Ç’ka të Re"
@@ -8806,6 +8971,9 @@
   },
   "icu:DonationReceipt__footer-text-v2": {
     "messageformat": "Faleminderit që mbështet Signal. Kontributi yt ndihmon në nxitjen e misionit të mbrojtjes së shprehjes së lirë dhe mundësimit të komunikimit të sigurt global për miliona njerëz në mbarë botën, përmes teknologjisë së privatësisë me burim të hapur. Nëse je banor i Shteteve të Bashkuara, të lutem, ruaje këtë faturë për të dhënat tatimore. Signal Technology Foundation është një ent jofitimprurës, i përjashtuar nga taksat, në Shtetet e Bashkuara sipas seksionit 501c3 të Kodit të të Ardhurave të Brendshme. Numri i ID-së federale të tatimeve është 82-4506840. Signal nuk ka ofruar asnjë mall ose shërbim në këmbim të këtij kontributi."
+  },
+  "icu:MessageCta__Donate": {
+    "messageformat": "Dhuro tani"
   },
   "icu:Donations__OfflineTooltip": {
     "messageformat": "Je jashtë linje. Të lutem, lidh internetin për të përfunduar dhurimin."
@@ -9005,6 +9173,9 @@
   "icu:CallQualitySurvey__WhatIssuesDidYouHave__SomethingElse__TextArea__AccessibilityLabel": {
     "messageformat": "Përshkrimi i problemeve"
   },
+  "icu:CallQualitySurvey__WhatIssuesDidYouHave__SomethingElse__TextArea__Placeholder": {
+    "messageformat": "Përshkruaj problemin"
+  },
   "icu:CallQualitySurvey__WhatIssuesDidYouHave__SomethingElse__TextArea__HelpText": {
     "messageformat": "Të lutem, përfshi çdo detaj që lidhet me çështjen. Çdo gjë që ndan këtu do të mbahet private dhe do të përdoret vetëm për të ndihmuar në përmirësimin e thirrjeve në Signal."
   },
@@ -9114,16 +9285,25 @@
     "messageformat": "Rregullme të vogla, riparime të gabimeve dhe përmirësime të mbarëvajtjes.  Faleminderit që përdorni Signal!",
     "ignoreUnused": true
   },
-  "icu:WhatsNew__8.26--0": {
-    "messageformat": "Përmirësime në kërkimin e anëtarëve të grupit."
-  },
-  "icu:WhatsNew__8.27--0": {
-    "messageformat": "Parametra të përmirësuara të njoftimeve, me mundësi të zgjeruara për mënyrën dhe kohën e shfaqjes së tyre."
-  },
   "icu:WhatsNew__8.30--0": {
-    "messageformat": "Thanks to a few performance improvements, your CPU will be slightly happier during video calls (even if you're not smiling)."
+    "messageformat": "Përmirësime të performancës për thirrjet me video."
   },
   "icu:WhatsNew__8.30--1": {
-    "messageformat": "We also added a convenient shortcut to open your system settings on Windows if you try to join a video call and Signal doesn't have permission to access the camera. Now it's easier to see what you need to do so that people can see you."
+    "messageformat": "Kemi shtuar gjithashtu një shkurtore të dobishme për të hapur parametrat e sistemit në Windows, nëse përpiqesh t’i bashkohesh një thirrjeje me video dhe Signal nuk ka leje për të përdorur kamerën."
+  },
+  "icu:WhatsNew__8.32--0": {
+    "messageformat": "Filtri i mesazheve të palexuara tashmë mbështetet edhe te dosjet e mesazheve dhe te ndërfaqja e kërkimit."
+  },
+  "icu:WhatsNew__8.32--1": {
+    "messageformat": "Besueshmëri e përmirësuar e ngarkimit edhe në kushte të dobëta të rrjetit. Faleminderit, <GH3mmmbulus></GH3mmmbulus>!"
+  },
+  "icu:WhatsNew__8.32--2": {
+    "messageformat": "Shkurtorja &quot;(N)&quot; tani i referohet saktë figurës emoxhi me gishtin e madh poshtë. Ngritja e gishtit të madh lart <lnicola></lnicola> për rregullimin e gabimit."
+  },
+  "icu:WhatsNew__8.34--0": {
+    "messageformat": "Signal Desktop now supports contact sharing too, so you can maintain eye contact with your computer screen without having to make physical contact with your smartphone."
+  },
+  "icu:WhatsNew__8.34--1": {
+    "messageformat": "Improved handling and performance for connected audio devices."
   }
 }

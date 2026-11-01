@@ -35,8 +35,9 @@ import type { PropsDataType as TimelinePropsType } from '../../components/conver
 import { assertDev } from '../../util/assert.std.ts';
 import { isConversationUnregistered } from '../../util/isConversationUnregistered.dom.ts';
 import { filterAndSortConversations } from '../../util/filterAndSortConversations.std.ts';
-import type { ContactNameColorType } from '../../types/Colors.std.ts';
-import { ContactNameColors } from '../../types/Colors.std.ts';
+import type { ChatStyle } from '../../types/ChatStyle.std.ts';
+import type { ContactNameColorType } from '../../types/ContactNameColor.std.ts';
+import { ContactNameColors } from '../../types/ContactNameColor.std.ts';
 import type { AvatarDataType } from '../../types/Avatar.std.ts';
 import type { AciString, ServiceIdString } from '../../types/ServiceId.std.ts';
 import { normalizeServiceId } from '../../types/ServiceId.std.ts';
@@ -143,14 +144,14 @@ export const getConversationLookup = createSelector(
   }
 );
 
-const getConversationsByServiceId = createSelector(
+export const getConversationsByServiceId = createSelector(
   getConversations,
   (state: ConversationsStateType): ConversationLookupType => {
     return state.conversationsByServiceId;
   }
 );
 
-const getConversationsByE164 = createSelector(
+export const getConversationsByE164 = createSelector(
   getConversations,
   (state: ConversationsStateType): ConversationLookupType => {
     return state.conversationsByE164;
@@ -457,38 +458,46 @@ export const _getLeftPaneLists = ({
   const pinnedConversationIdsSet = new Set(pinnedConversationIds);
 
   for (let conversation of Object.values(conversationLookup)) {
-    if (
-      !_shouldIncludeInChatFolder(
-        conversation,
-        selectedChatFolder,
-        stableSelectedConversationIdInChatFolder
-      )
-    ) {
-      continue;
-    }
+    const isSelected = selectedConversationId === conversation.id;
 
-    if (selectedConversationId === conversation.id) {
+    if (isSelected) {
       conversation = {
         ...conversation,
         isSelected: true,
       };
     }
 
-    // We always show pinned conversations
-    if (
-      conversation.isPinned &&
-      pinnedConversationIdsSet.has(conversation.id)
-    ) {
+    const isPinned =
+      conversation.isPinned && pinnedConversationIdsSet.has(conversation.id);
+
+    const matchesChatFolder = _shouldIncludeInChatFolder(
+      conversation,
+      selectedChatFolder,
+      stableSelectedConversationIdInChatFolder
+    );
+
+    if (isPinned && matchesChatFolder) {
       pinnedConversations.push(conversation);
       continue;
     }
 
-    if (conversation.activeAt) {
-      if (conversation.isArchived) {
-        archivedConversations.push(conversation);
-      } else {
-        conversations.push(conversation);
-      }
+    const isActive =
+      conversation.activeAt != null && conversation.activeAt !== 0;
+
+    if (!isActive) {
+      continue;
+    }
+
+    const isArchived = conversation.isArchived ?? false;
+
+    // ignore current chat folder
+    if (isArchived) {
+      archivedConversations.push(conversation);
+      continue;
+    }
+
+    if (matchesChatFolder) {
+      conversations.push(conversation);
     }
   }
 
@@ -720,22 +729,43 @@ function canComposeConversation(
   );
 }
 
-export const getAllComposableConversations = createSelector(
+const getAllDisplayReadyConversations = createSelector(
   getConversationLookup,
   (conversationLookup: ConversationLookupType): Array<ConversationType> =>
     Object.values(conversationLookup).filter(
       conversation =>
-        !isSignalConversation(conversation) &&
         !conversation.isBlocked &&
         !conversation.removalStage &&
         !conversation.terminated &&
         !conversation.isGroupV1AndDisabled &&
-        ((isGroupV2(conversation) && !conversation.left) ||
-          !isConversationUnregistered(conversation)) &&
         // All conversation should have a title except in weird cases where
-        // they don't, in that case we don't want to show these for Forwarding.
+        // they don't, in that case we don't want to show these for the blocking search.
+        // You'll have to open the group to block it.
         conversation.titleNoDefault &&
         hasDisplayInfo(conversation)
+    )
+);
+export const getAllUnblockedConversations = createSelector(
+  getAllDisplayReadyConversations,
+  (
+    displayReadyConversations: Array<ConversationType>
+  ): Array<ConversationType> =>
+    displayReadyConversations.filter(conversation => !conversation.isMe)
+);
+
+export const getAllComposableConversations = createSelector(
+  getAllDisplayReadyConversations,
+  (
+    displayReadyConversations: Array<ConversationType>
+  ): Array<ConversationType> =>
+    displayReadyConversations.filter(
+      conversation =>
+        // Can't compose a message to the release notes channel
+        !isSignalConversation(conversation) &&
+        // You must be in the group, or...
+        ((isGroupV2(conversation) && !conversation.left) ||
+          // ...the user must be registered
+          !isConversationUnregistered(conversation))
     )
 );
 
@@ -1337,10 +1367,10 @@ export const getInvitedContactsForNewlyCreatedGroup = createSelector(
 export const getConversationsWithCustomColorSelector = createSelector(
   getAllConversations,
   conversations => {
-    return (colorId: string): Array<ConversationType> => {
-      return conversations.filter(
-        conversation => conversation.customColorId === colorId
-      );
+    return (colorId: ChatStyle.CustomChatColorId): Array<ConversationType> => {
+      return conversations.filter(conversation => {
+        return conversation.bubbleColor?.customChatColorId === colorId;
+      });
     };
   }
 );

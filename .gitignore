@@ -1,5 +1,19 @@
 node_modules
 node_modules_bkp
+# Local translator verification artifacts and isolated profiles
+/.builder-cache/
+/.runtime-temp/
+/.smoke-profile/
+/.smoke-accounts-profile/
+/.smoke-multi-*/
+/smoke-startup.png
+/typecheck*.log
+/electron-*.out
+/electron-*.err
+/*-start.out
+/*-start.err
+/.build-temp/
+/UPGRADE-STATUS.md
 .sass-cache
 coverage/*
 build/curve25519_compiled.js
@@ -13,6 +27,7 @@ config/local.json
 config/local-*
 *.provisionprofile
 release/
+release-verified/
 /dev-app-update.yml
 .nyc_output/
 
