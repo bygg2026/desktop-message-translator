@@ -6,7 +6,7 @@
   "description": "Unofficial Signal Desktop client with Google and custom API translation",
   "desktopName": "desktop-message-translator.desktop",
   "repository": "https://github.com/bygg2026/desktop-message-translator.git",
-  "version": "8.36.0-alpha.1",
+  "version": "8.36.0-alpha.2",
   "license": "AGPL-3.0-only",
   "author": {
     "name": "Signal Messenger, LLC",

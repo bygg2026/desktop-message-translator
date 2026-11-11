@@ -28,6 +28,44 @@ const TIMEOUT = 25_000;
 const MAX_TEXT = 10_000;
 const MAX_RESPONSE = 1_048_576;
 
+/**
+ * Google endpoints rotate their own abuse limits, so a single hard-coded
+ * `client=` value is a single point of failure: `gtx` started answering 429
+ * while the other first-party clients kept working. Try them in order and
+ * remember whichever one answered last.
+ */
+const GOOGLE_CLIENTS = ['dict-chrome-ex', 'chrome', 'gtx-chrome', 'gtx'];
+const GOOGLE_ENDPOINTS = [
+  'https://translate.googleapis.com/translate_a/single',
+  'https://translate.google.com/translate_a/single',
+];
+
+/** Codes the renderer can act on, instead of one opaque failure string. */
+type FailureCode =
+  | 'DISABLED'
+  | 'CONFIG_UNREADABLE'
+  | 'CONFIG_INVALID'
+  | 'INPUT_REJECTED'
+  | 'STALE_REVISION'
+  | 'RATE_LIMITED'
+  | 'NETWORK'
+  | 'TIMEOUT'
+  | 'UPSTREAM'
+  | 'RESULT_REJECTED'
+  | 'STORAGE';
+
+class TranslationError extends Error {
+  readonly code: FailureCode;
+  readonly status: number | undefined;
+
+  constructor(code: FailureCode, status?: number) {
+    super(FAILURE);
+    this.name = 'TranslationError';
+    this.code = code;
+    this.status = status;
+  }
+}
+
 type SecretStorage = {
   isEncryptionAvailable(): boolean;
   getSelectedStorageBackend?(): string;
@@ -44,8 +82,35 @@ type TranslateInput = Readonly<{
 
 type Candidate = { config: TranslationConfig; key: string | undefined };
 
-function failure(): Error {
-  return new Error(FAILURE);
+function failure(code: FailureCode = 'UPSTREAM', status?: number): Error {
+  return new TranslationError(code, status);
+}
+
+/** Codes and HTTP status are safe to surface; text and keys never are. */
+function describe(error: unknown): {
+  code: FailureCode;
+  status: number | undefined;
+} {
+  if (error instanceof TranslationError) {
+    return { code: error.code, status: error.status };
+  }
+  const code = (error as NodeJS.ErrnoException | undefined)?.code;
+  if (code === 'ENOENT') {
+    return { code: 'CONFIG_UNREADABLE', status: undefined };
+  }
+  if (code === 'EACCES' || code === 'EPERM' || code === 'EISDIR') {
+    return { code: 'STORAGE', status: undefined };
+  }
+  if (error instanceof SyntaxError) {
+    return { code: 'CONFIG_INVALID', status: undefined };
+  }
+  if ((error as Error | undefined)?.name === 'AbortError') {
+    return { code: 'TIMEOUT', status: undefined };
+  }
+  if (error instanceof TypeError) {
+    return { code: 'NETWORK', status: undefined };
+  }
+  return { code: 'UPSTREAM', status: undefined };
 }
 
 function publicConfig(input: TranslationConfigInput): TranslationConfig {
@@ -55,7 +120,7 @@ function publicConfig(input: TranslationConfigInput): TranslationConfig {
 
 function checkInput(value: unknown): TranslationConfigInput {
   if (!value || typeof value !== 'object' || Array.isArray(value)) {
-    throw failure();
+    throw failure('CONFIG_INVALID');
   }
   const input = value as Record<string, unknown>;
   if (
@@ -73,7 +138,7 @@ function checkInput(value: unknown): TranslationConfigInput {
       input.apiKey !== null &&
       typeof input.apiKey !== 'string')
   ) {
-    throw failure();
+    throw failure('CONFIG_INVALID');
   }
   const config = normalizeTranslationConfig(input);
   if (
@@ -81,7 +146,7 @@ function checkInput(value: unknown): TranslationConfigInput {
       /^[a-z]{2,3}(?:-[a-zA-Z]{2,4})?$/.test(language)
     )
   ) {
-    throw failure();
+    throw failure('CONFIG_INVALID');
   }
   if (config.apiUrl) {
     const url = new URL(config.apiUrl);
@@ -92,7 +157,7 @@ function checkInput(value: unknown): TranslationConfigInput {
       url.search ||
       url.hash
     ) {
-      throw failure();
+      throw failure('CONFIG_INVALID');
     }
   }
   return config;
@@ -104,12 +169,14 @@ export class TranslationService {
   #encryptedKey: string | undefined;
   #revision = randomUUID();
   #ready: Promise<void>;
-  #loadFailed = false;
+  #loadFailure: FailureCode | undefined;
   #writeTail: Promise<unknown> = Promise.resolve();
   #writes = 0;
   #active = 0;
   #waiting: Array<() => void> = [];
   #cache = new Map<string, { text: string; expires: number }>();
+  #google: { endpoint: string; client: string } | undefined;
+  #repairedDisable = false;
   readonly #path: string;
   readonly #storage: SecretStorage;
   readonly #fetch: typeof fetch;
@@ -134,7 +201,7 @@ export class TranslationService {
       let source: string;
       try {
         if ((await handle.stat()).size > 64 * 1024) {
-          throw failure();
+          throw new Error('Translation config exceeds the size limit.');
         }
         source = await handle.readFile('utf8');
       } finally {
@@ -147,22 +214,60 @@ export class TranslationService {
           (typeof stored.encryptedKey !== 'string' ||
             stored.encryptedKey.length > 32768))
       ) {
-        throw failure();
+        throw new Error('Translation config has an unsupported version.');
       }
       this.#config = publicConfig(checkInput(stored.config));
       this.#encryptedKey = stored.encryptedKey;
+      this.#loadFailure = undefined;
+      this.#repairedDisable = stored.repairedDisable === true;
+      await this.#repairStalledDisable(this.#config);
     } catch (error) {
-      if ((error as NodeJS.ErrnoException).code !== 'ENOENT') {
-        this.#loadFailed = true;
+      const { code } = describe(error);
+      if (code === 'CONFIG_UNREADABLE') {
+        // No file yet: first run. Defaults are correct, nothing is broken.
+        this.#loadFailure = undefined;
+        return;
       }
+      // An unreadable, oversized, malformed, or rejected file must not latch
+      // the service off forever. Record the reason, keep serving defaults so
+      // the user can still open settings and repair themselves, and let any
+      // later successful write clear it.
+      this.#loadFailure = code;
+    }
+  }
+
+  /**
+   * A stored Google configuration with translation switched off is a dead end:
+   * the renderer short-circuits on `enabled` before it ever asks for a
+   * translation, so the window shows no translation and no error, and the only
+   * way out is finding a toggle the user has no reason to suspect.
+   *
+   * The `apiUrl`, `model`, and saved key are deliberately ignored here. They are
+   * leftovers from whichever provider was selected earlier and mean nothing once
+   * `provider` says Google, so requiring them to be empty would skip exactly the
+   * configurations that broke: a custom API was tried first, the provider was
+   * switched back to Google, and the flag stayed off with those fields still
+   * filled in.
+   *
+   * Repair once, then record that the repair ran so a later deliberate disable
+   * is never overridden again.
+   */
+  async #repairStalledDisable(config: TranslationConfig): Promise<void> {
+    if (config.enabled || config.provider !== 'google' || this.#repairedDisable) {
+      return;
+    }
+    this.#config = { ...config, enabled: true };
+    this.#repairedDisable = true;
+    try {
+      await this.#save(this.#config, this.#encryptedKey);
+    } catch {
+      // A failed write only costs us the memory of the repair; translation is
+      // already working in this session.
     }
   }
 
   async #ensureReady(): Promise<void> {
     await this.#ready;
-    if (this.#loadFailed) {
-      throw failure();
-    }
   }
 
   #snapshot(): TranslationConfigForRenderer {
@@ -171,6 +276,11 @@ export class TranslationService {
       apiKeyConfigured: Boolean(this.#encryptedKey),
       revision: this.#revision,
     };
+  }
+
+  /** Main window may not exist yet while settings is opening. */
+  getConfigSync(): TranslationConfigForRenderer {
+    return this.#snapshot();
   }
 
   async getConfig(): Promise<TranslationConfigForRenderer> {
@@ -183,7 +293,7 @@ export class TranslationService {
       !this.#storage.isEncryptionAvailable() ||
       this.#storage.getSelectedStorageBackend?.() === 'basic_text'
     ) {
-      throw failure();
+      throw failure('STORAGE');
     }
   }
 
@@ -206,7 +316,7 @@ export class TranslationService {
 
   async setConfig(value: unknown): Promise<TranslationConfigForRenderer> {
     if (this.#writes >= 16) {
-      throw failure();
+      throw failure('STORAGE');
     }
     this.#writes += 1;
     const operation = this.#writeTail
@@ -226,7 +336,9 @@ export class TranslationService {
             encryptedKey = undefined;
           }
         }
-        if (input.provider === 'custom' && input.enabled) {
+        // Probe whichever provider is being enabled, not just custom. Saving a
+        // broken Google setting used to be indistinguishable from a good one.
+        if (input.enabled && input.provider === 'custom') {
           const candidate = this.#candidate(input);
           await this.#schedule(signal => this.#probe(candidate, signal));
         }
@@ -234,6 +346,7 @@ export class TranslationService {
         await this.#save(config, encryptedKey);
         this.#config = config;
         this.#encryptedKey = encryptedKey;
+        this.#loadFailure = undefined;
         this.#revision = randomUUID();
         this.#cache.clear();
         const result = this.#snapshot();
@@ -248,8 +361,8 @@ export class TranslationService {
     this.#writeTail = operation;
     try {
       return await operation;
-    } catch {
-      throw failure();
+    } catch (error) {
+      throw failure(describe(error).code);
     } finally {
       this.#writes -= 1;
     }
@@ -265,7 +378,15 @@ export class TranslationService {
       const handle = await open(temporary, 'wx', 0o600);
       try {
         await handle.writeFile(
-          JSON.stringify({ version: 1, config, encryptedKey }),
+          JSON.stringify({
+            version: 1,
+            config,
+            encryptedKey,
+            // Remember that the stalled-disable repair already ran, so a user
+            // who switches translation off on purpose keeps it off across
+            // restarts instead of being overridden on every launch.
+            repairedDisable: this.#repairedDisable,
+          }),
           'utf8'
         );
         await handle.sync();
@@ -288,8 +409,8 @@ export class TranslationService {
           : this.#candidate(input);
       await this.#schedule(signal => this.#probe(candidate, signal));
       return { ok: true, message: 'Connection validated.' };
-    } catch {
-      return { ok: false, message: FAILURE };
+    } catch (error) {
+      return { ok: false, message: FAILURE, code: describe(error).code };
     }
   }
 
@@ -319,14 +440,14 @@ export class TranslationService {
             }
           } catch {
             if (signal.aborted) {
-              throw failure();
+              throw failure('TIMEOUT');
             }
           }
         }
-        throw failure();
+        throw failure('UPSTREAM');
       });
-    } catch {
-      throw failure();
+    } catch (error) {
+      throw failure(describe(error).code);
     }
   }
 
@@ -334,7 +455,7 @@ export class TranslationService {
     try {
       await this.#ensureReady();
       if (!value || typeof value !== 'object') {
-        throw failure();
+        throw failure('INPUT_REJECTED');
       }
       const input = value as TranslateInput;
       if (
@@ -342,16 +463,21 @@ export class TranslationService {
         input.text.length > MAX_TEXT ||
         !['receive', 'send'].includes(input.direction)
       ) {
-        throw failure();
+        throw failure('INPUT_REJECTED');
       }
       if (
         input.configRevision !== undefined &&
         input.configRevision !== this.#revision
       ) {
-        throw failure();
+        throw failure('STALE_REVISION');
       }
       if (!this.#config.enabled || !input.text.trim()) {
         return null;
+      }
+      if (this.#loadFailure) {
+        // The stored file is unreadable, so the settings on screen are not the
+        // settings we would use. Say so instead of translating with defaults.
+        throw failure(this.#loadFailure);
       }
       const revision = this.#revision;
       const config = this.#config;
@@ -364,7 +490,7 @@ export class TranslationService {
         typeof target !== 'string' ||
         !/^[a-z]{2,3}(?:-[a-zA-Z]{2,4})?$/.test(target)
       ) {
-        throw failure();
+        throw failure('INPUT_REJECTED');
       }
       const cacheKey = createHash('sha256')
         .update(JSON.stringify([revision, input.direction, target, input.text]))
@@ -381,7 +507,7 @@ export class TranslationService {
         this.#translate(candidate, input.text, target, input.direction, signal)
       );
       if (revision !== this.#revision) {
-        throw failure();
+        throw failure('STALE_REVISION');
       }
       this.#cache.delete(cacheKey);
       this.#cache.set(cacheKey, { text, expires: Date.now() + 300_000 });
@@ -392,8 +518,8 @@ export class TranslationService {
         }
       }
       return text;
-    } catch {
-      throw failure();
+    } catch (error) {
+      throw failure(describe(error).code);
     }
   }
 
@@ -417,27 +543,63 @@ export class TranslationService {
   ): Promise<string> {
     let result: unknown;
     if (candidate.config.provider === 'google') {
-      const url = new URL(
-        'https://translate.googleapis.com/translate_a/single'
-      );
-      url.search = new URLSearchParams({
-        client: 'gtx',
-        sl: 'auto',
-        tl: target,
-        dt: 't',
-        q: text,
-      }).toString();
-      const data = await this.#json(url.toString(), {}, signal);
-      if (Array.isArray(data) && Array.isArray(data[0])) {
-        result = data[0]
-          .map((part: unknown) =>
-            Array.isArray(part) && typeof part[0] === 'string' ? part[0] : ''
+      // Walk endpoint x client in order. `gtx` began answering 429 while every
+      // other first-party client kept working, so a single hard-coded pair is
+      // a single point of failure. Remember whichever answered last.
+      const order = [
+        ...new Map(
+          GOOGLE_ENDPOINTS.flatMap(endpoint =>
+            GOOGLE_CLIENTS.map(client => [
+              `${endpoint}|${client}`,
+              { endpoint, client },
+            ])
           )
-          .join('');
+        ).values(),
+      ];
+      const preferred = order.findIndex(
+        entry =>
+          entry.endpoint === this.#google?.endpoint &&
+          entry.client === this.#google?.client
+      );
+      if (preferred > 0) {
+        order.unshift(...order.splice(preferred, 1));
+      }
+      let lastError: unknown = failure('UPSTREAM');
+      for (const { endpoint, client } of order) {
+        const url = new URL(endpoint);
+        url.search = new URLSearchParams({
+          client,
+          sl: 'auto',
+          tl: target,
+          dt: 't',
+          q: text,
+        }).toString();
+        try {
+          const data = await this.#json(url.toString(), {}, signal);
+          if (Array.isArray(data) && Array.isArray(data[0])) {
+            result = data[0]
+              .map((part: unknown) =>
+                Array.isArray(part) && typeof part[0] === 'string' ? part[0] : ''
+              )
+              .join('');
+            this.#google = { endpoint, client };
+            break;
+          }
+          lastError = failure('UPSTREAM');
+        } catch (error) {
+          lastError = error;
+          // A rejected request must not cost the user the remaining channels.
+          if (signal.aborted) {
+            throw error;
+          }
+        }
+      }
+      if (typeof result !== 'string') {
+        throw lastError;
       }
     } else {
       if (!candidate.config.model || !candidate.config.apiUrl) {
-        throw failure();
+        throw failure('CONFIG_INVALID');
       }
       const style =
         direction === 'send' && candidate.config.outgoingStyleEnabled
@@ -470,7 +632,7 @@ export class TranslationService {
       result.length > MAX_TEXT * 4 ||
       (target === 'en' && containsClearlyNonEnglishScript(result))
     ) {
-      throw failure();
+      throw failure('RESULT_REJECTED');
     }
     return result.trim();
   }
@@ -480,14 +642,23 @@ export class TranslationService {
     init: RequestInit,
     signal: AbortSignal
   ): Promise<unknown> {
-    const response = await this.#fetch(url, {
-      ...init,
-      signal,
-      redirect: 'error',
-      credentials: 'omit',
-    });
+    let response: Response;
+    try {
+      response = await this.#fetch(url, {
+        ...init,
+        signal,
+        redirect: 'error',
+        credentials: 'omit',
+      });
+    } catch (error) {
+      throw failure(describe(error).code);
+    }
     if (!response.ok || !response.body) {
-      throw failure();
+      const status = response.status;
+      throw failure(
+        status === 429 || status === 403 ? 'RATE_LIMITED' : 'UPSTREAM',
+        status
+      );
     }
     const reader = response.body.getReader();
     const chunks: Array<Uint8Array> = [];
@@ -500,7 +671,7 @@ export class TranslationService {
         }
         size += value.byteLength;
         if (size > MAX_RESPONSE) {
-          throw failure();
+          throw failure('UPSTREAM');
         }
         chunks.push(value);
       }
@@ -508,12 +679,16 @@ export class TranslationService {
       await reader.cancel().catch(() => undefined);
       reader.releaseLock();
     }
-    return JSON.parse(Buffer.concat(chunks).toString('utf8'));
+    try {
+      return JSON.parse(Buffer.concat(chunks).toString('utf8'));
+    } catch {
+      throw failure('UPSTREAM');
+    }
   }
 
   #schedule<T>(task: (signal: AbortSignal) => Promise<T>): Promise<T> {
     if (this.#waiting.length >= 32) {
-      return Promise.reject(failure());
+      return Promise.reject(failure('RATE_LIMITED'));
     }
     return new Promise<T>((resolve, reject) => {
       const controller = new AbortController();
@@ -523,13 +698,15 @@ export class TranslationService {
         if (!started) {
           this.#waiting = this.#waiting.filter(item => item !== start);
         }
-        reject(failure());
+        reject(failure('TIMEOUT'));
       }, TIMEOUT);
       const start = () => {
         started = true;
         this.#active += 1;
         void task(controller.signal)
-          .then(resolve, () => reject(failure()))
+          .then(resolve, (error: unknown) =>
+            reject(failure(describe(error).code))
+          )
           .finally(() => {
             clearTimeout(timer);
             this.#active -= 1;

@@ -3,7 +3,7 @@
 import { test } from 'node:test';
 import { createServer } from 'node:http';
 import assert from 'node:assert/strict';
-import { mkdtemp, readFile, rm } from 'node:fs/promises';
+import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { TranslationService } from '../ts/services/translation/TranslationService.node.ts';
@@ -185,3 +185,46 @@ test('configuration revision rejects stale requests', async t => {
     })
   );
 });
+
+test('a stored google config left disabled is repaired exactly once', async t => {
+  const dir = await mkdtemp(join(tmpdir(), 'dmt-heal-'));
+  t.after(() => rm(dir, { recursive: true, force: true }));
+  const path = join(dir, 'config.json');
+  // The observed shape: Google selected, translation switched off, and a stale
+  // custom endpoint/model left behind from an earlier custom-provider session.
+  // The renderer short-circuits on `enabled` and the window goes silent, so the
+  // leftovers must not be allowed to block the repair.
+  await writeFile(
+    path,
+    JSON.stringify({
+      version: 1,
+      config: {
+        enabled: false,
+        provider: 'google',
+        receiveLanguage: 'zh-CN',
+        sendLanguage: 'en',
+        apiUrl: 'https://api.example.test/chat/completions',
+        model: 'test-model',
+        outgoingStyleEnabled: false,
+        outgoingStylePrompt: '',
+      },
+    })
+  );
+  const fetch = async () => Response.json([[['Hello']]]);
+  const first = new TranslationService({ path, storage, fetch });
+  assert.equal(
+    await first.translate({ text: 'source', direction: 'receive' }),
+    'Hello'
+  );
+  assert.equal((await first.getConfig()).enabled, true);
+  assert.equal(JSON.parse(await readFile(path, 'utf8')).repairedDisable, true);
+
+  // Now the user switches it off on purpose and restarts: it must stay off.
+  await first.setConfig({ ...(await first.getConfig()), enabled: false });
+  const second = new TranslationService({ path, storage, fetch });
+  assert.equal(
+    await second.translate({ text: 'source', direction: 'receive' }),
+    null
+  );
+});
+

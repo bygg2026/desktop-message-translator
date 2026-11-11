@@ -30,6 +30,9 @@ export type TranslationConfigInput = TranslationConfig &
 export type TranslationValidationResult = Readonly<{
   ok: boolean;
   message: string;
+  // Machine-readable reason for a failed probe, so the settings screen can tell
+  // a rate limit apart from a bad key instead of showing one generic sentence.
+  code?: string;
 }>;
 
 export type TranslationModelsResult = Readonly<{
@@ -40,7 +43,7 @@ export type TranslationModelsResult = Readonly<{
 export const DEFAULT_TRANSLATION_CONFIG: TranslationConfig = {
   enabled: true,
   provider: 'google',
-  receiveLanguage: 'my',
+  receiveLanguage: 'zh-CN',
   sendLanguage: 'en',
   apiUrl: '',
   model: '',
